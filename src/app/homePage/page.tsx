@@ -1,18 +1,17 @@
-"use client"
+'use client'
 import React from "react";
-import { Text, Heading, Img, Slider } from "../../components";
+import { Text, Heading, Img } from "../../components";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import HomepageCardblog from "../../components/HomepageCardblog";
 import HomepageCardproduct from "../../components/HomepageCardproduct";
-import AliceCarousel, { EventObject, DotsItem } from "react-alice-carousel";
 import { kalnia } from "@/styles/font";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import NewProductSlider from "./newProductSlider";
 
 export default function HomepagePage() {
-  const [sliderState, setSliderState] = React.useState(0);
-  const sliderRef = React.useRef<AliceCarousel>(null);
+
 
   return (
     <>
@@ -100,99 +99,17 @@ export default function HomepagePage() {
       </div>
 
 
-      <div className="flex flex-col items-center justify-start w-full gap-[99px] bg-gray-50">
+      <div className="w-full flex justify-center items-center">
+        <NewProductSlider />
+      </div>
 
 
-
-
-        <div className="flex flex-row justify-center w-full">
-          <div className="flex flex-col items-center justify-start w-full gap-[45px] max-w-[1290px]">
-            <div className="flex flex-col items-center justify-center w-full gap-[21px]">
-              <Heading size="3xl" className="tracking-[-0.50px] text-center">
-                <span className="text-black-900">Our </span>
-                <span className="text-black-900">Newest</span>
-                <span className="text-black-900">Product</span>
-              </Heading>
-              <Text size="md" className="mb-1 !text-gray-500 tracking-[-0.50px] text-center">
-                Made of the best materials and with a design that follows the times
-              </Text>
+      <div className="w-full bg-yellow-100 py-10">
+        <div className="flex justify-center items-center w-[80rem] mx-auto">
+          <div className="flex flex-row justify-between w-full p-[13px] m-auto">
+            <div className="flex flex-col items-center justify-start h-full w-[535px]">
+              <Image src="/images/white-sofa.png" height={1380} width={1230} alt="insideweather" className="w-[535px] object-cover" />
             </div>
-            <Slider
-              autoPlay
-              autoPlayInterval={2000}
-              responsive={{ "0": { items: 1 }, "550": { items: 1 }, "1050": { items: 1 } }}
-              renderDotsItem={(props: DotsItem) => {
-                return props?.isActive ? (
-                  <div className="h-[15px] w-[15px] mr-[15px] bg-blue_gray-900_01" />
-                ) : (
-                  <div className="h-[15px] w-[15px] mr-[15px] bg-gray_200" />
-                );
-              }}
-              activeIndex={sliderState}
-              onSlideChanged={(e: EventObject) => {
-                setSliderState(e?.item);
-              }}
-              ref={sliderRef}
-              className="w-full"
-              items={[...Array(3)].map(() => (
-                <React.Fragment key={Math.random()}>
-                  <div className="flex flex-col gap-[47px] mx-auto">
-                    <div className="flex flex-row justify-start w-full gap-[19px]">
-                      <HomepageCardproduct
-                        status="New"
-                        bxheartoneOne="images/img_bx_heart_1.svg"
-                        bxcarttwoOne="images/img_bx_cart_2.svg"
-                        className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                      />
-                      <HomepageCardproduct
-                        imageOne="images/img_image_400x308.png"
-                        status="New"
-                        className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                      />
-                      <HomepageCardproduct
-                        imageOne="images/img_image_1.png"
-                        status="New"
-                        className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                      />
-                      <HomepageCardproduct
-                        imageOne="images/img_image_2.png"
-                        status="New"
-                        className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                      />
-                    </div>
-                    <div className="flex flex-row justify-start w-full gap-[19px]">
-                      <HomepageCardproduct
-                        imageOne="images/img_image_3.png"
-                        status="New"
-                        className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                      />
-                      <HomepageCardproduct
-                        imageOne="images/img_image_4.png"
-                        status="New"
-                        className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                      />
-                      <HomepageCardproduct
-                        imageOne="images/img_image_5.png"
-                        status="New"
-                        className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                      />
-                      <HomepageCardproduct
-                        imageOne="images/img_image_6.png"
-                        status="New"
-                        className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                      />
-                    </div>
-                  </div>
-                </React.Fragment>
-              ))}
-            />
-          </div>
-        </div>
-        <div className="h-[535px] w-full relative">
-          <div className="flex flex-col items-center justify-start h-full w-[535px] right-0 bottom-0 top-0 m-auto absolute">
-            <Img src="images/img_inside_weather.png" alt="insideweather" className="w-[535px] object-cover" />
-          </div>
-          <div className="flex flex-row justify-start w-full bottom-0 right-0 left-0 p-[13px] m-auto bg-yellow-100 absolute">
             <div className="flex flex-col items-start justify-start w-[38%] mb-[95px] ml-[61px] gap-[30px]">
               <div className="flex flex-col items-start justify-start w-full gap-[17px]">
                 <Text size="lg" className="!text-blue_gray-900_01 tracking-[-0.50px]">
@@ -208,7 +125,11 @@ export default function HomepagePage() {
             </div>
           </div>
         </div>
-        <div className="flex flex-row justify-center w-full">
+      </div>
+
+
+      <div className="w-full flex justify-center items-center py-20">
+        <div className="flex flex-row justify-center w-[80rem]">
           <div className="flex flex-col items-center justify-start w-full gap-[67px] max-w-[1290px]">
             <Heading size="2xl" className="!text-blue_gray-900_01 tracking-[-0.50px] text-center">
               New Arrival
@@ -216,9 +137,8 @@ export default function HomepagePage() {
             <div className="flex flex-col w-full gap-[47px]">
               <div className="flex flex-row justify-start w-full gap-[19px]">
                 <HomepageCardproduct
+                  imageOne="images/img_image_8.png"
                   status="New"
-                  bxheartoneOne="images/img_bx_heart_1.svg"
-                  bxcarttwoOne="images/img_bx_cart_2.svg"
                   className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
                 />
                 <HomepageCardproduct
@@ -262,7 +182,11 @@ export default function HomepagePage() {
             </div>
           </div>
         </div>
-        <div className="flex flex-row justify-center w-full">
+      </div>
+
+
+      <div className="w-full bg-gray-50">
+        <div className="flex flex-row justify-center mx-auto py-20">
           <div className="flex flex-row justify-between w-full max-w-[1290px]">
             <div className="flex flex-col items-center justify-start w-[47%] gap-[50px]">
               <Heading size="3xl" className="tracking-[-0.50px] leading-[60px]">
@@ -318,7 +242,11 @@ export default function HomepagePage() {
             <Img src="images/img_rectangle_16.png" alt="image_one" className="w-[47%] object-cover" />
           </div>
         </div>
-        <div className="flex flex-row justify-center w-full">
+      </div>
+
+
+      <div className="w-full pb-20 pt-10">
+        <div className="flex flex-row justify-center mx-auto">
           <div className="flex flex-col items-center justify-start w-full gap-[50px] max-w-[1290px]">
             <div className="flex flex-col items-center justify-start w-full gap-4 p-1">
               <Heading size="3xl" className="tracking-[-0.50px] text-center !font-semibold">
@@ -342,6 +270,10 @@ export default function HomepagePage() {
             </div>
           </div>
         </div>
+      </div>
+
+
+      <div className=" bg-gray-50 pt-20">
         <Footer className="flex flex-col items-center justify-center w-full" />
       </div>
     </>
