@@ -24,7 +24,7 @@ export default function Footer({ ...props }: Props) {
             </Text>
           </div>
           <div className="flex w-full gap-2">
-            <input name="email" placeholder="Your email here.." className="w-[74%] rounded px-2" />
+            <input name="email" placeholder="Your email here.." className="w-[74%] bg-white rounded px-2" />
             <Button size="6xl" className="flex-1 !text-yellow-100 tracking-[-0.50px] font-bold min-w-[157px] rounded">
               Subscribe
             </Button>
