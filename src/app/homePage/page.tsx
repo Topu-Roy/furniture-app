@@ -8,7 +8,7 @@ import {
   NewArrivals,
   OurBenefits,
   ReadBlogSection,
-  NewProductSlider,
+  NewProductCarousel,
 } from "./exports";
 import Footer from "@/components/Footer";
 
@@ -19,7 +19,7 @@ export default function HomepagePage() {
       <HeroSection />
       <BrandsWorkedWith />
       <CategoryCTA />
-      <NewProductSlider />
+      <NewProductCarousel />
       <SecondCTA />
       <NewArrivals />
       <OurBenefits />

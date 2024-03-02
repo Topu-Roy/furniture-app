@@ -48,12 +48,12 @@ export default function HomepageCardproduct({
 
             <div className="flex flex-col items-center justify-start w-[96%] gap-5">
               {heartIcon ? (
-                <Button color="black_900" className="w-10 shadow-xs h-10 rounded-full bg-slate-300/40 p-2">
+                <Button color="black_900" className="w-10 shadow-xs h-10 rounded-full bg-slate-500/40 p-2 hover:bg-rose-600/50">
                   <Image height={100} width={100} alt="icon" src={`/${heartIcon}`} />
                 </Button>
               ) : null}
               {cartIcon ? (
-                <Button color="yellow_100" className="w-10 shadow-xs h-10 rounded-full bg-slate-300/40 p-2">
+                <Button color="yellow_100" className="w-10 shadow-xs h-10 rounded-full bg-slate-300/40 p-2 hover:bg-green-600/80">
                   <Image height={100} width={100} alt="icon" src={`/${cartIcon}`} />
                 </Button>
               ) : null}

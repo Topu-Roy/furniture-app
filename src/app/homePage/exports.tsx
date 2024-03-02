@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-import NewProductSlider from "./newProductSlider";
+import NewProductCarousel from "./newProductCarousel";
 import ReadBlogSection from "./readBlogSection";
 import OurBenefits from "./ourBenefits";
 import NewArrivals from "./newArrivals";
@@ -13,7 +13,7 @@ export {
     HeroSection,
     BrandsWorkedWith,
     CategoryCTA,
-    NewProductSlider,
+    NewProductCarousel,
     OurBenefits,
     ReadBlogSection,
     NewArrivals,
