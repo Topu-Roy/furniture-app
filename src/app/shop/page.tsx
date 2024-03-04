@@ -5,6 +5,7 @@ import { SelectBox } from "@/components/SelectBox";
 import Footer from "../../components/Footer";
 import HomepageCardproduct from "../../components/HomepageCardproduct";
 import NavBar from "@/components/NavBar";
+import ColorSelector from "./ColorSelector";
 
 const dropDownOptions = [
   { label: "Option1", value: "option1" },
@@ -17,38 +18,7 @@ export default function ShopPage() {
     <>
       <NavBar />
       <div className="flex flex-col items-center justify-start w-full gap-[100px] bg-gray-50">
-        {/* <div className="flex flex-col items-center justify-start w-full gap-[75px]">
-          <div className="flex flex-row justify-center w-full">
-            <div className="flex flex-row justify-center w-full max-w-[1290px]">
-              <div className="flex flex-row justify-center w-full">
-                <div className="h-[450px] w-full relative">
-                  <Img
-                    src="images/img_rectangle_28.png"
-                    alt="image_one"
-                    className="justify-center h-[450px] w-full left-0 bottom-0 right-0 top-0 m-auto object-cover absolute"
-                  />
-                  <div className="flex flex-col items-start justify-start w-[37%] h-max gap-[30px] left-[5%] bottom-0 top-0 m-auto absolute">
-                    <div className="flex flex-col items-start justify-start w-full gap-[15px]">
-                      <Heading size="md" className="!text-yellow-100 tracking-[-0.50px]">
-                        Best Room Decor Items
-                      </Heading>
-                      <Heading size="3xl" className="!text-white-A700 tracking-[-0.50px] leading-[60px]">
-                        Our goods have the best quality and materials in the world
-                      </Heading>
-                    </div>
-                    <Button
-                      color="yellow_100"
-                      size="9xl"
-                      className="tracking-[-0.50px] font-poppins font-bold min-w-[170px]"
-                    >
-                      Shop Now
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
+
         <div className="flex flex-col items-center justify-start w-full">
           <div className="flex flex-row justify-start items-start w-full gap-5 max-w-[1290px]">
             <div className="flex flex-col items-center justify-start w-[24%] gap-[60px]">
@@ -73,11 +43,7 @@ export default function ShopPage() {
                 </div>
                 <Img src="images/img_slider.svg" alt="slider_one" className="h-4" />
               </div>
-              <div className="flex flex-col items-start justify-start w-full gap-[21px]">
-                <Heading>Filter By Color</Heading>
-                <Img src="images/img_frame_48095956.svg" alt="image_two" className="h-10" />
-                <Img src="images/img_frame_48095957.svg" alt="image_three" className="h-10" />
-              </div>
+              <ColorSelector />
               <div className="flex flex-col items-start justify-start w-full gap-[18px]">
                 <Heading>Product Categories</Heading>
                 <div className="flex flex-col items-start justify-start w-full gap-5">
@@ -219,6 +185,7 @@ export default function ShopPage() {
               </div>
               <div className="justify-center w-full gap-5 grid-cols-3 grid min-h-[auto]">
                 <HomepageCardproduct
+                  imageOne="images/img_image_10.png"
                   status="New"
                   className="flex flex-col items-center justify-start w-full gap-[15px]"
                 />
@@ -290,8 +257,8 @@ export default function ShopPage() {
             </div>
           </div>
         </div>
-        <Footer className="flex flex-col items-center justify-center w-full" />
       </div>
+      <Footer className="pt-10" />
     </>
   );
 }
