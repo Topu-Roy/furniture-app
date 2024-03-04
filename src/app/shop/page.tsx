@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import { Img, Button, Input, Heading, Text } from "../../components";
+import { Img, Button, Heading, Text } from "../../components";
 import { SelectBox } from "@/components/SelectBox";
 import Footer from "../../components/Footer";
 import HomepageCardproduct from "../../components/HomepageCardproduct";
@@ -17,7 +17,7 @@ export default function ShopPage() {
     <>
       <NavBar />
       <div className="flex flex-col items-center justify-start w-full gap-[100px] bg-gray-50">
-        <div className="flex flex-col items-center justify-start w-full gap-[75px]">
+        {/* <div className="flex flex-col items-center justify-start w-full gap-[75px]">
           <div className="flex flex-row justify-center w-full">
             <div className="flex flex-row justify-center w-full max-w-[1290px]">
               <div className="flex flex-row justify-center w-full">
@@ -29,10 +29,10 @@ export default function ShopPage() {
                   />
                   <div className="flex flex-col items-start justify-start w-[37%] h-max gap-[30px] left-[5%] bottom-0 top-0 m-auto absolute">
                     <div className="flex flex-col items-start justify-start w-full gap-[15px]">
-                      <Heading size="md" as="h1" className="!text-yellow-100 tracking-[-0.50px]">
+                      <Heading size="md" className="!text-yellow-100 tracking-[-0.50px]">
                         Best Room Decor Items
                       </Heading>
-                      <Heading size="3xl" as="h2" className="!text-white-A700 tracking-[-0.50px] leading-[60px]">
+                      <Heading size="3xl" className="!text-white-A700 tracking-[-0.50px] leading-[60px]">
                         Our goods have the best quality and materials in the world
                       </Heading>
                     </div>
@@ -48,30 +48,24 @@ export default function ShopPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="flex flex-col items-center justify-start w-full">
           <div className="flex flex-row justify-start items-start w-full gap-5 max-w-[1290px]">
             <div className="flex flex-col items-center justify-start w-[24%] gap-[60px]">
               <div className="flex flex-col items-start justify-start w-full gap-[21px]">
-                <Heading as="h2">Filter By Price</Heading>
+                <Heading>Filter By Price</Heading>
                 <div className="flex flex-row justify-between items-center w-full pr-[74px]">
-                  <Input
+                  <input
                     color="gray_500"
-                    size="xs"
-                    variant="outline"
-                    shape="round"
                     name="price"
                     placeholder="$0"
                     className="w-[42%]"
                   />
-                  <Heading size="xs" as="h3" className="!font-plusjakartasans">
+                  <Heading size="xs" className="!font-plusjakartasans">
                     -
                   </Heading>
-                  <Input
+                  <input
                     color="gray_500"
-                    size="xs"
-                    variant="outline"
-                    shape="round"
                     name="price"
                     placeholder="$2000"
                     className="w-[42%]"
@@ -80,38 +74,38 @@ export default function ShopPage() {
                 <Img src="images/img_slider.svg" alt="slider_one" className="h-4" />
               </div>
               <div className="flex flex-col items-start justify-start w-full gap-[21px]">
-                <Heading as="h4">Filter By Color</Heading>
+                <Heading>Filter By Color</Heading>
                 <Img src="images/img_frame_48095956.svg" alt="image_two" className="h-10" />
                 <Img src="images/img_frame_48095957.svg" alt="image_three" className="h-10" />
               </div>
               <div className="flex flex-col items-start justify-start w-full gap-[18px]">
-                <Heading as="h5">Product Categories</Heading>
+                <Heading>Product Categories</Heading>
                 <div className="flex flex-col items-start justify-start w-full gap-5">
-                  <Text size="s" as="p" className="!text-blue_gray-900_01 tracking-[-0.50px] !font-poppins">
+                  <Text size="s" className="!text-blue_gray-900_01 tracking-[-0.50px] !font-poppins">
                     Chair (9)
                   </Text>
-                  <Text size="s" as="p" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
+                  <Text size="s" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
                     Lamp (10)
                   </Text>
-                  <Text size="s" as="p" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
+                  <Text size="s" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
                     Table (12)
                   </Text>
-                  <Text size="s" as="p" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
+                  <Text size="s" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
                     Sofa (6)
                   </Text>
-                  <Text size="s" as="p" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
+                  <Text size="s" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
                     Table (12)
                   </Text>
-                  <Text size="s" as="p" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
+                  <Text size="s" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
                     Clock (5)
                   </Text>
-                  <Text size="s" as="p" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
+                  <Text size="s" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
                     Pillow (3)
                   </Text>
                 </div>
               </div>
               <div className="flex flex-col items-start justify-start w-full gap-[18px]">
-                <Heading as="h6">Product Tag</Heading>
+                <Heading>Product Tag</Heading>
                 <div className="flex flex-col items-start justify-start w-full gap-[15px]">
                   <div className="flex flex-row justify-start gap-2.5">
                     <Button
@@ -187,7 +181,7 @@ export default function ShopPage() {
                   className="justify-center h-[400px] w-full left-0 bottom-0 right-0 top-0 m-auto object-cover absolute rounded-[10px]"
                 />
                 <div className="flex flex-col items-center justify-start w-[87%] gap-[15px] bottom-[10%] right-0 left-0 m-auto absolute">
-                  <Heading as="h5" className="!text-white-A700 text-center !font-bold !leading-[35px]">
+                  <Heading className="!text-white-A700 text-center !font-bold !leading-[35px]">
                     Make a purchase now and get 50% discount
                   </Heading>
                   <Button
@@ -205,8 +199,7 @@ export default function ShopPage() {
               <div className="flex flex-row justify-between items-center w-full">
                 <div className="flex flex-row justify-center w-[43%]">
                   <div className="flex flex-row justify-center w-full">
-                    <Input
-                      size="md"
+                    <input
                       name="office_chair"
                       placeholder="Office Chair"
                       className="w-[74%] !text-black-900_3f"
