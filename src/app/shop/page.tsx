@@ -1,11 +1,10 @@
 'use client'
 import React from "react";
-// import { Helmet } from "react-helmet";
 import { Img, Button, Input, Heading, Text } from "../../components";
 import { SelectBox } from "@/components/SelectBox";
 import Footer from "../../components/Footer";
-import Header from "../../components/NavBar";
 import HomepageCardproduct from "../../components/HomepageCardproduct";
+import NavBar from "@/components/NavBar";
 
 const dropDownOptions = [
   { label: "Option1", value: "option1" },
@@ -16,13 +15,9 @@ const dropDownOptions = [
 export default function ShopPage() {
   return (
     <>
-      {/* <Helmet>
-        <title>Furniture-app-1</title>
-        <meta name="description" content="Web site created using create-react-app" />
-      </Helmet> */}
+      <NavBar />
       <div className="flex flex-col items-center justify-start w-full gap-[100px] bg-gray-50">
         <div className="flex flex-col items-center justify-start w-full gap-[75px]">
-          <Header className="flex justify-center items-center w-full p-[35px] bg-white-A700" />
           <div className="flex flex-row justify-center w-full">
             <div className="flex flex-row justify-center w-full max-w-[1290px]">
               <div className="flex flex-row justify-center w-full">

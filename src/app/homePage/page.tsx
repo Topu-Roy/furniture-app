@@ -8,9 +8,9 @@ import {
   OurBenefits,
   ReadBlogSection,
   NewProductCarousel,
-  NavBar,
 } from "./exports";
 import Footer from "@/components/Footer";
+import NavBar from "@/components/NavBar";
 
 export default function HomepagePage() {
   return (

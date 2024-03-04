@@ -1,4 +1,3 @@
-import NavBar from "@/components/NavBar";
 import NewProductCarousel from "./newProductCarousel";
 import ReadBlogSection from "./readBlogSection";
 import OurBenefits from "./ourBenefits";
@@ -9,7 +8,6 @@ import BrandsWorkedWith from "./brandsWorkedWith";
 import HeroSection from "./heroSection";
 
 export {
-    NavBar,
     HeroSection,
     BrandsWorkedWith,
     CategoryCTA,
