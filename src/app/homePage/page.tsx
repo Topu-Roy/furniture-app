@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Header,
   HeroSection,
   CategoryCTA,
   BrandsWorkedWith,
@@ -9,13 +8,14 @@ import {
   OurBenefits,
   ReadBlogSection,
   NewProductCarousel,
+  NavBar,
 } from "./exports";
 import Footer from "@/components/Footer";
 
 export default function HomepagePage() {
   return (
     <>
-      <Header />
+      <NavBar />
       <HeroSection />
       <BrandsWorkedWith />
       <CategoryCTA />

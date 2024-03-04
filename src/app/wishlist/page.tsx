@@ -4,7 +4,7 @@ import React from "react";
 import { Button, Heading, Img } from "../../components";
 import CartSection from "../../components/CartSection";
 import Footer1 from "../../components/Footer1";
-import Header from "../../components/Header";
+import Header from "../../components/NavBar";
 
 export default function WishlistPage() {
   return (

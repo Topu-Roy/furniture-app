@@ -14,7 +14,7 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 
 
-export default function Header() {
+export default function NavBar() {
   return (
     <header className="flex justify-center items-center p-[35px] bg-white-A700 w-full">
       <div className="w-[85rem] mx-auto flex flex-row justify-between">

@@ -4,7 +4,7 @@ import React from "react";
 import { Img, Button, Input, Heading, Text } from "../../components";
 import { SelectBox } from "@/components/SelectBox";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Header from "../../components/NavBar";
 import HomepageCardproduct from "../../components/HomepageCardproduct";
 
 const dropDownOptions = [

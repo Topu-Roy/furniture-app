@@ -1,11 +1,10 @@
 "use client"
 import React from "react";
-// import { Helmet } from "react-helmet";
 import { Text, Heading, Img, Slider, Button } from "../../components";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import TeamCardteam from "../../components/TeamCardteam";
 import AliceCarousel, { EventObject, DotsItem } from "react-alice-carousel";
+import NavBar from "../../components/NavBar";
 
 export default function AboutusPage() {
   const [sliderState, setSliderState] = React.useState(0);
@@ -15,22 +14,19 @@ export default function AboutusPage() {
 
   return (
     <>
-      {/* <Helmet>
-        <title>Topu99's Application1</title>
-        <meta name="description" content="Web site created using create-react-app" />
-      </Helmet> */}
+
       <div className="flex flex-col items-center justify-start w-full gap-[100px] bg-gray-50">
-        <Header className="flex justify-center items-center w-full p-[35px] bg-white-A700" />
+        <NavBar />
         <div className="flex flex-col items-center justify-start w-full gap-[100px]">
           <div className="flex flex-row justify-center w-full">
             <div className="flex flex-row justify-between items-center w-full max-w-[1290px]">
               <div className="flex flex-col items-center justify-start w-[49%] gap-14">
                 <div className="flex flex-col items-start justify-start w-full gap-[25px]">
                   <div className="flex flex-col items-center justify-start gap-[25px]">
-                    <Heading size="3xl" as="h1" className="tracking-[-0.50px]">
+                    <Heading size="3xl" className="tracking-[-0.50px]">
                       Provide the best quality ingredients for home products
                     </Heading>
-                    <Text size="md" as="p" className="!text-gray-500 tracking-[-0.50px] leading-[35px]">
+                    <Text size="md" className="!text-gray-500 tracking-[-0.50px] leading-[35px]">
                       Lorem ipsum dolor sit amet consectetur adipiscing elit dictumst posuere, lectus dis vehicula augue
                       elementum quam risus. Placerat dictum lobortis lacinia volutpat morbi cum justo commodo est
                       aliquam, facilisi consequat ligula vivamus faucibus
@@ -48,7 +44,7 @@ export default function AboutusPage() {
                 <div className="flex flex-col items-center justify-start w-full gap-5">
                   <div className="flex flex-col items-start justify-start w-[38%] gap-[7px]">
                     <div className="flex flex-row justify-start items-center w-[58%] gap-2.5">
-                      <Heading size="md" as="h2" className="tracking-[0.12px] !font-bold">
+                      <Heading size="md" className="tracking-[0.12px] !font-bold">
                         Ratings
                       </Heading>
                       <div className="flex flex-row justify-start items-center w-[45%] gap-[5px]">
@@ -57,12 +53,12 @@ export default function AboutusPage() {
                           alt="image_one"
                           className="h-[30px] w-[30px]"
                         />
-                        <Heading size="md" as="h3" className="tracking-[0.12px] !font-bold">
+                        <Heading size="md" className="tracking-[0.12px] !font-bold">
                           5.0
                         </Heading>
                       </div>
                     </div>
-                    <Text size="xs" as="p" className="!text-black-900_7f tracking-[-0.50px]">
+                    <Text size="xs" className="!text-black-900_7f tracking-[-0.50px]">
                       Trusted by many people from all over the world
                     </Text>
                   </div>
@@ -91,7 +87,7 @@ export default function AboutusPage() {
                       <div className="flex flex-col items-center justify-start h-[50px] w-[50px] ml-[-5px]">
                         <Heading
                           size="xs"
-                          as="h4"
+
                           className="flex justify-center items-center h-[50px] w-[50px] !text-yellow-100 tracking-[-0.50px] bg-blue_gray-900_01 text-center rounded-[50%]"
                         >
                           3K+
@@ -110,7 +106,7 @@ export default function AboutusPage() {
           </div>
           <div className="flex flex-row justify-center w-full p-[41px] bg-black-900">
             <div className="flex flex-col items-center justify-start w-full gap-11 mx-[132px] max-w-[1094px]">
-              <Text size="lg" as="p" className="!text-gray-50_01 tracking-[-0.50px] text-center">
+              <Text size="lg" className="!text-gray-50_01 tracking-[-0.50px] text-center">
                 Various brands have used our products
               </Text>
               <div className="flex flex-row justify-start w-full gap-[50px]">
@@ -138,10 +134,10 @@ export default function AboutusPage() {
           <div className="flex flex-row justify-center w-full">
             <div className="flex flex-col items-center justify-start w-full gap-[51px] max-w-[1290px]">
               <div className="flex flex-col items-center justify-center w-full gap-5">
-                <Heading size="3xl" as="h2" className="tracking-[-0.50px] text-center">
+                <Heading size="3xl" className="tracking-[-0.50px] text-center">
                   Meet Our Team
                 </Heading>
-                <Text size="lg" as="p" className="mb-1 !text-gray-500 tracking-[-0.50px] text-center">
+                <Text size="lg" className="mb-1 !text-gray-500 tracking-[-0.50px] text-center">
                   We write various things related to furniture, from tips and what things I need to pay attention to
                   when choosing furniture
                 </Text>
@@ -185,10 +181,10 @@ export default function AboutusPage() {
             <div className="flex flex-row justify-start w-full bottom-0 right-0 left-0 p-[13px] m-auto bg-yellow-100 absolute">
               <div className="flex flex-col items-start justify-start w-[38%] mb-[95px] ml-[61px] gap-[30px]">
                 <div className="flex flex-col items-start justify-start w-full gap-[17px]">
-                  <Text size="lg" as="p" className="!text-blue_gray-900_01 tracking-[-0.50px]">
+                  <Text size="lg" className="!text-blue_gray-900_01 tracking-[-0.50px]">
                     Interior Modern
                   </Text>
-                  <Heading size="3xl" as="h2" className="tracking-[-0.50px]">
+                  <Heading size="3xl" className="tracking-[-0.50px]">
                     Arrange your home in such a way with our modern interiors
                   </Heading>
                 </div>
@@ -200,7 +196,7 @@ export default function AboutusPage() {
           </div>
           <div className="flex flex-row justify-center w-full">
             <div className="flex flex-col items-center justify-start w-full pt-[3px] gap-[46px] max-w-[1290px]">
-              <Heading size="3xl" as="h2" className="tracking-[0.12px] !font-poppins text-center !font-semibold">
+              <Heading size="3xl" className="tracking-[0.12px] !font-poppins text-center !font-semibold">
                 <span className="text-black-900 font-raleway font-bold">How happy are they with </span>
                 <span className="text-black-900 font-raleway font-bold">our service</span>
               </Heading>
@@ -234,11 +230,11 @@ export default function AboutusPage() {
                             />
                             <div className="flex flex-col items-center justify-start w-full gap-[13px]">
                               <div className="flex flex-col items-center justify-start w-full gap-1">
-                                <Heading size="md" as="h3" className="tracking-[0.12px] !font-poppins leading-[35px]">
+                                <Heading size="md" className="tracking-[0.12px] !font-poppins leading-[35px]">
                                   For the material and the chair as we expected it&#39;s good
                                 </Heading>
                                 <Text
-                                  as="p"
+
                                   className="!text-black-900_87 tracking-[0.12px] !font-poppins opacity-0.5 leading-[35px]"
                                 >
                                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
@@ -252,10 +248,10 @@ export default function AboutusPage() {
                                   className="h-14 w-14 rounded-[50%]"
                                 />
                                 <div className="flex flex-col items-start justify-start w-4/5 pt-0.5 gap-px">
-                                  <Heading size="md" as="h4" className="tracking-[0.12px] !font-poppins">
+                                  <Heading size="md" className="tracking-[0.12px] !font-poppins">
                                     Dagruel Manulo
                                   </Heading>
-                                  <Text as="p" className="!text-black-900_7f_01 tracking-[0.12px] !font-poppins">
+                                  <Text className="!text-black-900_7f_01 tracking-[0.12px] !font-poppins">
                                     Sydney, Australia
                                   </Text>
                                 </div>
@@ -272,11 +268,11 @@ export default function AboutusPage() {
                             />
                             <div className="flex flex-col items-center justify-start w-full gap-[13px]">
                               <div className="flex flex-col items-center justify-start w-full gap-1">
-                                <Heading size="md" as="h5" className="tracking-[0.12px] !font-poppins leading-[35px]">
+                                <Heading size="md" className="tracking-[0.12px] !font-poppins leading-[35px]">
                                   For the material and the chair as we expected it&#39;s good
                                 </Heading>
                                 <Text
-                                  as="p"
+
                                   className="!text-black-900_87 tracking-[0.12px] !font-poppins opacity-0.5 leading-[35px]"
                                 >
                                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
@@ -290,10 +286,10 @@ export default function AboutusPage() {
                                   className="h-14 w-14 rounded-[50%]"
                                 />
                                 <div className="flex flex-col items-start justify-start w-4/5 gap-1">
-                                  <Heading size="md" as="h6" className="tracking-[0.12px] !font-poppins">
+                                  <Heading size="md" className="tracking-[0.12px] !font-poppins">
                                     Zambi Owel
                                   </Heading>
-                                  <Text as="p" className="!text-black-900_7f_01 tracking-[0.12px] !font-poppins">
+                                  <Text className="!text-black-900_7f_01 tracking-[0.12px] !font-poppins">
                                     Sydney, Australia
                                   </Text>
                                 </div>
@@ -310,11 +306,11 @@ export default function AboutusPage() {
                             />
                             <div className="flex flex-col items-center justify-start w-full gap-[13px]">
                               <div className="flex flex-col items-center justify-start w-full gap-1">
-                                <Heading size="md" as="h6" className="tracking-[0.12px] !font-poppins leading-[35px]">
+                                <Heading size="md" className="tracking-[0.12px] !font-poppins leading-[35px]">
                                   For the material and the chair as we expected it&#39;s good
                                 </Heading>
                                 <Text
-                                  as="p"
+
                                   className="!text-black-900_87 tracking-[0.12px] !font-poppins opacity-0.5 leading-[35px]"
                                 >
                                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
@@ -328,10 +324,10 @@ export default function AboutusPage() {
                                   className="h-14 w-14 rounded-[50%]"
                                 />
                                 <div className="flex flex-col items-start justify-start w-4/5 gap-1">
-                                  <Heading size="md" as="h6" className="tracking-[0.12px] !font-poppins">
+                                  <Heading size="md" className="tracking-[0.12px] !font-poppins">
                                     Mario
                                   </Heading>
-                                  <Text as="p" className="!text-black-900_7f_01 tracking-[0.12px] !font-poppins">
+                                  <Text className="!text-black-900_7f_01 tracking-[0.12px] !font-poppins">
                                     Sydney, Australia
                                   </Text>
                                 </div>

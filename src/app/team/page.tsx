@@ -1,7 +1,7 @@
 "use client"
 import { Heading, Text } from "@/components";
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import Header from "@/components/NavBar";
 import TeamCardteam from "@/components/TeamCardteam";
 
 export default function TeamPage() {

@@ -3,7 +3,7 @@ import React from "react";
 // import { Helmet } from "react-helmet";
 import { Slider, Heading, Img, Button, Text, RatingBar } from "../../components";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Header from "../../components/NavBar";
 import HomepageCardproduct from "../../components/HomepageCardproduct";
 import AliceCarousel, { EventObject, DotsItem } from "react-alice-carousel";
 
