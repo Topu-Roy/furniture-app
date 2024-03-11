@@ -19,7 +19,7 @@ export default function ProductTag() {
                     <Button
                         size="lg"
                         variant={"link"}
-                        className="tracking-[-0.50px] px-3 py-1 bg-slate-200/90 rounded-full text-gray-700/90"
+                        className="tracking-[-0.50px] px-3 py-1 bg-slate-200/90 rounded-full text-gray-700/90 ring ring-black/20"
                     >
                         All
                     </Button>
