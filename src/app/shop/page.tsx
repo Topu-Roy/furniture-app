@@ -7,6 +7,7 @@ import HomepageCardproduct from "../../components/HomepageCardproduct";
 import NavBar from "@/components/NavBar";
 import ColorSelector from "./colorSelector";
 import FilterByPrice from "./filterByPrice";
+import Catagories from "./catagories";
 
 const dropDownOptions = [
   { label: "Option1", value: "option1" },
@@ -27,36 +28,11 @@ export default function ShopPage() {
               <FilterByPrice />
               <ColorSelector />
 
-              <div className="flex flex-col items-start justify-start w-full gap-[18px]">
-                <Heading>Product Categories</Heading>
-                <div className="flex flex-col items-start justify-start w-full gap-5">
-                  <Text size="s" className="!text-blue_gray-900_01 tracking-[-0.50px] !font-poppins">
-                    Chair (9)
-                  </Text>
-                  <Text size="s" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
-                    Lamp (10)
-                  </Text>
-                  <Text size="s" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
-                    Table (12)
-                  </Text>
-                  <Text size="s" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
-                    Sofa (6)
-                  </Text>
-                  <Text size="s" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
-                    Table (12)
-                  </Text>
-                  <Text size="s" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
-                    Clock (5)
-                  </Text>
-                  <Text size="s" className="!text-gray-500 tracking-[-0.50px] !font-poppins">
-                    Pillow (3)
-                  </Text>
-                </div>
-              </div>
+              <Catagories />
               <div className="flex flex-col items-start justify-start w-full gap-[18px]">
                 <Heading>Product Tag</Heading>
                 <div className="flex flex-col items-start justify-start w-full gap-[15px]">
-                  <div className="flex flex-row justify-start gap-2.5">
+                  <div className="flex flex-row justify-start gap-1">
                     <Button
                       size="lg"
                       shape="round"
