@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 import HomepageCardproduct from "../../components/HomepageCardproduct";
 import NavBar from "@/components/NavBar";
 import ColorSelector from "./colorSelector";
+import FilterByPrice from "./filterByPrice";
 
 const dropDownOptions = [
   { label: "Option1", value: "option1" },
@@ -17,33 +18,15 @@ export default function ShopPage() {
   return (
     <>
       <NavBar />
-      <div className="flex flex-col items-center justify-start w-full gap-[100px] bg-gray-50">
+      <div className="flex flex-col items-center justify-start w-full gap-[100px] bg-gray-50 py-4">
 
         <div className="flex flex-col items-center justify-start w-full">
           <div className="flex flex-row justify-start items-start w-full gap-5 max-w-[1290px]">
             <div className="flex flex-col items-center justify-start w-[24%] gap-[60px]">
-              <div className="flex flex-col items-start justify-start w-full gap-[21px]">
-                <Heading>Filter By Price</Heading>
-                <div className="flex flex-row justify-between items-center w-full pr-[74px]">
-                  <input
-                    color="gray_500"
-                    name="price"
-                    placeholder="$0"
-                    className="w-[42%]"
-                  />
-                  <Heading size="xs" className="!font-plusjakartasans">
-                    -
-                  </Heading>
-                  <input
-                    color="gray_500"
-                    name="price"
-                    placeholder="$2000"
-                    className="w-[42%]"
-                  />
-                </div>
-                <Img src="images/img_slider.svg" alt="slider_one" className="h-4" />
-              </div>
+
+              <FilterByPrice />
               <ColorSelector />
+
               <div className="flex flex-col items-start justify-start w-full gap-[18px]">
                 <Heading>Product Categories</Heading>
                 <div className="flex flex-col items-start justify-start w-full gap-5">
