@@ -15,8 +15,15 @@ export default function ColorSelector() {
         "blue",
         "cyan",
     ];
-
     const selectedColor = useShopStore(state => state.selectedColor);
+
+    function handleColorChange(color: SelectedColor) {
+        if (color === selectedColor) {
+            useShopStore.setState({ selectedColor: undefined })
+        } else {
+            useShopStore.setState({ selectedColor: color })
+        }
+    }
 
     return (
         <div className="flex flex-col items-start justify-start w-full gap-[21px]">
@@ -25,7 +32,7 @@ export default function ColorSelector() {
                 {colors.map((color) => (
                     <button
                         key={color}
-                        onClick={() => useShopStore.setState({ selectedColor: color })}
+                        onClick={() => handleColorChange(color)}
                         className={cn(`rounded-full h-10 w-10 p-6 text-xs bg-${color}-500/80 flex justify-center items-center`, {
                             "bg-black text-white": color === "black",
                             "bg-stone-200": color === "white",
