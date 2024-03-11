@@ -8,6 +8,7 @@ import NavBar from "@/components/NavBar";
 import ColorSelector from "./colorSelector";
 import FilterByPrice from "./filterByPrice";
 import Catagories from "./catagories";
+import ProductTag from "./productTag";
 
 const dropDownOptions = [
   { label: "Option1", value: "option1" },
@@ -27,78 +28,9 @@ export default function ShopPage() {
 
               <FilterByPrice />
               <ColorSelector />
-
               <Catagories />
-              <div className="flex flex-col items-start justify-start w-full gap-[18px]">
-                <Heading>Product Tag</Heading>
-                <div className="flex flex-col items-start justify-start w-full gap-[15px]">
-                  <div className="flex flex-row justify-start gap-1">
-                    <Button
-                      size="lg"
-                      shape="round"
-                      className="!text-yellow-100 tracking-[-0.50px] font-poppins border-blue_gray-900_01 border border-solid min-w-[66px]"
-                    >
-                      Chair
-                    </Button>
-                    <Button
-                      color="gray_500"
-                      size="lg"
-                      variant="outline"
-                      shape="round"
-                      className="tracking-[-0.50px] font-poppins min-w-[68px]"
-                    >
-                      Lamp
-                    </Button>
-                    <Button
-                      color="gray_500"
-                      size="lg"
-                      variant="outline"
-                      shape="round"
-                      className="tracking-[-0.50px] font-poppins min-w-[101px]"
-                    >
-                      Minimalist
-                    </Button>
-                  </div>
-                  <div className="flex flex-row justify-start gap-2.5">
-                    <Button
-                      color="gray_500"
-                      size="lg"
-                      variant="outline"
-                      shape="round"
-                      className="tracking-[-0.50px] font-poppins min-w-[59px]"
-                    >
-                      Sofa
-                    </Button>
-                    <Button
-                      color="gray_500"
-                      size="lg"
-                      variant="outline"
-                      shape="round"
-                      className="tracking-[-0.50px] font-poppins min-w-[58px]"
-                    >
-                      New
-                    </Button>
-                    <Button
-                      color="gray_500"
-                      size="lg"
-                      variant="outline"
-                      shape="round"
-                      className="tracking-[-0.50px] font-poppins min-w-[67px]"
-                    >
-                      Clock
-                    </Button>
-                  </div>
-                  <Button
-                    color="gray_500"
-                    size="lg"
-                    variant="outline"
-                    shape="round"
-                    className="tracking-[-0.50px] font-poppins min-w-[66px]"
-                  >
-                    Pillow
-                  </Button>
-                </div>
-              </div>
+              <ProductTag />
+
               <div className="h-[400px] w-full relative">
                 <Img
                   src="images/img_rectangle_29.png"

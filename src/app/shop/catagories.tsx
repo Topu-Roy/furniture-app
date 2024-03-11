@@ -43,13 +43,13 @@ export default function Catagories() {
             <Heading>Product Categories</Heading>
             <div className="flex flex-col items-start w-full gap-0.5">
                 <Button variant={'link'} className='p-0 text-gray-700'>
-                    <Text size="s" className="tracking-[-0.50px] !font-poppins">
+                    <Text size="s" className="tracking-[-0.50px]">
                         All ({totalQuantity})
                     </Text>
                 </Button>
                 {productCatagories.map(category => (
                     <Button variant={'link'} className='p-0 text-gray-700/90'>
-                        <Text size="s" className="tracking-[-0.50px] !font-poppins text-gray-700/90">
+                        <Text size="s" className="tracking-[-0.50px] text-gray-700/90">
                             {category.productName} ({category.quantity})
                         </Text>
                     </Button>
