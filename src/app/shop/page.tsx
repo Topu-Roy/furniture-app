@@ -23,35 +23,15 @@ export default function ShopPage() {
       <div className="flex flex-col items-center justify-start w-full gap-[100px] bg-gray-50 py-4">
 
         <div className="flex flex-col items-center justify-start w-full">
-          <div className="flex flex-row justify-start items-start w-full gap-5 max-w-[1290px]">
-            <div className="flex flex-col items-center justify-start w-[24%] gap-[60px]">
+          <div className="relative flex flex-row justify-start items-start w-full gap-5 max-w-[1290px]">
 
-              <FilterByPrice />
+            <div className="sticky top-0 flex flex-col items-center justify-start w-[24%] gap-[60px]">
               <ColorSelector />
+              <FilterByPrice />
               <Catagories />
               <ProductTag />
-
-              <div className="h-[400px] w-full relative">
-                <Img
-                  src="images/img_rectangle_29.png"
-                  alt="image_four"
-                  className="justify-center h-[400px] w-full left-0 bottom-0 right-0 top-0 m-auto object-cover absolute rounded-[10px]"
-                />
-                <div className="flex flex-col items-center justify-start w-[87%] gap-[15px] bottom-[10%] right-0 left-0 m-auto absolute">
-                  <Heading className="!text-white-A700 text-center !font-bold !leading-[35px]">
-                    Make a purchase now and get 50% discount
-                  </Heading>
-                  <Button
-                    color="yellow_100"
-                    size="xl"
-                    shape="round"
-                    className="!text-black-900 tracking-[-0.50px] font-poppins font-semibold border-yellow-100 border border-solid min-w-[107px]"
-                  >
-                    Buy Now
-                  </Button>
-                </div>
-              </div>
             </div>
+
             <div className="flex flex-col items-center justify-start w-3/4 gap-[49px]">
               <div className="flex flex-row justify-between items-center w-full">
                 <div className="flex flex-row justify-center w-[43%]">
