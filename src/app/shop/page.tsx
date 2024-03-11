@@ -1,7 +1,6 @@
 'use client'
 import React from "react";
-import { Img, Button, Heading, Text } from "../../components";
-import { SelectBox } from "@/components/SelectBox";
+import { Img, Button } from "../../components";
 import Footer from "../../components/Footer";
 import HomepageCardproduct from "../../components/HomepageCardproduct";
 import NavBar from "@/components/NavBar";
