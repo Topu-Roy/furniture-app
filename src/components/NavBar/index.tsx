@@ -16,7 +16,7 @@ import { Button } from "../ui/button";
 
 export default function NavBar() {
   return (
-    <header className="flex justify-center items-center p-[35px] bg-white-A700 w-full">
+    <header className="fixed top-0 flex z-50 h-[5rem] justify-center items-center w-full bg-white">
       <div className="w-[85rem] mx-auto flex flex-row justify-between">
         <Link href="/" legacyBehavior passHref>
           <Image src="images/img_frame_146.svg" height={146} width={146} alt="image" className="h-[30px] w-auto" />

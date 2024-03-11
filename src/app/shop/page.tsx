@@ -9,23 +9,38 @@ import ColorSelector from "./colorSelector";
 import FilterByPrice from "./filterByPrice";
 import Catagories from "./catagories";
 import ProductTag from "./productTag";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-const dropDownOptions = [
-  { label: "Option1", value: "option1" },
-  { label: "Option2", value: "option2" },
-  { label: "Option3", value: "option3" },
+const sortingOptions = [
+  {
+    value: 'default',
+    option: 'Default'
+  },
+  {
+    value: 'price',
+    option: 'Price'
+  },
+  {
+    value: 'rating',
+    option: 'Rating'
+  },
+  {
+    value: 'popularity',
+    option: 'Popularity'
+  },
 ];
 
 export default function ShopPage() {
   return (
     <>
       <NavBar />
-      <div className="flex flex-col items-center justify-start w-full gap-[100px] bg-gray-50 py-4">
+      <div className="flex mt-[5rem] py-8 flex-col items-center justify-start w-full gap-[100px] bg-stone-100">
 
         <div className="flex flex-col items-center justify-start w-full">
           <div className="relative flex flex-row justify-start items-start w-full gap-5 max-w-[1290px]">
 
-            <div className="sticky top-0 flex flex-col items-center justify-start w-[24%] gap-[60px]">
+            <div className="sticky top-[5rem] pt-4 flex flex-col items-center justify-start w-[24%] gap-[60px]">
               <ColorSelector />
               <FilterByPrice />
               <Catagories />
@@ -35,24 +50,33 @@ export default function ShopPage() {
             <div className="flex flex-col items-center justify-start w-3/4 gap-[49px]">
               <div className="flex flex-row justify-between items-center w-full">
                 <div className="flex flex-row justify-center w-[43%]">
-                  <div className="flex flex-row justify-center w-full">
-                    <input
-                      name="office_chair"
+                  <div className="flex flex-row justify-center w-full gap-2">
+                    <Input
                       placeholder="Office Chair"
-                      className="w-[74%] !text-black-900_3f"
+                      className="w-[74%] h-12 px-8 text-sm rounded-sm"
                     />
-                    <Button size="6xl" className="!text-yellow-100 tracking-[-0.50px] font-semibold min-w-[107px]">
+                    <Button size="6xl" className="h-12 !text-yellow-100 tracking-[-0.50px] font-semibold rounded-sm">
                       Search
                     </Button>
                   </div>
                 </div>
-                <SelectBox
-                  indicator={<Img src="images/img_evaarrowiosforwardfill.svg" alt="eva:arrow-ios-forward-fill" />}
-                  name="sortby"
-                  placeholder="Sort By"
-                  options={dropDownOptions}
-                  className="w-[8%] gap-px text-black-900 font-raleway font-medium"
-                />
+
+                <div className="w-[15%]">
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Default" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Options</SelectLabel>
+                        {sortingOptions.map(opt => (
+                          <SelectItem value={opt.value}>{opt.option}</SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+
               </div>
               <div className="justify-center w-full gap-5 grid-cols-3 grid min-h-[auto]">
                 <HomepageCardproduct
