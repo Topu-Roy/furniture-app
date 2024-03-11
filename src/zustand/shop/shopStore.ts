@@ -1,13 +1,21 @@
 import { create } from "zustand";
 
-type UseBearStoreType = {
-  bears: number;
-  increasePopulation: () => void;
-  removeAllBears: () => void;
+type UseShopStoreType = {
+  selectedColor: SelectedColor | undefined;
+  setSelectedColor: (color: SelectedColor) => void;
 };
 
-export const useBearStore = create<UseBearStoreType>((set) => ({
-  bears: 0,
-  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-  removeAllBears: () => set({ bears: 0 }),
+export type SelectedColor =
+  | "black"
+  | "white"
+  | "red"
+  | "orange"
+  | "green"
+  | "purple"
+  | "blue"
+  | "cyan";
+
+export const useShopStore = create<UseShopStoreType>((set) => ({
+  selectedColor: undefined,
+  setSelectedColor: (color) => set({ selectedColor: color }),
 }));

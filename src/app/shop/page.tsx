@@ -5,7 +5,7 @@ import { SelectBox } from "@/components/SelectBox";
 import Footer from "../../components/Footer";
 import HomepageCardproduct from "../../components/HomepageCardproduct";
 import NavBar from "@/components/NavBar";
-import ColorSelector from "./ColorSelector";
+import ColorSelector from "./colorSelector";
 
 const dropDownOptions = [
   { label: "Option1", value: "option1" },
