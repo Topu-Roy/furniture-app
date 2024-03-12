@@ -1,10 +1,16 @@
 import React from 'react'
 import { Heading, Text } from '@/components'
 import { Button } from '@/components/ui/button'
+import { Category } from '@/zustand/shop/shopStore';
 
 export default function Catagories() {
 
-    const productCatagories = [
+    type ProductCatagoriesType = {
+        productName: Category;
+        quantity: number;
+    }[]
+
+    const productCatagories: ProductCatagoriesType = [
         {
             productName: "Chair",
             quantity: 8

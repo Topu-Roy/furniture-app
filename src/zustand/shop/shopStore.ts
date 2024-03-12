@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
 type UseShopStoreType = {
-  selectedColor: SelectedColor | undefined;
-  setSelectedColor: (color: SelectedColor) => void;
+  selectedColor: Color | undefined;
+  setSelectedColor: (color: Color) => void;
 };
 
-export type SelectedColor =
+export type Color =
   | "black"
   | "white"
   | "red"
@@ -14,6 +14,15 @@ export type SelectedColor =
   | "purple"
   | "blue"
   | "cyan";
+
+export type Category =
+  | "Chair"
+  | "Table"
+  | "Lamp"
+  | "Drawer"
+  | "Bed"
+  | "Bookshelf"
+  | "Sofa";
 
 export const useShopStore = create<UseShopStoreType>((set) => ({
   selectedColor: undefined,

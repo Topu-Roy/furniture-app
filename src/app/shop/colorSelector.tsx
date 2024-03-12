@@ -2,10 +2,10 @@
 import React from 'react'
 import { Heading } from '@/components'
 import { cn } from '@/lib/utils'
-import { SelectedColor, useShopStore } from '@/zustand/shop/shopStore';
+import { Color, useShopStore } from '@/zustand/shop/shopStore';
 
 export default function ColorSelector() {
-    const colors: SelectedColor[] = [
+    const colors: Color[] = [
         "black",
         "white",
         "red",
@@ -15,9 +15,10 @@ export default function ColorSelector() {
         "blue",
         "cyan",
     ];
+
     const selectedColor = useShopStore(state => state.selectedColor);
 
-    function handleColorChange(color: SelectedColor) {
+    function handleColorChange(color: Color) {
         if (color === selectedColor) {
             useShopStore.setState({ selectedColor: undefined })
         } else {
