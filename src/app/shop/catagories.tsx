@@ -66,13 +66,17 @@ export default function Catagories() {
                         asChild
                         onClick={() => handleCategory(category.productName)}
                         variant={'link'}
-                        className={cn('cursor-pointer tracking-[-0.50px] px-3 py-1 bg-slate-200/90 rounded-full text-gray-700/90',
+                        className={cn('cursor-pointer tracking-[-0.50px] px-3 py-1 bg-slate-200/90 rounded-full min-w-[3rem]',
                             {
                                 "ring-[2px] ring-black/20": selectedCategory === category.productName
                             }
                         )}
                     >
-                        <Text size="s" className="tracking-[-0.50px] text-gray-700/90">
+                        <Text
+                            size="s"
+                            className={cn("tracking-[-0.50px] !text-gray-700/90",
+                                { "!text-black": selectedCategory === category.productName })}
+                        >
                             {category.productName} ({category.quantity})
                         </Text>
                     </Button>
