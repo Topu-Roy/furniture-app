@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
@@ -38,20 +38,22 @@ export default function ProductHeader() {
                 </div>
             </div>
 
-            <div className="w-[15%]">
-                <Select>
-                    <SelectTrigger>
-                        <SelectValue placeholder="Default" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            <SelectLabel>Options</SelectLabel>
-                            {sortingOptions.map(opt => (
-                                <SelectItem value={opt.value}>{opt.option}</SelectItem>
-                            ))}
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
+            <div className="flex justify-center items-center gap-2 w-[20%]">
+                <span className='text-sm font-medium'>Sort by</span>
+                <div className="w-[70%]">
+                    <Select>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Default" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                {sortingOptions.map(opt => (
+                                    <SelectItem value={opt.value}>{opt.option}</SelectItem>
+                                ))}
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
+                </div>
             </div>
 
         </div>
