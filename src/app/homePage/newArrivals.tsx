@@ -1,6 +1,6 @@
 import React from 'react'
 import { Heading } from '@/components'
-import HomepageCardproduct from '@/components/HomepageCardproduct'
+import HomepageCardproduct from '@/components/product/productCard'
 
 export default function NewArrivals() {
     return (

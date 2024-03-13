@@ -4,7 +4,7 @@ import React from "react";
 import { Slider, Heading, Img, Button, Text, RatingBar } from "../../components";
 import Footer from "../../components/Footer";
 import Header from "../../components/NavBar";
-import HomepageCardproduct from "../../components/HomepageCardproduct";
+import HomepageCardproduct from "../../components/product/productCard";
 import AliceCarousel, { EventObject, DotsItem } from "react-alice-carousel";
 
 export default function ShopDetailDescriptionPage() {

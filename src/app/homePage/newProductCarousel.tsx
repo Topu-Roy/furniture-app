@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import { Heading, Text } from '@/components';
-import HomepageCardproduct from '@/components/HomepageCardproduct';
+import HomepageCardproduct from '@/components/product/productCard';
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import Autoplay from "embla-carousel-autoplay"

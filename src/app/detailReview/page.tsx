@@ -5,7 +5,7 @@ import { Slider, Heading, Img, Button, Text, CheckBox, TextArea, Input, RatingBa
 import CartSection from "../../components/CartSection";
 import DetailReviewSectionfooter from "../../components/DetailReviewSectionfooter";
 import Header from "../../components/NavBar";
-import HomepageCardproduct from "../../components/HomepageCardproduct";
+import HomepageCardproduct from "../../components/product/productCard";
 import AliceCarousel, { EventObject, DotsItem } from "react-alice-carousel";
 
 export default function DetailReviewPage() {

@@ -1,28 +1,38 @@
 import React from "react";
-import { Text, Heading } from "./..";
+import { Text, Heading } from "..";
 import Image from "next/image";
 import { Button } from "../ui/button";
 
-type Props = {
+type Color = "black" | "white" | "red" | "orange" | "green" | "purple" | "blue" | "cyan"
+type Category = "All" | "Chair" | "Table" | "Lamp" | "Drawer" | "Bed" | "Bookshelf" | "Sofa"
+type Tag = "All" | "Minimalistic" | "Modern" | "Stylish" | "Elegant" | "Ambient" | "Luxurious"
+
+type TagsWithoutAll = Omit<Tag, '"All"'>
+type CategoryWithoutAll = Omit<Category, "All">
+
+export type ProductType = {
   className?: string;
-  imageOne?: string;
-  category?: string;
-  status?: string;
-  productTitle?: string;
-  price?: string;
+  productTitle: string;
+  image: string;
+  price: number | undefined;
+  status?: "new" | "popular" | "out of stock";
+  category: CategoryWithoutAll;
+  tag: TagsWithoutAll;
+  color: Color
 }
 
-const heartIcon = "images/img_bx_heart_1.svg"
-const cartIcon = "images/img_bx_cart_2.svg"
-
-export default function HomepageCardproduct({
-  imageOne = "images/defaultNoData.png",
-  category = "Living Room",
+export default function Product({
+  image = "images/defaultNoData.png",
+  category = "Bed",
   status,
   productTitle = "Teak wood chair",
-  price = "$24",
+  price = 24,
   ...props
-}: Props) {
+}: ProductType) {
+
+  const heartIcon = "images/img_bx_heart_1.svg"
+  const cartIcon = "images/img_bx_cart_2.svg"
+
   return (
     <div {...props}>
       <div className="flex flex-col items-center justify-start w-full">
@@ -30,7 +40,7 @@ export default function HomepageCardproduct({
           <Image
             height={500}
             width={500}
-            src={`/${imageOne}`}
+            src={`/${image}`}
             alt="image_one"
             className="justify-center h-[400px] w-full left-0 bottom-0 right-0 top-0 m-auto object-cover absolute"
           />
@@ -67,7 +77,7 @@ export default function HomepageCardproduct({
           {productTitle}
         </Heading>
         <Text size="lg" className="!text-blue_gray-900_01 tracking-[-0.50px]">
-          {price}
+          {price === undefined ? "TBA" : price}
         </Text>
       </div>
     </div>
