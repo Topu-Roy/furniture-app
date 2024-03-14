@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import Product, { ProductType } from '@/components/product/productCard';
+import Product, { type ProductType } from '@/components/product/productCard';
 import { Button } from '@/components/ui/button';
 
 type Props = {
