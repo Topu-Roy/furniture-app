@@ -10,13 +10,13 @@ type Props = {
 export default function RenderProducts(props: Props) {
 
     const totalProducts = props.products.length;
-    const productPerPage = 10;
+    const productPerPage = 12;
     const totalPages = Math.round(totalProducts / productPerPage)
     const [productsToRender, setProductsToRender] = React.useState(props.products.slice(1, 10))
 
     function updateProducts(pageNumber: number) {
-        let index = 10 * pageNumber;
-        setProductsToRender(props.products.slice(index - 10, index))
+        let index = productPerPage * pageNumber;
+        setProductsToRender(props.products.slice(index - productPerPage, index))
 
         window.scrollTo({
             top: 0,
@@ -48,7 +48,6 @@ export default function RenderProducts(props: Props) {
                         tag={item.tag}
                         key={item.productTitle + 1}
                         status={item.status}
-                        className='flex flex-col items-center justify-start w-full gap-[15px]'
                     />
                 ))}
             </div>

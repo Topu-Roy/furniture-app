@@ -2,6 +2,7 @@ import React from "react";
 import { Text, Heading } from "..";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
 
 type Color = "black" | "white" | "green" | "brown";
 type Category = "All" | "Chair" | "Table" | "Lamp" | "Drawer" | "Bed" | "Bookshelf" | "Sofa"
@@ -22,11 +23,10 @@ export type ProductType = {
 }
 
 export default function Product({
-  image = "images/defaultNoData.png",
+  image = "/images/defaultNoData.png",
   category = "Bed",
-  status,
-  productTitle = "Teak wood chair",
-  price = 24,
+  productTitle = "product not found",
+  price = 0,
   ...props
 }: ProductType) {
 
@@ -34,7 +34,7 @@ export default function Product({
   const cartIcon = "images/img_bx_cart_2.svg"
 
   return (
-    <div {...props}>
+    <div {...props} className={cn("flex flex-col items-center justify-start w-full gap-[15px]", props.className)}>
       <div className="flex flex-col items-center justify-start w-full">
         <div className="h-[400px] w-full relative">
           <Image
@@ -48,11 +48,11 @@ export default function Product({
             {category}
           </Button>
           <div className="flex flex-col items-center justify-start w-[14%] gap-[106px] right-[5%] top-[4%] m-auto absolute">
-            {!!status ? (
+            {!!props.status ? (
               <Text
                 className="flex justify-center items-center w-[42px] h-[21px] px-[7px] py-0.5 !text-white-A700 tracking-[-0.50px] bg-red-A200"
               >
-                {status}
+                {props.status}
               </Text>
             ) : null}
 
