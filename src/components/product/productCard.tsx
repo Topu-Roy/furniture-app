@@ -1,8 +1,10 @@
 import React from "react";
-import { Text, Heading } from "..";
+import { Text } from "..";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
+import { FaRegHeart } from "react-icons/fa";
+import { LucideShoppingCart } from "lucide-react";
 
 type Color = "black" | "white" | "green" | "brown";
 type Category = "All" | "Chair" | "Table" | "Lamp" | "Drawer" | "Bed" | "Bookshelf" | "Sofa"
@@ -34,55 +36,58 @@ export default function Product({
   const cartIcon = "images/img_bx_cart_2.svg"
 
   return (
-    <div {...props} className={cn("flex flex-col items-center justify-start w-full gap-[15px]", props.className)}>
+    <div {...props} className={cn("flex flex-col items-center justify-start w-full gap-2 group", props.className)}>
       <div className="flex flex-col items-center justify-start w-full">
-        <div className="h-[400px] w-full relative">
-          <Image
-            height={500}
-            width={500}
-            src={image}
-            alt="image_one"
-            className="justify-center h-[400px] w-full left-0 bottom-0 right-0 top-0 m-auto object-cover absolute"
-          />
-          <Button size="lg" className="bottom-[4%] left-[5%] m-auto tracking-[-0.50px] min-w-[106px] absolute">
-            {category}
-          </Button>
-          <div className="flex flex-col items-center justify-start w-[14%] gap-[106px] right-[5%] top-[4%] m-auto absolute">
-            {!!props.status ? (
-              <Text
-                className="flex justify-center items-center w-[42px] h-[21px] px-[7px] py-0.5 !text-white-A700 tracking-[-0.50px] bg-red-A200"
-              >
+        <div className="w-full relative overflow-hidden">
+          <div className="h-[400px] overflow-hidden z-10 rounded-md ">
+            <Image
+              height={500}
+              width={500}
+              src={image}
+              alt={productTitle}
+              className="justify-center h-full w-full group-hover:scale-105 transition-all duration-500 ease-in-out"
+            />
+          </div>
+
+          {/* //* Decoration */}
+          <div className="z-[19] absolute bottom-0 left-0 ring-0 h-[40%] w-full bg-gradient-to-t from-white/50 to-transparent transition-all translate-y-[150%] group-hover:translate-y-0 duration-300" />
+
+          <div className="z-20 absolute bottom-[3%] left-0 ring-0 w-full flex flex-row items-center justify-around gap-2 transition-all translate-y-[150%] group-hover:translate-y-0 duration-300">
+            <Button size="lg" className="rounded-md font-bold">
+              Buy now
+            </Button>
+            <div className="flex flex-row justify-between items-center gap-3">
+              <Button className="flex justify-center items-center p-2 rounded-full bg-gray-400/50 hover:bg-gray-400/90">
+                <LucideShoppingCart size={25} className="text-stone-800 " />
+              </Button>
+              <Button className="flex justify-center items-center p-2 rounded-full bg-gray-400/50 hover:bg-gray-400/90">
+                <FaRegHeart size={25} className="text-stone-800 " />
+              </Button>
+            </div>
+          </div>
+
+          <div className="z-30 absolute top-0 right-0 max-w-min rounded-lg w-full">
+            {props.status ? (
+              <Text className={cn("px-2",
+                {
+                  "bg-red-500/50": props.status === 'new',
+                  "bg-green-500/50": props.status === 'popular',
+                  "bg-gray-500/50": props.status === 'out of stock',
+                }
+              )}>
                 {props.status}
               </Text>
             ) : null}
-
-            <div className="flex flex-col items-center justify-start w-[96%] gap-5">
-
-              <Button color="black_900" className="w-10 shadow-xs h-10 text-red-700 rounded-full bg-slate-500/40 p-2 hover:bg-rose-600/50">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-              </Button>
-
-
-
-
-              {cartIcon ? (
-                <Button color="yellow_100" className="w-10 shadow-xs h-10 rounded-full bg-slate-300/40 p-2 hover:bg-green-600/80">
-                  <Image height={100} width={100} alt="icon" src={`/${cartIcon}`} />
-                </Button>
-              ) : null}
-            </div>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-row justify-between items-center w-full">
-        <Heading className="tracking-[-0.50px]">
-          {productTitle}
-        </Heading>
-        <Text size="lg" className="!text-blue_gray-900_01 tracking-[-0.50px]">
-          {price === undefined ? "TBA" : price}
+      <div className="flex flex-row justify-between items-center w-full gap-2">
+        <Text size="md" className=" font-medium line-clamp-1 truncate">
+          {productTitle.length > 25 ? productTitle.slice(0, 25) + "..." : productTitle}
+        </Text>
+        <Text size="lg" className="font-extrabold text-gray-700">
+          ${price === 0 ? "TBA" : price}
         </Text>
       </div>
     </div>
