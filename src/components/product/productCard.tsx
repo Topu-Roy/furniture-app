@@ -3,7 +3,7 @@ import { Text, Heading } from "..";
 import Image from "next/image";
 import { Button } from "../ui/button";
 
-type Color = "black" | "white" | "red" | "orange" | "green" | "purple" | "blue" | "cyan"
+type Color = "black" | "white" | "green" | "brown";
 type Category = "All" | "Chair" | "Table" | "Lamp" | "Drawer" | "Bed" | "Bookshelf" | "Sofa"
 type Tag = "All" | "Minimalistic" | "Modern" | "Stylish" | "Elegant" | "Ambient" | "Luxurious"
 

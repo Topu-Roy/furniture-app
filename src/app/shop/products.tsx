@@ -1,76 +1,11 @@
 import React from 'react'
 import { Img } from '@/components'
-import Product, { ProductType } from '@/components/product/productCard'
 import { Button } from '@/components/ui/button'
 import ProductHeader from './productHeader'
+import { products } from './productArray'
 
 export default function Products() {
 
-    const products: ProductType[] = [
-        {
-            productTitle: "Elegant Dining Chair",
-            image: "images/dining_chair.jpg",
-            price: 149,
-            status: "popular",
-            category: "Chair",
-            tag: "Stylish",
-            color: "black",
-        },
-        {
-            productTitle: "Modern Coffee Table",
-            image: "images/coffee_table.jpg",
-            price: 399,
-            status: "new",
-            category: "Table",
-            tag: "Minimalistic",
-            color: "white",
-        },
-        {
-            productTitle: "Vintage Desk Lamp",
-            image: "images/desk_lamp.jpg",
-            price: 59,
-            status: "out of stock",
-            category: "Lamp",
-            tag: "Ambient",
-            color: "red",
-        },
-        {
-            productTitle: "Drawer Organizer Set",
-            image: "images/drawer_organizer.jpg",
-            price: 29,
-            status: "popular",
-            category: "Drawer",
-            tag: "Modern",
-            color: "orange",
-        },
-        {
-            productTitle: "King Size Bed Frame",
-            image: "images/bed_frame.jpg",
-            price: 599,
-            status: "popular",
-            category: "Bed",
-            tag: "Luxurious",
-            color: "purple",
-        },
-        {
-            productTitle: "Classic Bookshelf",
-            image: "images/bookshelf.jpg",
-            price: 249,
-            status: "new",
-            category: "Bookshelf",
-            tag: "Stylish",
-            color: "blue",
-        },
-        {
-            productTitle: "Modern Sectional Sofa",
-            image: "images/sofa.jpg",
-            price: 899,
-            status: "popular",
-            category: "Sofa",
-            tag: "Elegant",
-            color: "green",
-        },
-    ];
 
     return (
         <div className="flex flex-col items-center justify-start w-3/4 gap-[49px]">
