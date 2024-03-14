@@ -40,7 +40,7 @@ export default function Product({
           <Image
             height={500}
             width={500}
-            src={`/${image}`}
+            src={image}
             alt="image_one"
             className="justify-center h-[400px] w-full left-0 bottom-0 right-0 top-0 m-auto object-cover absolute"
           />
