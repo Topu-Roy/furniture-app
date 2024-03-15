@@ -9,11 +9,7 @@ export default function ColorSelector() {
         "black",
         "white",
         "red",
-        "orange",
         "green",
-        "purple",
-        "blue",
-        "cyan",
     ];
 
     const selectedColor = useShopStore(state => state.selectedColor);

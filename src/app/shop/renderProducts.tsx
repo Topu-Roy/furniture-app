@@ -10,12 +10,19 @@ type Props = {
 
 export default function RenderProducts(props: Props) {
 
+    // Pagination
     const totalProducts = props.products.length;
     const productPerPage = 12;
     const totalPages = Math.round(totalProducts / productPerPage)
+
+    // Zustand
     const products = useShopStore((state) => state.products);
+    const selectedCategory = useShopStore((state) => state.selectedCategory);
+    const selectedColor = useShopStore((state) => state.selectedColor);
+    const selectedTag = useShopStore((state) => state.selectedTag);
     const { setProducts } = useShopStore();
 
+    // Active Buttons
     const [currentPageIndicator, setCurrentPageIndicator] = React.useState(1);
 
     function updateProducts(pageNumber: number) {
@@ -42,6 +49,7 @@ export default function RenderProducts(props: Props) {
             </Button>
         )
     }
+
 
     React.useEffect(() => {
         setProducts(props.products.slice(0, productPerPage))

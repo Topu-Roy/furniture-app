@@ -48,6 +48,7 @@ export default function Catagories() {
     ]
 
     const selectedCategory = useShopStore(state => state.selectedCategory);
+    const { filterProductsByCategory } = useShopStore();
 
     let totalQuantity = 0;
     productCatagories.forEach(category => totalQuantity += category.quantity);
@@ -55,6 +56,7 @@ export default function Catagories() {
 
     function handleCategory(category: Category) {
         useShopStore.setState({ selectedCategory: category })
+        filterProductsByCategory();
     }
 
     return (
