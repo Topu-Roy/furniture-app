@@ -1,7 +1,8 @@
 "use client"
 import React from 'react'
-import Product, { type ProductType } from '@/components/product/productCard';
+import Product from '@/components/product/productCard';
 import { Button } from '@/components/ui/button';
+import { ProductType, useShopStore } from '@/zustand/shop/shopStore';
 
 type Props = {
     products: ProductType[],
@@ -12,22 +13,29 @@ export default function RenderProducts(props: Props) {
     const totalProducts = props.products.length;
     const productPerPage = 12;
     const totalPages = Math.round(totalProducts / productPerPage)
-    const [productsToRender, setProductsToRender] = React.useState(props.products.slice(1, 10))
+    const products = useShopStore((state) => state.products);
+    const { setProducts } = useShopStore();
+
+    const [currentPageIndicator, setCurrentPageIndicator] = React.useState(1);
 
     function updateProducts(pageNumber: number) {
         let index = productPerPage * pageNumber;
-        setProductsToRender(props.products.slice(index - productPerPage, index))
+        setProducts(props.products.slice(index - productPerPage, index));
 
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         })
+
+        setCurrentPageIndicator(pageNumber);
     }
 
     let PaginationButtons: React.JSX.Element[] = [];
     for (let i = 1; i <= totalPages; i++) {
         PaginationButtons.push(
             <Button
+                variant={currentPageIndicator === i ? 'default' : 'outline'}
+                key={i + Math.random()}
                 onClick={() => updateProducts(i)}
             >
                 {i}
@@ -35,10 +43,15 @@ export default function RenderProducts(props: Props) {
         )
     }
 
+    React.useEffect(() => {
+        setProducts(props.products.slice(0, productPerPage))
+    }, [])
+
+
     return (
         <div className="w-full">
             <div className="justify-center w-full gap-5 grid-cols-3 grid min-h-[auto]">
-                {productsToRender.map(item => (
+                {products.map(item => (
                     <Product
                         productTitle={item.productTitle}
                         image={item.image}
@@ -46,7 +59,7 @@ export default function RenderProducts(props: Props) {
                         color={item.color}
                         price={item.price}
                         tag={item.tag}
-                        key={item.productTitle + 1}
+                        key={item.productTitle + item.image}
                         status={item.status}
                     />
                 ))}

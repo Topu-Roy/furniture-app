@@ -5,24 +5,7 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { FaRegHeart } from "react-icons/fa";
 import { LucideShoppingCart } from "lucide-react";
-
-type Color = "black" | "white" | "green" | "brown";
-type Category = "All" | "Chair" | "Table" | "Lamp" | "Drawer" | "Bed" | "Bookshelf" | "Sofa"
-type Tag = "All" | "Minimalistic" | "Modern" | "Stylish" | "Elegant" | "Ambient" | "Luxurious"
-
-type TagsWithoutAll = Omit<Tag, '"All"'>
-type CategoryWithoutAll = Omit<Category, "All">
-
-export type ProductType = {
-  className?: string;
-  productTitle: string;
-  image: string;
-  price: number | undefined;
-  status?: "new" | "popular" | "out of stock";
-  category: CategoryWithoutAll;
-  tag: TagsWithoutAll;
-  color: Color
-}
+import { ProductType } from "@/zustand/shop/shopStore";
 
 export default function Product({
   image = "/images/defaultNoData.png",
@@ -50,7 +33,7 @@ export default function Product({
           </div>
 
           {/* //* Decoration */}
-          <div className="z-[19] absolute bottom-0 left-0 ring-0 h-[40%] w-full bg-gradient-to-t from-white/50 to-transparent transition-all translate-y-[150%] group-hover:translate-y-0 duration-300" />
+          <div className="z-[19] select-none pointer-events-none absolute bottom-0 left-0 ring-0 h-[40%] w-full bg-gradient-to-t from-white/50 to-transparent transition-all translate-y-[150%] group-hover:translate-y-0 duration-300" />
 
           <div className="z-20 absolute bottom-[3%] left-0 ring-0 w-full flex flex-row items-center justify-around gap-2 transition-all translate-y-[150%] group-hover:translate-y-0 duration-300">
             <Button size="lg" className="rounded-md font-bold">
