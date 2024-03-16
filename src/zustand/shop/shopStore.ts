@@ -18,6 +18,9 @@ export type ProductType = {
 type UseShopStoreType = {
   productsBackup: ProductType[];
   setProductsBackup: (products: ProductType[]) => void;
+  selectedMinPrice: number;
+  selectedMaxPrice: number;
+  selectedSliderPrice: number;
   selectedColor: Color | undefined;
   selectedCategory: Category;
   selectedTag: Tag;
@@ -26,6 +29,9 @@ type UseShopStoreType = {
 export const useShopStore = create<UseShopStoreType>((set) => ({
   productsBackup: [],
   setProductsBackup: (props: ProductType[]) => set(() => ({ productsBackup: props })),
+  selectedMinPrice: 0,
+  selectedMaxPrice: 2000,
+  selectedSliderPrice: 2000,
   selectedColor: undefined,
   selectedCategory: "All",
   selectedTag: "All",
