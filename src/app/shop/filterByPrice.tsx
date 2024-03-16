@@ -14,6 +14,21 @@ export default function FilterByPrice() {
     const debouncedMinPrice = useDebounce(minPrice);
     const debouncedMaxPrice = useDebounce(maxPrice);
 
+    const { selectedMinPrice, selectedMaxPrice, selectedSliderPrice } = useShopStore();
+
+    useEffect(() => {
+        if (selectedMaxPrice !== 2000 && selectedMinPrice !== 0) {
+            useShopStore.setState({ selectedSliderPrice: 2000 });
+        }
+    }, [selectedMaxPrice, selectedMaxPrice])
+
+    useEffect(() => {
+        if (selectedSliderPrice !== 2000) {
+            useShopStore.setState({ selectedMinPrice: 0 });
+            useShopStore.setState({ selectedMaxPrice: 2000 });
+        }
+    }, [selectedSliderPrice])
+
     const handleMinPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value;
         const numericValue = parseInt(inputValue.replace(/\D/g, ''));
