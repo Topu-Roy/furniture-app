@@ -16,22 +16,16 @@ export type ProductType = {
 };
 
 type UseShopStoreType = {
-  products: ProductType[];
-  setProducts: (products: ProductType[]) => void;
-  filterProductsByCategory: () => void;
-  filterProductsByColor: () => void;
-  filterProductsByTag: () => void;
+  productsBackup: ProductType[];
+  setProductsBackup: (products: ProductType[]) => void;
   selectedColor: Color | undefined;
   selectedCategory: Category;
   selectedTag: Tag;
 };
 
 export const useShopStore = create<UseShopStoreType>((set) => ({
-  products: [],
-  setProducts: (props: ProductType[]) => set(() => ({ products: props })),
-  filterProductsByCategory: () => set((state) => ({ products: state.products.filter(item => item.category === state.selectedCategory) })),
-  filterProductsByColor: () => set((state) => ({ products: state.products.filter(item => item.color === state.selectedColor) })),
-  filterProductsByTag: () => set((state) => ({ products: state.products.filter(item => item.tag === state.selectedTag) })),
+  productsBackup: [],
+  setProductsBackup: (props: ProductType[]) => set(() => ({ productsBackup: props })),
   selectedColor: undefined,
   selectedCategory: "All",
   selectedTag: "All",

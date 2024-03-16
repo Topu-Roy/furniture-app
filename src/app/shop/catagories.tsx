@@ -48,15 +48,18 @@ export default function Catagories() {
     ]
 
     const selectedCategory = useShopStore(state => state.selectedCategory);
-    const { filterProductsByCategory } = useShopStore();
 
     let totalQuantity = 0;
     productCatagories.forEach(category => totalQuantity += category.quantity);
     productCatagories[0].quantity = totalQuantity;
 
     function handleCategory(category: Category) {
-        useShopStore.setState({ selectedCategory: category })
-        filterProductsByCategory();
+        useShopStore.setState({ selectedCategory: category });
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
     }
 
     return (
@@ -65,6 +68,7 @@ export default function Catagories() {
             <div className="flex flex-row flex-wrap items-start w-full gap-2">
                 {productCatagories.map(category => (
                     <Button
+                        key={category.productName}
                         asChild
                         onClick={() => handleCategory(category.productName)}
                         variant={'link'}
