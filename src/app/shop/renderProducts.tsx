@@ -3,6 +3,9 @@ import React from 'react'
 import Product from '@/components/product/productCard';
 import { Button } from '@/components/ui/button';
 import { ProductType, useShopStore } from '@/zustand/shop/shopStore';
+import { Heading } from '@/components';
+import { VscLoading } from "react-icons/vsc";
+import { MdRunningWithErrors } from "react-icons/md";
 
 type Props = {
     products: ProductType[],
@@ -89,21 +92,67 @@ export default function RenderProducts(props: Props) {
         );
     }
 
+    function handleResetAll() {
+        useShopStore.setState({ selectedCategory: 'All' });
+        useShopStore.setState({ selectedMinPrice: 0 });
+        useShopStore.setState({ selectedMaxPrice: 2000 });
+        useShopStore.setState({ selectedSliderPrice: 2000 });
+        useShopStore.setState({ selectedColor: undefined });
+        useShopStore.setState({ selectedSorting: 'default' });
+        useShopStore.setState({ selectedTag: 'All' });
+    }
+
+
+    function Products() {
+        if (props.products.length === 0) {
+            // loading
+            return (
+                <div className='col-span-3 flex flex-col justify-center items-center w-full pt-14 gap-4'>
+                    <Heading size='lg'>
+                        Hold Tight, Products are loading...
+                    </Heading>
+                    <VscLoading className='animate-spin p-2 text-gray-700' size={20} />
+                </div>
+            )
+        }
+        if (filteredProducts.length === 0) {
+            // No products
+            return (
+                <div className='col-span-3 flex flex-col justify-center items-center w-full pt-14 gap-4'>
+                    <MdRunningWithErrors className='p-2 text-gray-700' size={20} />
+                    <Heading size='lg'>
+                        Oops! No products found...
+                    </Heading>
+                    <Button
+                        onClick={handleResetAll}
+                        variant={'outline'}
+                    >
+                        Reset all filters
+                    </Button>
+                </div>
+            )
+        }
+
+        return (
+            productsToRender.map(item => (
+                <Product
+                    productTitle={item.productTitle}
+                    image={item.image}
+                    category={item.category}
+                    color={item.color}
+                    price={item.price}
+                    tag={item.tag}
+                    key={item.productTitle + item.image}
+                    status={item.status}
+                />
+            ))
+        )
+    }
+
     return (
         <div className="w-full">
             <div className="w-full h-full justify-center gap-5 grid-cols-3 grid min-h-[auto]">
-                {productsToRender.map(item => (
-                    <Product
-                        productTitle={item.productTitle}
-                        image={item.image}
-                        category={item.category}
-                        color={item.color}
-                        price={item.price}
-                        tag={item.tag}
-                        key={item.productTitle + item.image}
-                        status={item.status}
-                    />
-                ))}
+                <Products />
             </div>
             <div className="w-full pt-4 flex flex-row justify-center items-center gap-2">
                 {PaginationButtons}
