@@ -18,6 +18,7 @@ export default function RenderProducts(props: Props) {
     const [currentPage, setCurrentPage] = React.useState(1);
     const productsPerPage = 12;
 
+    // Filtering Logic
     React.useEffect(() => {
         let tempFilteredProducts = [...props.products];
 
@@ -47,6 +48,7 @@ export default function RenderProducts(props: Props) {
         }
 
         setFilteredProducts(tempFilteredProducts);
+        setCurrentPage(1);
     }, [selectedCategory, selectedColor, selectedTag, selectedMinPrice, selectedMinPrice, selectedSliderPrice]);
 
     // Pagination
