@@ -7,6 +7,7 @@ import useDebounce from '@/hooks/debounce'
 import { useShopStore } from '@/zustand/shop/shopStore'
 import { GrPowerReset } from "react-icons/gr";
 import { Button } from '@/components/ui/button'
+import HeadingAndReset from './headingAndReset'
 
 export default function FilterByPrice() {
     const [sliderValue, setSliderValue] = useState(2000);
@@ -69,9 +70,10 @@ export default function FilterByPrice() {
         useShopStore.setState({ selectedMaxPrice: 2000 });
         useShopStore.setState({ selectedSliderPrice: 2000 });
 
-        setMinPrice(0);
-        setMaxPrice(2000);
-        setSliderValue(2000);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
     }
 
     useEffect(() => {
@@ -88,16 +90,7 @@ export default function FilterByPrice() {
 
     return (
         <div className="flex flex-col gap-4">
-            <div className='flex justify-between items-center gap-2'>
-                <Heading size='md'>Filter by price</Heading>
-                <Button
-                    variant={'outline'}
-                    className='rounded-full p-2'
-                    onClick={handleReset}
-                >
-                    <GrPowerReset size={18} />
-                </Button>
-            </div>
+            <HeadingAndReset title='Filter By Price' handleReset={handleReset} />
             <div className="flex flex-row justify-center items-center gap-1">
                 <div className="flex justify-center items-center gap-2 bg-gray-50 border-[1px] border-black pl-1.5 ">
                     <span className=''>Min $:</span>

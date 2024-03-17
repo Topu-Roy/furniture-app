@@ -4,6 +4,8 @@ import { Heading, Text } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Category, useShopStore } from '@/zustand/shop/shopStore';
 import { cn } from '@/lib/utils';
+import { GrPowerReset } from 'react-icons/gr';
+import HeadingAndReset from './headingAndReset';
 
 export default function Catagories() {
 
@@ -62,9 +64,18 @@ export default function Catagories() {
         })
     }
 
+    function handleReset() {
+        useShopStore.setState({ selectedCategory: 'All' });
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
+
     return (
         <div className="flex flex-col items-start justify-start w-full gap-4">
-            <Heading>Product Categories</Heading>
+            <HeadingAndReset handleReset={handleReset} title={"Product Categories"} />
             <div className="flex flex-row flex-wrap items-start w-full gap-2">
                 {productCatagories.map(category => (
                     <Button

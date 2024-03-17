@@ -1,11 +1,12 @@
 "use client"
 import React from 'react'
-import { Heading } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Tag, useShopStore } from '@/zustand/shop/shopStore'
 import { cn } from '@/lib/utils'
+import HeadingAndReset from './headingAndReset'
 
 export default function ProductTag() {
+    const { selectedTag } = useShopStore();
     const productTags: Tag[] = [
         "All",
         "Minimalistic",
@@ -16,10 +17,18 @@ export default function ProductTag() {
         "Luxurious",
     ]
 
-    const selectedTag = useShopStore().selectedTag;
+    function handleReset() {
+        useShopStore.setState({ selectedTag: 'All' });
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
+
     return (
         <div className="flex flex-col items-start justify-start w-full gap-4">
-            <Heading>Product Tag</Heading>
+            <HeadingAndReset title='Filter By Tag' handleReset={handleReset} />
             <div className="flex flex-col items-start justify-start w-full gap-4">
                 <div className="flex flex-row justify-start flex-wrap gap-2">
                     {productTags.map(tag => (

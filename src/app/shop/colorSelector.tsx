@@ -3,6 +3,9 @@ import React from 'react'
 import { Heading } from '@/components'
 import { cn } from '@/lib/utils'
 import { Color, useShopStore } from '@/zustand/shop/shopStore';
+import { Button } from '@/components/ui/button';
+import { GrPowerReset } from 'react-icons/gr';
+import HeadingAndReset from './headingAndReset';
 
 export default function ColorSelector() {
     const colors: Color[] = [
@@ -23,9 +26,18 @@ export default function ColorSelector() {
         }
     }
 
+    function handleReset() {
+        useShopStore.setState({ selectedCategory: 'All' });
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
+
     return (
         <div className="flex flex-col items-start justify-start w-full gap-[21px]">
-            <Heading>Filter By Color</Heading>
+            <HeadingAndReset title='Filter By Color' handleReset={handleReset} />
             <div className="flex flex-row items-start justify-start flex-wrap w-full gap-3">
                 {colors.map((color) => (
                     <button
