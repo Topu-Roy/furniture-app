@@ -11,7 +11,7 @@ type Props = {
 export default function RenderProducts(props: Props) {
 
     // Zustand
-    const { selectedCategory, selectedColor, selectedTag } = useShopStore();
+    const { selectedCategory, selectedColor, selectedTag, selectedMinPrice, selectedMaxPrice, selectedSliderPrice } = useShopStore();
 
     // Local state
     const [filteredProducts, setFilteredProducts] = React.useState(props.products);
@@ -21,20 +21,33 @@ export default function RenderProducts(props: Props) {
     React.useEffect(() => {
         let tempFilteredProducts = [...props.products];
 
-        if (selectedCategory !== 'All') {
-            tempFilteredProducts = tempFilteredProducts.filter(item => item.category === selectedCategory);
+        if (selectedCategory !== 'All') tempFilteredProducts = tempFilteredProducts.filter(item => item.category === selectedCategory);
+        if (selectedColor !== undefined) tempFilteredProducts = tempFilteredProducts.filter(item => item.color === selectedColor);
+        if (selectedTag !== 'All') tempFilteredProducts = tempFilteredProducts.filter(item => item.tag === selectedTag);
+
+
+        if (selectedMinPrice !== 0 && selectedMaxPrice !== 2000) {
+            tempFilteredProducts = tempFilteredProducts.filter((item) => {
+                if (item.price !== undefined) {
+                    return item.price <= selectedMinPrice && item.price <= selectedMaxPrice
+                } else {
+                    return true;
+                }
+            })
         }
 
-        if (selectedColor !== undefined) {
-            tempFilteredProducts = tempFilteredProducts.filter(item => item.color === selectedColor);
-        }
-
-        if (selectedTag !== 'All') {
-            tempFilteredProducts = tempFilteredProducts.filter(item => item.tag === selectedTag);
+        if (selectedSliderPrice !== 2000) {
+            tempFilteredProducts = tempFilteredProducts.filter((item) => {
+                if (item.price !== undefined) {
+                    return item.price <= selectedSliderPrice;
+                } else {
+                    return true;
+                }
+            })
         }
 
         setFilteredProducts(tempFilteredProducts);
-    }, [selectedCategory, selectedColor, selectedTag]);
+    }, [selectedCategory, selectedColor, selectedTag, selectedMinPrice, selectedMinPrice, selectedSliderPrice]);
 
     // Pagination
     const totalProducts = filteredProducts.length;

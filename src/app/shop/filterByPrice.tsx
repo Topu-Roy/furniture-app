@@ -5,6 +5,8 @@ import { Input } from '@/components/ui/input'
 import { Slider } from '@/components/ui/slider'
 import useDebounce from '@/hooks/debounce'
 import { useShopStore } from '@/zustand/shop/shopStore'
+import { GrPowerReset } from "react-icons/gr";
+import { Button } from '@/components/ui/button'
 
 export default function FilterByPrice() {
     const [sliderValue, setSliderValue] = useState(2000);
@@ -19,6 +21,7 @@ export default function FilterByPrice() {
     useEffect(() => {
         if (selectedMaxPrice !== 2000 && selectedMinPrice !== 0) {
             useShopStore.setState({ selectedSliderPrice: 2000 });
+            setSliderValue(2000);
         }
     }, [selectedMaxPrice, selectedMaxPrice])
 
@@ -26,8 +29,18 @@ export default function FilterByPrice() {
         if (selectedSliderPrice !== 2000) {
             useShopStore.setState({ selectedMinPrice: 0 });
             useShopStore.setState({ selectedMaxPrice: 2000 });
+
+            setMinPrice(0);
+            setMaxPrice(2000);
         }
     }, [selectedSliderPrice])
+
+
+    useEffect(() => {
+        setMinPrice(selectedMinPrice);
+        setMaxPrice(selectedMaxPrice);
+        setSliderValue(selectedSliderPrice);
+    }, [selectedMaxPrice, selectedMinPrice, selectedSliderPrice])
 
     const handleMinPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value;
@@ -51,6 +64,16 @@ export default function FilterByPrice() {
         }
     };
 
+    function handleReset() {
+        useShopStore.setState({ selectedMinPrice: 0 });
+        useShopStore.setState({ selectedMaxPrice: 2000 });
+        useShopStore.setState({ selectedSliderPrice: 2000 });
+
+        setMinPrice(0);
+        setMaxPrice(2000);
+        setSliderValue(2000);
+    }
+
     useEffect(() => {
         useShopStore.setState({ selectedMinPrice: debouncedMinPrice })
     }, [debouncedMinPrice])
@@ -65,7 +88,16 @@ export default function FilterByPrice() {
 
     return (
         <div className="flex flex-col gap-4">
-            <Heading size='md'>Filter by price</Heading>
+            <div className='flex justify-between items-center gap-2'>
+                <Heading size='md'>Filter by price</Heading>
+                <Button
+                    variant={'outline'}
+                    className='rounded-full p-2'
+                    onClick={handleReset}
+                >
+                    <GrPowerReset size={18} />
+                </Button>
+            </div>
             <div className="flex flex-row justify-center items-center gap-1">
                 <div className="flex justify-center items-center gap-2 bg-gray-50 border-[1px] border-black pl-1.5 ">
                     <span className=''>Min $:</span>
@@ -83,6 +115,7 @@ export default function FilterByPrice() {
                 </span>
                 <Slider
                     defaultValue={[sliderValue]}
+                    value={[sliderValue]}
                     onValueChange={(val) => setSliderValue(val[0])}
                     className='flex-1'
                     max={2000}
