@@ -1,28 +1,20 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { useShopStore } from '@/zustand/shop/shopStore';
+
+type SortingMethodType = "default" | "price"
 
 
 export default function ProductHeader() {
-    const sortingOptions = [
-        {
-            value: 'default',
-            option: 'Default'
-        },
-        {
-            value: 'price',
-            option: 'Price'
-        },
-        {
-            value: 'rating',
-            option: 'Rating'
-        },
-        {
-            value: 'popularity',
-            option: 'Popularity'
-        },
-    ];
+    const [sortingMethod, setSortingMethod] = useState<SortingMethodType>('default');
+    const sortingOptions: SortingMethodType[] = ["default", "price"];
+
+    useEffect(() => {
+        useShopStore.setState({ selectedSorting: sortingMethod })
+    }, [sortingMethod])
 
     return (
         <div className="flex flex-row justify-between items-center w-full">
@@ -41,14 +33,14 @@ export default function ProductHeader() {
             <div className="flex justify-center items-center gap-2 w-[20%]">
                 <span className='text-sm font-medium'>Sort by</span>
                 <div className="w-[70%]">
-                    <Select>
+                    <Select onValueChange={(value: SortingMethodType) => setSortingMethod(value)}>
                         <SelectTrigger>
                             <SelectValue placeholder="Default" />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
                                 {sortingOptions.map(opt => (
-                                    <SelectItem value={opt.value}>{opt.option}</SelectItem>
+                                    <SelectItem value={opt}>{opt.slice(0, 1).toUpperCase() + opt.slice(1, opt.length)}</SelectItem>
                                 ))}
                             </SelectGroup>
                         </SelectContent>

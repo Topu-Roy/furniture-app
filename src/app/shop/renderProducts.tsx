@@ -11,7 +11,7 @@ type Props = {
 export default function RenderProducts(props: Props) {
 
     // Zustand
-    const { selectedCategory, selectedColor, selectedTag, selectedMinPrice, selectedMaxPrice, selectedSliderPrice } = useShopStore();
+    const { selectedCategory, selectedColor, selectedTag, selectedMinPrice, selectedMaxPrice, selectedSliderPrice, selectedSorting } = useShopStore();
 
     // Local state
     const [filteredProducts, setFilteredProducts] = React.useState(props.products);
@@ -47,9 +47,19 @@ export default function RenderProducts(props: Props) {
             })
         }
 
+        if (selectedSorting === 'price') {
+            tempFilteredProducts.sort((a, b) => {
+                if (a.price === undefined && b.price === undefined) return 0;
+                if (a.price === undefined) return 1;
+                if (b.price === undefined) return -1;
+
+                return a.price - b.price;
+            })
+        }
+
         setFilteredProducts(tempFilteredProducts);
         setCurrentPage(1);
-    }, [selectedCategory, selectedColor, selectedTag, selectedMinPrice, selectedMinPrice, selectedSliderPrice]);
+    }, [selectedCategory, selectedColor, selectedTag, selectedMinPrice, selectedMinPrice, selectedSliderPrice, selectedSorting]);
 
     // Pagination
     const totalProducts = filteredProducts.length;

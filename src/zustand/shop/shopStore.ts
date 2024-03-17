@@ -21,6 +21,7 @@ type UseShopStoreType = {
   selectedMinPrice: number;
   selectedMaxPrice: number;
   selectedSliderPrice: number;
+  selectedSorting: "default" | "price";
   selectedColor: Color | undefined;
   selectedCategory: Category;
   selectedTag: Tag;
@@ -32,6 +33,7 @@ export const useShopStore = create<UseShopStoreType>((set) => ({
   selectedMinPrice: 0,
   selectedMaxPrice: 2000,
   selectedSliderPrice: 2000,
+  selectedSorting: 'default',
   selectedColor: undefined,
   selectedCategory: "All",
   selectedTag: "All",
