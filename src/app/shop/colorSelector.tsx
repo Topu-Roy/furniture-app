@@ -10,6 +10,7 @@ export default function ColorSelector() {
         "white",
         "red",
         "green",
+        'brown'
     ];
 
     const selectedColor = useShopStore(state => state.selectedColor);
@@ -31,8 +32,9 @@ export default function ColorSelector() {
                         key={color}
                         onClick={() => handleColorChange(color)}
                         className={cn(`rounded-full h-10 w-10 p-6 text-xs bg-${color}-500/80 flex justify-center items-center`, {
-                            "bg-black text-white": color === "black",
-                            "bg-stone-200": color === "white",
+                            "bg-black/80 text-white": color === "black",
+                            "bg-stone-200/80 text-black": color === "white",
+                            "bg-[#964B00]/80": color === "brown",
                             "ring-[3px] ring-stone-700": selectedColor === color
                         })}
                     >
@@ -44,9 +46,6 @@ export default function ColorSelector() {
                 <div className='bg-red-500/80'></div>
                 <div className='bg-orange-500/80'></div>
                 <div className='bg-green-500/80'></div>
-                <div className='bg-purple-500/80'></div>
-                <div className='bg-blue-500/80'></div>
-                <div className='bg-cyan-500/80'></div>
             </div>
         </div>
     )
