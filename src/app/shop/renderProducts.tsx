@@ -14,7 +14,14 @@ type Props = {
 export default function RenderProducts(props: Props) {
 
     // Zustand
-    const { selectedCategory, selectedColor, selectedTag, selectedMinPrice, selectedMaxPrice, selectedSliderPrice, selectedSorting } = useShopStore();
+    const { selectedCategory,
+        selectedColor,
+        selectedTag,
+        selectedMinPrice,
+        selectedMaxPrice,
+        selectedSliderPrice,
+        selectedSorting,
+        searchInputText } = useShopStore();
 
     // Local state
     const [filteredProducts, setFilteredProducts] = React.useState(props.products);
@@ -60,9 +67,23 @@ export default function RenderProducts(props: Props) {
             })
         }
 
+        if (searchInputText !== '') {
+            tempFilteredProducts = tempFilteredProducts.filter(item => (
+                item.productTitle.toLowerCase().includes(searchInputText.toLowerCase()) || item.category.toLowerCase().includes(searchInputText.toLowerCase())
+            ))
+        }
+
         setFilteredProducts(tempFilteredProducts);
         setCurrentPage(1);
-    }, [selectedCategory, selectedColor, selectedTag, selectedMinPrice, selectedMinPrice, selectedSliderPrice, selectedSorting]);
+    }, [selectedCategory,
+        selectedColor,
+        selectedTag,
+        selectedMinPrice,
+        selectedMinPrice,
+        selectedSliderPrice,
+        selectedSorting,
+        searchInputText
+    ]);
 
     // Pagination
     const totalProducts = filteredProducts.length;
@@ -100,8 +121,8 @@ export default function RenderProducts(props: Props) {
         useShopStore.setState({ selectedColor: undefined });
         useShopStore.setState({ selectedSorting: 'default' });
         useShopStore.setState({ selectedTag: 'All' });
+        useShopStore.setState({ searchInputText: '' });
     }
-
 
     function Products() {
         if (props.products.length === 0) {

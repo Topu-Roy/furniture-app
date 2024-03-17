@@ -25,6 +25,7 @@ type UseShopStoreType = {
   selectedColor: Color | undefined;
   selectedCategory: Category;
   selectedTag: Tag;
+  searchInputText: string;
 };
 
 export const useShopStore = create<UseShopStoreType>((set) => ({
@@ -37,4 +38,5 @@ export const useShopStore = create<UseShopStoreType>((set) => ({
   selectedColor: undefined,
   selectedCategory: "All",
   selectedTag: "All",
+  searchInputText: '',
 }));

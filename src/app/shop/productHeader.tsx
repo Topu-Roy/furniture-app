@@ -4,13 +4,30 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useShopStore } from '@/zustand/shop/shopStore';
+import useDebounce from '@/hooks/debounce';
 
 type SortingMethodType = "default" | "price"
 
 
 export default function ProductHeader() {
+    const { searchInputText } = useShopStore();
+    const [searchText, setSearchText] = useState('');
+    const debouncedText = useDebounce(searchText);
     const [sortingMethod, setSortingMethod] = useState<SortingMethodType>('default');
+
     const sortingOptions: SortingMethodType[] = ["default", "price"];
+
+    function handleClearSearch() {
+        setSearchText('');
+    }
+
+    useEffect(() => {
+        useShopStore.setState({ searchInputText: debouncedText })
+    }, [debouncedText])
+
+    useEffect(() => {
+        setSearchText(searchInputText);
+    }, [searchInputText])
 
     useEffect(() => {
         useShopStore.setState({ selectedSorting: sortingMethod })
@@ -21,11 +38,18 @@ export default function ProductHeader() {
             <div className="flex flex-row justify-center w-[43%]">
                 <div className="flex flex-row justify-center w-full gap-2">
                     <Input
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
                         placeholder="Office Chair"
                         className="w-[74%] h-12 px-8 text-sm rounded-sm"
                     />
-                    <Button size="6xl" className="h-12 !text-yellow-100 tracking-[-0.50px] font-semibold rounded-sm">
-                        Search
+                    <Button
+                        onClick={handleClearSearch}
+                        variant={'outline'}
+                        size="6xl"
+                        className="h-12 tracking-[-0.50px] font-semibold rounded-sm"
+                    >
+                        Clear
                     </Button>
                 </div>
             </div>
@@ -40,14 +64,13 @@ export default function ProductHeader() {
                         <SelectContent>
                             <SelectGroup>
                                 {sortingOptions.map(opt => (
-                                    <SelectItem value={opt}>{opt.slice(0, 1).toUpperCase() + opt.slice(1, opt.length)}</SelectItem>
+                                    <SelectItem key={opt} value={opt}>{opt.slice(0, 1).toUpperCase() + opt.slice(1, opt.length)}</SelectItem>
                                 ))}
                             </SelectGroup>
                         </SelectContent>
                     </Select>
                 </div>
             </div>
-
         </div>
     )
 }
