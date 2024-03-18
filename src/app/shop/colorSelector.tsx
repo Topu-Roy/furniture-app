@@ -12,41 +12,29 @@ type ColorNQuantity = {
 export default function ColorSelector() {
 
     const { selectedColor, productsBackup } = useShopStore();
-
     const [colors, setColors] = useState<ColorNQuantity[]>([]);
-    const [blackCount, setBlackCount] = useState(0);
-    const [whiteCount, setWhiteCount] = useState(0);
-    const [redCount, setRedCount] = useState(0);
-    const [greenCount, setGreenCount] = useState(0);
-    const [brownCount, setBrownCount] = useState(0);
 
     useEffect(() => {
-        setBlackCount(productsBackup.filter(item => item.color === "black").length);
-        setWhiteCount(productsBackup.filter(item => item.color === "white").length);
-        setRedCount(productsBackup.filter(item => item.color === "red").length);
-        setGreenCount(productsBackup.filter(item => item.color === "green").length);
-        setBrownCount(productsBackup.filter(item => item.color === "brown").length);
-
         const colors: ColorNQuantity[] = [
             {
                 color: "black",
-                quantity: blackCount
+                quantity: productsBackup.filter(item => item.color === "black").length
             },
             {
                 color: "white",
-                quantity: whiteCount
+                quantity: productsBackup.filter(item => item.color === "white").length
             },
             {
                 color: "red",
-                quantity: redCount
+                quantity: productsBackup.filter(item => item.color === "red").length
             },
             {
                 color: "green",
-                quantity: greenCount
+                quantity: productsBackup.filter(item => item.color === "green").length
             },
             {
                 color: "brown",
-                quantity: brownCount
+                quantity: productsBackup.filter(item => item.color === "brown").length
             }
         ];
 
