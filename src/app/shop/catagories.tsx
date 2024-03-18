@@ -3,7 +3,7 @@ import React, { ReactElement, useEffect, useState } from 'react'
 import { Text } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Category, useShopStore } from '@/zustand/shop/shopStore';
-import { cn } from '@/lib/utils';
+import { cn, scrollToTop } from '@/lib/utils';
 import HeadingAndReset from './headingAndReset';
 
 type ProductCatagoriesType = {
@@ -73,17 +73,7 @@ export default function Catagories() {
         ];
 
         setProductCategories(categories);
-
-        console.log(productsBackup)
-        console.log(allCount, chairCount, tableCount);
     }, [productsBackup])
-
-    function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
-    }
 
     function handleCategory(category: Category) {
         useShopStore.setState({ selectedCategory: category });
