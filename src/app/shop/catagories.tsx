@@ -1,5 +1,5 @@
 'use client'
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Category, useShopStore } from '@/zustand/shop/shopStore';
@@ -17,58 +17,42 @@ export default function Catagories() {
     const selectedCategory = useShopStore(state => state.selectedCategory);
 
     const [productCategories, setProductCategories] = useState<ProductCatagoriesType>([]);
-    let allCount = 0;
-    let chairCount = 0;
-    let tableCount = 0;
-    let lampCount = 0;
-    let drawerCount = 0;
-    let bedCount = 0;
-    let bookshelfCount = 0;
-    let sofaCount = 0;
 
     useEffect(() => {
-        allCount = productsBackup.length;
-        chairCount = productsBackup.filter(item => item.category === 'Chair').length;
-        tableCount = productsBackup.filter(item => item.category === 'Table').length;
-        lampCount = productsBackup.filter(item => item.category === 'Lamp').length;
-        drawerCount = productsBackup.filter(item => item.category === 'Drawer').length;
-        bedCount = productsBackup.filter(item => item.category === 'Bed').length;
-        bookshelfCount = productsBackup.filter(item => item.category === 'Bookshelf').length;
-        sofaCount = productsBackup.filter(item => item.category === 'Sofa').length;
 
         const categories: ProductCatagoriesType = [
             {
                 // @ts-ignore
                 productName: "All",
-                quantity: allCount
+                quantity: productsBackup.length
             },
             {
                 productName: "Chair",
-                quantity: chairCount
+                quantity: productsBackup.filter(item => item.category === 'Chair').length
             },
             {
                 productName: "Table",
-                quantity: tableCount
+                quantity: productsBackup.filter(item => item.category === 'Table').length
             },
             {
                 productName: "Lamp",
-                quantity: lampCount
+                quantity: productsBackup.filter(item => item.category === 'Lamp').length
             },
             {
                 productName: "Drawer",
-                quantity: drawerCount
+                quantity: productsBackup.filter(item => item.category === 'Drawer').length
             },
             {
                 productName: "Bed",
-                quantity: bedCount
+                quantity: productsBackup.filter(item => item.category === 'Bed').length
             },
             {
                 productName: "Bookshelf",
-                quantity: bookshelfCount
+                quantity: productsBackup.filter(item => item.category === 'Bookshelf').length
             },
             {
                 productName: "Sofa",
-                quantity: sofaCount
+                quantity: productsBackup.filter(item => item.category === 'Sofa').length
             }
         ];
 

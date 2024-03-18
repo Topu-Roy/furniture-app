@@ -1,22 +1,59 @@
 "use client"
-import React from 'react'
-import { Heading } from '@/components'
-import { cn } from '@/lib/utils'
+import React, { useEffect, useState } from 'react'
+import { cn, scrollToTop } from '@/lib/utils'
 import { Color, useShopStore } from '@/zustand/shop/shopStore';
-import { Button } from '@/components/ui/button';
-import { GrPowerReset } from 'react-icons/gr';
 import HeadingAndReset from './headingAndReset';
 
-export default function ColorSelector() {
-    const colors: Color[] = [
-        "black",
-        "white",
-        "red",
-        "green",
-        'brown'
-    ];
+type ColorNQuantity = {
+    color: Color;
+    quantity: number
+}
 
-    const selectedColor = useShopStore(state => state.selectedColor);
+export default function ColorSelector() {
+
+    const { selectedColor, productsBackup } = useShopStore();
+
+    const [colors, setColors] = useState<ColorNQuantity[]>([]);
+    const [blackCount, setBlackCount] = useState(0);
+    const [whiteCount, setWhiteCount] = useState(0);
+    const [redCount, setRedCount] = useState(0);
+    const [greenCount, setGreenCount] = useState(0);
+    const [brownCount, setBrownCount] = useState(0);
+
+    useEffect(() => {
+        setBlackCount(productsBackup.filter(item => item.color === "black").length);
+        setWhiteCount(productsBackup.filter(item => item.color === "white").length);
+        setRedCount(productsBackup.filter(item => item.color === "red").length);
+        setGreenCount(productsBackup.filter(item => item.color === "green").length);
+        setBrownCount(productsBackup.filter(item => item.color === "brown").length);
+
+        const colors: ColorNQuantity[] = [
+            {
+                color: "black",
+                quantity: blackCount
+            },
+            {
+                color: "white",
+                quantity: whiteCount
+            },
+            {
+                color: "red",
+                quantity: redCount
+            },
+            {
+                color: "green",
+                quantity: greenCount
+            },
+            {
+                color: "brown",
+                quantity: brownCount
+            }
+        ];
+
+        setColors(colors);
+    }, [productsBackup])
+
+
 
     function handleColorChange(color: Color) {
         if (color === selectedColor) {
@@ -24,33 +61,32 @@ export default function ColorSelector() {
         } else {
             useShopStore.setState({ selectedColor: color })
         }
+
+        scrollToTop();
     }
 
     function handleReset() {
         useShopStore.setState({ selectedCategory: 'All' });
 
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
+        scrollToTop();
     }
 
     return (
         <div className="flex flex-col items-start justify-start w-full gap-[21px]">
             <HeadingAndReset title='Filter By Color' handleReset={handleReset} />
             <div className="flex flex-row items-start justify-start flex-wrap w-full gap-3">
-                {colors.map((color) => (
+                {colors.map((item) => (
                     <button
-                        key={color}
-                        onClick={() => handleColorChange(color)}
-                        className={cn(`rounded-full h-10 w-10 p-6 text-xs bg-${color}-500/80 flex justify-center items-center`, {
-                            "bg-black/80 text-white": color === "black",
-                            "bg-stone-200/80 text-black": color === "white",
-                            "bg-[#964B00]/80": color === "brown",
-                            "ring-[3px] ring-stone-700": selectedColor === color
+                        key={item.color}
+                        onClick={() => handleColorChange(item.color)}
+                        className={cn(`rounded-full h-10 w-10 p-6 text-xs bg-${item.color}-500/80 flex justify-center items-center`, {
+                            "bg-black/80 text-white": item.color === "black",
+                            "bg-stone-200/80 text-black": item.color === "white",
+                            "bg-[#964B00]/80": item.color === "brown",
+                            "ring-[3px] ring-stone-700": selectedColor === item.color
                         })}
                     >
-                        <span className={cn(``)}>{color[0].toUpperCase() + color.slice(1, color.length)}</span>
+                        <span>{item.quantity}</span>
                     </button>
                 ))}
             </div>
