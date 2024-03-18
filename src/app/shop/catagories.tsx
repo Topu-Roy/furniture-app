@@ -13,8 +13,7 @@ type ProductCatagoriesType = {
 
 export default function Catagories() {
 
-    const { productsBackup } = useShopStore();
-    const selectedCategory = useShopStore(state => state.selectedCategory);
+    const { productsBackup, selectedCategory } = useShopStore();
 
     const [productCategories, setProductCategories] = useState<ProductCatagoriesType>([]);
 
