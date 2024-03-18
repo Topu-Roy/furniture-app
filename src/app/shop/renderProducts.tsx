@@ -1,8 +1,8 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Product from '@/components/product/productCard';
 import { Button } from '@/components/ui/button';
-import { ProductType, useShopStore } from '@/zustand/shop/shopStore';
+import { type ProductType, useShopStore } from '@/zustand/shop/shopStore';
 import { Heading } from '@/components';
 import { VscLoading } from "react-icons/vsc";
 import { MdRunningWithErrors } from "react-icons/md";
@@ -14,7 +14,9 @@ type Props = {
 export default function RenderProducts(props: Props) {
 
     // Zustand
-    const { selectedCategory,
+    const {
+        setProductsBackup,
+        selectedCategory,
         selectedColor,
         selectedTag,
         selectedMinPrice,
@@ -24,12 +26,12 @@ export default function RenderProducts(props: Props) {
         searchInputText } = useShopStore();
 
     // Local state
-    const [filteredProducts, setFilteredProducts] = React.useState(props.products);
-    const [currentPage, setCurrentPage] = React.useState(1);
+    const [filteredProducts, setFilteredProducts] = useState(props.products);
+    const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 12;
 
     // Filtering Logic
-    React.useEffect(() => {
+    useEffect(() => {
         let tempFilteredProducts = [...props.products];
 
         if (selectedCategory !== 'All') tempFilteredProducts = tempFilteredProducts.filter(item => item.category === selectedCategory);
@@ -85,6 +87,10 @@ export default function RenderProducts(props: Props) {
         searchInputText
     ]);
 
+    useEffect(() => {
+        setProductsBackup(props.products);
+    }, [props.products])
+
     // Pagination
     const totalProducts = filteredProducts.length;
     const totalPages = Math.ceil(totalProducts / productsPerPage);
@@ -113,17 +119,7 @@ export default function RenderProducts(props: Props) {
         );
     }
 
-    function handleResetAll() {
-        useShopStore.setState({ selectedCategory: 'All' });
-        useShopStore.setState({ selectedMinPrice: 0 });
-        useShopStore.setState({ selectedMaxPrice: 2000 });
-        useShopStore.setState({ selectedSliderPrice: 2000 });
-        useShopStore.setState({ selectedColor: undefined });
-        useShopStore.setState({ selectedSorting: 'default' });
-        useShopStore.setState({ selectedTag: 'All' });
-        useShopStore.setState({ searchInputText: '' });
-    }
-
+    // Render Products and handle empty and loading states
     function Products() {
         if (props.products.length === 0) {
             // loading
@@ -168,6 +164,17 @@ export default function RenderProducts(props: Props) {
                 />
             ))
         )
+    }
+
+    function handleResetAll() {
+        useShopStore.setState({ selectedCategory: 'All' });
+        useShopStore.setState({ selectedMinPrice: 0 });
+        useShopStore.setState({ selectedMaxPrice: 2000 });
+        useShopStore.setState({ selectedSliderPrice: 2000 });
+        useShopStore.setState({ selectedColor: undefined });
+        useShopStore.setState({ selectedSorting: 'default' });
+        useShopStore.setState({ selectedTag: 'All' });
+        useShopStore.setState({ searchInputText: '' });
     }
 
     return (

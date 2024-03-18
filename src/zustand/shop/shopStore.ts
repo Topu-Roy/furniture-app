@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
 export type Color = "black" | "white" | "red" | "brown" | "green";
-export type Category = "All" | "Chair" | "Table" | "Lamp" | "Drawer" | "Bed" | "Bookshelf" | "Sofa";
-export type Tag = "All" | "Minimalistic" | "Modern" | "Stylish" | "Elegant" | "Ambient" | "Luxurious";
+export type Category = "Chair" | "Table" | "Lamp" | "Drawer" | "Bed" | "Bookshelf" | "Sofa";
+export type Tag = "Minimalistic" | "Modern" | "Stylish" | "Elegant" | "Ambient" | "Luxurious";
 
 export type ProductType = {
   className?: string;
@@ -10,8 +10,8 @@ export type ProductType = {
   image: string;
   price: number | undefined;
   status?: "new" | "popular" | "out of stock";
-  category: Omit<Category, "All">;
-  tag: Omit<Tag, '"All"'>;
+  category: Category;
+  tag: Tag;
   color: Color;
 };
 
@@ -23,8 +23,8 @@ type UseShopStoreType = {
   selectedSliderPrice: number;
   selectedSorting: "default" | "price";
   selectedColor: Color | undefined;
-  selectedCategory: Category;
-  selectedTag: Tag;
+  selectedCategory: Category | "All";
+  selectedTag: Tag | "All";
   searchInputText: string;
 };
 

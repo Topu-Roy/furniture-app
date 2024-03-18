@@ -1,83 +1,107 @@
 'use client'
-import React from 'react'
-import { Heading, Text } from '@/components'
+import React, { ReactElement, useEffect, useState } from 'react'
+import { Text } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Category, useShopStore } from '@/zustand/shop/shopStore';
 import { cn } from '@/lib/utils';
-import { GrPowerReset } from 'react-icons/gr';
 import HeadingAndReset from './headingAndReset';
+
+type ProductCatagoriesType = {
+    productName: Category;
+    quantity: number;
+}[]
 
 export default function Catagories() {
 
-    type ProductCatagoriesType = {
-        productName: Category;
-        quantity: number;
-    }[]
-
-    const productCatagories: ProductCatagoriesType = [
-        {
-            productName: "All",
-            quantity: 0
-        },
-        {
-            productName: "Chair",
-            quantity: 8
-        },
-        {
-            productName: "Table",
-            quantity: 12
-        },
-        {
-            productName: "Lamp",
-            quantity: 8
-        },
-        {
-            productName: "Drawer",
-            quantity: 7
-        },
-        {
-            productName: "Bed",
-            quantity: 10
-        },
-        {
-            productName: "Bookshelf",
-            quantity: 6
-        },
-        {
-            productName: "Sofa",
-            quantity: 4
-        }
-    ]
-
+    const { productsBackup } = useShopStore();
     const selectedCategory = useShopStore(state => state.selectedCategory);
 
-    let totalQuantity = 0;
-    productCatagories.forEach(category => totalQuantity += category.quantity);
-    productCatagories[0].quantity = totalQuantity;
+    const [productCategories, setProductCategories] = useState<ProductCatagoriesType>([]);
+    let allCount = 0;
+    let chairCount = 0;
+    let tableCount = 0;
+    let lampCount = 0;
+    let drawerCount = 0;
+    let bedCount = 0;
+    let bookshelfCount = 0;
+    let sofaCount = 0;
 
-    function handleCategory(category: Category) {
-        useShopStore.setState({ selectedCategory: category });
+    useEffect(() => {
+        allCount = productsBackup.length;
+        chairCount = productsBackup.filter(item => item.category === 'Chair').length;
+        tableCount = productsBackup.filter(item => item.category === 'Table').length;
+        lampCount = productsBackup.filter(item => item.category === 'Lamp').length;
+        drawerCount = productsBackup.filter(item => item.category === 'Drawer').length;
+        bedCount = productsBackup.filter(item => item.category === 'Bed').length;
+        bookshelfCount = productsBackup.filter(item => item.category === 'Bookshelf').length;
+        sofaCount = productsBackup.filter(item => item.category === 'Sofa').length;
 
+        const categories: ProductCatagoriesType = [
+            {
+                // @ts-ignore
+                productName: "All",
+                quantity: allCount
+            },
+            {
+                productName: "Chair",
+                quantity: chairCount
+            },
+            {
+                productName: "Table",
+                quantity: tableCount
+            },
+            {
+                productName: "Lamp",
+                quantity: lampCount
+            },
+            {
+                productName: "Drawer",
+                quantity: drawerCount
+            },
+            {
+                productName: "Bed",
+                quantity: bedCount
+            },
+            {
+                productName: "Bookshelf",
+                quantity: bookshelfCount
+            },
+            {
+                productName: "Sofa",
+                quantity: sofaCount
+            }
+        ];
+
+        setProductCategories(categories);
+
+        console.log(productsBackup)
+        console.log(allCount, chairCount, tableCount);
+    }, [productsBackup])
+
+    function scrollToTop() {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         })
     }
 
+    function handleCategory(category: Category) {
+        useShopStore.setState({ selectedCategory: category });
+
+        scrollToTop();
+    }
+
     function handleReset() {
         useShopStore.setState({ selectedCategory: 'All' });
 
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
+        scrollToTop();
     }
 
     return (
         <div className="flex flex-col items-start justify-start w-full gap-4">
             <HeadingAndReset handleReset={handleReset} title={"Product Categories"} />
             <div className="flex flex-row flex-wrap items-start w-full gap-2">
-                {productCatagories.map(category => (
+                {productCategories.map(category => (
                     <Button
                         key={category.productName}
                         asChild

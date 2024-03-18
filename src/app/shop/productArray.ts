@@ -235,7 +235,7 @@ export const products: ProductType[] = [
     image: "/products/Chair - Brown - Classic Rocking Chair (2).jpg",
     price: 499,
     category: "Chair",
-    tag: "Comfortable",
+    tag: "Minimalistic",
     color: "brown",
   },
   {
@@ -252,7 +252,7 @@ export const products: ProductType[] = [
     image: "/products/Drawer - White - Compact Nightstand (2).jpg",
     price: 129,
     category: "Drawer",
-    tag: "Functional",
+    tag: "Stylish",
     color: "white",
   },
   {
@@ -261,7 +261,7 @@ export const products: ProductType[] = [
     image: "/products/Lamp - Brown - Contemporary Floor Lamp (2).jpg",
     price: 999,
     category: "Lamp",
-    tag: "Contemporary",
+    tag: "Elegant",
     color: "brown",
   },
   {
@@ -269,7 +269,7 @@ export const products: ProductType[] = [
     image: "/products/Lamp - Black - Vintage Desk Lamp (2).jpg",
     price: 79,
     category: "Lamp",
-    tag: "Vintage",
+    tag: "Modern",
     color: "black",
   },
   {
@@ -304,7 +304,7 @@ export const products: ProductType[] = [
     image: "/products/Table - Brown - Rustic Wooden Dining Table (2).jpg",
     price: 399,
     category: "Table",
-    tag: "Rustic",
+    tag: "Ambient",
     color: "brown",
   },
 ];
