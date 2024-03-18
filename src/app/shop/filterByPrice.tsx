@@ -1,13 +1,11 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { Heading } from '@/components'
 import { Input } from '@/components/ui/input'
 import { Slider } from '@/components/ui/slider'
 import useDebounce from '@/hooks/debounce'
 import { useShopStore } from '@/zustand/shop/shopStore'
-import { GrPowerReset } from "react-icons/gr";
-import { Button } from '@/components/ui/button'
 import HeadingAndReset from './headingAndReset'
+import { scrollToTop } from '@/lib/utils'
 
 export default function FilterByPrice() {
     const [sliderValue, setSliderValue] = useState(2000);
@@ -35,7 +33,6 @@ export default function FilterByPrice() {
             setMaxPrice(2000);
         }
     }, [selectedSliderPrice])
-
 
     useEffect(() => {
         setMinPrice(selectedMinPrice);
@@ -70,10 +67,7 @@ export default function FilterByPrice() {
         useShopStore.setState({ selectedMaxPrice: 2000 });
         useShopStore.setState({ selectedSliderPrice: 2000 });
 
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
+        scrollToTop();
     }
 
     useEffect(() => {
