@@ -41,7 +41,7 @@ export default function Footer({ ...props }: Props) {
             <Heading size="3xl" className={cn("text-gray-50_01 tracking-[-0.50px]")}>
               Furnit.
             </Heading>
-            <Text size="md" className={cn("text-gray-50_a3 tracking-[-0.50px] opacity-0.81 !leading-[35px] pr-4")}>
+            <Text size="md" className={cn("!text-gray-50_a3 tracking-[-0.50px] opacity-0.81 !leading-[35px] pr-4")}>
               Lorem ipsum dolor sit amet litam consectetur adipiscing elit, facilisi vivamus proin lit laoreet phasel
               alilus porttitor inter, facilisis condiment tarime egestas rhoncus dapibus iaculis alemir.
             </Text>
