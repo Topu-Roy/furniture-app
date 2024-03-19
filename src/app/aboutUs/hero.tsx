@@ -1,7 +1,7 @@
+import React from 'react'
 import { Heading, Text } from '@/components'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import React from 'react'
 import CompactIconsRating from './compactIconsRating'
 
 export default function Hero() {
