@@ -1,54 +1,137 @@
 "use client"
-import React from 'react'
-import { Heading, Slider, Text } from '@/components';
-import TeamCardteam from '@/components/TeamCardteam';
-import AliceCarousel, { DotsItem, EventObject } from 'react-alice-carousel';
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Heading } from "@/components";
 
-export default function OurTeam() {
-    const [sliderState1, setSliderState1] = React.useState(0);
-    const sliderRef1 = React.useRef<AliceCarousel>(null);
+type props = {
+    teamMembers: {
+        id: number;
+        role: string;
+        name: string;
+        imageUrl: string;
+    }[]
+}
+
+export default function OurTeam(props: props) {
+    const [api, setApi] = useState<CarouselApi>()
+    const [current, setCurrent] = useState(0)
+    const [count, setCount] = useState(0)
+
+    useEffect(() => {
+        if (!api) {
+            return
+        }
+
+        setCount(api.scrollSnapList().length)
+        setCurrent(api.selectedScrollSnap() + 1)
+
+        api.on("select", () => {
+            setCurrent(api.selectedScrollSnap() + 1)
+        })
+    }, [api])
+
+    const pageNumbers = Array.from({ length: count }, (_, i) => (
+        <Button
+            variant={i === current - 1 ? 'default' : 'ghost'}
+            key={i}
+            className={cn("text-sm cursor-pointer rounded-full h-8 w-8")}
+            onClick={() => api?.scrollTo(i)}
+        >
+            {i + 1}
+        </Button>
+    ));
+
     return (
-        <div className="flex flex-row justify-center w-full">
-            <div className="flex flex-col items-center justify-start w-full gap-[51px] max-w-[1290px]">
-                <div className="flex flex-col items-center justify-center w-full gap-5">
-                    <Heading size="3xl" className="tracking-[-0.50px] text-center">
-                        Meet Our Team
-                    </Heading>
-                    <Text size="lg" className="mb-1 !text-gray-500 tracking-[-0.50px] text-center">
-                        We write various things related to furniture, from tips and what things I need to pay attention to
-                        when choosing furniture
-                    </Text>
-                </div>
-                <Slider
-                    autoPlay
-                    autoPlayInterval={2000}
-                    responsive={{ "0": { items: 1 }, "550": { items: 1 }, "1050": { items: 3 } }}
-                    renderDotsItem={(props: DotsItem) => {
-                        return props?.isActive ? (
-                            <div className="h-[15px] w-[15px] mr-[15px] bg-blue_gray-900_01" />
-                        ) : (
-                            <div className="h-[15px] w-[15px] mr-[15px] bg-gray_200" />
-                        );
-                    }}
-                    activeIndex={sliderState1}
-                    onSlideChanged={(e: EventObject) => {
-                        setSliderState1(e?.item);
-                    }}
-                    ref={sliderRef1}
-                    className="w-full"
-                    items={[...Array(9)].map(() => (
-                        <React.Fragment key={Math.random()}>
-                            <div className="flex flex-col items-center justify-start mx-2.5">
-                                <TeamCardteam
-                                    image="images/img_rectangle_1487_1.png"
-                                    makejhane="Mia Lobey"
-                                    financemanager="Accountant"
-                                    className="flex flex-col items-center justify-start w-full gap-[30px]"
-                                />
-                            </div>
-                        </React.Fragment>
-                    ))}
-                />
+        <div className="py-14 space-y-8 h-[80dvh] flex justify-center items-center flex-col">
+            <Heading size="2xl" className="text-center">
+                Meet Our Talented Team Members
+            </Heading>
+            <Carousel
+                setApi={setApi}
+                plugins={[
+                    Autoplay({
+                        delay: 10000,
+                    }),
+                ]}
+                className="max-w-7xl w-full mx-auto"
+            >
+                <CarouselContent>
+                    <CarouselItem>
+                        <div className="w-full flex justify-center items-center gap-4">
+                            {props.teamMembers.slice(0, 3).map(member => (
+                                <div className="border rounded-xl p-4 space-y-4 shadow">
+                                    <div className="w-full">
+                                        <Image
+                                            className="aspect-square w-full rounded-xl"
+                                            src={member.imageUrl}
+                                            height={1024}
+                                            width={1024}
+                                            alt={member.name + " " + member.role}
+                                        />
+                                    </div>
+
+                                    <div className="flex justify-start items-center gap-2">
+                                        <span className="font-bold tracking-wide text-xl text-black/85">{member.name}</span>
+                                        <span className="font-medium text-black/70">({member.role})</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </CarouselItem>
+                    <CarouselItem>
+                        <div className="w-full flex justify-center items-center">
+                            {props.teamMembers.slice(3, 6).map(member => (
+                                <div className="border rounded-xl p-4 space-y-4 shadow">
+                                    <div className="w-full">
+                                        <Image
+                                            className="aspect-square w-full rounded-xl"
+                                            src={member.imageUrl}
+                                            height={1024}
+                                            width={1024}
+                                            alt={member.name + " " + member.role}
+                                        />
+                                    </div>
+
+                                    <div className="flex justify-start items-center gap-2">
+                                        <span className="font-bold tracking-wide text-xl text-black/85">{member.name}</span>
+                                        <span className="font-medium text-black/70">({member.role})</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </CarouselItem>
+                    <CarouselItem>
+                        <div className="w-full flex justify-center items-center">
+                            {props.teamMembers.slice(6, 9).map(member => (
+                                <div className="border rounded-xl p-4 space-y-4 shadow">
+                                    <div className="w-full">
+                                        <Image
+                                            className="aspect-square w-full rounded-xl"
+                                            src={member.imageUrl}
+                                            height={1024}
+                                            width={1024}
+                                            alt={member.name + " " + member.role}
+                                        />
+                                    </div>
+
+                                    <div className="flex justify-start items-center gap-2">
+                                        <span className="font-bold tracking-wide text-xl text-black/85">{member.name}</span>
+                                        <span className="font-medium text-black/70">({member.role})</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </CarouselItem>
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+            </Carousel>
+            <div className="w-full flex justify-center items-center gap-4">
+                {pageNumbers}
             </div>
         </div>
     )
