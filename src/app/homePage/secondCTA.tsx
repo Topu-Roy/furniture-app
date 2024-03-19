@@ -1,7 +1,7 @@
+import React from 'react'
 import { Heading, Text } from '@/components'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import React from 'react'
 
 export default function SecondCTA() {
     return (
@@ -11,7 +11,7 @@ export default function SecondCTA() {
                     <div className="flex flex-col items-center justify-start h-full w-[535px]">
                         <Image src="/images/white-sofa.png" height={1380} width={1230} alt="insideweather" className="object-cover" />
                     </div>
-                    <div className="flex flex-col items-start justify-start w-[38%] mb-[95px] ml-[61px] gap-[30px]">
+                    <div className="flex flex-col items-start justify-center my-auto w-[38%] mb-[95px] ml-[61px] gap-[30px]">
                         <div className="flex flex-col items-start justify-start w-full gap-[17px]">
                             <Text size="lg" className="!text-blue_gray-900_01 tracking-[-0.50px]">
                                 Interior Modern
@@ -20,7 +20,7 @@ export default function SecondCTA() {
                                 Arrange your home in such a way with our modern interiors
                             </Heading>
                         </div>
-                        <Button size="9xl" variant="outline" className="tracking-[-0.50px] font-medium min-w-[218px]">
+                        <Button size="9xl" variant="outline" className="bg-gray-800 text-white hover:bg-gray-950 hover:text-white hover:scale-105 transition-all duration-100 tracking-[-0.50px] font-medium min-w-[218px]">
                             Shop Now
                         </Button>
                     </div>

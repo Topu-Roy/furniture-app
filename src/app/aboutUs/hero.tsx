@@ -7,8 +7,8 @@ import CompactIconsRating from './compactIconsRating'
 export default function Hero() {
     return (
         <>
-            <section className="bg-stone-200 mt-[5rem]">
-                <div className="flex justify-between items-center w-full max-w-7xl mx-auto gap-4 py-8">
+            <section className="bg-stone-200 mt-[5rem] h-[70dvh]">
+                <div className="flex justify-between items-center w-full max-w-7xl mx-auto my-auto gap-4 py-8">
                     <div className="flex-1">
                         <div className="space-y-2 pb-8">
                             <Heading size="3xl" className="tracking-[-0.50px]">
@@ -20,10 +20,9 @@ export default function Hero() {
                                 aliquam, facilisi consequat ligula vivamus faucibus
                             </Text>
                             <Button
-                                color="black_900"
-                                size="lg"
+                                size="6xl"
                                 variant="outline"
-                                className="tracking-[-0.50px] font-semibold min-w-[172px]"
+                                className="bg-gray-800 text-white hover:bg-gray-950 hover:text-white hover:scale-105 transition-all duration-100 tracking-[-0.50px] font-semibold"
                             >
                                 Meet our Team
                             </Button>
