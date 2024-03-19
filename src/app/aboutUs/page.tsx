@@ -7,6 +7,7 @@ import OurTeam from "./ourTeam";
 import SecondCTA from "./secondCTA";
 import Testimonials from "./testimonials";
 import { teamMembers } from "./teamMembersArray";
+import { testimonialsArray } from "./testimonialsArray";
 
 export default function AboutusPage() {
 
@@ -19,7 +20,7 @@ export default function AboutusPage() {
       <WorkedWith />
       <OurTeam teamMembers={teamMembers} />
       <SecondCTA />
-      <Testimonials />
+      <Testimonials testimonials={testimonialsArray} />
       <Footer className="flex flex-col items-center justify-center w-full" />
     </>
   );
