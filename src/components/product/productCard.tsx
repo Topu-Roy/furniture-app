@@ -15,20 +15,17 @@ export default function Product({
   ...props
 }: ProductType) {
 
-  const heartIcon = "images/img_bx_heart_1.svg"
-  const cartIcon = "images/img_bx_cart_2.svg"
-
   return (
     <div {...props} className={cn("flex flex-col items-center justify-start w-full gap-2 group", props.className)}>
       <div className="flex flex-col items-center justify-start w-full">
         <div className="w-full relative overflow-hidden">
-          <div className="h-[400px] overflow-hidden z-10 rounded-md ">
+          <div className="overflow-hidden z-10 rounded-md aspect-square">
             <Image
-              height={500}
-              width={500}
+              height={1024}
+              width={1024}
               src={image}
               alt={productTitle}
-              className="justify-center h-full w-full group-hover:scale-105 transition-all duration-500 ease-in-out"
+              className="justify-center h-full w-full group-hover:scale-105 transition-all duration-500 ease-in-out aspect-square"
             />
           </div>
 
