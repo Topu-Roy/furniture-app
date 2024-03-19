@@ -1,8 +1,24 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import { Heading } from '@/components'
-import HomepageCardproduct from '@/components/product/productCard'
+import { type ProductType } from '@/zustand/shop/shopStore'
+import Product from '@/components/product/productCard'
 
-export default function NewArrivals() {
+type props = {
+    products: ProductType[]
+}
+
+export default function NewArrivals(props: props) {
+    const [newProductsOne, setNewProductsOne] = useState<ProductType[]>([])
+    const [newProductsTwo, setNewProductsTwo] = useState<ProductType[]>([])
+
+    useEffect(() => {
+        const newProducts = props.products.filter(item => item.status === 'new');
+
+        setNewProductsOne(newProducts.slice(0, 4))
+        setNewProductsTwo(newProducts.slice(5, 9))
+    }, [props.products])
+
     return (
         <div className="w-full flex justify-center items-center py-20">
             <div className="flex flex-row justify-center w-[80rem]">
@@ -12,48 +28,34 @@ export default function NewArrivals() {
                     </Heading>
                     <div className="flex flex-col w-full gap-[47px]">
                         <div className="flex flex-row justify-start w-full gap-[19px]">
-                            <HomepageCardproduct
-                                imageOne="images/img_image_8.png"
-                                status="New"
-                                className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                            />
-                            <HomepageCardproduct
-                                imageOne="images/img_image_7.png"
-                                status="New"
-                                className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                            />
-                            <HomepageCardproduct
-                                imageOne="images/img_image_8.png"
-                                status="New"
-                                className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                            />
-                            <HomepageCardproduct
-                                imageOne="images/img_image_9.png"
-                                status="New"
-                                className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                            />
+                            {newProductsOne.map(item => (
+                                <Product
+                                    category={item.category}
+                                    color={item.color}
+                                    image={item.image}
+                                    price={item.price}
+                                    productTitle={item.productTitle}
+                                    tag={item.tag}
+                                    className={item.className}
+                                    key={item.productTitle + item.tag}
+                                    status={item.status}
+                                />
+                            ))}
                         </div>
                         <div className="flex flex-row w-full gap-[19px]">
-                            <HomepageCardproduct
-                                imageOne="images/img_image_10.png"
-                                status="New"
-                                className="flex flex-col items-center justify-start w-full gap-[15px]"
-                            />
-                            <HomepageCardproduct
-                                imageOne="images/img_image_11.png"
-                                status="New"
-                                className="flex flex-col items-center justify-start w-full gap-[15px]"
-                            />
-                            <HomepageCardproduct
-                                imageOne="images/img_image_12.png"
-                                status="New"
-                                className="flex flex-col items-center justify-start w-full gap-[15px]"
-                            />
-                            <HomepageCardproduct
-                                imageOne="images/img_image_13.png"
-                                status="New"
-                                className="flex flex-col items-center justify-start w-full gap-[15px]"
-                            />
+                            {newProductsTwo.map(item => (
+                                <Product
+                                    category={item.category}
+                                    color={item.color}
+                                    image={item.image}
+                                    price={item.price}
+                                    productTitle={item.productTitle}
+                                    tag={item.tag}
+                                    className={item.className}
+                                    key={item.productTitle + item.tag}
+                                    status={item.status}
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>

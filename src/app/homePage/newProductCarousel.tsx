@@ -1,19 +1,35 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Heading, Text } from '@/components';
-import HomepageCardproduct from '@/components/product/productCard';
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import Autoplay from "embla-carousel-autoplay"
 import { Button } from '@/components/ui/button';
+import { type ProductType } from '@/zustand/shop/shopStore';
+import Product from '@/components/product/productCard';
 
+type props = {
+    products: ProductType[]
+}
 
-export default function newProductCarousel() {
-    const [api, setApi] = React.useState<CarouselApi>()
-    const [current, setCurrent] = React.useState(0)
-    const [count, setCount] = React.useState(0)
+export default function newProductCarousel(props: props) {
+    const [api, setApi] = useState<CarouselApi>()
+    const [current, setCurrent] = useState(0)
+    const [count, setCount] = useState(0)
 
-    React.useEffect(() => {
+    const [productsListOne, setProductsListOne] = useState<ProductType[]>([])
+    const [productsListTwo, setProductsListTwo] = useState<ProductType[]>([])
+    const [productsListThree, setProductsListThree] = useState<ProductType[]>([])
+    const [productsListFour, setProductsListFour] = useState<ProductType[]>([])
+
+    useEffect(() => {
+        setProductsListOne(props.products.slice(20, 24))
+        setProductsListTwo(props.products.slice(15, 19))
+        setProductsListThree(props.products.slice(8, 12))
+        setProductsListFour(props.products.slice(10, 14))
+    }, [props.products])
+
+    useEffect(() => {
         if (!api) {
             return
         }
@@ -28,12 +44,9 @@ export default function newProductCarousel() {
 
     const pageNumbers = Array.from({ length: count }, (_, i) => (
         <Button
+            variant={i === current - 1 ? 'default' : 'ghost'}
             key={i}
-            className={cn("text-sm bg-gray-200 text-muted-foreground px-2 py-1 cursor-pointer rounded-full h-8 w-8",
-                {
-                    "bg-black rounded-full": i === current - 1
-                }
-            )}
+            className={cn("text-sm cursor-pointer rounded-full h-8 w-8")}
             onClick={() => api?.scrollTo(i)}
         >
             {i + 1}
@@ -66,48 +79,32 @@ export default function newProductCarousel() {
                     <CarouselItem>
                         <div className="flex flex-col justify-start w-full gap-4">
                             <div className="flex justify-center items-center gap-4">
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_3.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-4"
-                                />
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_4.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-4"
-                                />
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_5.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-4"
-                                />
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_6.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-4"
-                                />
+                                {productsListOne.map((item) => (
+                                    <Product
+                                        category={item.category}
+                                        color={item.color}
+                                        image={item.image}
+                                        price={item.price}
+                                        productTitle={item.productTitle}
+                                        tag={item.tag}
+                                        key={item.productTitle + item.tag}
+                                        status={item.status}
+                                    />
+                                ))}
                             </div>
                             <div className="flex flex-row justify-start w-full gap-4">
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_400x308.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                                />
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_1.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                                />
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_400x308.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                                />
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_2.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                                />
+                                {productsListTwo.map((item) => (
+                                    <Product
+                                        category={item.category}
+                                        color={item.color}
+                                        image={item.image}
+                                        price={item.price}
+                                        productTitle={item.productTitle}
+                                        tag={item.tag}
+                                        key={item.productTitle + item.tag}
+                                        status={item.status}
+                                    />
+                                ))}
                             </div>
 
                         </div>
@@ -115,48 +112,32 @@ export default function newProductCarousel() {
                     <CarouselItem>
                         <div className="flex flex-col justify-start w-full gap-4">
                             <div className="flex flex-row justify-start w-full gap-4">
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_400x308.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                                />
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_1.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                                />
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_400x308.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                                />
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_2.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-[15px]"
-                                />
+                                {productsListThree.map((item) => (
+                                    <Product
+                                        category={item.category}
+                                        color={item.color}
+                                        image={item.image}
+                                        price={item.price}
+                                        productTitle={item.productTitle}
+                                        tag={item.tag}
+                                        key={item.productTitle + item.tag}
+                                        status={item.status}
+                                    />
+                                ))}
                             </div>
                             <div className="flex justify-center items-center gap-4">
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_3.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-4"
-                                />
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_4.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-4"
-                                />
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_5.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-4"
-                                />
-                                <HomepageCardproduct
-                                    imageOne="images/img_image_6.png"
-                                    status="New"
-                                    className="flex flex-col items-center justify-start w-[24%] gap-4"
-                                />
+                                {productsListFour.map((item) => (
+                                    <Product
+                                        category={item.category}
+                                        color={item.color}
+                                        image={item.image}
+                                        price={item.price}
+                                        productTitle={item.productTitle}
+                                        tag={item.tag}
+                                        key={item.productTitle + item.tag}
+                                        status={item.status}
+                                    />
+                                ))}
                             </div>
 
                         </div>
@@ -164,7 +145,6 @@ export default function newProductCarousel() {
                 </CarouselContent>
                 <div className="flex justify-center items-center gap-2 py-4">
                     <div className='flex justify-center items-center gap-2 py-2 text-center text-sm text-muted-foreground'>
-                        <span>Page:</span>
                         {pageNumbers}
                     </div>
                 </div>

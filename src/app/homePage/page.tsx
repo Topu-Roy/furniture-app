@@ -11,6 +11,7 @@ import {
 } from "./exports";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
+import { products } from "../shop/productArray";
 
 export default function HomepagePage() {
   return (
@@ -19,9 +20,9 @@ export default function HomepagePage() {
       <HeroSection />
       <BrandsWorkedWith />
       <CategoryCTA />
-      <NewProductCarousel />
+      <NewProductCarousel products={products} />
       <SecondCTA />
-      <NewArrivals />
+      <NewArrivals products={products} />
       <OurBenefits />
       <ReadBlogSection />
       <div className="bg-gray-50 pt-20">
