@@ -43,7 +43,7 @@ export default function NavBar() {
               <NavigationMenuTrigger>More</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <NavigationMenuLink asChild>
-                  <a
+                  <Link
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
@@ -57,7 +57,7 @@ export default function NavBar() {
                       Beautifully designed components built with Radix UI and
                       Tailwind CSS.
                     </p>
-                  </a>
+                  </Link>
                 </NavigationMenuLink>
               </NavigationMenuContent>
             </NavigationMenuItem>

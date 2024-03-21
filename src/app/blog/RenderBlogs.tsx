@@ -47,13 +47,8 @@ export default function RenderBlogs(props: props) {
 
   const handlePaginationClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    if (pageNumber === totalPages) {
-      setTimeout(() => {
-        scrollToTop();
-      }, 1);
-    } else {
-      scrollToTop();
-    }
+
+    scrollToTop();
   };
 
   return (
