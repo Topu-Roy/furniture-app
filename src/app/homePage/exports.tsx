@@ -8,12 +8,12 @@ import BrandsWorkedWith from "./brandsWorkedWith";
 import HeroSection from "./heroSection";
 
 export {
-    HeroSection,
-    BrandsWorkedWith,
-    CategoryCTA,
-    NewProductCarousel,
-    OurBenefits,
-    ReadBlogSection,
-    NewArrivals,
-    SecondCTA,
+  HeroSection,
+  BrandsWorkedWith,
+  CategoryCTA,
+  NewProductCarousel,
+  OurBenefits,
+  ReadBlogSection,
+  NewArrivals,
+  SecondCTA,
 };

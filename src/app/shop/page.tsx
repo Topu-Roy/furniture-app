@@ -11,12 +11,10 @@ export default function ShopPage() {
   return (
     <>
       <NavBar />
-      <div className="flex mt-[5rem] py-8 flex-col items-center justify-start w-full gap-[100px] bg-stone-100">
-
-        <div className="flex flex-col items-center justify-start w-full">
-          <div className="relative flex flex-row justify-start items-start w-full gap-5 max-w-[1290px]">
-
-            <div className="sticky top-[5rem] pt-4 flex flex-col items-center justify-start w-[24%] gap-[60px]">
+      <div className="mt-[5rem] flex w-full flex-col items-center justify-start gap-[100px] bg-stone-100 py-8">
+        <div className="flex w-full flex-col items-center justify-start">
+          <div className="relative flex w-full max-w-[1290px] flex-row items-start justify-start gap-5">
+            <div className="sticky top-[5rem] flex w-[24%] flex-col items-center justify-start gap-[60px] pt-4">
               <ColorSelector />
               <FilterByPrice />
               <Catagories />
@@ -26,7 +24,7 @@ export default function ShopPage() {
             <Products />
           </div>
         </div>
-      </div >
+      </div>
       <Footer className="pt-10" />
     </>
   );

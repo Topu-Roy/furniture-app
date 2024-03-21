@@ -1,51 +1,69 @@
-import { Heading, Text } from '@/components'
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import React from 'react'
+import { Heading, Text } from "@/components";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import React from "react";
 
 export default function CategoryCTA() {
-    return (
-        <div className="w-full py-20">
-            <div className="flex flex-row w-full gap-5 max-w-[1290px] mx-auto">
-                <div className="flex flex-row justify-between items-center w-full p-6 bg-gradient">
-                    <div className="flex flex-col items-start justify-start w-[55%] ml-1.5 gap-6">
-                        <div className="flex flex-col items-start justify-start w-full gap-7">
-                            <Text size="md" className="!text-gray-50_01 tracking-[-0.50px]">
-                                Living Room
-                            </Text>
-                            <Heading size="3xl" className="!text-gray-50_01 tracking-[-0.50px]">
-                                The best foam padded chair
-                            </Heading>
-                        </div>
-                        <Button
-                            size="6xl"
-                            className="tracking-[-0.50px] font-medium min-w-[155px] bg-white hover:bg-slate-200 text-gray-900"
-                        >
-                            Shop Now
-                        </Button>
-                    </div>
-                    <Image height={500} width={500} src="/images/img_sam_moghadam_kh.png" alt="image" className="w-[31%] mr-1.5 object-cover" />
-                </div>
-                <div className="flex flex-row justify-between items-center w-full p-[30px] bg-gradient">
-                    <div className="flex flex-col items-start justify-start w-[54%] gap-6">
-                        <div className="flex flex-col items-start justify-start w-full gap-7">
-                            <Text size="md" className="!text-gray-50_01 tracking-[-0.50px]">
-                                Living Room
-                            </Text>
-                            <Heading size="3xl" className="!text-gray-50_01 tracking-[-0.50px]">
-                                Latest model chandelier
-                            </Heading>
-                        </div>
-                        <Button
-                            size="6xl"
-                            className="tracking-[-0.50px] font-medium min-w-[155px] bg-white hover:bg-slate-200 text-gray-900"
-                        >
-                            Shop Now
-                        </Button>
-                    </div>
-                    <Image height={500} width={500} src="/images/img_phil_desforges.png" alt="phildesforges" className="w-[34%] my-[22px] object-cover" />
-                </div>
+  return (
+    <div className="w-full py-20">
+      <div className="mx-auto flex w-full max-w-[1290px] flex-row gap-5">
+        <div className="flex w-full flex-row items-center justify-between bg-gradient p-6">
+          <div className="ml-1.5 flex w-[55%] flex-col items-start justify-start gap-6">
+            <div className="flex w-full flex-col items-start justify-start gap-7">
+              <Text size="md" className="tracking-[-0.50px] !text-gray-50_01">
+                Living Room
+              </Text>
+              <Heading
+                size="3xl"
+                className="tracking-[-0.50px] !text-gray-50_01"
+              >
+                The best foam padded chair
+              </Heading>
             </div>
+            <Button
+              size="6xl"
+              className="min-w-[155px] bg-white font-medium tracking-[-0.50px] text-gray-900 hover:bg-slate-200"
+            >
+              Shop Now
+            </Button>
+          </div>
+          <Image
+            height={500}
+            width={500}
+            src="/images/img_sam_moghadam_kh.png"
+            alt="image"
+            className="mr-1.5 w-[31%] object-cover"
+          />
         </div>
-    )
+        <div className="flex w-full flex-row items-center justify-between bg-gradient p-[30px]">
+          <div className="flex w-[54%] flex-col items-start justify-start gap-6">
+            <div className="flex w-full flex-col items-start justify-start gap-7">
+              <Text size="md" className="tracking-[-0.50px] !text-gray-50_01">
+                Living Room
+              </Text>
+              <Heading
+                size="3xl"
+                className="tracking-[-0.50px] !text-gray-50_01"
+              >
+                Latest model chandelier
+              </Heading>
+            </div>
+            <Button
+              size="6xl"
+              className="min-w-[155px] bg-white font-medium tracking-[-0.50px] text-gray-900 hover:bg-slate-200"
+            >
+              Shop Now
+            </Button>
+          </div>
+          <Image
+            height={500}
+            width={500}
+            src="/images/img_phil_desforges.png"
+            alt="phildesforges"
+            className="my-[22px] w-[34%] object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  );
 }

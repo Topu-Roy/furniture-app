@@ -10,9 +10,6 @@ import { teamMembers } from "./teamMembersArray";
 import { testimonialsArray } from "./testimonialsArray";
 
 export default function AboutusPage() {
-
-
-
   return (
     <>
       <NavBar />
@@ -21,7 +18,7 @@ export default function AboutusPage() {
       <OurTeam teamMembers={teamMembers} />
       <SecondCTA />
       <Testimonials testimonials={testimonialsArray} />
-      <Footer className="flex flex-col items-center justify-center w-full" />
+      <Footer className="flex w-full flex-col items-center justify-center" />
     </>
   );
 }
