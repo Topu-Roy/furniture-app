@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import {
   NavigationMenu,
@@ -7,19 +7,24 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle
+  navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
 
-
 export default function NavBar() {
   return (
-    <header className="fixed top-0 flex z-50 h-[5rem] justify-center items-center w-full bg-white">
-      <div className="w-[85rem] mx-auto flex flex-row justify-between">
-        <Link href="/" legacyBehavior passHref>
-          <Image src="images/img_frame_146.svg" height={146} width={146} alt="image" className="h-[30px] w-auto" />
+    <header className="fixed top-0 z-50 flex h-[5rem] w-full items-center justify-center bg-white">
+      <div className="mx-auto flex w-[85rem] flex-row justify-between">
+        <Link href="/homePage">
+          <Image
+            src="images/img_frame_146.svg"
+            height={146}
+            width={146}
+            alt="image"
+            className="h-[30px] w-auto"
+          />
         </Link>
 
         <NavigationMenu className="">
@@ -28,7 +33,7 @@ export default function NavBar() {
               {
                 // TODO
               }
-              <Link href="/" legacyBehavior passHref>
+              <Link href="/homePage">
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Home
                 </NavigationMenuLink>
@@ -45,7 +50,9 @@ export default function NavBar() {
                     {
                       // TODO
                     }
-                    <div className="mb-2 mt-4 text-lg font-medium">shadcn/ui</div>
+                    <div className="mb-2 mt-4 text-lg font-medium">
+                      shadcn/ui
+                    </div>
                     <p className="text-sm leading-tight text-muted-foreground">
                       Beautifully designed components built with Radix UI and
                       Tailwind CSS.
@@ -55,28 +62,28 @@ export default function NavBar() {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/shop" legacyBehavior passHref>
+              <Link href="/shop" passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Shop
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/blog" legacyBehavior passHref>
+              <Link href="/blog" passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Blog
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/aboutUs" legacyBehavior passHref>
+              <Link href="/aboutUs" passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   About Us
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/team" legacyBehavior passHref>
+              <Link href="/team" passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Team
                 </NavigationMenuLink>
@@ -85,26 +92,44 @@ export default function NavBar() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="flex flex-row justify-between w-auto gap-2">
-          <Link href="/search" legacyBehavior passHref>
+        <div className="flex w-auto flex-row justify-between gap-2">
+          <Link href="/search" passHref>
             <Button variant={"ghost"}>
-              <Image height={50} width={50} src="images/img_search.svg" alt="search_one" className="h-6 w-6" />
+              <Image
+                height={50}
+                width={50}
+                src="images/img_search.svg"
+                alt="search_one"
+                className="h-6 w-6"
+              />
             </Button>
           </Link>
 
-          <Link href="/profile" legacyBehavior passHref>
+          <Link href="/profile" passHref>
             <Button variant={"ghost"}>
-              <Image height={50} width={50} src="images/img_list_black_900.svg" alt="list_one" className="h-6 w-6" />
+              <Image
+                height={50}
+                width={50}
+                src="images/img_list_black_900.svg"
+                alt="list_one"
+                className="h-6 w-6"
+              />
             </Button>
           </Link>
 
-          <Link href="/cart" legacyBehavior passHref>
+          <Link href="/cart" passHref>
             <Button variant={"ghost"}>
-              <Image height={50} width={50} src="images/img_list.svg" alt="list_three" className="h-6 w-6" />
+              <Image
+                height={50}
+                width={50}
+                src="images/img_list.svg"
+                alt="list_three"
+                className="h-6 w-6"
+              />
             </Button>
           </Link>
         </div>
       </div>
-    </header >
+    </header>
   );
 }
