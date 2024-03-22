@@ -11,7 +11,7 @@ import {
 } from "./exports";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
-import { products } from "../shop/productArray";
+import { products } from "../../assets/productArray";
 
 export default function HomepagePage() {
   return (

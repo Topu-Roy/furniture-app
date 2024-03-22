@@ -1,6 +1,6 @@
 import React from "react";
 import ProductHeader from "./productHeader";
-import { products } from "../productArray";
+import { products } from "../../../assets/productArray";
 import RenderProducts from "./renderProducts";
 
 export default function Products() {
