@@ -1,12 +1,22 @@
-"use client"
+"use client";
 import React from "react";
-// import { Helmet } from "react-helmet";
-import { Slider, Heading, Img, Button, Text, CheckBox, TextArea, Input, RatingBar } from "../../components";
+import {
+  Slider,
+  Heading,
+  Img,
+  Button,
+  Text,
+  CheckBox,
+  TextArea,
+  Input,
+  RatingBar,
+} from "../../components";
 import CartSection from "../../components/CartSection";
 import DetailReviewSectionfooter from "../../components/DetailReviewSectionfooter";
 import Header from "../../components/NavBar";
 import HomepageCardproduct from "../../components/product/productCard";
 import AliceCarousel, { EventObject, DotsItem } from "react-alice-carousel";
+import NavBar from "../../components/NavBar";
 
 export default function DetailReviewPage() {
   const [sliderState, setSliderState] = React.useState(0);
@@ -16,67 +26,87 @@ export default function DetailReviewPage() {
 
   return (
     <>
-      {/* <Helmet>
-        <title>Topuroy1's Application1</title>
-        <meta name="description" content="Web site created using create-react-app" />
-      </Helmet> */}
-      <div className="flex flex-col items-center justify-start w-full gap-[99px] bg-gray-50">
-        <div className="flex flex-col items-center justify-start w-full">
-          <Header className="flex justify-center items-center w-full p-[35px] bg-white-A700" />
-          <div className="flex flex-row justify-center w-full pt-[75px] px-14">
-            <div className="flex flex-row justify-start w-full gap-[47px] max-w-[1290px]">
-              <Img src="images/img_rectangle_1475.png" alt="image_one" className="w-[49%] object-cover" />
-              <div className="flex flex-col items-center justify-start w-[49%] gap-[30px]">
-                <div className="flex flex-col items-start justify-start w-full gap-8">
-                  <Heading size="xl" as="h1" className="tracking-[-0.50px]">
+      <NavBar />
+      <div className="flex w-full flex-col items-center justify-start gap-[99px] bg-gray-50">
+        <div className="flex w-full flex-col items-center justify-start">
+          <div className="flex w-full flex-row justify-center px-14 pt-[75px]">
+            <div className="flex w-full max-w-[1290px] flex-row justify-start gap-[47px]">
+              <Img
+                src="images/img_rectangle_1475.png"
+                alt="image_one"
+                className="w-[49%] object-cover"
+              />
+              <div className="flex w-[49%] flex-col items-center justify-start gap-[30px]">
+                <div className="flex w-full flex-col items-start justify-start gap-8">
+                  <Heading size="xl" className="tracking-[-0.50px]">
                     Complete set of sofa, pillows and bed sheets
                   </Heading>
-                  <div className="flex flex-row justify-start items-center gap-[15px]">
+                  <div className="flex flex-row items-center justify-start gap-[15px]">
                     <RatingBar
                       value={1}
                       isEditable={true}
                       color="#d9d9d9"
                       activeColor="#ff9432"
                       size={20}
-                      className="flex justify-between w-[140px]"
+                      className="flex w-[140px] justify-between"
                     />
-                    <Text as="p" className="!text-gray-500 tracking-[-0.50px]">
+                    <Text className="tracking-[-0.50px] !text-gray-500">
                       ( 1 review )
                     </Text>
                   </div>
-                  <Heading size="2xl" as="h2" className="!text-blue_gray-900_01 tracking-[-0.50px]">
+                  <Heading
+                    size="2xl"
+                    className="tracking-[-0.50px] !text-blue_gray-900_01"
+                  >
                     $ 75.00
                   </Heading>
-                  <div className="flex flex-col items-start justify-start w-full gap-[19px]">
-                    <Heading size="s" as="h3" className="tracking-[-0.50px]">
-                      <span className="text-gray-500 font-normal">Stok :</span>
+                  <div className="flex w-full flex-col items-start justify-start gap-[19px]">
+                    <Heading size="s" className="tracking-[-0.50px]">
+                      <span className="font-normal text-gray-500">Stok :</span>
                       <span className="text-black-900 font-normal">18</span>
                     </Heading>
-                    <Heading size="s" as="h4" className="tracking-[-0.50px]">
-                      <span className="text-gray-500 font-normal">SKU :</span>
+                    <Heading size="s" className="tracking-[-0.50px]">
+                      <span className="font-normal text-gray-500">SKU :</span>
                       <span className="text-black-900 font-normal">BA65</span>
                       <span className="text-black-900"></span>
                     </Heading>
-                    <Heading size="s" as="h5" className="tracking-[-0.50px]">
-                      <span className="text-gray-500 font-normal">Categories :</span>
-                      <span className="text-black-900 font-normal">Chair, New Arrivals, Special</span>
+                    <Heading size="s" className="tracking-[-0.50px]">
+                      <span className="font-normal text-gray-500">
+                        Categories :
+                      </span>
+                      <span className="text-black-900 font-normal">
+                        Chair, New Arrivals, Special
+                      </span>
                     </Heading>
-                    <Heading size="s" as="h6" className="tracking-[-0.50px]">
-                      <span className="text-gray-500 font-normal">Tags :</span>
-                      <span className="text-black-900 font-normal">Black, Chair</span>
+                    <Heading size="s" className="tracking-[-0.50px]">
+                      <span className="font-normal text-gray-500">Tags :</span>
+                      <span className="text-black-900 font-normal">
+                        Black, Chair
+                      </span>
                     </Heading>
                   </div>
-                  <Text size="lg" as="p" className="!text-gray-500 tracking-[-0.50px] leading-[35px]">
-                    In order to sit comfortably for long periods, people need freedom of movement. The Form rocking
-                    chair has a molded plastic shell with a wide, curved seat, which gives plenty of opportunity for
-                    changing one’s sitting position.
+                  <Text
+                    size="lg"
+                    className="leading-[35px] tracking-[-0.50px] !text-gray-500"
+                  >
+                    In order to sit comfortably for long periods, people need
+                    freedom of movement. The Form rocking chair has a molded
+                    plastic shell with a wide, curved seat, which gives plenty
+                    of opportunity for changing one’s sitting position.
                   </Text>
                 </div>
-                <div className="flex flex-row justify-start w-full">
-                  <div className="flex flex-row justify-between items-center w-[55%]">
-                    <div className="flex flex-row justify-start items-center gap-[15px] p-[9px] border-black-900 border border-solid">
-                      <Img src="images/img_bx_minus_circle.svg" alt="image_two" className="h-6 w-6 ml-1" />
-                      <Text size="lg" as="p" className="!text-black-900 tracking-[-0.50px]">
+                <div className="flex w-full flex-row justify-start">
+                  <div className="flex w-[55%] flex-row items-center justify-between">
+                    <div className="border-black-900 flex flex-row items-center justify-start gap-[15px] border border-solid p-[9px]">
+                      <Img
+                        src="images/img_bx_minus_circle.svg"
+                        alt="image_two"
+                        className="ml-1 h-6 w-6"
+                      />
+                      <Text
+                        size="lg"
+                        className="!text-black-900 tracking-[-0.50px]"
+                      >
                         1
                       </Text>
                       <Img
@@ -85,10 +115,19 @@ export default function DetailReviewPage() {
                         className="h-6 w-6"
                       />
                     </div>
-                    <Button color="black_900" size="4xl" className="tracking-[-0.50px] min-w-[128px]">
+                    <Button
+                      color="black_900"
+                      size="4xl"
+                      className="min-w-[128px] tracking-[-0.50px]"
+                    >
                       Add to Cart
                     </Button>
-                    <Button color="blue_gray_100" size="3xl" variant="outline" className="w-[43px]">
+                    <Button
+                      color="blue_gray_100"
+                      size="3xl"
+                      variant="outline"
+                      className="w-[43px]"
+                    >
                       <Img src="images/img_frame_48095996.svg" />
                     </Button>
                   </div>
@@ -97,35 +136,44 @@ export default function DetailReviewPage() {
             </div>
           </div>
         </div>
-        <div className="flex flex-row justify-center w-full">
-          <div className="flex flex-row justify-start items-start w-full gap-[50px] max-w-[1290px]">
-            <div className="flex flex-col items-center justify-start w-[49%] gap-[50px]">
-              <div className="flex flex-col items-center justify-start w-full gap-[49px]">
-                <div className="flex flex-row justify-between items-start w-full pr-[369px]">
-                  <Heading size="lg" as="h2" className="mt-0.5 !text-gray-500 tracking-[-0.50px] !font-josefinsans">
+        <div className="flex w-full flex-row justify-center">
+          <div className="flex w-full max-w-[1290px] flex-row items-start justify-start gap-[50px]">
+            <div className="flex w-[49%] flex-col items-center justify-start gap-[50px]">
+              <div className="flex w-full flex-col items-center justify-start gap-[49px]">
+                <div className="flex w-full flex-row items-start justify-between pr-[369px]">
+                  <Heading
+                    size="lg"
+                    className="!font-josefinsans mt-0.5 tracking-[-0.50px] !text-gray-500"
+                  >
                     Description
                   </Heading>
-                  <div className="flex flex-col items-center justify-start w-[31%] gap-2.5">
-                    <Heading size="lg" as="h3" className="!text-blue_gray-900_01 tracking-[-0.50px] !font-josefinsans">
+                  <div className="flex w-[31%] flex-col items-center justify-start gap-2.5">
+                    <Heading
+                      size="lg"
+                      className="!font-josefinsans tracking-[-0.50px] !text-blue_gray-900_01"
+                    >
                       Review
                     </Heading>
                     <div className="h-1.5 w-full bg-blue_gray-900_01" />
                   </div>
                 </div>
-                <div className="flex flex-col w-full gap-[30px]">
-                  <div className="flex flex-col items-end justify-start w-full gap-2.5">
-                    <div className="flex flex-row justify-between items-center w-full">
-                      <div className="flex flex-row justify-start items-center w-[26%] gap-[15px]">
+                <div className="flex w-full flex-col gap-[30px]">
+                  <div className="flex w-full flex-col items-end justify-start gap-2.5">
+                    <div className="flex w-full flex-row items-center justify-between">
+                      <div className="flex w-[26%] flex-row items-center justify-start gap-[15px]">
                         <Img
                           src="images/img_image_54x54.png"
                           alt="ralph_edwards"
                           className="h-[54px] w-[54px] rounded-[50%]"
                         />
-                        <div className="flex flex-col items-start justify-start w-[57%] gap-1">
-                          <Text as="p" className="!text-black-900 tracking-[-0.50px]">
+                        <div className="flex w-[57%] flex-col items-start justify-start gap-1">
+                          <Text className="!text-black-900 tracking-[-0.50px]">
                             Ralph Edwards
                           </Text>
-                          <Text size="xs" as="p" className="!text-blue_gray-400 tracking-[-0.50px]">
+                          <Text
+                            size="xs"
+                            className="!text-blue_gray-400 tracking-[-0.50px]"
+                          >
                             2 minutes ago
                           </Text>
                         </div>
@@ -136,27 +184,31 @@ export default function DetailReviewPage() {
                         color="#d9d9d9"
                         activeColor="#ff9432"
                         size={16}
-                        className="flex justify-between w-32"
+                        className="flex w-32 justify-between"
                       />
                     </div>
-                    <Text as="p" className="w-[92%] !text-black-900 tracking-[-0.50px] leading-[35px]">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. A justo turpis massa tristique augue
-                      dignissim volutpat. Quis ultricies eu libero tortor dictumst.
+                    <Text className="!text-black-900 w-[92%] leading-[35px] tracking-[-0.50px]">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. A
+                      justo turpis massa tristique augue dignissim volutpat.
+                      Quis ultricies eu libero tortor dictumst.
                     </Text>
                   </div>
-                  <div className="flex flex-col items-end justify-start w-full gap-2.5">
-                    <div className="flex flex-row justify-between items-center w-full">
-                      <div className="flex flex-row justify-start items-center w-[26%] gap-[15px]">
+                  <div className="flex w-full flex-col items-end justify-start gap-2.5">
+                    <div className="flex w-full flex-row items-center justify-between">
+                      <div className="flex w-[26%] flex-row items-center justify-start gap-[15px]">
                         <Img
                           src="images/img_image_54x54.png"
                           alt="image_one"
                           className="h-[54px] w-[54px] rounded-[50%]"
                         />
-                        <div className="flex flex-col items-start justify-start w-[57%] gap-1">
-                          <Text as="p" className="!text-black-900 tracking-[-0.50px]">
+                        <div className="flex w-[57%] flex-col items-start justify-start gap-1">
+                          <Text className="!text-black-900 tracking-[-0.50px]">
                             Ralph Edwards
                           </Text>
-                          <Text size="xs" as="p" className="!text-blue_gray-400 tracking-[-0.50px]">
+                          <Text
+                            size="xs"
+                            className="!text-blue_gray-400 tracking-[-0.50px]"
+                          >
                             2 minutes ago
                           </Text>
                         </div>
@@ -167,24 +219,25 @@ export default function DetailReviewPage() {
                         color="#d9d9d9"
                         activeColor="#ff9432"
                         size={16}
-                        className="flex justify-between w-32"
+                        className="flex w-32 justify-between"
                       />
                     </div>
-                    <Text as="p" className="w-[92%] !text-black-900 tracking-[-0.50px] leading-[35px]">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. A justo turpis massa tristique augue
-                      dignissim volutpat. Quis ultricies eu libero tortor dictumst.
+                    <Text className="!text-black-900 w-[92%] leading-[35px] tracking-[-0.50px]">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. A
+                      justo turpis massa tristique augue dignissim volutpat.
+                      Quis ultricies eu libero tortor dictumst.
                     </Text>
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-start w-full gap-[21px]">
-                <Heading size="lg" as="h4" className="tracking-[-0.50px] text-center">
+              <div className="flex w-full flex-col items-center justify-start gap-[21px]">
+                <Heading size="lg" className="text-center tracking-[-0.50px]">
                   Write your review
                 </Heading>
-                <div className="flex flex-col items-center justify-start h-[621px] w-[620px] gap-8">
-                  <div className="flex flex-col items-center justify-start w-full gap-[49px]">
-                    <div className="flex flex-col items-start justify-start w-full gap-3.5">
-                      <Heading size="s" as="h5" className="tracking-[-0.50px]">
+                <div className="flex h-[621px] w-[620px] flex-col items-center justify-start gap-8">
+                  <div className="flex w-full flex-col items-center justify-start gap-[49px]">
+                    <div className="flex w-full flex-col items-start justify-start gap-3.5">
+                      <Heading size="s" className="tracking-[-0.50px]">
                         Your Rating
                       </Heading>
                       <RatingBar
@@ -193,13 +246,13 @@ export default function DetailReviewPage() {
                         color="#d9d9d9"
                         activeColor="#ff9432"
                         size={16}
-                        className="flex justify-between w-32"
+                        className="flex w-32 justify-between"
                       />
                     </div>
-                    <div className="flex flex-col items-center justify-start w-full gap-[30px]">
-                      <div className="flex flex-row justify-start w-full gap-4">
-                        <div className="flex flex-col items-start justify-start w-[49%] gap-4">
-                          <Heading size="s" as="h6" className="tracking-[-0.50px]">
+                    <div className="flex w-full flex-col items-center justify-start gap-[30px]">
+                      <div className="flex w-full flex-row justify-start gap-4">
+                        <div className="flex w-[49%] flex-col items-start justify-start gap-4">
+                          <Heading size="s" className="tracking-[-0.50px]">
                             Your Name
                           </Heading>
                           <Input
@@ -212,8 +265,8 @@ export default function DetailReviewPage() {
                             className="w-full"
                           />
                         </div>
-                        <div className="flex flex-col items-start justify-start w-[49%] gap-4">
-                          <Heading size="s" as="h6" className="tracking-[-0.50px]">
+                        <div className="flex w-[49%] flex-col items-start justify-start gap-4">
+                          <Heading size="s" className="tracking-[-0.50px]">
                             Your Email
                           </Heading>
                           <Input
@@ -227,27 +280,27 @@ export default function DetailReviewPage() {
                           />
                         </div>
                       </div>
-                      <div className="flex flex-col items-start justify-start w-full gap-4">
-                        <Heading size="s" as="h6" className="tracking-[-0.50px]">
+                      <div className="flex w-full flex-col items-start justify-start gap-4">
+                        <Heading size="s" className="tracking-[-0.50px]">
                           Your Review
                         </Heading>
                         <TextArea
                           name="frame48096017"
                           placeholder="Write your review here...."
-                          className="w-full text-gray-500 tracking-[-0.50px]"
+                          className="w-full tracking-[-0.50px] text-gray-500"
                         />
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col items-start justify-start w-full gap-[30px]">
+                  <div className="flex w-full flex-col items-start justify-start gap-[30px]">
                     <CheckBox
                       name="savemynameemail"
                       label="Save my name, email, and website in this browser for the next time I comment."
-                      className="gap-2.5 tracking-[-0.50px] font-poppins text-left italic"
+                      className="font-poppins gap-2.5 text-left italic tracking-[-0.50px]"
                     />
                     <Button
                       size="6xl"
-                      className="tracking-[-0.50px] font-poppins font-medium border-blue_gray-900_01 border-2 border-solid min-w-[155px]"
+                      className="font-poppins min-w-[155px] border-2 border-solid border-blue_gray-900_01 font-medium tracking-[-0.50px]"
                     >
                       Submit
                     </Button>
@@ -255,16 +308,20 @@ export default function DetailReviewPage() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col items-center justify-start w-[49%] mt-0.5 gap-[21px]">
+            <div className="mt-0.5 flex w-[49%] flex-col items-center justify-start gap-[21px]">
               <Slider
                 autoPlay
                 autoPlayInterval={2000}
-                responsive={{ "0": { items: 1 }, "550": { items: 1 }, "1050": { items: 1 } }}
+                responsive={{
+                  "0": { items: 1 },
+                  "550": { items: 1 },
+                  "1050": { items: 1 },
+                }}
                 renderDotsItem={(props: DotsItem) => {
                   return props?.isActive ? (
-                    <div className="h-[15px] w-[15px] mr-[15px] bg-blue_gray-900_01" />
+                    <div className="mr-[15px] h-[15px] w-[15px] bg-blue_gray-900_01" />
                   ) : (
-                    <div className="h-[15px] w-[15px] mr-[15px] bg-gray_200" />
+                    <div className="mr-[15px] h-[15px] w-[15px] bg-gray_200" />
                   );
                 }}
                 activeIndex={sliderState1}
@@ -275,20 +332,23 @@ export default function DetailReviewPage() {
                 className="w-full"
                 items={[...Array(3)].map(() => (
                   <React.Fragment key={Math.random()}>
-                    <div className="flex flex-row justify-between items-start p-6 mx-auto bg-gray-50_01">
-                      <div className="flex flex-col items-start justify-start w-[55%] ml-[19px] gap-[23px]">
-                        <div className="flex flex-col items-start justify-start w-full gap-7">
-                          <Text size="lg" as="p" className="!text-blue_gray-900_01 tracking-[-0.50px]">
+                    <div className="mx-auto flex flex-row items-start justify-between bg-gray-50_01 p-6">
+                      <div className="ml-[19px] flex w-[55%] flex-col items-start justify-start gap-[23px]">
+                        <div className="flex w-full flex-col items-start justify-start gap-7">
+                          <Text
+                            size="lg"
+                            className="tracking-[-0.50px] !text-blue_gray-900_01"
+                          >
                             Living Room
                           </Text>
-                          <Heading size="2xl" as="h1" className="tracking-[-0.50px]">
+                          <Heading size="2xl" className="tracking-[-0.50px]">
                             The best foam padded chair
                           </Heading>
                         </div>
                         <Button
                           size="6xl"
                           variant="outline"
-                          className="tracking-[-0.50px] font-poppins font-medium min-w-[155px]"
+                          className="font-poppins min-w-[155px] font-medium tracking-[-0.50px]"
                         >
                           Shop Now
                         </Button>
@@ -296,7 +356,7 @@ export default function DetailReviewPage() {
                       <Img
                         src="images/img_sam_moghadam_kh.png"
                         alt="sammoghadamkh"
-                        className="w-[32%] mr-[19px] object-cover"
+                        className="mr-[19px] w-[32%] object-cover"
                       />
                     </div>
                   </React.Fragment>
@@ -305,21 +365,25 @@ export default function DetailReviewPage() {
             </div>
           </div>
         </div>
-        <div className="flex flex-row justify-center w-full">
-          <div className="flex flex-col items-center justify-start w-full gap-[42px] max-w-[1290px]">
-            <Heading size="3xl" as="h2" className="tracking-[-0.50px] text-center">
+        <div className="flex w-full flex-row justify-center">
+          <div className="flex w-full max-w-[1290px] flex-col items-center justify-start gap-[42px]">
+            <Heading size="3xl" className="text-center tracking-[-0.50px]">
               Related Products
             </Heading>
-            <div className="flex flex-col items-center justify-start w-full gap-[42px]">
+            <div className="flex w-full flex-col items-center justify-start gap-[42px]">
               <Slider
                 autoPlay
                 autoPlayInterval={2000}
-                responsive={{ "0": { items: 1 }, "550": { items: 1 }, "1050": { items: 4 } }}
+                responsive={{
+                  "0": { items: 1 },
+                  "550": { items: 1 },
+                  "1050": { items: 4 },
+                }}
                 renderDotsItem={(props: DotsItem) => {
                   return props?.isActive ? (
-                    <div className="h-[15px] w-[15px] mr-[15px] bg-blue_gray-900_01" />
+                    <div className="mr-[15px] h-[15px] w-[15px] bg-blue_gray-900_01" />
                   ) : (
-                    <div className="h-[15px] w-[15px] mr-[15px] bg-gray_200" />
+                    <div className="mr-[15px] h-[15px] w-[15px] bg-gray_200" />
                   );
                 }}
                 activeIndex={sliderState}
@@ -332,7 +396,7 @@ export default function DetailReviewPage() {
                   <React.Fragment key={Math.random()}>
                     <HomepageCardproduct
                       imageOne="images/img_image_10.png"
-                      className="flex flex-col items-center justify-start gap-[15px] mx-2.5"
+                      className="mx-2.5 flex flex-col items-center justify-start gap-[15px]"
                     />
                   </React.Fragment>
                 ))}
@@ -340,9 +404,9 @@ export default function DetailReviewPage() {
             </div>
           </div>
         </div>
-        <footer className="flex flex-col items-center justify-center w-full">
-          <CartSection className="flex flex-row justify-start w-full pl-[46px] gap-11 py-[46px] mx-auto bg-gradient max-w-[1278px]" />
-          <DetailReviewSectionfooter className="flex flex-row justify-end w-full mt-[501px] ml-[-1359px] p-12 bg-black-900" />
+        <footer className="flex w-full flex-col items-center justify-center">
+          <CartSection className="mx-auto flex w-full max-w-[1278px] flex-row justify-start gap-11 bg-gradient py-[46px] pl-[46px]" />
+          <DetailReviewSectionfooter className="bg-black-900 ml-[-1359px] mt-[501px] flex w-full flex-row justify-end p-12" />
         </footer>
       </div>
     </>

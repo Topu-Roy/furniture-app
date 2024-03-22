@@ -1,11 +1,13 @@
 import React from "react";
 import Footer from "../../components/Footer";
 import NavBar from "@/components/NavBar";
-import ColorSelector from "./colorSelector";
-import FilterByPrice from "./filterByPrice";
-import Catagories from "./catagories";
-import ProductTag from "./productTag";
-import Products from "./products";
+import {
+  ColorSelector,
+  Catagories,
+  FilterByPrice,
+  ProductTag,
+  Products,
+} from "./components";
 
 export default function ShopPage() {
   return (
