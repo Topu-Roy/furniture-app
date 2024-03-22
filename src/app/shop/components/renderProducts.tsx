@@ -163,6 +163,7 @@ export default function RenderProducts(props: Props) {
 
     return productsToRender.map((item) => (
       <Product
+        id={item.id}
         productTitle={item.productTitle}
         image={item.image}
         category={item.category}

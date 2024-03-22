@@ -5,6 +5,7 @@ export type Category = "Chair" | "Table" | "Lamp" | "Drawer" | "Bed" | "Bookshel
 export type Tag = "Minimalistic" | "Modern" | "Stylish" | "Elegant" | "Ambient" | "Luxurious";
 
 export type ProductType = {
+  id: number;
   className?: string;
   productTitle: string;
   image: string;
