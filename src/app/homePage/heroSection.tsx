@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "@/components";
 import { Button } from "@/components/ui/button";
-import { kalnia } from "@/styles/font";
+import { poppins } from "@/styles/font";
 import Image from "next/image";
 
 export default function HeroSection() {
@@ -16,7 +16,7 @@ export default function HeroSection() {
               </Text>
               <Text
                 size="max"
-                className={`!text-black-900 tracking-normal ${kalnia.className}`}
+                className={`!text-black-900 tracking-normal ${poppins.className}`}
               >
                 Various new collections of furniture to decorate the corner of
                 your house.

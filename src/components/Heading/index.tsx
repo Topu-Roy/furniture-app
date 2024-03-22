@@ -1,4 +1,5 @@
 import React from "react";
+import { poppins } from "@/styles/font";
 
 const sizes = {
   "3xl": "text-[40px] font-bold",
@@ -13,7 +14,7 @@ const sizes = {
 export type HeadingProps = Partial<{
   className: string;
   size: keyof typeof sizes;
-}>
+}>;
 
 const Heading: React.FC<React.PropsWithChildren<HeadingProps>> = ({
   children,
@@ -21,9 +22,11 @@ const Heading: React.FC<React.PropsWithChildren<HeadingProps>> = ({
   size = "md",
   ...restProps
 }) => {
-
   return (
-    <h2 className={`text-black-900 font-raleway ${className} ${sizes[size]}`} {...restProps}>
+    <h2
+      className={`text-black-900 ${className} ${sizes[size]} ${poppins.className}`}
+      {...restProps}
+    >
       {children}
     </h2>
   );
