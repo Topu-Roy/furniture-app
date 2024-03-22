@@ -8,7 +8,6 @@ import Footer from "@/components/Footer";
 export default function BlogPage() {
   return (
     <div className="mt-[5rem] bg-gray-50 pt-8">
-      <NavBar />
       <div className="flex w-full flex-col items-center justify-start gap-2 pt-1">
         <Heading size="3xl" className="text-center tracking-[-0.50px]">
           Read Our Latest Blog
@@ -22,7 +21,6 @@ export default function BlogPage() {
         </Text>
       </div>
       <RenderBlogs blogs={blogPosts} />
-      <Footer />
     </div>
   );
 }

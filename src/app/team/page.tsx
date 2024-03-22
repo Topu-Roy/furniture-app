@@ -1,14 +1,10 @@
 import { Heading, Text } from "@/components";
-import Footer from "@/components/Footer";
-import NavBar from "@/components/NavBar";
 import { teamMembers } from "../aboutUs/teamMembersArray";
 import RenderTeamMembers from "./RenderTeamMembers";
 
 export default function TeamPage() {
   return (
     <div className="mt-[5rem] bg-gray-50 pt-10">
-      <NavBar />
-
       <Heading size="3xl" className="text-center tracking-[-0.50px]">
         Meet Our Team
       </Heading>
@@ -22,7 +18,7 @@ export default function TeamPage() {
 
       <RenderTeamMembers teamMembers={teamMembers} />
 
-      <Footer className="flex w-full flex-col items-center justify-center" />
+      {/* <Footer className="flex w-full flex-col items-center justify-center" /> */}
     </div>
   );
 }

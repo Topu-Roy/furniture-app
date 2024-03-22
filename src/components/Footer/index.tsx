@@ -12,7 +12,7 @@ interface Props {
 export default function Footer({ ...props }: Props) {
   return (
     <footer {...props}>
-      <div className="mx-auto flex w-[80rem] items-center justify-center rounded bg-gradient pt-10">
+      <div className="mx-auto flex w-[80rem] items-center justify-center rounded bg-gray-50 bg-gradient pt-10">
         <div className="flex w-full flex-1 flex-col items-center justify-center space-y-4 px-10">
           <div className="flex w-full flex-col items-center justify-start gap-2.5">
             <Heading
