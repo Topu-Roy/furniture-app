@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import { Text } from "..";
 import Image from "next/image";
 import { Button } from "../ui/button";
@@ -7,19 +8,19 @@ import { FaRegHeart } from "react-icons/fa";
 import { LucideShoppingCart } from "lucide-react";
 import { ProductType } from "@/zustand/shop/shopStore";
 import Link from "next/link";
+import AddButton from "./addButton";
+import { useCartStore } from "@/zustand/cart/cartStore";
 
-export default function Product({
-  id,
-  image = "/images/defaultNoData.png",
-  category = "Bed",
-  productTitle = "product not found",
-  price = 0,
-  ...props
-}: ProductType) {
+export default function Product(props: ProductType) {
+  const { products } = useCartStore();
+
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
+
   return (
     <div
-      key={id}
-      {...props}
+      key={props.id}
       className={cn(
         "group flex w-full flex-col items-center justify-start gap-2",
         props.className,
@@ -27,13 +28,13 @@ export default function Product({
     >
       <div className="flex w-full flex-col items-center justify-start">
         <div className="relative w-full overflow-hidden">
-          <Link href={`/shop/${id}`}>
+          <Link href={`/shop/${props.id}`}>
             <div className="z-10 aspect-square overflow-hidden rounded-md">
               <Image
                 height={1024}
                 width={1024}
-                src={image}
-                alt={productTitle}
+                src={props.image || "/images/defaultNoData.png"}
+                alt={props.productTitle}
                 className="aspect-square h-full w-full justify-center transition-all duration-500 ease-in-out group-hover:scale-105"
               />
             </div>
@@ -43,9 +44,17 @@ export default function Product({
           <div className="pointer-events-none absolute bottom-0 left-0 z-[19] h-[40%] w-full translate-y-[150%] select-none bg-gradient-to-t from-white/50 to-transparent ring-0 transition-all duration-300 group-hover:translate-y-0" />
 
           <div className="absolute bottom-[3%] left-0 z-20 flex w-full translate-y-[150%] flex-row items-center justify-around gap-2 ring-0 transition-all duration-300 group-hover:translate-y-0">
-            <Button size="lg" className="rounded-md font-bold">
-              Buy now
-            </Button>
+            <AddButton
+              category={props.category}
+              color={props.color}
+              id={props.id}
+              image={props.image}
+              price={props.price}
+              productTitle={props.productTitle}
+              quantity={1}
+              tag={props.tag}
+              status={props.status}
+            />
             <div className="flex flex-row items-center justify-between gap-3">
               <Button className="flex items-center justify-center rounded-full bg-gray-400/50 p-2 hover:bg-gray-400/90">
                 <LucideShoppingCart size={25} className="text-stone-800 " />
@@ -74,12 +83,12 @@ export default function Product({
 
       <div className="flex w-full flex-row items-center justify-between gap-2">
         <Text size="md" className=" line-clamp-1 truncate font-medium">
-          {productTitle.length > 25
-            ? productTitle.slice(0, 25) + "..."
-            : productTitle}
+          {props.productTitle.length > 25
+            ? props.productTitle.slice(0, 25) + "..."
+            : props.productTitle}
         </Text>
         <Text size="lg" className="font-extrabold text-gray-700">
-          ${price === 0 ? "TBA" : price}
+          ${props.price === 0 ? "TBA" : props.price}
         </Text>
       </div>
     </div>
