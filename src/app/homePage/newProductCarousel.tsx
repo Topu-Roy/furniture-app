@@ -88,6 +88,7 @@ export default function newProductCarousel(props: props) {
               <div className="flex items-center justify-center gap-4">
                 {productsListOne.map((item) => (
                   <Product
+                    id={item.id}
                     category={item.category}
                     color={item.color}
                     image={item.image}
@@ -102,6 +103,7 @@ export default function newProductCarousel(props: props) {
               <div className="flex w-full flex-row justify-start gap-4">
                 {productsListTwo.map((item) => (
                   <Product
+                    id={item.id}
                     category={item.category}
                     color={item.color}
                     image={item.image}
@@ -120,6 +122,7 @@ export default function newProductCarousel(props: props) {
               <div className="flex w-full flex-row justify-start gap-4">
                 {productsListThree.map((item) => (
                   <Product
+                    id={item.id}
                     category={item.category}
                     color={item.color}
                     image={item.image}
@@ -134,6 +137,7 @@ export default function newProductCarousel(props: props) {
               <div className="flex items-center justify-center gap-4">
                 {productsListFour.map((item) => (
                   <Product
+                    id={item.id}
                     category={item.category}
                     color={item.color}
                     image={item.image}

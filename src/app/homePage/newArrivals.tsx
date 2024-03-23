@@ -33,6 +33,7 @@ export default function NewArrivals(props: props) {
             <div className="flex w-full flex-row justify-start gap-[19px]">
               {newProductsOne.map((item) => (
                 <Product
+                  id={item.id}
                   category={item.category}
                   color={item.color}
                   image={item.image}
@@ -48,6 +49,7 @@ export default function NewArrivals(props: props) {
             <div className="flex w-full flex-row gap-[19px]">
               {newProductsTwo.map((item) => (
                 <Product
+                  id={item.id}
                   category={item.category}
                   color={item.color}
                   image={item.image}
