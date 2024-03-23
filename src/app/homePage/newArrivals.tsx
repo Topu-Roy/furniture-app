@@ -1,5 +1,4 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Heading } from "@/components";
 import { type ProductType } from "@/zustand/shop/shopStore";
 import Product from "@/components/product/productCard";
@@ -9,15 +8,9 @@ type props = {
 };
 
 export default function NewArrivals(props: props) {
-  const [newProductsOne, setNewProductsOne] = useState<ProductType[]>([]);
-  const [newProductsTwo, setNewProductsTwo] = useState<ProductType[]>([]);
-
-  useEffect(() => {
-    const newProducts = props.products.filter((item) => item.status === "new");
-
-    setNewProductsOne(newProducts.slice(0, 4));
-    setNewProductsTwo(newProducts.slice(5, 9));
-  }, [props.products]);
+  const newProducts = props.products.filter((item) => item.status === "new");
+  const newProductsOne = newProducts.slice(0, 4);
+  const newProductsTwo = newProducts.slice(5, 9);
 
   return (
     <div className="flex w-full items-center justify-center py-20">
