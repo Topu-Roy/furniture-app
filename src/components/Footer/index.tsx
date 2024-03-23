@@ -9,10 +9,10 @@ interface Props {
   className?: string;
 }
 
-export default function Footer({ ...props }: Props) {
+export default function Footer({ className }: Props) {
   return (
-    <footer {...props}>
-      <div className="mx-auto flex w-[80rem] items-center justify-center rounded bg-gray-50 bg-gradient pt-10">
+    <footer className={cn(`${className} pt-14`)}>
+      <div className="mx-auto flex max-w-7xl items-center justify-center rounded bg-gray-50 bg-gradient pt-10">
         <div className="flex w-full flex-1 flex-col items-center justify-center space-y-4 px-10">
           <div className="flex w-full flex-col items-center justify-start gap-2.5">
             <Heading
@@ -55,7 +55,7 @@ export default function Footer({ ...props }: Props) {
         </div>
       </div>
 
-      <div className="mt-20 w-full bg-black py-10">
+      <div className="mt-14 w-full bg-black py-10">
         <div className="mx-auto flex w-[80rem] flex-row gap-4">
           <div className="w-1/2">
             <Heading
@@ -205,6 +205,7 @@ export default function Footer({ ...props }: Props) {
           </div>
         </div>
       </div>
+
       <div className="flex w-full flex-row items-center justify-center border-t border-white/40 bg-black py-4">
         <div className="flex w-auto flex-row justify-between gap-3 pr-[3px]">
           <Text

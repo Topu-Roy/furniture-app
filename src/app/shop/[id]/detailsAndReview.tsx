@@ -83,7 +83,7 @@ export default function DetailsAndReview({ product, className }: props) {
           </div>
 
           {productReviews.map((item) => (
-            <div key={item.id} className="rounded-md border p-2">
+            <div key={item.id} className="rounded-xl border p-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center justify-start gap-2">
                   <Image

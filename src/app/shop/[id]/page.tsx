@@ -12,13 +12,16 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
   );
 
   return (
-    <>
+    <div className="w-full bg-stone-100 pb-8">
       <div className="mx-auto mt-[5rem] max-w-7xl space-y-8">
         {product ? (
           <>
             <RenderProduct product={product} />
             <div className="flex max-w-7xl items-start justify-start">
-              <DetailsAndReview product={product} className="w-[50%]" />
+              <DetailsAndReview
+                product={product}
+                className="w-[50%] rounded-xl bg-white p-2"
+              />
               <RelatedProductCarousel
                 productId={product.id}
                 productCategory={product.category}
@@ -32,6 +35,6 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
