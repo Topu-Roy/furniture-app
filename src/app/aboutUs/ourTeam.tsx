@@ -13,6 +13,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components";
+import Link from "next/link";
 
 type props = {
   teamMembers: {
@@ -70,78 +71,84 @@ export default function OurTeam(props: props) {
           <CarouselItem>
             <div className="flex w-full items-center justify-center gap-4">
               {props.teamMembers.slice(0, 3).map((member) => (
-                <div className="space-y-4 rounded-xl border p-4 shadow">
-                  <div className="w-full">
-                    <Image
-                      className="aspect-square w-full rounded-xl"
-                      src={member.imageUrl}
-                      height={1024}
-                      width={1024}
-                      alt={member.name + " " + member.role}
-                    />
-                  </div>
+                <Link href={"/team"}>
+                  <div className="space-y-4 rounded-xl border p-4 shadow">
+                    <div className="w-full">
+                      <Image
+                        className="aspect-square w-full rounded-xl"
+                        src={member.imageUrl}
+                        height={1024}
+                        width={1024}
+                        alt={member.name + " " + member.role}
+                      />
+                    </div>
 
-                  <div className="flex items-center justify-start gap-2">
-                    <span className="text-xl font-bold tracking-wide text-black/85">
-                      {member.name}
-                    </span>
-                    <span className="font-medium text-black/70">
-                      ({member.role})
-                    </span>
+                    <div className="flex items-center justify-start gap-2">
+                      <span className="text-xl font-bold tracking-wide text-black/85">
+                        {member.name}
+                      </span>
+                      <span className="font-medium text-black/70">
+                        ({member.role})
+                      </span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </CarouselItem>
           <CarouselItem>
             <div className="flex w-full items-center justify-center">
               {props.teamMembers.slice(3, 6).map((member) => (
-                <div className="space-y-4 rounded-xl border p-4 shadow">
-                  <div className="w-full">
-                    <Image
-                      className="aspect-square w-full rounded-xl"
-                      src={member.imageUrl}
-                      height={1024}
-                      width={1024}
-                      alt={member.name + " " + member.role}
-                    />
-                  </div>
+                <Link href={"/team"}>
+                  <div className="space-y-4 rounded-xl border p-4 shadow">
+                    <div className="w-full">
+                      <Image
+                        className="aspect-square w-full rounded-xl"
+                        src={member.imageUrl}
+                        height={1024}
+                        width={1024}
+                        alt={member.name + " " + member.role}
+                      />
+                    </div>
 
-                  <div className="flex items-center justify-start gap-2">
-                    <span className="text-xl font-bold tracking-wide text-black/85">
-                      {member.name}
-                    </span>
-                    <span className="font-medium text-black/70">
-                      ({member.role})
-                    </span>
+                    <div className="flex items-center justify-start gap-2">
+                      <span className="text-xl font-bold tracking-wide text-black/85">
+                        {member.name}
+                      </span>
+                      <span className="font-medium text-black/70">
+                        ({member.role})
+                      </span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </CarouselItem>
           <CarouselItem>
             <div className="flex w-full items-center justify-center">
               {props.teamMembers.slice(6, 9).map((member) => (
-                <div className="space-y-4 rounded-xl border p-4 shadow">
-                  <div className="w-full">
-                    <Image
-                      className="aspect-square w-full rounded-xl"
-                      src={member.imageUrl}
-                      height={1024}
-                      width={1024}
-                      alt={member.name + " " + member.role}
-                    />
-                  </div>
+                <Link href={"/team"}>
+                  <div className="space-y-4 rounded-xl border p-4 shadow">
+                    <div className="w-full">
+                      <Image
+                        className="aspect-square w-full rounded-xl"
+                        src={member.imageUrl}
+                        height={1024}
+                        width={1024}
+                        alt={member.name + " " + member.role}
+                      />
+                    </div>
 
-                  <div className="flex items-center justify-start gap-2">
-                    <span className="text-xl font-bold tracking-wide text-black/85">
-                      {member.name}
-                    </span>
-                    <span className="font-medium text-black/70">
-                      ({member.role})
-                    </span>
+                    <div className="flex items-center justify-start gap-2">
+                      <span className="text-xl font-bold tracking-wide text-black/85">
+                        {member.name}
+                      </span>
+                      <span className="font-medium text-black/70">
+                        ({member.role})
+                      </span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </CarouselItem>
