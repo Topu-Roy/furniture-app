@@ -13,13 +13,17 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="mx-auto mt-[5rem] max-w-7xl">
+      <div className="mx-auto mt-[5rem] max-w-7xl space-y-8">
         {product ? (
           <>
             <RenderProduct product={product} />
             <div className="flex max-w-7xl items-start justify-start">
-              <DetailsAndReview product={product} className="w-[50%] flex-1" />
-              <RelatedProductCarousel className="w-[50%] flex-1" />
+              <DetailsAndReview product={product} className="w-[50%]" />
+              <RelatedProductCarousel
+                productId={product.id}
+                productCategory={product.category}
+                className="w-[50%]"
+              />
             </div>
           </>
         ) : (
