@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { FaRegHeart } from "react-icons/fa";
 import { LucideShoppingCart } from "lucide-react";
 import { ProductType } from "@/zustand/shop/shopStore";
+import Link from "next/link";
 
 export default function Product({
   id,
@@ -26,15 +27,17 @@ export default function Product({
     >
       <div className="flex w-full flex-col items-center justify-start">
         <div className="relative w-full overflow-hidden">
-          <div className="z-10 aspect-square overflow-hidden rounded-md">
-            <Image
-              height={1024}
-              width={1024}
-              src={image}
-              alt={productTitle}
-              className="aspect-square h-full w-full justify-center transition-all duration-500 ease-in-out group-hover:scale-105"
-            />
-          </div>
+          <Link href={`/shop/${id}`}>
+            <div className="z-10 aspect-square overflow-hidden rounded-md">
+              <Image
+                height={1024}
+                width={1024}
+                src={image}
+                alt={productTitle}
+                className="aspect-square h-full w-full justify-center transition-all duration-500 ease-in-out group-hover:scale-105"
+              />
+            </div>
+          </Link>
 
           {/* //* Decoration */}
           <div className="pointer-events-none absolute bottom-0 left-0 z-[19] h-[40%] w-full translate-y-[150%] select-none bg-gradient-to-t from-white/50 to-transparent ring-0 transition-all duration-300 group-hover:translate-y-0" />
