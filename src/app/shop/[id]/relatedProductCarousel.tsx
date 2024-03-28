@@ -10,6 +10,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Product from "@/components/product/productCard";
+import { Text } from "@/components";
 
 type props = {
   productId: number;
@@ -46,11 +47,17 @@ export default function RelatedProductCarousel({
           `${className} flex w-[50%] flex-col items-center justify-center`,
         )}
       >
-        <Carousel className="mx-auto w-[80%] pb-8 pt-16">
+        <Text
+          size="xl"
+          className="flex w-full items-start justify-start pb-4 pl-[4.7rem] font-semibold text-gray-900/80"
+        >
+          Related products
+        </Text>
+        <Carousel className="mx-auto w-[80%] pb-8">
           <CarouselContent>
             {productsToRender.map((item) => (
               <CarouselItem>
-                <div key={item.id} className="mx-auto max-w-md">
+                <div key={item.id} className="mx-auto max-w-[30rem]">
                   <Product
                     className="w-full"
                     category={item.category}

@@ -1,16 +1,41 @@
 "use client";
-import React from "react";
-import { Button, Heading, Text, Input, Img } from "../../components";
-import { useCartStore } from "@/zustand/cart/cartStore";
+import React, { useEffect, useState } from "react";
+import { Heading, Text, Input, Img } from "../../components";
+import { CartProductType, useCartStore } from "@/zustand/cart/cartStore";
+import { Button } from "@/components/ui/button";
 
 export default function CartPage() {
-  const { products } = useCartStore();
-  console.log(products);
+  const { products, removeFromCart, increaseQuantity, decreaseQuantity } =
+    useCartStore();
+  const [productsToRender, setProductsToRender] = useState<CartProductType[]>(
+    [],
+  );
+
+  useEffect(() => {
+    setProductsToRender(products);
+    console.log(products);
+  }, [products]);
+
+  function handleRemove(id: number) {
+    removeFromCart(id);
+  }
+  function handleIncrease(id: number) {
+    increaseQuantity(id);
+  }
+  function handleDecrease(id: number) {
+    decreaseQuantity(id);
+  }
+
   return (
     <>
-      <div className="">
-        {products.map((item) => (
-          <div className="">{item.productTitle}</div>
+      <div className="mt-[5rem]">
+        {productsToRender.map((item) => (
+          <div key={item.id} className="">
+            <div className="">{item.productTitle}</div>
+            <Button onClick={() => handleRemove(item.id)}>Delete</Button>
+            <Button onClick={() => handleIncrease(item.id)}>Add</Button>
+            <Button onClick={() => handleDecrease(item.id)}>Decrease</Button>
+          </div>
         ))}
       </div>
       {/* <div className="flex w-full flex-col items-center justify-start gap-[100px] bg-gray-50">

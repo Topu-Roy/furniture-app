@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from 'zustand/middleware'
 
 type Color = "black" | "white" | "red" | "brown" | "green";
 type Category = "Chair" | "Table" | "Lamp" | "Drawer" | "Bed" | "Bookshelf" | "Sofa";
@@ -20,14 +21,37 @@ type UseShopStoreType = {
     products: CartProductType[];
     addToCart: (product: CartProductType) => void
     removeFromCart: (id: number) => void
+    increaseQuantity: (id: number) => void
+    decreaseQuantity: (id: number) => void
 };
 
-export const useCartStore = create<UseShopStoreType>((set) => ({
-    products: [],
-    addToCart: (product) => set((state) => {
-        return { products: { ...state.products, product } }
-    }),
-    removeFromCart: (id) => set((state) => {
-        return { products: state.products.filter(item => item.id !== id) }
-    })
-}));
+export const useCartStore = create<UseShopStoreType>()(
+    persist(
+        (set, get) => ({
+            products: [],
+            addToCart: (product) => set(() => {
+                const isExist = get().products.find(item => item.id === product.id);
+
+                if (isExist) {
+                    return { products: get().products };
+                }
+
+                return { products: [...get().products, product] };
+            }),
+            removeFromCart: (id) => set(() => ({ products: get().products.filter(item => item.id !== id) })),
+            increaseQuantity: (id) => set(() => ({
+                products: get().products.map(item => (
+                    item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+                ))
+            })),
+            decreaseQuantity: (id) => set(() => ({
+                products: get().products.map(item => (
+                    item.id === id ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity } : item
+                ))
+            }))
+        }), {
+        name: "cart-storage",
+        storage: createJSONStorage(() => sessionStorage)
+    }
+    )
+);

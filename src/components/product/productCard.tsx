@@ -65,7 +65,7 @@ export default function Product(props: ProductType) {
             </div>
           </div>
 
-          <div className="absolute right-0 top-0 z-30 w-full max-w-min rounded-lg">
+          <div className="absolute right-[2%] top-[2%] z-30 w-full max-w-min rounded-lg rounded-tr-full">
             {props.status ? (
               <Text
                 className={cn("px-2", {

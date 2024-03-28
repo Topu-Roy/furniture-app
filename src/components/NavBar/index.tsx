@@ -60,15 +60,17 @@ export default function NavBar() {
             />
           </Button>
 
-          <Button variant={"ghost"}>
-            <Image
-              height={50}
-              width={50}
-              src="images/img_list.svg"
-              alt="list_three"
-              className="h-6 w-6"
-            />
-          </Button>
+          <Link href={"/cart"}>
+            <Button variant={"ghost"}>
+              <Image
+                height={50}
+                width={50}
+                src="images/img_list.svg"
+                alt="list_three"
+                className="h-6 w-6"
+              />
+            </Button>
+          </Link>
         </div>
       </div>
     </header>
