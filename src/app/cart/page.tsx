@@ -1,20 +1,21 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Heading, Text, Input, Img } from "../../components";
+import { Heading, Text } from "../../components";
 import { CartProductType, useCartStore } from "@/zustand/cart/cartStore";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { TiMinus, TiPlus } from "react-icons/ti";
-import { Checkbox } from "@/components/ui/checkbox";
+import Chip from "./chip";
+import {
+  IoCheckmarkDoneCircleOutline,
+  IoCheckmarkDoneCircleSharp,
+} from "react-icons/io5";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { cn } from "@/lib/utils";
 
 export default function CartPage() {
-  const {
-    products,
-    removeFromCart,
-    increaseQuantity,
-    decreaseQuantity,
-    changeSelected,
-  } = useCartStore();
+  const { products, removeFromCart, increaseQuantity, decreaseQuantity } =
+    useCartStore();
   const [productsToRender, setProductsToRender] = useState<CartProductType[]>(
     [],
   );
@@ -22,7 +23,6 @@ export default function CartPage() {
 
   useEffect(() => {
     setProductsToRender(products);
-    console.log(products);
   }, [products]);
 
   useEffect(() => {
@@ -33,20 +33,12 @@ export default function CartPage() {
     );
 
     selectedProductsArr.forEach((item) => {
-      totalPriceForSelectedProducts =
-        totalPriceForSelectedProducts + item.price;
+      const priceWithQuantity = item.price * item.quantity;
+      totalPriceForSelectedProducts += priceWithQuantity;
     });
 
     setCheckoutPrice(totalPriceForSelectedProducts);
-
-    console.log(products);
   }, [products]);
-
-  useEffect(() => {
-    products.forEach((item) => {
-      changeSelected(item.id, false);
-    });
-  }, []);
 
   function handleRemove(id: number) {
     removeFromCart(id);
@@ -57,9 +49,13 @@ export default function CartPage() {
   function handleDecrease(id: number) {
     decreaseQuantity(id);
   }
-  function handleSelect(id: number) {
-    const selectedProduct = products.find((item) => item.id === id);
-    changeSelected(id, selectedProduct?.isSelected == false ? true : false);
+
+  function handleCheck(id: number) {
+    useCartStore.setState({
+      products: products.map((item) =>
+        item.id !== id ? item : { ...item, isSelected: !item.isSelected },
+      ),
+    });
   }
 
   return (
@@ -67,26 +63,51 @@ export default function CartPage() {
       <Heading size="3xl" className="mt-[5rem] py-8 text-center">
         My Cart
       </Heading>
+
       <div className="mx-auto flex max-w-7xl items-start justify-between gap-2">
         <div className="w-full space-y-2">
           {productsToRender.map((item) => (
             <div
               key={item.id}
-              className="grid w-full grid-cols-8 gap-2 bg-zinc-100"
+              className={cn(
+                "grid w-full grid-cols-8 gap-2 rounded-lg bg-zinc-100 p-2",
+                {
+                  "ring-2 ring-neutral-500": item.isSelected,
+                },
+              )}
             >
-              <div className="col-span-1 ">
-                <Checkbox
-                  onClick={() => handleSelect(item.id)}
-                  checked={item.isSelected}
-                  id={item.id.toString()}
-                />
-                <label
-                  htmlFor={item.id.toString()}
-                  onClick={() => handleSelect(item.id)}
-                >
-                  {item.isSelected ? "Selected" : "Select"}
+              <div className="relative col-span-1 flex flex-col items-center justify-center">
+                <label className="flex flex-1 items-center justify-center">
+                  <input
+                    className="h-[2.5rem] w-[2.5rem] opacity-0"
+                    type="checkbox"
+                    checked={item.isSelected || false}
+                    onChange={() => handleCheck(item.id)}
+                  />
+                  <Button
+                    variant="ghost"
+                    className="pointer-events-none absolute rounded-full p-0 shadow-sm"
+                    size={"lg"}
+                  >
+                    {item.isSelected ? (
+                      <IoCheckmarkDoneCircleSharp size={30} />
+                    ) : (
+                      <IoCheckmarkDoneCircleOutline size={30} />
+                    )}
+                  </Button>
                 </label>
+
+                <div className="h-0.5 w-[80%] rounded-full bg-black/40" />
+                <Button
+                  variant="ghost"
+                  onClick={() => handleRemove(item.id)}
+                  className="flex-1 rounded-full p-0 shadow-sm"
+                  size={"lg"}
+                >
+                  <RiDeleteBin6Line size={30} />
+                </Button>
               </div>
+
               <div className="col-span-2 max-w-[10rem] overflow-hidden rounded-md">
                 <Image
                   src={item.image}
@@ -99,14 +120,16 @@ export default function CartPage() {
                 <Text size="lg" className="font-semibold">
                   {item.productTitle}
                 </Text>
+
+                <div className="flex items-center justify-start gap-4">
+                  {item.color ? <Chip text={item.color} /> : null}
+                  {item.category ? <Chip text={item.category} /> : null}
+                  {item.status ? <Chip text={item.status} /> : null}
+                  {item.tag ? <Chip text={item.tag} /> : null}
+                </div>
+
                 <Text size="md" className="">
-                  Color: {item.color}
-                </Text>
-                <Text size="md" className="">
-                  Category: <span className="">{item.category}</span>
-                </Text>
-                <Text size="md" className="">
-                  Price:{" "}
+                  Price:
                   <span className="text-lg font-semibold">$ {item.price}</span>
                 </Text>
               </div>
@@ -133,12 +156,13 @@ export default function CartPage() {
                 </div>
                 <div className="flex items-center justify-center gap-2">
                   <Text>Total price:</Text>
-                  <Text>{item.price}</Text>
+                  <Text>{item.price * item.quantity}</Text>
                 </div>
               </div>
             </div>
           ))}
         </div>
+
         <div className="flex w-[33%] flex-col items-start justify-end gap-7 bg-gray-50_01 p-[27px]">
           <Heading className="mt-[9px] !font-bold tracking-[-0.50px]">
             Total for selected items
@@ -156,8 +180,7 @@ export default function CartPage() {
               </Heading>
             </div>
             <div className="flex w-full flex-row items-center justify-center">
-              <Input
-                size="sm"
+              <input
                 name="your_voucher"
                 placeholder="Your Voucher"
                 className="!text-black-900_3f w-[73%]"

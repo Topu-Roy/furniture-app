@@ -24,7 +24,6 @@ type UseShopStoreType = {
     removeFromCart: (id: number) => void
     increaseQuantity: (id: number) => void
     decreaseQuantity: (id: number) => void
-    changeSelected: (id: number, selection: boolean) => void
 };
 
 export const useCartStore = create<UseShopStoreType>()(
@@ -51,12 +50,7 @@ export const useCartStore = create<UseShopStoreType>()(
                 products: get().products.map(item => (
                     item.id === id ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity } : item
                 ))
-            })),
-            changeSelected: (id, selection) => set(() => ({
-                products: get().products.map(item => (
-                    item.id === id ? { ...item, isSelected: selection } : item
-                ))
-            })),
+            }))
         }),
         {
             name: "cart-storage",
