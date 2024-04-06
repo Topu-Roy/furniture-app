@@ -4,12 +4,14 @@ import { ProductType } from "@/zustand/shop/shopStore";
 import { Text } from "@/components";
 import { Button } from "@/components/ui/button";
 import { TiPlus, TiMinus } from "react-icons/ti";
+import { useCartStore } from "@/zustand/cart/cartStore";
 
 type props = {
   product: ProductType;
 };
 
 export default function ProductAddToCart({ product }: props) {
+  const { products, addToCart } = useCartStore();
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(product.price);
 
@@ -24,6 +26,24 @@ export default function ProductAddToCart({ product }: props) {
     if (num === -1 && quantity === 1) return;
     setQuantity((prev) => prev + num);
   }
+
+  function handleAddToCart() {
+    const { category, color, id, image, price, productTitle, tag, status } =
+      product;
+    addToCart({
+      productTitle,
+      category,
+      color,
+      id,
+      image,
+      isSelected: false,
+      price: product.price as number,
+      quantity,
+      tag,
+      status,
+    });
+  }
+
   return (
     <div className="flex h-full w-full items-center justify-between gap-2">
       <div className="flex h-14 w-[25%] items-center justify-center gap-5 rounded-md border p-2">
@@ -51,7 +71,10 @@ export default function ProductAddToCart({ product }: props) {
         </Text>
       </div>
 
-      <Button className="h-14 w-[30%] rounded-md" variant={"outline"}>
+      <Button
+        onClick={() => handleAddToCart()}
+        className="h-14 w-[30%] rounded-md"
+      >
         Add to cart
       </Button>
     </div>
