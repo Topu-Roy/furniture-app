@@ -7,7 +7,7 @@ import RenderCart from "./components/renderCart";
 export default function CartPage() {
   return (
     <div className="bg-stone-200">
-      <Heading size="3xl" className="mt-[5rem] text-center">
+      <Heading size="3xl" className="mt-[5rem] pt-8 text-center">
         My Cart
       </Heading>
 
