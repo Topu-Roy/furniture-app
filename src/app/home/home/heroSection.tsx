@@ -42,7 +42,7 @@ export default function HeroSection() {
               </Button>
             </Link>
           </div>
-          <div className="relative h-[90dvw] w-[95dvw] rounded-lg sm:h-[70dvw]  sm:w-[75dvw] md:h-[475px] md:w-[48%]">
+          <div className="relative h-[90dvw] w-[95dvw] rounded-lg md:h-[23rem] md:w-[25rem] xl:h-[30rem] xl:w-[35rem]">
             <Image
               height={1000}
               width={1000}
