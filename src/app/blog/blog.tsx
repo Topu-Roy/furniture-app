@@ -51,10 +51,7 @@ export default function Blog({ blog }: Props) {
       </Text>
 
       <Link href={`/blog/${id}`} className="w-full">
-        <Button
-          className="h-14 w-full rounded-sm"
-          variant={"outline"}
-        >
+        <Button className="hover:bg-primary h-14 w-full rounded-sm bg-slate-200 text-gray-800">
           Read more
         </Button>
       </Link>

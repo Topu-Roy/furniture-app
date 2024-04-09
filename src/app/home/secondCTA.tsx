@@ -21,7 +21,7 @@ export default function SecondCTA() {
             <div className="flex w-full flex-col items-start justify-start gap-[17px]">
               <Text
                 size="lg"
-                className="tracking-[-0.50px] !text-blue_gray-900_01"
+                className="!text-blue_gray-900_01 tracking-[-0.50px]"
               >
                 Interior Modern
               </Text>
@@ -31,7 +31,6 @@ export default function SecondCTA() {
             </div>
             <Button
               size="9xl"
-              variant="outline"
               className="min-w-[218px] font-medium tracking-[-0.50px] transition-all duration-100 hover:scale-105"
             >
               Shop Now

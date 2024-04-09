@@ -32,12 +32,7 @@ export default function AddButton({
   }
 
   return (
-    <Button
-      onClick={handleClick}
-      size="lg"
-      variant={"outline"}
-      className="rounded-md font-bold"
-    >
+    <Button onClick={handleClick} size="lg" className="rounded-md font-bold">
       Add to cart
     </Button>
   );

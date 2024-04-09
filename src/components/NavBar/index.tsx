@@ -7,7 +7,7 @@ export default function NavBar() {
   return (
     <header className="fixed top-0 z-50 flex h-[5rem] w-full items-center justify-center bg-white">
       <div className="mx-auto flex w-[85rem] flex-row justify-between">
-        <Link href="/homePage">
+        <Link href="/home">
           <Image
             src="images/img_frame_146.svg"
             height={146}

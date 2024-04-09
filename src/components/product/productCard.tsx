@@ -1,5 +1,5 @@
-"use client";
-import React, { useEffect } from "react";
+import React from "react";
+import Link from "next/link";
 import { Text } from "..";
 import Image from "next/image";
 import { Button } from "../ui/button";
@@ -7,17 +7,9 @@ import { cn } from "@/lib/utils";
 import { FaRegHeart } from "react-icons/fa";
 import { LucideShoppingCart } from "lucide-react";
 import { ProductType } from "@/zustand/shop/shopStore";
-import Link from "next/link";
 import AddButton from "./addButton";
-import { useCartStore } from "@/zustand/cart/cartStore";
 
 export default function Product(props: ProductType) {
-  const { products } = useCartStore();
-
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
-
   return (
     <div
       key={props.id}
@@ -44,23 +36,30 @@ export default function Product(props: ProductType) {
           <div className="pointer-events-none absolute bottom-0 left-0 z-[19] h-[40%] w-full translate-y-[150%] select-none bg-gradient-to-t from-white/50 to-transparent ring-0 transition-all duration-300 group-hover:translate-y-0" />
 
           <div className="absolute bottom-[3%] left-0 z-20 flex w-full translate-y-[150%] flex-row items-center justify-around gap-2 ring-0 transition-all duration-300 group-hover:translate-y-0">
-            <AddButton
-              category={props.category}
-              color={props.color}
-              id={props.id}
-              image={props.image}
-              price={props.price}
-              productTitle={props.productTitle}
-              quantity={1}
-              tag={props.tag}
-              status={props.status}
-            />
-            <div className="flex flex-row items-center justify-between gap-3">
-              <Button className="flex items-center justify-center rounded-full bg-gray-400/50 p-2 hover:bg-gray-400/90">
-                <LucideShoppingCart size={25} className="text-stone-800 " />
+            {props.price ? (
+              <AddButton
+                category={props.category}
+                color={props.color}
+                id={props.id}
+                image={props.image}
+                price={props.price}
+                productTitle={props.productTitle}
+                quantity={1}
+                tag={props.tag}
+                status={props.status}
+                isSelected={false}
+              />
+            ) : (
+              <Button size="lg" className="rounded-md font-bold">
+                Not Available
               </Button>
-              <Button className="flex items-center justify-center rounded-full bg-gray-400/50 p-2 hover:bg-gray-400/90">
-                <FaRegHeart size={25} className="text-stone-800 " />
+            )}
+            <div className="flex flex-row items-center justify-between gap-3">
+              <Button className="flex items-center justify-center rounded-full bg-white p-2 text-gray-700 hover:text-white">
+                <LucideShoppingCart size={25} />
+              </Button>
+              <Button className="flex items-center justify-center rounded-full bg-white p-2 text-gray-700 hover:text-white">
+                <FaRegHeart size={25} />
               </Button>
             </div>
           </div>
