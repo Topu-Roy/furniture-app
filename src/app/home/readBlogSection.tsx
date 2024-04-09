@@ -68,7 +68,7 @@ export default function ReadBlogSection() {
 
             <Link href={`/blog/${item.id}`} className="w-full">
               <Button
-                className="h-14 w-full rounded-sm bg-slate-200"
+                className="h-14 w-full rounded-sm"
                 variant={"outline"}
               >
                 Read more

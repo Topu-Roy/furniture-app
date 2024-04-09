@@ -24,7 +24,7 @@ export default function HeroSection() {
             </div>
             <Button
               size="9xl"
-              className="min-w-[218px] border-2 border-solid border-blue_gray-900_01 font-medium tracking-[-0.50px] text-yellow-100"
+              className="min-w-[218px] border-2 border-solid  font-medium tracking-[-0.50px]"
             >
               Shop Now
             </Button>

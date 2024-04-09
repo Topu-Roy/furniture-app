@@ -54,7 +54,7 @@ export default function ProductHeader() {
             onClick={handleClearSearch}
             variant={"outline"}
             size="6xl"
-            className="h-12 rounded-sm font-semibold tracking-[-0.50px] text-gray-600"
+            className="h-12 rounded-sm font-semibold tracking-[-0.50px]"
           >
             Clear
           </Button>

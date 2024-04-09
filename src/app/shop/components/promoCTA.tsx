@@ -1,6 +1,7 @@
-import { Heading, Img } from "@/components";
-import { Button } from "@/components/ui/button";
 import React from "react";
+import Image from "next/image";
+import { Heading } from "@/components";
+import { Button } from "@/components/ui/button";
 
 export default function promoCTA() {
   return (
@@ -9,7 +10,9 @@ export default function promoCTA() {
         <div className="flex w-full max-w-[1290px] flex-row justify-center">
           <div className="flex w-full flex-row justify-center">
             <div className="relative h-[450px] w-full">
-              <Img
+              <Image
+                height={1024}
+                width={1024}
                 src="images/img_rectangle_28.png"
                 alt="image_one"
                 className="absolute bottom-0 left-0 right-0 top-0 m-auto h-[450px] w-full justify-center object-cover"
@@ -32,7 +35,7 @@ export default function promoCTA() {
                 <Button
                   color="yellow_100"
                   size="9xl"
-                  className="font-poppins min-w-[170px] font-bold tracking-[-0.50px]"
+                  className="min-w-[170px] font-bold tracking-[-0.50px]"
                 >
                   Shop Now
                 </Button>

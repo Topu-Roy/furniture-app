@@ -70,7 +70,7 @@ export default function CartCheckout() {
       <div className="flex w-full flex-col items-center justify-start gap-5">
         <div className="flex w-full flex-row items-center justify-center">
           <Input placeholder="Your Voucher" className="mr-2 w-[73%]" />
-          <Button className="min-w-[98px] font-semibold !text-yellow-100">
+          <Button className="min-w-[98px] font-semibold">
             Apply
           </Button>
         </div>
@@ -82,7 +82,7 @@ export default function CartCheckout() {
         </Text>
         <Heading>$ {checkoutPrice}</Heading>
       </div>
-      <Button className="w-full font-semibold !text-yellow-100">
+      <Button className="w-full font-semibold">
         Checkout Now
       </Button>
     </>

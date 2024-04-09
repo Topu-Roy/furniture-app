@@ -44,19 +44,19 @@ export default function RenderTeamMembers(props: props) {
             <div className="pointer-events-none absolute bottom-0 left-0 z-[19] h-[40%] w-full translate-y-[150%] select-none bg-gradient-to-t from-white/50 to-transparent ring-0 transition-all duration-300 group-hover:translate-y-0" />
             <div className="absolute bottom-[3%] left-0 z-20 flex w-full translate-y-[150%] flex-row items-center justify-around gap-2 ring-0 transition-all duration-300 group-hover:translate-y-0">
               <div className="flex flex-row items-center justify-between gap-3">
-                <Button className="flex items-center justify-center rounded-full bg-white p-2 transition-all duration-200 hover:bg-slate-200">
+                <Button className="flex items-center justify-center rounded-full p-2 transition-all duration-200">
                   <FaFacebookF
                     size={25}
                     className="text-blue-600 hover:scale-105"
                   />
                 </Button>
-                <Button className="flex items-center justify-center rounded-full bg-white p-2 transition-all duration-200 hover:bg-slate-200">
+                <Button className="flex items-center justify-center rounded-full p-2 transition-all duration-200">
                   <IoLogoWhatsapp
                     size={25}
                     className="text-green-600 hover:scale-105"
                   />
                 </Button>
-                <Button className="flex items-center justify-center rounded-full bg-white p-2 transition-all duration-200 hover:bg-slate-200">
+                <Button className="flex items-center justify-center rounded-full p-2 transition-all duration-200">
                   <FaGithub size={25} className="text-black hover:scale-105" />
                 </Button>
               </div>

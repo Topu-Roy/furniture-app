@@ -38,7 +38,7 @@ export default function Footer({ className }: Props) {
             />
             <Button
               size="6xl"
-              className="min-w-[157px] flex-1 rounded font-bold tracking-[-0.50px] !text-yellow-100"
+              className="min-w-[157px] flex-1 rounded font-bold tracking-[-0.50px]"
             >
               Subscribe
             </Button>
@@ -79,7 +79,7 @@ export default function Footer({ className }: Props) {
             <div className="flex items-center justify-start gap-4 pt-16">
               <Button
                 color="yellow_100"
-                className="h-10 w-10 rounded-full bg-white p-2"
+                className="h-10 w-10 rounded-full p-2"
               >
                 <Image
                   width={50}
@@ -90,7 +90,7 @@ export default function Footer({ className }: Props) {
               </Button>
               <Button
                 color="yellow_100"
-                className="h-10 w-10 rounded-full bg-white p-2"
+                className="h-10 w-10 rounded-full p-2"
               >
                 <Image
                   width={50}
@@ -101,7 +101,7 @@ export default function Footer({ className }: Props) {
               </Button>
               <Button
                 color="yellow_100"
-                className="h-10 w-10 rounded-full bg-white p-2"
+                className="h-10 w-10 rounded-full p-2"
               >
                 <Image
                   width={50}
@@ -112,7 +112,7 @@ export default function Footer({ className }: Props) {
               </Button>
               <Button
                 color="yellow_100"
-                className="h-10 w-10 rounded-full bg-white p-2"
+                className="h-10 w-10 rounded-full p-2"
               >
                 <Image
                   width={50}

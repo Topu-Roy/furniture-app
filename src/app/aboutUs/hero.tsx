@@ -26,7 +26,7 @@ export default function Hero() {
               <Button
                 size="6xl"
                 variant="outline"
-                className="bg-gray-800 font-semibold tracking-[-0.50px] text-white transition-all duration-100 hover:scale-105 hover:bg-gray-950 hover:text-white"
+                className="font-semibold tracking-[-0.50px] transition-all duration-100 hover:scale-105"
               >
                 Meet our Team
               </Button>

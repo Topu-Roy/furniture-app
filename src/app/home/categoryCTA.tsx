@@ -22,7 +22,7 @@ export default function CategoryCTA() {
             </div>
             <Button
               size="6xl"
-              className="min-w-[155px] bg-white font-medium tracking-[-0.50px] text-gray-900 hover:bg-slate-200"
+              className="min-w-[155px] font-medium tracking-[-0.50px]"
             >
               Shop Now
             </Button>
@@ -50,7 +50,7 @@ export default function CategoryCTA() {
             </div>
             <Button
               size="6xl"
-              className="min-w-[155px] bg-white font-medium tracking-[-0.50px] text-gray-900 hover:bg-slate-200"
+              className="min-w-[155px] font-medium tracking-[-0.50px]"
             >
               Shop Now
             </Button>

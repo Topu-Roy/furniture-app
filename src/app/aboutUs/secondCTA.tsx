@@ -32,7 +32,7 @@ export default function SecondCTA() {
             <Button
               size="9xl"
               variant="outline"
-              className="min-w-[218px] bg-gray-800 font-medium tracking-[-0.50px] text-white transition-all duration-100 hover:scale-105 hover:bg-gray-950 hover:text-white"
+              className="min-w-[218px] font-medium tracking-[-0.50px] transition-all duration-100 hover:scale-105"
             >
               Shop Now
             </Button>
