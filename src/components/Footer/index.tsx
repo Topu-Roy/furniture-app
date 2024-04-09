@@ -58,12 +58,14 @@ export default function Footer({ className }: Props) {
       <div className="mt-14 w-full bg-black py-10">
         <div className="mx-auto flex w-[80rem] flex-row gap-4">
           <div className="w-1/2">
-            <Heading
-              size="3xl"
-              className={cn("tracking-[-0.50px] text-gray-50_01")}
-            >
-              Furnit.
-            </Heading>
+            <Link href={"/home"}>
+              <Heading
+                size="3xl"
+                className={cn("tracking-[-0.50px] text-gray-50_01")}
+              >
+                Furnit.
+              </Heading>
+            </Link>
             <Text
               size="md"
               className={cn(

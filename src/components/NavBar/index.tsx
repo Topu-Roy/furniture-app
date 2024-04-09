@@ -18,7 +18,7 @@ export default function NavBar() {
         </Link>
 
         <div className="flex items-center justify-center gap-4 font-semibold">
-          <Link href="/homePage">
+          <Link href="/home">
             <Button variant={"ghost"}>Home</Button>
           </Link>
 
