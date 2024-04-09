@@ -1,9 +1,7 @@
 import React from "react";
 import { Text, Heading } from "../../components";
-import NavBar from "@/components/NavBar";
 import RenderBlogs from "./RenderBlogs";
 import { blogPosts } from "./blogPostArray";
-import Footer from "@/components/Footer";
 
 export default function BlogPage() {
   return (
@@ -17,7 +15,8 @@ export default function BlogPage() {
           className="text-center leading-[35px] tracking-[-0.50px] !text-gray-500"
         >
           We write various things related to furniture, from tips and what
-          things <br />I need to pay attention to when choosing furniture
+          things <br />
+          you need to pay attention to when choosing furniture
         </Text>
       </div>
       <RenderBlogs blogs={blogPosts} />
