@@ -59,7 +59,10 @@ export default function BlogDetails({ params }: { params: { id: string } }) {
 
         {blog.article.blocks.map((textBlock) => (
           <>
-            <h2 className="group cursor-pointer hover:underline">
+            <h2
+              key={textBlock.heading}
+              className="group cursor-pointer hover:underline"
+            >
               {textBlock.heading}{" "}
               <span className="opacity-0 group-hover:opacity-100">#</span>
             </h2>

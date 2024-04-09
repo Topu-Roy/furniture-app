@@ -70,16 +70,8 @@ body {
   }
 }
  
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
 
-[type="text"],
+/* [type="text"],
 input:where(:not([type])),
 [type="email"],
 [type="url"],
@@ -103,10 +95,10 @@ select {
   padding: unset;
   font-size: unset;
   line-height: unset;
-}
+} */
 
 /* Override default focus colors for tailwindcss-forms https://github.com/tailwindlabs/tailwindcss-forms */
-[type="text"]:focus,
+/* [type="text"]:focus,
 [type="email"]:focus,
 [type="url"]:focus,
 [type="password"]:focus,
@@ -120,4 +112,4 @@ textarea:focus,
 select:focus {
   --tw-ring-color: "#23292e";
   border-color: "#23292e";
-}
+} */
