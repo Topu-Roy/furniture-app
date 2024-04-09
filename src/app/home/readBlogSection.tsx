@@ -5,6 +5,7 @@ import Image from "next/image";
 import { TbWritingSign } from "react-icons/tb";
 import { MdDateRange } from "react-icons/md";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function ReadBlogSection() {
   const blogs = blogPosts.slice(0, 3);
@@ -35,7 +36,7 @@ export default function ReadBlogSection() {
           >
             <div className="aspect-square w-full overflow-hidden rounded-lg">
               <Image
-                src={item.imageURL}
+                src={item.thumbnail}
                 alt={item.headline}
                 height={1024}
                 width={1024}
@@ -52,7 +53,7 @@ export default function ReadBlogSection() {
             <div className="flex items-center justify-center gap-4">
               <div className="flex items-center justify-center gap-2">
                 <TbWritingSign size={20} />
-                <span>{item.postBy}</span>
+                <span>{item.postDate}</span>
               </div>
               <div className="h-4 w-0.5 rounded-xl bg-black/50" />
               <div className="flex items-center justify-center gap-2">
@@ -65,12 +66,14 @@ export default function ReadBlogSection() {
               {item.article.intro}
             </Text>
 
-            <Button
-              className="h-14 w-full rounded-sm bg-slate-200"
-              variant={"outline"}
-            >
-              Read more
-            </Button>
+            <Link href={`/blog/${item.id}`} className="w-full">
+              <Button
+                className="h-14 w-full rounded-sm bg-slate-200"
+                variant={"outline"}
+              >
+                Read more
+              </Button>
+            </Link>
           </div>
         ))}
       </div>

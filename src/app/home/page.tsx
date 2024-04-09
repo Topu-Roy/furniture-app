@@ -13,7 +13,7 @@ import { products } from "../../assets/productArray";
 
 export default function HomepagePage() {
   return (
-    <>
+    <div className="bg-stone-200">
       <HeroSection />
       <BrandsWorkedWith />
       <CategoryCTA />
@@ -22,6 +22,6 @@ export default function HomepagePage() {
       <NewArrivals products={products} />
       <OurBenefits />
       <ReadBlogSection />
-    </>
+    </div>
   );
 }
