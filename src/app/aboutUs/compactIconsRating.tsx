@@ -15,6 +15,7 @@ export default function CompactIconsRating() {
     <div className="flex w-full flex-row justify-center">
       {userIconsForRating.map((icon) => (
         <Image
+          key={icon}
           src={`/images/${icon}`}
           alt=""
           className="h-[50px] w-[50px] rounded-[50%]"
@@ -25,7 +26,7 @@ export default function CompactIconsRating() {
       <div className="ml-[-5px] flex h-[50px] w-[50px] flex-col items-center justify-start">
         <Heading
           size="xs"
-          className="flex h-[50px] w-[50px] items-center justify-center rounded-[50%] bg-blue_gray-900_01 text-center tracking-[-0.50px] !text-yellow-100"
+          className="bg-blue_gray-900_01 flex h-[50px] w-[50px] items-center justify-center rounded-[50%] text-center tracking-[-0.50px] !text-yellow-100"
         >
           3K+
         </Heading>

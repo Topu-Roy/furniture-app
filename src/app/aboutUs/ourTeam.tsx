@@ -71,7 +71,7 @@ export default function OurTeam(props: props) {
           <CarouselItem>
             <div className="flex w-full items-center justify-center gap-4">
               {props.teamMembers.slice(0, 3).map((member) => (
-                <Link href={"/team"}>
+                <Link key={member.id} href={"/team"}>
                   <div className="space-y-4 rounded-xl border p-4 shadow">
                     <div className="w-full">
                       <Image

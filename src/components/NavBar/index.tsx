@@ -22,7 +22,7 @@ export default function NavBar() {
           </Link>
         </div>
 
-        <div className="hidden items-center justify-center gap-4 font-semibold sm:flex">
+        <div className="hidden items-center justify-center gap-4 font-semibold md:flex">
           <Link href="/home">
             <Button variant={"ghost"}>Home</Button>
           </Link>
