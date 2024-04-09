@@ -4,7 +4,7 @@ import RenderTeamMembers from "./RenderTeamMembers";
 
 export default function TeamPage() {
   return (
-    <div className="mt-[5rem] bg-gray-50 pt-10">
+    <div className="mt-[5rem] bg-stone-200 pt-10">
       <Heading size="3xl" className="text-center tracking-[-0.50px]">
         Meet Our Team
       </Heading>
@@ -17,8 +17,6 @@ export default function TeamPage() {
       </Text>
 
       <RenderTeamMembers teamMembers={teamMembers} />
-
-      {/* <Footer className="flex w-full flex-col items-center justify-center" /> */}
     </div>
   );
 }
