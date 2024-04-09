@@ -8,7 +8,7 @@ import {
   OurBenefits,
   ReadBlogSection,
   NewProductCarousel,
-} from "./exports";
+} from "./home/exports";
 import { products } from "../../assets/productArray";
 
 export default function HomepagePage() {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Heading, Text } from "@/components";
-import { blogPosts } from "../blog/blogPostArray";
+import { blogPosts } from "../../blog/blogPostArray";
 import Image from "next/image";
 import { TbWritingSign } from "react-icons/tb";
 import { MdDateRange } from "react-icons/md";
@@ -67,10 +67,7 @@ export default function ReadBlogSection() {
             </Text>
 
             <Link href={`/blog/${item.id}`} className="w-full">
-              <Button
-                className="h-14 w-full rounded-sm"
-                variant={"outline"}
-              >
+              <Button className="h-14 w-full rounded-sm" variant={"outline"}>
                 Read more
               </Button>
             </Link>
