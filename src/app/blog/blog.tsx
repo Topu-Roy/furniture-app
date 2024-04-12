@@ -14,18 +14,9 @@ type Props = {
 export default function Blog({ blog }: Props) {
   const { id, headline, thumbnail, article, postDate, author } = blog;
   return (
-    <div
-      key={id + " " + headline}
-      className="flex w-full flex-col items-center justify-start space-y-3 rounded-lg border bg-white p-2"
-    >
-      <div className="aspect-square w-full overflow-hidden rounded-lg">
-        <Image
-          src={thumbnail}
-          alt={headline}
-          height={1024}
-          width={1024}
-          className="aspect-square"
-        />
+    <div className="flex w-full flex-col items-center justify-start space-y-3 rounded-lg border bg-white p-2">
+      <div className="flex aspect-square w-full items-center justify-center overflow-hidden rounded-lg">
+        <Image src={thumbnail} alt={headline} height={1024} width={1024} />
       </div>
       <Text
         size="lg"
@@ -51,7 +42,7 @@ export default function Blog({ blog }: Props) {
       </Text>
 
       <Link href={`/blog/${id}`} className="w-full">
-        <Button className="hover:bg-primary h-14 w-full rounded-sm bg-slate-200 text-gray-800">
+        <Button className="h-14 w-full rounded-sm bg-slate-200 text-gray-800 hover:bg-primary hover:text-white">
           Read more
         </Button>
       </Link>

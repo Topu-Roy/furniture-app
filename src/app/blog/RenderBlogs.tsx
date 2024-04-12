@@ -32,7 +32,7 @@ export default function RenderBlogs(props: props) {
   for (let i = 1; i <= totalPages; i++) {
     PaginationButtons.push(
       <Button
-        key={i}
+        key={i + "btn"}
         variant={currentPage === i ? "default" : "outline"}
         onClick={() => handlePaginationClick(i)}
         className="rounded-full"
@@ -52,7 +52,9 @@ export default function RenderBlogs(props: props) {
     <div className="py-10">
       <div className="mx-auto grid w-full max-w-7xl grid-cols-3 gap-4 pb-10">
         {blogs.map((item) => (
-          <Blog blog={item} />
+          <div key={`${item.id}-blog`}>
+            <Blog blog={item} />
+          </div>
         ))}
       </div>
 

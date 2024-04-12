@@ -1,11 +1,7 @@
 import React from "react";
 import { Heading, Text } from "@/components";
 import { blogPosts } from "../../blog/blogPostArray";
-import Image from "next/image";
-import { TbWritingSign } from "react-icons/tb";
-import { MdDateRange } from "react-icons/md";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import Blog from "@/app/blog/blog";
 
 export default function ReadBlogSection() {
   const blogs = blogPosts.slice(0, 3);
@@ -30,47 +26,8 @@ export default function ReadBlogSection() {
 
       <div className="mx-auto grid w-full max-w-7xl grid-cols-3 gap-4 pt-8">
         {blogs.map((item) => (
-          <div
-            key={item.id + " " + item.headline}
-            className="flex w-full flex-col items-center justify-start space-y-3 rounded-lg border bg-white p-2"
-          >
-            <div className="aspect-square w-full overflow-hidden rounded-lg">
-              <Image
-                src={item.thumbnail}
-                alt={item.headline}
-                height={1024}
-                width={1024}
-                className="aspect-square"
-              />
-            </div>
-            <Text
-              size="lg"
-              className="line-clamp-2 h-[3.5rem] text-center font-semibold"
-            >
-              {item.headline}
-            </Text>
-
-            <div className="flex items-center justify-center gap-4">
-              <div className="flex items-center justify-center gap-2">
-                <TbWritingSign size={20} />
-                <span>{item.postDate}</span>
-              </div>
-              <div className="h-4 w-0.5 rounded-xl bg-black/50" />
-              <div className="flex items-center justify-center gap-2">
-                <MdDateRange size={20} />
-                <span>{item.postDate}</span>
-              </div>
-            </div>
-
-            <Text size="s" className="line-clamp-3  h-[3.7rem]">
-              {item.article.intro}
-            </Text>
-
-            <Link href={`/blog/${item.id}`} className="w-full">
-              <Button className="h-14 w-full rounded-sm" variant={"outline"}>
-                Read more
-              </Button>
-            </Link>
+          <div key={`${item.id}-blog`}>
+            <Blog blog={item} />
           </div>
         ))}
       </div>
