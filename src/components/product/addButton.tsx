@@ -1,34 +1,16 @@
 "use client";
 import React from "react";
-import { CartProductType, useCartStore } from "@/zustand/cart/cartStore";
+import { type CartProductType, useCartStore } from "@/zustand/cart/cartStore";
 import { Button } from "../ui/button";
 
-export default function AddButton({
-  category,
-  color,
-  id,
-  image,
-  price,
-  productTitle,
-  quantity,
-  tag,
-  status,
-  isSelected,
-}: CartProductType) {
+type Props = {
+  product: CartProductType;
+};
+
+export default function AddButton({ product }: Props) {
   const { addToCart } = useCartStore();
   function handleClick() {
-    addToCart({
-      category,
-      color,
-      id,
-      image,
-      price,
-      productTitle,
-      quantity,
-      tag,
-      status,
-      isSelected,
-    });
+    addToCart(product);
   }
 
   return (

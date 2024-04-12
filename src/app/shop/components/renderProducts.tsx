@@ -6,6 +6,7 @@ import { type ProductType, useShopStore } from "@/zustand/shop/shopStore";
 import { Heading } from "@/components";
 import { VscLoading } from "react-icons/vsc";
 import { MdRunningWithErrors } from "react-icons/md";
+import { scrollToTop } from "@/lib/utils";
 
 type Props = {
   products: ProductType[];
@@ -118,10 +119,7 @@ export default function RenderProducts(props: Props) {
   const handlePaginationClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    scrollToTop();
   };
 
   const PaginationButtons = [];

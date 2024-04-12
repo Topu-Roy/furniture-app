@@ -8,6 +8,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { LucideShoppingCart } from "lucide-react";
 import { ProductType } from "@/zustand/shop/shopStore";
 import AddButton from "./addButton";
+import ButtonWithIcon from "./buttonWithIcon";
 
 export default function Product(props: ProductType) {
   return (
@@ -38,29 +39,49 @@ export default function Product(props: ProductType) {
           <div className="absolute bottom-[3%] left-0 z-20 flex w-full translate-y-[150%] flex-row items-center justify-around gap-2 ring-0 transition-all duration-300 group-hover:translate-y-0">
             {props.price ? (
               <AddButton
-                category={props.category}
-                color={props.color}
-                id={props.id}
-                image={props.image}
-                price={props.price}
-                productTitle={props.productTitle}
-                quantity={1}
-                tag={props.tag}
-                status={props.status}
-                isSelected={false}
+                product={{
+                  ...props,
+                  price: props.price,
+                  quantity: 1,
+                  isSelected: false,
+                }}
               />
             ) : (
-              <Button size="lg" className="rounded-md font-bold">
+              <Button
+                disabled={true}
+                size="lg"
+                className="rounded-md font-bold"
+              >
                 Not Available
               </Button>
             )}
             <div className="flex flex-row items-center justify-between gap-3">
-              <Button className="flex items-center justify-center rounded-full bg-white p-2 text-gray-700 hover:text-white">
-                <LucideShoppingCart size={25} />
-              </Button>
-              <Button className="flex items-center justify-center rounded-full bg-white p-2 text-gray-700 hover:text-white">
-                <FaRegHeart size={25} />
-              </Button>
+              {props.price ? (
+                <ButtonWithIcon
+                  product={{
+                    ...props,
+                    price: props.price,
+                    quantity: 1,
+                    isSelected: false,
+                  }}
+                  role="cart"
+                >
+                  <LucideShoppingCart size={25} />
+                </ButtonWithIcon>
+              ) : null}
+              {props.price ? (
+                <ButtonWithIcon
+                  product={{
+                    ...props,
+                    price: props.price,
+                    quantity: 1,
+                    isSelected: false,
+                  }}
+                  role="favorite"
+                >
+                  <FaRegHeart size={25} />
+                </ButtonWithIcon>
+              ) : null}
             </div>
           </div>
 
