@@ -1,7 +1,7 @@
 import React from "react";
 import { products } from "@/assets/productArray";
-import ThreeDCard from "@/components/3d/ThreeDCard";
-import { Heading, Text } from "@/components";
+import ThreeDCard from "@/components/aceternity/3d/threeDCard";
+import { Heading } from "@/components";
 import { cn } from "@/lib/utils";
 
 export default function CategoryCTA() {
@@ -9,10 +9,19 @@ export default function CategoryCTA() {
   const lamp = products.filter((item) => item.category === "Lamp")[4];
   return (
     <div className="mx-auto w-full max-w-7xl py-14">
-      <Heading size="3xl" className={cn("text-center text-gray-900")}>
-        Find a variety of home furniture's
+      <Heading
+        size="3xl"
+        className={cn("hidden text-center text-gray-900/80 md:block")}
+      >
+        Find a variety of home <br className="lg:hidden" /> furniture's
       </Heading>
-      <div className="flex w-full items-center justify-center gap-8">
+      <Heading
+        size="2xl"
+        className={cn("px-8 text-center text-gray-900/80 md:hidden")}
+      >
+        Find a variety of <br /> home furniture's
+      </Heading>
+      <div className="flex w-full flex-col items-center justify-center gap-2 px-3 py-8 sm:px-0 md:flex-row lg:gap-4">
         <ThreeDCard
           heading="Try new our chairs"
           subHeading="Brand new collection of chairs and modern design."
