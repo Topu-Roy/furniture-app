@@ -1,4 +1,3 @@
-import NewProductCarousel from "./newProductCarousel";
 import ReadBlogSection from "./readBlogSection";
 import OurBenefits from "./ourBenefits";
 import NewArrivals from "./newArrivals";
@@ -11,7 +10,6 @@ export {
   HeroSection,
   BrandsWorkedWith,
   CategoryCTA,
-  NewProductCarousel,
   OurBenefits,
   ReadBlogSection,
   NewArrivals,

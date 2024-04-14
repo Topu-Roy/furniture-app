@@ -7,9 +7,9 @@ import {
   NewArrivals,
   OurBenefits,
   ReadBlogSection,
-  NewProductCarousel,
 } from "./home/exports";
 import { products } from "../../assets/productArray";
+import HomeProductCarousel from "./home/homeProductCarousel";
 
 export default function HomepagePage() {
   return (
@@ -17,7 +17,7 @@ export default function HomepagePage() {
       <HeroSection />
       <BrandsWorkedWith />
       <CategoryCTA />
-      <NewProductCarousel products={products} />
+      <HomeProductCarousel />
       <SecondCTA />
       <NewArrivals products={products} />
       <OurBenefits />
