@@ -12,18 +12,15 @@ interface Props {
 export default function Footer({ className }: Props) {
   return (
     <footer className={cn(`${className} pt-14`)}>
-      <div className="mx-auto flex max-w-7xl items-center justify-center rounded bg-gray-50 bg-gradient pt-10">
+      <div className="bg-gradient mx-auto flex max-w-7xl items-center justify-center rounded bg-gray-50 pt-10">
         <div className="flex w-full flex-1 flex-col items-center justify-center space-y-4 px-10">
           <div className="flex w-full flex-col items-center justify-start gap-2.5">
-            <Heading
-              size="3xl"
-              className="leading-[60px] tracking-[-0.50px] !text-gray-50_01"
-            >
+            <Heading className="!text-gray-50_01 leading-[60px] tracking-[-0.50px]">
               Subscribe now and get 10% off all items
             </Heading>
             <Text
               size="md"
-              className="!leading-[35px] tracking-[-0.50px] !text-gray-50_01"
+              className="!text-gray-50_01 !leading-[35px] tracking-[-0.50px]"
             >
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry&#39;s standard dummy
@@ -59,17 +56,14 @@ export default function Footer({ className }: Props) {
         <div className="mx-auto flex w-[80rem] flex-row gap-4">
           <div className="w-1/2">
             <Link href={"/home"}>
-              <Heading
-                size="3xl"
-                className={cn("tracking-[-0.50px] text-gray-50_01")}
-              >
+              <Heading className={cn("text-gray-50_01 tracking-[-0.50px]")}>
                 Furnit.
               </Heading>
             </Link>
             <Text
               size="md"
               className={cn(
-                "pr-4 !leading-[35px] tracking-[-0.50px] !text-gray-50_a3 opacity-0.81",
+                "!text-gray-50_a3 opacity-0.81 pr-4 !leading-[35px] tracking-[-0.50px]",
               )}
             >
               Lorem ipsum dolor sit amet litam consectetur adipiscing elit,
@@ -77,10 +71,7 @@ export default function Footer({ className }: Props) {
               facilisis condiment tarime egestas rhoncus dapibus iaculis alemir.
             </Text>
             <div className="flex items-center justify-start gap-4 pt-16">
-              <Button
-                color="yellow_100"
-                className="h-10 w-10 rounded-full p-2"
-              >
+              <Button color="yellow_100" className="h-10 w-10 rounded-full p-2">
                 <Image
                   width={50}
                   height={50}
@@ -88,10 +79,7 @@ export default function Footer({ className }: Props) {
                   src="images/img_bxl_instagram.svg"
                 />
               </Button>
-              <Button
-                color="yellow_100"
-                className="h-10 w-10 rounded-full p-2"
-              >
+              <Button color="yellow_100" className="h-10 w-10 rounded-full p-2">
                 <Image
                   width={50}
                   height={50}
@@ -99,10 +87,7 @@ export default function Footer({ className }: Props) {
                   src="images/img_bxl_facebook.svg"
                 />
               </Button>
-              <Button
-                color="yellow_100"
-                className="h-10 w-10 rounded-full p-2"
-              >
+              <Button color="yellow_100" className="h-10 w-10 rounded-full p-2">
                 <Image
                   width={50}
                   height={50}
@@ -110,10 +95,7 @@ export default function Footer({ className }: Props) {
                   src="images/img_bxl_twitter.svg"
                 />
               </Button>
-              <Button
-                color="yellow_100"
-                className="h-10 w-10 rounded-full p-2"
-              >
+              <Button color="yellow_100" className="h-10 w-10 rounded-full p-2">
                 <Image
                   width={50}
                   height={50}
@@ -125,14 +107,12 @@ export default function Footer({ className }: Props) {
           </div>
           <div className="flex flex-1 flex-row pt-16">
             <div className="flex-1">
-              <Heading size="lg" className={cn("pb-4 text-white/70")}>
-                Customer
-              </Heading>
+              <Heading className={cn("pb-4 text-white/70")}>Customer</Heading>
               <div className="space-y-3">
                 <Text
                   size="md"
                   className={cn(
-                    "tracking-[-0.50px] text-white/60 opacity-0.81",
+                    "opacity-0.81 tracking-[-0.50px] text-white/60",
                   )}
                 >
                   <Link href={"/"}>Order Status</Link>
@@ -140,7 +120,7 @@ export default function Footer({ className }: Props) {
                 <Text
                   size="md"
                   className={cn(
-                    "tracking-[-0.50px] text-white/60 opacity-0.81",
+                    "opacity-0.81 tracking-[-0.50px] text-white/60",
                   )}
                 >
                   <Link href={"/"}>Collections</Link>
@@ -148,7 +128,7 @@ export default function Footer({ className }: Props) {
                 <Text
                   size="md"
                   className={cn(
-                    "tracking-[-0.50px] text-white/60 opacity-0.81",
+                    "opacity-0.81 tracking-[-0.50px] text-white/60",
                   )}
                 >
                   <Link href={"/"}>Our Story</Link>
@@ -156,7 +136,7 @@ export default function Footer({ className }: Props) {
                 <Text
                   size="md"
                   className={cn(
-                    "tracking-[-0.50px] text-white/60 opacity-0.81",
+                    "opacity-0.81 tracking-[-0.50px] text-white/60",
                   )}
                 >
                   <Link href={"/"}>Affiliates</Link>
@@ -164,7 +144,7 @@ export default function Footer({ className }: Props) {
                 <Text
                   size="md"
                   className={cn(
-                    "tracking-[-0.50px] text-white/60 opacity-0.81",
+                    "opacity-0.81 tracking-[-0.50px] text-white/60",
                   )}
                 >
                   <Link href={"/"}>Security</Link>
@@ -172,14 +152,14 @@ export default function Footer({ className }: Props) {
               </div>
             </div>
             <div className="flex-1">
-              <Heading size="lg" className={cn("pb-4 text-white/70")}>
+              <Heading className={cn("pb-4 text-white/70")}>
                 Information
               </Heading>
               <div className="space-y-3">
                 <Text
                   size="md"
                   className={cn(
-                    "tracking-[-0.50px] text-white/60 opacity-0.81",
+                    "opacity-0.81 tracking-[-0.50px] text-white/60",
                   )}
                 >
                   <Link href={"/"}>Customer Service</Link>
@@ -188,7 +168,7 @@ export default function Footer({ className }: Props) {
                 <Text
                   size="md"
                   className={cn(
-                    "tracking-[-0.50px] text-white/60 opacity-0.81",
+                    "opacity-0.81 tracking-[-0.50px] text-white/60",
                   )}
                 >
                   <Link href={"/"}>Careers</Link>
@@ -197,7 +177,7 @@ export default function Footer({ className }: Props) {
                 <Text
                   size="md"
                   className={cn(
-                    "tracking-[-0.50px] text-white/60 opacity-0.81",
+                    "opacity-0.81 tracking-[-0.50px] text-white/60",
                   )}
                 >
                   <Link href={"/"}>FAQ</Link>
@@ -212,14 +192,14 @@ export default function Footer({ className }: Props) {
         <div className="flex w-auto flex-row justify-between gap-3 pr-[3px]">
           <Text
             size="md"
-            className={cn("tracking-[-0.50px] text-white/65 opacity-0.81")}
+            className={cn("opacity-0.81 tracking-[-0.50px] text-white/65")}
           >
             © Copyright 2022. All Rights Reserved
           </Text>
           <Text
             size="md"
             className={cn(
-              "mb-px tracking-[-0.50px] text-white/65 opacity-0.81",
+              "opacity-0.81 mb-px tracking-[-0.50px] text-white/65",
             )}
           >
             |
@@ -227,7 +207,7 @@ export default function Footer({ className }: Props) {
           <Text
             size="md"
             className={cn(
-              "mb-px tracking-[-0.50px] text-white/65 opacity-0.81",
+              "opacity-0.81 mb-px tracking-[-0.50px] text-white/65",
             )}
           >
             <Link href={"/"}>Terms of condition</Link>
@@ -235,7 +215,7 @@ export default function Footer({ className }: Props) {
           <Text
             size="md"
             className={cn(
-              "mb-px tracking-[-0.50px] text-white/65 opacity-0.81",
+              "opacity-0.81 mb-px tracking-[-0.50px] text-white/65",
             )}
           >
             |
@@ -243,7 +223,7 @@ export default function Footer({ className }: Props) {
           <Text
             size="md"
             className={cn(
-              "mb-px tracking-[-0.50px] text-white/65 opacity-0.81",
+              "opacity-0.81 mb-px tracking-[-0.50px] text-white/65",
             )}
           >
             <Link href={"/"}>Privacy Policy</Link>
