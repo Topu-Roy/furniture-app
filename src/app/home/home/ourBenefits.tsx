@@ -1,87 +1,74 @@
 import Image from "next/image";
 import React from "react";
 import { Heading, Text } from "@/components";
+import { BiRocket } from "react-icons/bi";
+import { MdOutlineLock } from "react-icons/md";
+import { GrPowerReset } from "react-icons/gr";
+import { IoCallOutline } from "react-icons/io5";
 
 export default function OurBenefits() {
+  const features = [
+    {
+      id: 1,
+      title: "Fast Shipping",
+      icon: <BiRocket size={26} className="text-black/60" />,
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has",
+    },
+    {
+      id: 2,
+      title: "Safe Delivery",
+      icon: <MdOutlineLock size={26} className="text-black/60" />,
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has",
+    },
+    {
+      id: 3,
+      title: "365 Days Return",
+      icon: <GrPowerReset size={26} className="text-black/60" />,
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has",
+    },
+    {
+      id: 4,
+      title: "24 hours CS",
+      icon: <IoCallOutline size={26} className="text-black/60" />,
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has",
+    },
+  ];
+
   return (
     <div className="w-full bg-gray-50">
-      <div className="mx-auto flex flex-row justify-center py-20">
-        <div className="flex w-full max-w-[1290px] flex-row justify-between">
-          <div className="flex w-[47%] flex-col items-center justify-start gap-[50px]">
-            <Heading size="3xl" className="leading-[60px] tracking-[-0.50px]">
+      <div className="mx-auto flex max-w-7xl flex-row justify-center py-14 md:py-20">
+        <div className="flex w-full flex-row justify-between">
+          <div className="flex w-full flex-col items-center justify-start gap-[50px] px-2 sm:px-4 lg:flex-1">
+            <Heading size="2xl" className="px-8 text-center md:hidden">
               We guarantee the safety of your shopping
             </Heading>
-            <div className="grid min-h-[auto] w-full grid-cols-2 justify-center gap-[50px]">
-              <div className="flex w-full flex-col items-start justify-start gap-10">
-                <Image
-                  width={50}
-                  height={50}
-                  src="/images/img_icon.svg"
-                  alt="fast_shipping"
-                  className="h-[60px]"
-                />
-                <div className="flex w-full flex-col items-start justify-start gap-[9px]">
-                  <Heading className="tracking-[-0.50px]">
-                    Fast Shipping
-                  </Heading>
-                  <Text className="leading-[25px] tracking-[-0.50px] !text-gray-500">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry Lorem Ipsum has{" "}
-                  </Text>
+            <Heading
+              size="3xl"
+              className="hidden leading-[60px] tracking-[-0.50px] md:block"
+            >
+              We guarantee the safety of your shopping
+            </Heading>
+            <div className="grid min-h-[auto] w-full grid-cols-2 justify-center gap-1.5">
+              {features.map((item) => (
+                <div
+                  key={`${item.id}-features`}
+                  className="flex w-full flex-col items-start justify-start gap-10 rounded-md bg-slate-300/50 p-4"
+                >
+                  {item.icon}
+                  <div className="flex w-full flex-col items-start justify-start gap-[9px]">
+                    <Heading className="tracking-[-0.50px]">
+                      {item.title}
+                    </Heading>
+                    <Text className="leading-[25px] tracking-[-0.50px] !text-gray-500">
+                      {item.description}
+                    </Text>
+                  </div>
                 </div>
-              </div>
-              <div className="flex w-full flex-col items-start justify-start gap-10">
-                <Image
-                  width={50}
-                  height={50}
-                  src="/images/img_icon_gray_50_01.svg"
-                  alt="icon_one"
-                  className="h-[60px]"
-                />
-                <div className="flex w-full flex-col items-start justify-start gap-[9px]">
-                  <Heading className="tracking-[-0.50px]">
-                    Safe Delivery
-                  </Heading>
-                  <Text className="leading-[25px] tracking-[-0.50px] !text-gray-500">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry Lorem Ipsum has{" "}
-                  </Text>
-                </div>
-              </div>
-              <div className="flex w-full flex-col items-start justify-start gap-10">
-                <Image
-                  width={50}
-                  height={50}
-                  src="/images/img_icon_gray_50_01_60x63.svg"
-                  alt="icon_one"
-                  className="h-[60px]"
-                />
-                <div className="flex w-full flex-col items-start justify-start gap-2 pt-0.5">
-                  <Heading className="tracking-[-0.50px]">
-                    365 Days Return
-                  </Heading>
-                  <Text className="leading-[25px] tracking-[-0.50px] !text-gray-500">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry Lorem Ipsum has{" "}
-                  </Text>
-                </div>
-              </div>
-              <div className="flex w-full flex-col items-start justify-start gap-10">
-                <Image
-                  width={50}
-                  height={50}
-                  src="/images/img_icon_60x63.svg"
-                  alt="icon_one"
-                  className="h-[60px]"
-                />
-                <div className="flex w-full flex-col items-start justify-start gap-2.5">
-                  <Heading className="tracking-[-0.50px]">24 hours CS</Heading>
-                  <Text className="leading-[25px] tracking-[-0.50px] !text-gray-500">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry Lorem Ipsum has{" "}
-                  </Text>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           <Image
@@ -89,7 +76,7 @@ export default function OurBenefits() {
             width={1000}
             src="/images/img_rectangle_16.png"
             alt="image_one"
-            className="w-[47%] object-cover"
+            className="hidden w-[47%] object-cover lg:block"
           />
         </div>
       </div>
