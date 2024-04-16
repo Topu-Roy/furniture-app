@@ -5,39 +5,15 @@ import Link from "next/link";
 
 export default function Copyright() {
   return (
-    <div className="flex w-full flex-row items-center justify-center border-t border-white/40 bg-black py-4">
-      <div className="flex w-auto flex-row justify-between gap-3 pr-[3px]">
-        <Text
-          size="md"
-          className={cn("opacity-0.81 tracking-[-0.50px] text-white/65")}
-        >
+    <>
+      <div className="w-full bg-gray-950">
+        <div className="mx-auto h-px w-[90%] bg-white/10" />
+      </div>
+      <div className="flex w-full flex-row items-center justify-center bg-gray-950 py-4">
+        <Text size="s" className="text-white/40">
           © Copyright 2022. All Rights Reserved
         </Text>
-        <Text
-          size="md"
-          className={cn("opacity-0.81 mb-px tracking-[-0.50px] text-white/65")}
-        >
-          |
-        </Text>
-        <Text
-          size="md"
-          className={cn("opacity-0.81 mb-px tracking-[-0.50px] text-white/65")}
-        >
-          <Link href={"/"}>Terms of condition</Link>
-        </Text>
-        <Text
-          size="md"
-          className={cn("opacity-0.81 mb-px tracking-[-0.50px] text-white/65")}
-        >
-          |
-        </Text>
-        <Text
-          size="md"
-          className={cn("opacity-0.81 mb-px tracking-[-0.50px] text-white/65")}
-        >
-          <Link href={"/"}>Privacy Policy</Link>
-        </Text>
       </div>
-    </div>
+    </>
   );
 }

@@ -7,6 +7,7 @@ import { FaSquareInstagram } from "react-icons/fa6";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaTiktok } from "react-icons/fa";
+import { Button } from "../ui/button";
 
 export default function FooterLinks() {
   const footerData = [
@@ -40,6 +41,14 @@ export default function FooterLinks() {
       links: [
         {
           name: "Customer Service",
+          url: "#",
+        },
+        {
+          name: "Terms of condition",
+          url: "#",
+        },
+        {
+          name: "Privacy Policy",
           url: "#",
         },
         {
@@ -78,18 +87,25 @@ export default function FooterLinks() {
   ];
 
   return (
-    <div className="mt-14 w-full bg-gray-900 py-10 lg:py-16">
-      <div className="mx-auto flex max-w-7xl flex-row gap-4">
-        <div className="w-1/2">
-          <Link href={"/home"}>
-            <Heading className={cn("text-primary")}>Furnit.</Heading>
-          </Link>
-          <Text size="s" muted={true} className="">
-            Lorem ipsum dolor sit amet litam consectetur adipiscing elit,
-            facilisi vivamus proin lit laoreet phasel alilus porttitor inter,
-            facilisis condiment tarime egestas rhoncus dapibus iaculis alemir.
-          </Text>
-          <div className="flex items-center justify-start gap-4 pt-16">
+    <div className="mt-14 w-full bg-gray-950 py-10 lg:py-16">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row">
+        <div className="w-full space-y-8 pb-4 md:w-1/2 md:pb-0 lg:pl-8 2xl:pl-0">
+          <div className="mx-auto space-y-2 px-2 text-center md:pr-14 lg:px-0 lg:text-left">
+            <Link href={"/home"}>
+              <Heading className="text-primary">Furnit.</Heading>
+            </Link>
+            <Text size="md" muted={true} className="sm:px-8 md:px-4 lg:px-0">
+              Lorem ipsum dolor sit amet litam consectetur adipiscing elit,
+              facilisi vivamus proin lit laoreet phasel alilus porttitor inter,
+              facilisis condiment tarime egestas rhoncus dapibus iaculis alemir.
+            </Text>
+            <div className="mt-4">
+              <Link href={"/shop"}>
+                <Button variant={"secondary"}>View furniture's</Button>
+              </Link>
+            </div>
+          </div>
+          <div className="flex w-full items-center justify-center gap-4 lg:justify-start">
             {socialLinks.map((item) => (
               <Link
                 key={item.name}
@@ -102,9 +118,11 @@ export default function FooterLinks() {
           </div>
         </div>
 
-        <div className="flex flex-1 flex-row">
+        <div className="mx-auto h-px w-[90%] bg-white/10 md:hidden" />
+
+        <div className="flex flex-1 flex-row px-4 pt-8">
           {footerData.map((item) => (
-            <div key={item.headline} className="flex-1">
+            <div key={item.headline} className="flex-1 text-center">
               <Text size="xl" className={cn("pb-4 text-white/70")}>
                 {item.headline}
               </Text>
@@ -117,7 +135,9 @@ export default function FooterLinks() {
                       "opacity-0.81 tracking-[-0.50px] text-white/60",
                     )}
                   >
-                    <Link href={link.url}>{link.name}</Link>
+                    <Link href={link.url}>
+                      <span className="hover:underline">{link.name}</span>
+                    </Link>
                   </Text>
                 ))}
               </div>
