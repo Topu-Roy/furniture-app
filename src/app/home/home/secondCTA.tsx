@@ -2,36 +2,46 @@ import React from "react";
 import { Heading, Text } from "@/components";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { poppins } from "@/styles/font";
 
 export default function SecondCTA() {
   return (
-    <div className="w-full bg-yellow-100 py-10">
-      <div className="mx-auto flex w-[80rem] items-center justify-center">
-        <div className="m-auto flex w-full flex-row justify-between p-4">
-          <div className="flex h-full w-[535px] flex-col items-center justify-start">
+    <div className="w-full bg-yellow-100/80 py-10">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-center">
+        <div className="m-auto flex w-full flex-col justify-between p-4 md:flex-row">
+          <div className="mx-auto flex h-full w-[70%] flex-col items-center justify-start md:my-auto md:w-[40%]">
             <Image
               src="/images/white-sofa.png"
               height={1380}
               width={1230}
-              alt="insideweather"
+              alt="white sofa"
               className="object-cover"
             />
           </div>
-          <div className="my-auto mb-[95px] ml-[61px] flex w-[38%] flex-col items-start justify-center gap-[30px]">
-            <div className="flex w-full flex-col items-start justify-start gap-[17px]">
+          <div className="my-auto flex w-full flex-col items-start justify-center gap-4 pt-8 md:w-[60%] md:px-8 md:pt-0 lg:w-[45%]">
+            <div className="flex w-full flex-col items-center justify-start gap-4 md:items-start">
               <Text
-                size="lg"
-                className="!text-blue_gray-900_01 tracking-[-0.50px]"
+                size="s"
+                className={`${poppins.className} rounded-full bg-secondary/40 p-1 px-2 tracking-[-0.50px] shadow-md sm:mb-4`}
               >
                 Interior Modern
               </Text>
-              <Heading size="3xl" className="leading-[60px] tracking-[-0.50px]">
+              <Heading size="2xl" className="hidden md:block">
+                Arrange your home in such a way with our modern interiors
+              </Heading>
+              <Heading size="lg" className="w-full text-center md:hidden">
                 Arrange your home in such a way with our modern interiors
               </Heading>
             </div>
             <Button
+              size="6xl"
+              className="mx-auto font-medium transition-all duration-100 hover:scale-105 md:mx-0 lg:hidden"
+            >
+              Shop Now
+            </Button>
+            <Button
               size="9xl"
-              className="min-w-[218px] font-medium tracking-[-0.50px] transition-all duration-100 hover:scale-105"
+              className="hidden font-medium transition-all duration-100 hover:scale-105 lg:block"
             >
               Shop Now
             </Button>
