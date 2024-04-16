@@ -85,7 +85,10 @@ export default function FilterByPrice() {
 
   return (
     <div className="flex flex-col gap-4">
-      <HeadingAndReset title="Filter By Price" handleReset={handleReset} />
+      <HeadingAndReset
+        title="Filter By Price"
+        handleReset={handleReset}
+      />
       <div className="flex flex-row items-center justify-center gap-1">
         <div className="flex items-center justify-center gap-2 border-[1px] border-black bg-gray-50 pl-1.5 ">
           <span className="">Min $:</span>

@@ -20,13 +20,11 @@ export default function promoCTA() {
               <div className="absolute bottom-0 left-[5%] top-0 m-auto flex h-max w-[37%] flex-col items-start justify-start gap-[30px]">
                 <div className="flex w-full flex-col items-start justify-start gap-[15px]">
                   <Heading
-                    size="md"
                     className="tracking-[-0.50px] !text-yellow-100"
                   >
                     Best Room Decor Items
                   </Heading>
                   <Heading
-                    size="3xl"
                     className="!text-white-A700 leading-[60px] tracking-[-0.50px]"
                   >
                     Our goods have the best quality and materials in the world

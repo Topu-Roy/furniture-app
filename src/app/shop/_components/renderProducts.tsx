@@ -1,5 +1,4 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Product from "@/components/product/productCard";
 import { Button } from "@/components/ui/button";
 import { type ProductType, useShopStore } from "@/zustand/shop/shopStore";
@@ -10,6 +9,7 @@ import { scrollToTop } from "@/lib/utils";
 
 type Props = {
   products: ProductType[];
+  setSheetOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function RenderProducts(props: Props) {
@@ -90,6 +90,8 @@ export default function RenderProducts(props: Props) {
       );
     }
 
+    props.setSheetOpen((prev) => (prev === true ? !prev : prev)); //* Close the side panel whenever any filtering is done
+
     setFilteredProducts(tempFilteredProducts);
     setCurrentPage(1);
   }, [
@@ -141,7 +143,7 @@ export default function RenderProducts(props: Props) {
       // loading
       return (
         <div className="col-span-3 flex w-full flex-col items-center justify-center gap-4 pt-14">
-          <Heading size="lg">Hold Tight, Products are loading...</Heading>
+          <Heading>Hold Tight, Products are loading...</Heading>
           <VscLoading className="animate-spin p-2 text-gray-700" size={20} />
         </div>
       );
@@ -151,7 +153,7 @@ export default function RenderProducts(props: Props) {
       return (
         <div className="col-span-3 flex w-full flex-col items-center justify-center gap-4 pt-14">
           <MdRunningWithErrors className="p-2 text-gray-700" size={20} />
-          <Heading size="lg">Oops! No products found...</Heading>
+          <Heading>Oops! No products found...</Heading>
           <Button onClick={handleResetAll} variant={"outline"}>
             Reset all filters
           </Button>
@@ -187,7 +189,7 @@ export default function RenderProducts(props: Props) {
 
   return (
     <div className="w-full">
-      <div className="grid h-full min-h-[auto] w-full grid-cols-3 justify-center gap-5">
+      <div className="grid h-full w-full grid-cols-2 justify-center gap-2 md:grid-cols-3 md:gap-3">
         <Products />
       </div>
       <div className="flex w-full flex-row items-center justify-center gap-2 pt-4">

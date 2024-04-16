@@ -1,5 +1,7 @@
 import { Heading } from "@/components";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { poppins } from "@/styles/font";
 import React from "react";
 import { GrPowerReset } from "react-icons/gr";
 
@@ -11,7 +13,11 @@ type props = {
 export default function HeadingAndReset(props: props) {
   return (
     <div className="flex w-full flex-row items-center justify-between gap-2">
-      <Heading>{props.title}</Heading>
+      <h3
+        className={cn("text-xl font-bold text-gray-900/80", poppins.className)}
+      >
+        {props.title}
+      </h3>
       <Button
         variant={"outline"}
         className="rounded-full p-2"
