@@ -1,15 +1,13 @@
 import React from "react";
-import {
-  HeroSection,
-  CategoryCTA,
-  BrandsWorkedWith,
-  SecondCTA,
-  NewArrivals,
-  OurBenefits,
-  ReadBlogSection,
-} from "./home/exports";
 import { products } from "../../assets/productArray";
 import HomeProductCarousel from "./home/homeProductCarousel";
+import HeroSection from "./home/heroSection";
+import SecondCTA from "../aboutUs/secondCTA";
+import BrandsWorkedWith from "./home/brandsWorkedWith";
+import CategoryCTA from "./home/categoryCTA";
+import NewArrivals from "./home/newArrivals";
+import OurBenefits from "./home/ourBenefits";
+import ReadBlogSection from "./home/readBlogSection";
 
 export default function HomepagePage() {
   return (
