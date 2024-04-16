@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import { blogPosts } from "../blogPostArray";
-import { Heading, Text } from "@/components";
 import RecommendedBlogs from "./recommendedBlogs";
+import { Heading } from "@/app/_components/heading";
+import { Text } from "@/app/_components/text";
 
 export default function BlogDetails({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -29,9 +30,7 @@ export default function BlogDetails({ params }: { params: { id: string } }) {
           />
         </div>
 
-        <Heading size="3xl" className="my-4 pt-2">
-          {blog.headline}
-        </Heading>
+        <Heading className="my-4 pt-2">{blog.headline}</Heading>
 
         <div className="flex items-center justify-start gap-4 py-2">
           <Image
@@ -72,9 +71,7 @@ export default function BlogDetails({ params }: { params: { id: string } }) {
 
         <div className="mx-auto my-16 h-[2px] w-[50%] bg-black/30" />
 
-        <Heading size="xl" className="mt-4 pb-8 text-center">
-          You might also like
-        </Heading>
+        <Heading className="mt-4 pb-8 text-center">You might also like</Heading>
         <RecommendedBlogs currentBlogId={blog.id} blogs={blogPosts} />
       </div>
     </div>

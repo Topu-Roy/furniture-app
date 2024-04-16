@@ -1,13 +1,13 @@
 import React from "react";
 import { products } from "../../assets/productArray";
-import HomeProductCarousel from "./home/homeProductCarousel";
-import HeroSection from "./home/heroSection";
-import BrandsWorkedWith from "./home/brandsWorkedWith";
-import CategoryCTA from "./home/categoryCTA";
-import NewArrivals from "./home/newArrivals";
-import OurBenefits from "./home/ourBenefits";
-import ReadBlogSection from "./home/readBlogSection";
-import SecondCTA from "./home/secondCTA";
+import BrandsWorkedWith from "./_components/brandsWorkedWith";
+import CategoryCTA from "./_components/categoryCTA";
+import HeroSection from "./_components/heroSection";
+import HomeProductCarousel from "./_components/homeProductCarousel";
+import NewArrivals from "./_components/newArrivals";
+import OurBenefits from "./_components/ourBenefits";
+import ReadBlogSection from "./_components/readBlogSection";
+import SecondCTA from "./_components/secondCTA";
 
 export default function HomepagePage() {
   return (

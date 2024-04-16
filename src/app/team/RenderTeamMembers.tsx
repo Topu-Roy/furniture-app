@@ -1,8 +1,7 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import React from "react";
-import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { FaFacebookF, FaGithub } from "react-icons/fa6";
 import { IoLogoWhatsapp } from "react-icons/io";
 

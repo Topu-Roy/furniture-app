@@ -1,13 +1,14 @@
 import React from "react";
-import { Text, Heading } from "../../components";
-import RenderBlogs from "./RenderBlogs";
+import RenderBlogs from "./_components/RenderBlogs";
 import { blogPosts } from "./blogPostArray";
+import { Heading } from "../_components/heading";
+import { Text } from "../_components/text";
 
 export default function BlogPage() {
   return (
     <div className="mt-[5rem] bg-gray-50 pt-8">
       <div className="flex w-full flex-col items-center justify-start gap-2 pt-1">
-        <Heading size="3xl" className="text-center tracking-[-0.50px]">
+        <Heading className="text-center tracking-[-0.50px]">
           Read Our Latest Blog
         </Heading>
         <Text

@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import Product from "@/components/product/productCard";
-import { Button } from "@/components/ui/button";
+import { scrollToTop } from "@/lib/utils";
 import { type ProductType, useShopStore } from "@/zustand/shop/shopStore";
-import { Heading } from "@/components";
+import Product from "@/app/_components/product/productCard";
+import { Button } from "@/components/ui/button";
 import { VscLoading } from "react-icons/vsc";
 import { MdRunningWithErrors } from "react-icons/md";
-import { scrollToTop } from "@/lib/utils";
+import { Heading } from "@/app/_components/heading";
 
 type Props = {
   products: ProductType[];

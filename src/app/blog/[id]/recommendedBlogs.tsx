@@ -1,6 +1,6 @@
 import React from "react";
 import { type BlogType } from "../blogPostArray";
-import Blog from "../blog";
+import Blog from "../_components/blog";
 
 type Props = {
   currentBlogId: number;

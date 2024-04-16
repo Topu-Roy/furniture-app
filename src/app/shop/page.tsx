@@ -1,11 +1,9 @@
 import React from "react";
-import {
-  ColorSelector,
-  Catagories,
-  FilterByPrice,
-  ProductTag,
-  Products,
-} from "./_components";
+import Catagories from "./_components/catagories";
+import ColorSelector from "./_components/colorSelector";
+import FilterByPrice from "./_components/filterByPrice";
+import ProductTag from "./_components/productTag";
+import Products from "./_components/products";
 
 export default function ShopPage() {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import { Heading } from "@/components";
 import { Button } from "@/components/ui/button";
+import { Heading } from "@/app/_components/heading";
 
 export default function promoCTA() {
   return (

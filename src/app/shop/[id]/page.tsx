@@ -1,9 +1,9 @@
 import React from "react";
 import { products } from "@/assets/productArray";
 import { ProductType } from "@/zustand/shop/shopStore";
-import RenderProduct from "./renderProduct";
-import DetailsAndReview from "./detailsAndReview";
-import RelatedProductCarousel from "./relatedProductCarousel";
+import RenderProduct from "./_components/renderProduct";
+import DetailsAndReview from "./_components/detailsAndReview";
+import RelatedProductCarousel from "./_components/relatedProductCarousel";
 
 export default function ProductDetails({ params }: { params: { id: string } }) {
   const productID = parseInt(params.id);

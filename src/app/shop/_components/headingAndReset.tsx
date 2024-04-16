@@ -1,8 +1,7 @@
-import { Heading } from "@/components";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { poppins } from "@/styles/font";
 import React from "react";
+import { poppins } from "@/styles/font";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { GrPowerReset } from "react-icons/gr";
 
 type props = {

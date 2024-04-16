@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Text } from "@/components";
-import { Button } from "@/components/ui/button";
-import { Category, useShopStore } from "@/zustand/shop/shopStore";
 import { cn, scrollToTop } from "@/lib/utils";
+import { Category, useShopStore } from "@/zustand/shop/shopStore";
 import HeadingAndReset from "./headingAndReset";
+import { Button } from "@/components/ui/button";
+import { Text } from "@/app/_components/text";
 
 type ProductCatagoriesType = {
   productName: Category;

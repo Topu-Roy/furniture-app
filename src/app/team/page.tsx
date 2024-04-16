@@ -1,11 +1,12 @@
-import { Heading, Text } from "@/components";
+import { Heading } from "../_components/heading";
+import { Text } from "../_components/text";
 import { teamMembers } from "../aboutUs/teamMembersArray";
 import RenderTeamMembers from "./RenderTeamMembers";
 
 export default function TeamPage() {
   return (
     <div className="mt-[5rem] bg-stone-200 pt-10">
-      <Heading size="3xl" className="text-center tracking-[-0.50px]">
+      <Heading className="text-center tracking-[-0.50px]">
         Meet Our Team
       </Heading>
       <Text
