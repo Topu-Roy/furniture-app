@@ -2,29 +2,40 @@ import React from "react";
 import { Heading } from "@/components";
 import { type ProductType } from "@/zustand/shop/shopStore";
 import Product from "@/components/product/productCard";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 type props = {
   products: ProductType[];
 };
 
 export default function NewArrivals(props: props) {
-  const newProducts = props.products.filter((item) => item.status === "new");
-  const newProductsOne = newProducts.slice(0, 4);
-  const newProductsTwo = newProducts.slice(5, 9);
+  const AllNewProducts = props.products.filter((item) => item.status === "new");
+  const newProductsMobile = AllNewProducts.slice(0, 4);
+  const newProductsTablet = AllNewProducts.slice(0, 6);
+  const newProductsDesktop = AllNewProducts.slice(0, 8);
+  const newProductsWideScreen = AllNewProducts.slice(0, 10);
 
   return (
     <div className="flex w-full items-center justify-center py-20">
-      <div className="flex w-[80rem] flex-row justify-center">
-        <div className="flex w-full max-w-[1290px] flex-col items-center justify-start gap-[67px]">
+      <div className="flex max-w-7xl flex-row justify-center">
+        <div className="flex w-full flex-col items-center justify-start gap-[67px]">
           <Heading
             size="2xl"
-            className="text-center tracking-[-0.50px] !text-blue_gray-900_01"
+            className="!text-blue_gray-900_01 text-center tracking-[-0.50px]"
           >
             New Arrival
           </Heading>
-          <div className="flex w-full flex-col gap-[47px]">
-            <div className="flex w-full flex-row justify-start gap-[19px]">
-              {newProductsOne.map((item) => (
+
+          <div className="relative flex w-full flex-col gap-7">
+            <Link
+              href={`/shop`}
+              className="absolute -top-14 right-4 z-40 md:right-0"
+            >
+              <Button variant={"ghost"}>View All</Button>
+            </Link>
+            <div className="flex w-full flex-row flex-wrap justify-center gap-4 md:hidden">
+              {newProductsMobile.map((item) => (
                 <Product
                   id={item.id}
                   category={item.category}
@@ -33,14 +44,14 @@ export default function NewArrivals(props: props) {
                   price={item.price}
                   productTitle={item.productTitle}
                   tag={item.tag}
-                  className={item.className}
+                  className={"max-w-[45%]"}
                   key={item.productTitle + item.tag}
                   status={item.status}
                 />
               ))}
             </div>
-            <div className="flex w-full flex-row gap-[19px]">
-              {newProductsTwo.map((item) => (
+            <div className="hidden w-full flex-row flex-wrap justify-center gap-4 md:flex lg:hidden">
+              {newProductsTablet.map((item) => (
                 <Product
                   id={item.id}
                   category={item.category}
@@ -49,7 +60,39 @@ export default function NewArrivals(props: props) {
                   price={item.price}
                   productTitle={item.productTitle}
                   tag={item.tag}
-                  className={item.className}
+                  className={"max-w-[31%]"}
+                  key={item.productTitle + item.tag}
+                  status={item.status}
+                />
+              ))}
+            </div>
+            <div className="hidden w-full flex-row flex-wrap justify-center gap-4 lg:flex xl:hidden">
+              {newProductsDesktop.map((item) => (
+                <Product
+                  id={item.id}
+                  category={item.category}
+                  color={item.color}
+                  image={item.image}
+                  price={item.price}
+                  productTitle={item.productTitle}
+                  tag={item.tag}
+                  className={"max-w-[23%]"}
+                  key={item.productTitle + item.tag}
+                  status={item.status}
+                />
+              ))}
+            </div>
+            <div className="hidden w-full flex-row flex-wrap justify-center gap-4 xl:flex">
+              {newProductsWideScreen.map((item) => (
+                <Product
+                  id={item.id}
+                  category={item.category}
+                  color={item.color}
+                  image={item.image}
+                  price={item.price}
+                  productTitle={item.productTitle}
+                  tag={item.tag}
+                  className={"max-w-[15rem]"}
                   key={item.productTitle + item.tag}
                   status={item.status}
                 />

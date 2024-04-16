@@ -29,7 +29,10 @@ export default function SecondCTA() {
               <Heading size="2xl" className="hidden md:block">
                 Arrange your home in such a way with our modern interiors
               </Heading>
-              <Heading size="lg" className="w-full text-center md:hidden">
+              <Heading
+                size="lg"
+                className="w-full px-4 text-center sm:px-20 md:hidden"
+              >
                 Arrange your home in such a way with our modern interiors
               </Heading>
             </div>
