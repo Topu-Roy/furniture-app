@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Chip from "./chip";
-import { Text } from "@/components";
 import UpdateQuantity from "./updateQuantity";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -21,6 +20,7 @@ import {
 } from "react-icons/io5";
 import { CartProductType, useCartStore } from "@/zustand/cart/cartStore";
 import { cn } from "@/lib/utils";
+import { Text } from "@/app/_components/text";
 
 type Props = {
   products: CartProductType[];
