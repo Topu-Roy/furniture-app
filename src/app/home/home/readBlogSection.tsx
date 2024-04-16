@@ -7,12 +7,9 @@ export default function ReadBlogSection() {
   const blogs = blogPosts.slice(0, 3);
 
   return (
-    <div className="py-10">
+    <div className="bg-white py-10">
       <div className="flex w-full flex-col items-center justify-start gap-4 p-1">
-        <Heading
-          size="3xl"
-          className="text-center !font-semibold tracking-[-0.50px]"
-        >
+        <Heading className="text-center !font-semibold tracking-[-0.50px]">
           Read Our Latest Blog
         </Heading>
         <Text

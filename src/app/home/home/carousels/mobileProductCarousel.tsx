@@ -83,7 +83,7 @@ export default function MobileProductCarousel(props: props) {
       </CarouselContent>
       <CarouselPrevious />
       <CarouselNext />
-      <div className="flex items-center justify-center gap-2 bg-gray-200 py-4">
+      <div className="flex items-center justify-center gap-2 py-4">
         <div className="flex items-center justify-center gap-2 py-2 text-center text-sm text-muted-foreground">
           {pageNumbers}
         </div>

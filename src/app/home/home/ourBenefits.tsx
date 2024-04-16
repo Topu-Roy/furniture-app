@@ -39,20 +39,14 @@ export default function OurBenefits() {
   ];
 
   return (
-    <div className="w-full bg-gray-50">
-      <div className="mx-auto flex max-w-7xl flex-row justify-center py-14 md:py-20">
-        <div className="flex w-full flex-row justify-between">
+    <div className="w-full">
+      <div className="mx-auto max-w-7xl py-14 md:py-20">
+        <Heading className="pb-10 text-center">
+          We guarantee the safety of your shopping
+        </Heading>
+        <div className="flex h-full w-full flex-row justify-between px-2">
           <div className="flex w-full flex-col items-center justify-start gap-[50px] px-2 sm:px-4 lg:flex-1">
-            <Heading size="2xl" className="px-8 text-center md:hidden">
-              We guarantee the safety of your shopping
-            </Heading>
-            <Heading
-              size="3xl"
-              className="hidden leading-[60px] tracking-[-0.50px] md:block"
-            >
-              We guarantee the safety of your shopping
-            </Heading>
-            <div className="grid min-h-[auto] w-full grid-cols-2 justify-center gap-1.5">
+            <div className="grid h-full w-full grid-cols-2 justify-center gap-1.5">
               {features.map((item) => (
                 <div
                   key={`${item.id}-features`}
@@ -60,9 +54,12 @@ export default function OurBenefits() {
                 >
                   {item.icon}
                   <div className="flex w-full flex-col items-start justify-start gap-[9px]">
-                    <Heading className="tracking-[-0.50px]">
+                    <Text
+                      size="lg"
+                      className="font-semibold tracking-[-0.50px]"
+                    >
                       {item.title}
-                    </Heading>
+                    </Text>
                     <Text className="leading-[25px] tracking-[-0.50px] !text-gray-500">
                       {item.description}
                     </Text>
@@ -71,13 +68,15 @@ export default function OurBenefits() {
               ))}
             </div>
           </div>
-          <Image
-            height={1000}
-            width={1000}
-            src="/images/img_rectangle_16.png"
-            alt="image_one"
-            className="hidden w-[47%] object-cover lg:block"
-          />
+          <div className="hidden w-[50%] items-center justify-center overflow-hidden rounded-md object-cover lg:flex xl:w-[35%]">
+            <Image
+              height={1000}
+              width={1000}
+              src="/images/img_rectangle_16.png"
+              alt="image_one"
+              className="hidden w-full scale-110 object-cover lg:block"
+            />
+          </div>
         </div>
       </div>
     </div>

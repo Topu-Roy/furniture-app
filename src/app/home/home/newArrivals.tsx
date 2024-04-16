@@ -17,13 +17,10 @@ export default function NewArrivals(props: props) {
   const newProductsWideScreen = AllNewProducts.slice(0, 10);
 
   return (
-    <div className="flex w-full items-center justify-center py-20">
+    <div className="flex w-full items-center justify-center bg-white py-10 lg:py-16">
       <div className="flex max-w-7xl flex-row justify-center">
         <div className="flex w-full flex-col items-center justify-start gap-[67px]">
-          <Heading
-            size="2xl"
-            className="!text-blue_gray-900_01 text-center tracking-[-0.50px]"
-          >
+          <Heading className="!text-blue_gray-900_01 text-center tracking-[-0.50px]">
             New Arrival
           </Heading>
 

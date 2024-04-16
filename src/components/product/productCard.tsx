@@ -101,7 +101,7 @@ export default function Product(props: ProductType) {
         </div>
       </div>
 
-      <div className="flex w-full flex-row items-center justify-between gap-2">
+      <div className="flex w-full flex-row items-center justify-between gap-2 py-2">
         <Text size="md" className=" line-clamp-1 truncate font-medium">
           {props.productTitle.length > 25
             ? props.productTitle.slice(0, 25) + "..."
