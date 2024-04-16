@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { TbWritingSign } from "react-icons/tb";
 import { MdDateRange } from "react-icons/md";
 import { type BlogType } from "./blogPostArray";
+import { cn } from "@/lib/utils";
 
 type Props = {
   blog: BlogType;
@@ -28,7 +29,7 @@ export default function Blog({ blog }: Props) {
       <div className="flex items-center justify-center gap-4">
         <div className="flex items-center justify-center gap-2">
           <TbWritingSign size={20} />
-          <span>{author.name}</span>
+          <Text className="line-clamp-1">{author.name}</Text>
         </div>
         <div className="h-4 w-0.5 rounded-xl bg-black/50" />
         <div className="flex items-center justify-center gap-2">
@@ -37,7 +38,7 @@ export default function Blog({ blog }: Props) {
         </div>
       </div>
 
-      <Text size="s" className="line-clamp-3  h-[3.7rem]">
+      <Text size="s" className="line-clamp-3">
         {article.intro}
       </Text>
 
