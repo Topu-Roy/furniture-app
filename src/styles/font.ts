@@ -1,25 +1,15 @@
-import { Dosis, Inter, Poller_One, Poppins } from "next/font/google";
-
-export const pollerOne = Poller_One({
-  weight: ["400"],
-  subsets: ["latin"],
-  display: "swap",
-});
+import { Inter, Poppins } from "next/font/google";
 
 export const inter = Inter({
+  weight: ['400', '500', '600'],
   subsets: ["latin"],
   display: 'swap'
 }
 );
 
 export const poppins = Poppins({
-  weight: '600',
+  weight: ['600', "700", "800", "900"],
   subsets: ['latin'],
   display: 'swap'
 })
 
-export const dosis = Dosis({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-});
