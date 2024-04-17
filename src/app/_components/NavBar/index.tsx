@@ -6,7 +6,7 @@ import MobileMenu from "./mobileMenu";
 
 export default function NavBar() {
   return (
-    <header className="fixed top-0 z-50 flex h-[5rem] w-[100vw] items-center justify-center bg-white px-2">
+    <header className="fixed top-0 z-50 flex h-[5rem] w-[100vw] items-center justify-center bg-white px-2 shadow-sm">
       <div className="mx-auto flex w-[98vw] max-w-[85rem] flex-row justify-between">
         <div className="relative flex items-center justify-between gap-2">
           <MobileMenu />

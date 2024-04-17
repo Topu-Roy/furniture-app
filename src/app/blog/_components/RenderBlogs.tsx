@@ -50,7 +50,7 @@ export default function RenderBlogs(props: props) {
 
   return (
     <div className="py-10">
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-3 gap-4 pb-10">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 px-4 pb-10 sm:grid-cols-2 lg:grid-cols-3 2xl:px-0">
         {blogs.map((item) => (
           <div key={`${item.id}-blog`}>
             <Blog blog={item} />
