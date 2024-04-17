@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/carousel";
 import Product from "@/app/_components/product/productCard";
 import { Text } from "@/app/_components/text";
+import { Heading } from "@/app/_components/heading";
 
 type props = {
   productId: number;
@@ -44,20 +45,16 @@ export default function RelatedProductCarousel({
     <>
       <div
         className={cn(
-          `${className} flex w-[50%] flex-col items-center justify-center`,
+          "flex flex-col items-center justify-center md:justify-start",
+          className,
         )}
       >
-        <Text
-          size="xl"
-          className="flex w-full items-start justify-start pb-4 pl-[4.7rem] font-semibold text-gray-900/80"
-        >
-          Related products
-        </Text>
+        <Heading className="py-6 text-center md:pt-0">Related products</Heading>
         <Carousel className="mx-auto w-[80%] pb-8">
           <CarouselContent>
             {productsToRender.map((item) => (
-              <CarouselItem>
-                <div key={item.id} className="mx-auto max-w-[30rem]">
+              <CarouselItem key={`${item.id}-related-products`}>
+                <div className="mx-auto max-w-[30rem]">
                   <Product
                     className="w-full"
                     category={item.category}

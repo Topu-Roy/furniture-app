@@ -14,23 +14,23 @@ type props = {
 export default function DetailsAndReview({ product, className }: props) {
   return (
     <Tabs defaultValue="Details" className={className}>
-      <TabsList className="grid w-full grid-cols-2">
+      <TabsList className="grid w-full grid-cols-2 bg-black/10">
         <TabsTrigger value="Details">Details</TabsTrigger>
-        <TabsTrigger value="Review">Review</TabsTrigger>
+        <TabsTrigger value="Reviews">Reviews</TabsTrigger>
       </TabsList>
       <TabsContent value="Details" className="space-y-4 pb-8 pt-4">
         <div className="flex items-center justify-start gap-4">
-          <div className="rounded-xl bg-gray-300 p-1 px-2">
-            <Text>{product.category}</Text>
+          <div className="rounded-xl bg-black/[0.15] p-1 px-2 ">
+            <Text className="text-black/[0.8]">{product.category}</Text>
           </div>
-          <div className="rounded-xl bg-gray-300 p-1 px-2">
-            <Text>{product.color}</Text>
+          <div className="rounded-xl bg-black/[0.15] p-1 px-2 ">
+            <Text className="text-black/[0.8]">{product.color}</Text>
           </div>
-          <div className="rounded-xl bg-gray-300 p-1 px-2">
-            <Text>{product.status}</Text>
+          <div className="rounded-xl bg-black/[0.15] p-1 px-2 ">
+            <Text className="text-black/[0.8]">{product.status}</Text>
           </div>
-          <div className="rounded-xl bg-gray-300 p-1 px-2">
-            <Text>{product.tag}</Text>
+          <div className="rounded-xl bg-black/[0.15] p-1 px-2 ">
+            <Text className="text-black/[0.8]">{product.tag}</Text>
           </div>
         </div>
         <div className="space-y-2">
@@ -65,7 +65,7 @@ export default function DetailsAndReview({ product, className }: props) {
           </Text>
         </div>
       </TabsContent>
-      <TabsContent value="Review">
+      <TabsContent value="Reviews">
         <div className="space-y-2 py-4">
           <div className="">
             <div className="flex items-center justify-center gap-4 pb-4">
@@ -83,7 +83,10 @@ export default function DetailsAndReview({ product, className }: props) {
           </div>
 
           {productReviews.map((item) => (
-            <div key={item.id} className="rounded-xl bg-zinc-100 p-2 shadow">
+            <div
+              key={`${item.id}-product-review`}
+              className="rounded-xl bg-zinc-200/80 p-2 shadow"
+            >
               <div className="flex items-center justify-between">
                 <div className="flex items-center justify-start gap-2">
                   <Image
