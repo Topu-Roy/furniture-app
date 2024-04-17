@@ -3,6 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 import MobileMenu from "./mobileMenu";
+import { IoSearchOutline } from "react-icons/io5";
+import { BsCart2 } from "react-icons/bs";
+import { GoPerson } from "react-icons/go";
+import CartIcon from "./cartIcon";
 
 export default function NavBar() {
   return (
@@ -46,35 +50,13 @@ export default function NavBar() {
 
         <div className="flex w-auto flex-row justify-between gap-3">
           <Button variant={"ghost"} className="p-1">
-            <Image
-              height={50}
-              width={50}
-              src="images/img_search.svg"
-              alt="search_one"
-              className="h-6 w-6"
-            />
+            <IoSearchOutline size={20} />
           </Button>
 
-          <Link href={"/cart"}>
-            <Button variant={"ghost"} className="p-1">
-              <Image
-                height={50}
-                width={50}
-                src="images/img_list.svg"
-                alt="list_three"
-                className="h-6 w-6"
-              />
-            </Button>
-          </Link>
+          <CartIcon />
 
           <Button variant={"ghost"} className="p-1">
-            <Image
-              height={50}
-              width={50}
-              src="images/img_list_black_900.svg"
-              alt="list_one"
-              className="h-6 w-6"
-            />
+            <GoPerson size={20} />
           </Button>
         </div>
       </div>
