@@ -18,11 +18,15 @@ export default function BlogDetails({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="w-full bg-stone-200">
-      <div className="prose mx-auto mt-[5rem] max-w-7xl py-14">
-        <div className="flex h-[30rem] w-full items-center justify-center overflow-hidden rounded-lg">
+    <div className="w-full bg-gray-200">
+      <div className="prose mx-auto mt-[5rem] max-w-7xl px-4 py-2 sm:py-3 md:py-4 xl:px-6">
+        <Heading className="my-4 pt-2 text-center sm:mt-8 sm:text-left md:hidden">
+          {blog.headline}
+        </Heading>
+
+        <div className="flex w-full items-center justify-center overflow-hidden rounded-lg lg:h-[30rem]">
           <Image
-            className="w-full"
+            className="my-0 w-full py-0"
             width={1800}
             height={900}
             src={blog.cover}
@@ -30,9 +34,9 @@ export default function BlogDetails({ params }: { params: { id: string } }) {
           />
         </div>
 
-        <Heading className="my-4 pt-2">{blog.headline}</Heading>
+        <Heading className="my-4 hidden pt-2 md:block">{blog.headline}</Heading>
 
-        <div className="flex items-center justify-start gap-4 py-2">
+        <div className="flex items-center justify-start gap-4 pt-8 md:pt-2">
           <Image
             className="m-0 rounded-full p-0"
             height={80}
@@ -57,7 +61,9 @@ export default function BlogDetails({ params }: { params: { id: string } }) {
         <p>{blog.article.intro}</p>
 
         {blog.article.blocks.map((textBlock) => (
-          <>
+          <div
+            key={`${textBlock.heading.slice(0, 3)}-${textBlock.text.slice(0, 3)}-textBlock`}
+          >
             <h2
               key={textBlock.heading}
               className="group cursor-pointer hover:underline"
@@ -66,7 +72,7 @@ export default function BlogDetails({ params }: { params: { id: string } }) {
               <span className="opacity-0 group-hover:opacity-100">#</span>
             </h2>
             <p>{textBlock.text}</p>
-          </>
+          </div>
         ))}
 
         <div className="mx-auto my-16 h-[2px] w-[50%] bg-black/30" />

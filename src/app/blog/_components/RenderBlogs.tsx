@@ -32,7 +32,7 @@ export default function RenderBlogs(props: props) {
   for (let i = 1; i <= totalPages; i++) {
     PaginationButtons.push(
       <Button
-        key={i + "btn"}
+        key={`${i}-button`}
         variant={currentPage === i ? "default" : "outline"}
         onClick={() => handlePaginationClick(i)}
         className="rounded-full"

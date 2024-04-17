@@ -22,9 +22,11 @@ export default function RecommendedBlogs({ blogs, currentBlogId }: Props) {
   const blogsToRender = shuffleArray(blogsWithoutCurrentOne);
 
   return (
-    <div className="flex items-center justify-between gap-4">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
       {blogsToRender.slice(5, 8).map((item) => (
-        <Blog blog={item} key={item.id} />
+        <div key={`${item.id}-recommended`}>
+          <Blog blog={item} />
+        </div>
       ))}
     </div>
   );
