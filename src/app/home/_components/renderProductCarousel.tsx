@@ -7,13 +7,11 @@ import DesktopProductCarousel from "./_carousels/desktopProductCarousel";
 import MobileProductCarousel from "./_carousels/mobileProductCarousel";
 import TabletProductCarousel from "./_carousels/tabletProductCarousel";
 
-
 export default function RenderProductCarousel() {
   const width = useDeviceWidth();
   const [deviceWidth, setDeviceWidth] = useState(width);
   useEffect(() => {
     setDeviceWidth(width);
-    console.log(width);
   }, [width]);
 
   if (deviceWidth >= 1280) {
