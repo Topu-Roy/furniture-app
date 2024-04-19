@@ -87,7 +87,7 @@ export default function FooterLinks() {
   ];
 
   return (
-    <div className="mt-14 w-full bg-gray-950 py-10 lg:py-16">
+    <div className="mt-6 w-full bg-gray-950 pt-6 md:mt-8 md:pt-8 lg:mt-14 lg:pt-14 xl:mt-16 xl:pt-16">
       <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row">
         <div className="w-full space-y-8 pb-4 md:w-1/2 md:pb-0 lg:pl-8 2xl:pl-0">
           <div className="mx-auto space-y-2 px-2 text-center md:pr-14 lg:px-0 lg:text-left">

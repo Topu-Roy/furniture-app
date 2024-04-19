@@ -10,7 +10,7 @@ interface Props {
 
 export default function Footer({ className }: Props) {
   return (
-    <footer className={cn(`${className} pt-14`)}>
+    <footer className={cn("pt-6 md:pt-8 lg:pt-14 xl:pt-16", className)}>
       <div className="px-2">
         <Newsletter />
       </div>

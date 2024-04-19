@@ -7,7 +7,7 @@ import { Heading } from "../heading";
 export default function Newsletter() {
   return (
     <div className="mx-auto flex w-full max-w-7xl items-center justify-center rounded-sm bg-black/[0.15] sm:w-[90%]">
-      <div className="flex w-full flex-1 flex-col items-center justify-center space-y-4 px-4 py-8 lg:space-y-8 lg:py-8 xl:py-0">
+      <div className="flex w-full flex-1 flex-col items-center justify-center space-y-4 px-4 py-4 lg:space-y-8 lg:py-8 xl:py-0">
         <div className="flex w-full flex-col items-center justify-start gap-2.5 text-center lg:text-left">
           <Heading>Subscribe now and get 10% off all items</Heading>
           <Text size="md" muted={true}>
