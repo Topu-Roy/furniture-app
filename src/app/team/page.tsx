@@ -5,16 +5,12 @@ import RenderTeamMembers from "./RenderTeamMembers";
 
 export default function TeamPage() {
   return (
-    <div className="mt-[5rem] bg-stone-200 pt-10">
-      <Heading className="text-center tracking-[-0.50px]">
-        Meet Our Team
-      </Heading>
-      <Text
-        size="lg"
-        className="text-center leading-[35px] tracking-[-0.50px] !text-gray-500"
-      >
+    <div className="mt-[5rem] bg-stone-200 pt-2 md:pt-4 lg:pt-6">
+      <Heading className="text-center">Meet Our Team</Heading>
+      <Text size="lg" muted className="px-2 text-center md:px-0">
         We write various things related to furniture, from tips and what things{" "}
-        <br />I need to pay attention to when choosing furniture
+        <br className="hidden md:block" />I need to pay attention to when
+        choosing furniture
       </Text>
 
       <RenderTeamMembers teamMembers={teamMembers} />
