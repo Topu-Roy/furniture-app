@@ -11,7 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { type TestimonialsArrayType } from "../testimonialsArray";
+import { type TestimonialsArrayType } from "../../../assets/testimonialsArray";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { Heading } from "@/app/_components/heading";

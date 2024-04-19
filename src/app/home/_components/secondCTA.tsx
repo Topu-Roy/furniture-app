@@ -8,7 +8,7 @@ import { Heading } from "@/app/_components/heading";
 
 export default function SecondCTA() {
   return (
-    <div className="w-full py-10 lg:py-16">
+    <section className="w-full py-10 lg:py-16">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-center">
         <div className="m-auto flex w-full flex-col justify-between p-4 md:flex-row">
           <div className="mx-auto flex h-full w-[70%] flex-col items-center justify-start md:my-auto md:w-[40%]">
@@ -53,6 +53,6 @@ export default function SecondCTA() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

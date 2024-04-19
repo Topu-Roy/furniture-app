@@ -4,7 +4,7 @@ import Marquee from "react-fast-marquee";
 
 export default function BrandsWorkedWith() {
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-10 bg-gray-900 py-10 sm:py-12 md:py-14 lg:py-16">
+    <section className="flex w-full flex-col items-center justify-center gap-10 bg-gray-900 py-10 sm:py-12 md:py-14 lg:py-16">
       <Marquee className="mx-auto flex w-full max-w-7xl flex-row justify-between">
         <Image
           src="images/img_search_gray_50_01.svg"
@@ -49,6 +49,6 @@ export default function BrandsWorkedWith() {
           width={110}
         />
       </Marquee>
-    </div>
+    </section>
   );
 }

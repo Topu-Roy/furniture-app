@@ -1,5 +1,5 @@
 import React from "react";
-import { teamMembers } from "../aboutUs/teamMembersArray";
+import { teamMembers } from "../../assets/teamMembersArray";
 import RenderTeamMembers from "./_components/RenderTeamMembers";
 import TeamHeading from "./_components/teamHeading";
 
