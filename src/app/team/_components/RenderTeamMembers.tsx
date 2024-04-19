@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Text } from "../_components/text";
+import { Text } from "../../_components/text";
 import { FaFacebookF, FaGithub } from "react-icons/fa6";
 import { IoLogoWhatsapp } from "react-icons/io";
 import {
