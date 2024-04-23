@@ -12,7 +12,7 @@ export default function AboutusPage() {
     <>
       <Hero />
       <BrandsWorkedWith />
-      <OurTeam teamMembers={teamMembers} />
+      <OurTeam teamMembers={teamMembers} className="bg-stone-200" />
       <SecondCTA />
       <Testimonials testimonials={testimonialsArray} />
     </>

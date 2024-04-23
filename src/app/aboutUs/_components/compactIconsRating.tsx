@@ -17,13 +17,13 @@ export default function CompactIconsRating() {
           key={`${icon}-icon`}
           src={`/images/${icon}`}
           alt=""
-          className="h-[50px] w-[50px] rounded-[50%]"
+          className="-ml-2 h-[50px] w-[50px] rounded-[50%]"
           height={50}
           width={50}
         />
       ))}
-      <div className="ml-[-5px] flex h-[50px] w-[50px] flex-col items-center justify-start">
-        <Heading className="bg-blue_gray-900_01 flex h-[50px] w-[50px] items-center justify-center rounded-[50%] text-center tracking-[-0.50px] !text-yellow-100">
+      <div className=" flex h-[50px] w-[50px] flex-col items-center justify-start pl-8">
+        <Heading className="flex h-[50px] w-[50px] items-center justify-center rounded-[50%] text-center">
           3K+
         </Heading>
       </div>

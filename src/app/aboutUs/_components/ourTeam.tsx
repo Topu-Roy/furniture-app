@@ -22,6 +22,7 @@ type props = {
     name: string;
     imageUrl: string;
   }[];
+  className?: string;
 };
 
 export default function OurTeam(props: props) {
@@ -54,10 +55,13 @@ export default function OurTeam(props: props) {
   ));
 
   return (
-    <div className="flex h-[80dvh] flex-col items-center justify-center space-y-8 py-14">
-      <Heading className="text-center">
-        Meet Our Talented Team Members
-      </Heading>
+    <div
+      className={cn(
+        "flex h-[80dvh] flex-col items-center justify-center space-y-8 py-14",
+        props.className,
+      )}
+    >
+      <Heading className="text-center">Meet Our Talented Team Members</Heading>
       <Carousel
         setApi={setApi}
         plugins={[
