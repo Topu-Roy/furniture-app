@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { type BlogType } from "../blogPostArray";
 import { Button } from "@/components/ui/button";
 import { scrollToTop } from "@/lib/utils";
@@ -14,22 +14,25 @@ export default function RenderBlogs(props: props) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const itemPerPage = 9;
-  let totalPages = Math.ceil(props.blogs.length / itemPerPage);
-  let lastIndex;
+  let totalPages = useRef(Math.ceil(props.blogs.length / itemPerPage));
+  let lastIndex = useRef(0);
 
   useEffect(() => {
     setBlogs(props.blogs.slice(0, itemPerPage));
-    totalPages = Math.ceil(props.blogs.length / itemPerPage);
+    totalPages.current = Math.ceil(props.blogs.length / itemPerPage);
   }, [props.blogs]);
 
   useEffect(() => {
-    lastIndex = currentPage * itemPerPage;
-    const paginatedBlog = props.blogs.slice(lastIndex - itemPerPage, lastIndex);
+    lastIndex.current = currentPage * itemPerPage;
+    const paginatedBlog = props.blogs.slice(
+      lastIndex.current - itemPerPage,
+      lastIndex.current,
+    );
     setBlogs(paginatedBlog);
   }, [currentPage, props.blogs]);
 
   const PaginationButtons = [];
-  for (let i = 1; i <= totalPages; i++) {
+  for (let i = 1; i <= totalPages.current; i++) {
     PaginationButtons.push(
       <Button
         key={`${i}-button`}

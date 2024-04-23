@@ -95,10 +95,11 @@ export default function RenderProducts(props: Props) {
     setFilteredProducts(tempFilteredProducts);
     setCurrentPage(1);
   }, [
+    props,
     selectedCategory,
     selectedColor,
     selectedTag,
-    selectedMinPrice,
+    selectedMaxPrice,
     selectedMinPrice,
     selectedSliderPrice,
     selectedSorting,
@@ -107,7 +108,7 @@ export default function RenderProducts(props: Props) {
 
   useEffect(() => {
     setProductsBackup(props.products);
-  }, [props.products]);
+  }, [props.products, setProductsBackup]);
 
   // Pagination
   const totalProducts = filteredProducts.length;

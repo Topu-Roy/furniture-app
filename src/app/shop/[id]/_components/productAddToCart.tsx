@@ -16,7 +16,7 @@ export default function ProductAddToCart({ product }: props) {
 
   useEffect(() => {
     setIsAlreadyAddedToCart(products.some((item) => item.id === product.id));
-  }, [products]);
+  }, [product, products]);
 
   function updateQuantity(num: 1 | -1) {
     if (num === -1 && quantity === 1) return;

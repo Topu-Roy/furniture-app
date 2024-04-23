@@ -75,7 +75,7 @@ export default function OurTeam(props: props) {
           <CarouselItem>
             <div className="flex w-full items-center justify-center gap-4">
               {props.teamMembers.slice(0, 3).map((member) => (
-                <Link key={member.id} href={"/team"}>
+                <Link key={`${member.id}-member-about`} href={"/team"}>
                   <div className="space-y-4 rounded-xl border p-4 shadow">
                     <div className="w-full">
                       <Image
@@ -103,7 +103,7 @@ export default function OurTeam(props: props) {
           <CarouselItem>
             <div className="flex w-full items-center justify-center">
               {props.teamMembers.slice(3, 6).map((member) => (
-                <Link href={"/team"}>
+                <Link key={`${member.id}-member-about`} href={"/team"}>
                   <div className="space-y-4 rounded-xl border p-4 shadow">
                     <div className="w-full">
                       <Image
@@ -131,7 +131,7 @@ export default function OurTeam(props: props) {
           <CarouselItem>
             <div className="flex w-full items-center justify-center">
               {props.teamMembers.slice(6, 9).map((member) => (
-                <Link href={"/team"}>
+                <Link key={`${member.id}-member-about`} href={"/team"}>
                   <div className="space-y-4 rounded-xl border p-4 shadow">
                     <div className="w-full">
                       <Image

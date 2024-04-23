@@ -10,7 +10,7 @@ export default function CategoryCTA() {
     <div className="mx-auto w-full max-w-7xl py-10 lg:py-16">
       <Heading className={"px-8 text-center"}>
         Find a variety of <br className="hidden md:block lg:hidden" /> home
-        furniture's
+        furniture&apos;s
       </Heading>
       <div className="flex w-full flex-col items-center justify-center gap-2 px-3 py-8 sm:px-0 md:flex-row lg:gap-4">
         <ThreeDCard

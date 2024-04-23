@@ -101,7 +101,7 @@ export default function FooterLinks() {
             </Text>
             <div className="mt-4">
               <Link href={"/shop"}>
-                <Button variant={"secondary"}>View furniture's</Button>
+                <Button variant={"secondary"}>View furniture&apos;s</Button>
               </Link>
             </div>
           </div>

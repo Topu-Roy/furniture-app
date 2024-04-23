@@ -65,7 +65,10 @@ export default function MobileProductCarousel(props: props) {
     >
       <CarouselContent className="mx-auto w-full gap-2 p-1">
         {productsList.map((item) => (
-          <CarouselItem className="flex flex-col items-center justify-center rounded-md bg-white p-2">
+          <CarouselItem
+            key={`${item.id}-mobile-carousel`}
+            className="flex flex-col items-center justify-center rounded-md bg-white p-2"
+          >
             <Product
               key={`${item.id}-home-carousel`}
               category={item.category}

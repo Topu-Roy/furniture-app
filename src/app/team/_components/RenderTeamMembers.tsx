@@ -65,13 +65,13 @@ export default function RenderTeamMembers(props: props) {
             <div className="absolute bottom-[3%] left-0 z-20 flex w-full translate-y-[150%] flex-row items-center justify-around gap-2 ring-0 transition-all duration-300 group-hover:translate-y-0">
               <div className="flex flex-row items-center justify-between gap-3">
                 {socialIcons.map((icon) => (
-                  <TooltipProvider delayDuration={300}>
+                  <TooltipProvider
+                    key={`${icon.name}-social-icon`}
+                    delayDuration={300}
+                  >
                     <Tooltip>
                       <TooltipTrigger>
-                        <Button
-                          key={`${icon.name}-social-icon`}
-                          className="flex items-center justify-center rounded-full bg-black p-2 text-white transition-all duration-300 hover:scale-105"
-                        >
+                        <Button className="flex items-center justify-center rounded-full bg-black p-2 text-white transition-all duration-300 hover:scale-105">
                           {icon.icon}
                         </Button>
                       </TooltipTrigger>

@@ -53,7 +53,10 @@ export default function CartCheckout() {
           products.map((item) => {
             if (item.isSelected) {
               return (
-                <div className="flex items-center justify-between gap-4">
+                <div
+                  key={`${item.id}-cart-checkout`}
+                  className="flex items-center justify-between gap-4"
+                >
                   <p className="truncate">{item.productTitle}</p>
                   <p className="">${item.price * item.quantity}</p>
                 </div>
@@ -71,9 +74,7 @@ export default function CartCheckout() {
       <div className="flex w-full flex-col items-center justify-start gap-5">
         <div className="flex w-full flex-row items-center justify-center">
           <Input placeholder="Your Voucher" className="mr-2 w-[73%]" />
-          <Button className="min-w-[98px] font-semibold">
-            Apply
-          </Button>
+          <Button className="min-w-[98px] font-semibold">Apply</Button>
         </div>
       </div>
 
@@ -83,9 +84,7 @@ export default function CartCheckout() {
         </Text>
         <Heading>$ {checkoutPrice}</Heading>
       </div>
-      <Button className="w-full font-semibold">
-        Checkout Now
-      </Button>
+      <Button className="w-full font-semibold">Checkout Now</Button>
     </>
   );
 }
