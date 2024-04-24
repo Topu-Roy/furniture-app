@@ -9,6 +9,7 @@ import { ProductType } from "@/zustand/shop/shopStore";
 import AddButton from "./addButton";
 import ButtonWithIcon from "./buttonWithIcon";
 import { Text } from "../text";
+import MobilePopover from "./mobilePopover";
 
 export default function Product(props: ProductType) {
   return (
@@ -33,10 +34,22 @@ export default function Product(props: ProductType) {
             </div>
           </Link>
 
-          {/* //* Decoration */}
-          <div className="pointer-events-none absolute bottom-0 left-0 z-[19] h-[40%] w-full translate-y-[150%] select-none bg-gradient-to-t from-white/50 to-transparent ring-0 transition-all duration-300 group-hover:translate-y-0" />
+          {/* Mobile Popover button */}
+          <div className="absolute bottom-[2%] right-[2%] md:hidden">
+            <MobilePopover
+              product={{
+                ...props,
+                price: props.price as number,
+                quantity: 1,
+                isSelected: false,
+              }}
+            />
+          </div>
 
-          <div className="absolute bottom-[3%] left-0 z-20 flex w-full translate-y-[150%] flex-row items-center justify-around gap-2 ring-0 transition-all duration-300 group-hover:translate-y-0">
+          {/* Overlay - Decoration Only */}
+          <div className="pointer-events-none absolute bottom-0 left-0 z-[19] hidden h-[40%] w-full translate-y-[150%] select-none bg-gradient-to-t from-white/50 to-transparent ring-0 transition-all duration-300 group-hover:translate-y-0 md:block" />
+
+          <div className="absolute bottom-[3%] left-0 z-20 hidden w-full translate-y-[150%] flex-row items-center justify-around gap-2 ring-0 transition-all duration-300 group-hover:translate-y-0 md:flex">
             {props.price ? (
               <AddButton
                 product={{
