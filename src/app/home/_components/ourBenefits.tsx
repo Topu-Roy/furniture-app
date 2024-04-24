@@ -41,11 +41,11 @@ export default function OurBenefits() {
 
   return (
     <div className="w-full">
-      <div className="mx-auto max-w-7xl py-14 md:py-20">
+      <div className="mx-auto max-w-7xl px-2 py-14 md:py-20">
         <Heading className="pb-10 text-center">
           We guarantee the safety of your shopping
         </Heading>
-        <div className="flex h-full w-full flex-row justify-between px-2">
+        <div className="flex h-full w-full flex-row justify-between">
           <div className="flex w-full flex-col items-center justify-start gap-[50px] px-2 sm:px-4 lg:flex-1">
             <div className="grid h-full w-full grid-cols-2 justify-center gap-1.5">
               {features.map((item) => (
