@@ -4,9 +4,14 @@ import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 import MobileMenu from "./mobileMenu";
 import { IoSearchOutline } from "react-icons/io5";
-import { BsCart2 } from "react-icons/bs";
-import { GoPerson } from "react-icons/go";
 import CartIcon from "./cartIcon";
+import {
+  SignIn,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 export default function NavBar() {
   return (
@@ -48,16 +53,23 @@ export default function NavBar() {
           </Link>
         </div>
 
-        <div className="flex w-auto flex-row justify-between gap-3">
+        <div className="flex w-auto flex-row items-center justify-between gap-3">
           <Button variant={"ghost"} className="p-1">
             <IoSearchOutline size={20} />
           </Button>
 
           <CartIcon />
 
-          <Button variant={"ghost"} className="p-1">
-            <GoPerson size={20} />
-          </Button>
+          <div>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+            <SignedOut>
+              <Button>
+                <SignInButton />
+              </Button>
+            </SignedOut>
+          </div>
         </div>
       </div>
     </header>
