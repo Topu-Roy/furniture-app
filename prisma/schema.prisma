@@ -9,12 +9,13 @@ datasource db {
 }
 
 model User {
-  id     String        @id @default(auto()) @map("_id") @db.ObjectId
-  authId String        @unique
-  email  String?       @unique
-  name   String
-  role   Role          @default(USER)
-  cart   CartProduct[]
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  authId       String
+  role         Role          @default(USER)
+  imageUrl     String?
+  userName     String
+  cartProducts CartProduct[]
+  reviews      Review[]
 }
 
 model Product {
@@ -33,11 +34,11 @@ model Product {
 model Review {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   text      String
-  name      String
-  imageURL  String
   date      DateTime @default(now())
-  Product   Product? @relation(fields: [productId], references: [id])
-  productId String?  @db.ObjectId
+  Product   Product  @relation(fields: [productId], references: [id])
+  productId String   @db.ObjectId
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?  @db.ObjectId
 }
 
 model CartProduct {

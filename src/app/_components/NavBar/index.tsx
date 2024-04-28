@@ -5,13 +5,7 @@ import { Button } from "../../../components/ui/button";
 import MobileMenu from "./mobileMenu";
 import { IoSearchOutline } from "react-icons/io5";
 import CartIcon from "./cartIcon";
-import {
-  SignIn,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function NavBar() {
   return (
