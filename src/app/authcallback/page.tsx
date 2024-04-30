@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 export default async function AuthCallback() {
   const user = await currentUser();
-  
+
   if (user) {
     const bodyToPost: syncUserPostBodyType = {
       authId: user.id,
@@ -12,14 +12,11 @@ export default async function AuthCallback() {
       role: "USER",
       userName: user.username,
     };
-    const res = await fetch("api/sync-user", {
+    await fetch("http://localhost:3000/api/sync-user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bodyToPost),
     });
-
-    const resJson = res.json();
-    console.log(resJson);
   }
 
   redirect("/home");

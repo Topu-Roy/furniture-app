@@ -14,7 +14,6 @@ export default function NewArrivals(props: props) {
   const newProductsMobile = AllNewProducts.slice(0, 4);
   const newProductsTablet = AllNewProducts.slice(0, 6);
   const newProductsDesktop = AllNewProducts.slice(0, 8);
-  const newProductsWideScreen = AllNewProducts.slice(0, 10);
 
   return (
     <div className="flex w-full items-center justify-center bg-white py-10 lg:py-16">
@@ -63,7 +62,7 @@ export default function NewArrivals(props: props) {
                 />
               ))}
             </div>
-            <div className="hidden w-full flex-row flex-wrap justify-center gap-4 lg:flex xl:hidden">
+            <div className="hidden w-full flex-row flex-wrap justify-center gap-4 lg:flex">
               {newProductsDesktop.map((item) => (
                 <Product
                   id={item.id}
@@ -74,22 +73,6 @@ export default function NewArrivals(props: props) {
                   productTitle={item.productTitle}
                   tag={item.tag}
                   className={"max-w-[23%]"}
-                  key={item.productTitle + item.tag}
-                  status={item.status}
-                />
-              ))}
-            </div>
-            <div className="hidden w-full flex-row flex-wrap justify-center gap-4 xl:flex">
-              {newProductsWideScreen.map((item) => (
-                <Product
-                  id={item.id}
-                  category={item.category}
-                  color={item.color}
-                  image={item.image}
-                  price={item.price}
-                  productTitle={item.productTitle}
-                  tag={item.tag}
-                  className={"max-w-[15rem]"}
                   key={item.productTitle + item.tag}
                   status={item.status}
                 />

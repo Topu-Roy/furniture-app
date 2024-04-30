@@ -6,8 +6,10 @@ import MobileMenu from "./mobileMenu";
 import { IoSearchOutline } from "react-icons/io5";
 import CartIcon from "./cartIcon";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
-export default function NavBar() {
+export default async function NavBar() {
+  const user = auth();
   return (
     <header className="fixed top-0 z-50 flex h-[5rem] w-[100vw] items-center justify-center bg-white px-2 shadow-sm">
       <div className="mx-auto flex w-[98vw] max-w-[85rem] flex-row justify-between">
@@ -55,14 +57,24 @@ export default function NavBar() {
           <CartIcon />
 
           <div>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-            <SignedOut>
-              <Button>
-                <SignInButton />
-              </Button>
-            </SignedOut>
+            {!user.userId || !user ? (
+              <>
+                <Link href={"/authcallback"}>
+                  <Button>Sign up</Button>
+                </Link>
+              </>
+            ) : (
+              <div className="">
+                <SignedIn>
+                  <UserButton />
+                </SignedIn>
+                <SignedOut>
+                  <Button>
+                    <SignInButton />
+                  </Button>
+                </SignedOut>
+              </div>
+            )}
           </div>
         </div>
       </div>
