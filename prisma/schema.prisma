@@ -10,10 +10,10 @@ datasource db {
 
 model User {
   id           String        @id @default(auto()) @map("_id") @db.ObjectId
-  authId       String
+  authId       String        @db.ObjectId
   role         Role          @default(USER)
   imageUrl     String?
-  userName     String
+  userName     String?
   cartProducts CartProduct[]
   reviews      Review[]
 }
@@ -21,7 +21,7 @@ model User {
 model Product {
   id           String        @id @default(auto()) @map("_id") @db.ObjectId
   productTitle String
-  image        String
+  image        String?
   price        Int
   status       Status?
   category     Category
