@@ -10,8 +10,18 @@ export async function GET() {
             price: 159,
             productTitle: "Adjustable Office Chair",
             tag: "MODERN",
+
         },
     });
 
     return NextResponse.json({ id: createdProduct.id })
+}
+
+export default async function PATCH(request: Request) {
+    const body: unknown = await request.json()
+
+    if (!body) return NextResponse.json({ message: "Missing required fields" }, { status: 404 })
+
+    // const validatedBody = syncUserPostBody.parse(body)
+
 }

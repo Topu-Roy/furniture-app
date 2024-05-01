@@ -1,8 +1,5 @@
+import { Category, Color, Tag } from "@/zod/schema";
 import { create } from "zustand";
-
-export type Color = "black" | "white" | "red" | "brown" | "green";
-export type Category = "Chair" | "Table" | "Lamp" | "Drawer" | "Bed" | "Bookshelf" | "Sofa";
-export type Tag = "Minimalistic" | "Modern" | "Stylish" | "Elegant" | "Ambient" | "Luxurious";
 
 export type ProductType = {
   id: number;

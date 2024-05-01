@@ -9,7 +9,7 @@ export const products: ProductType[] = [
     status: 'new',
     category: 'Chair',
     tag: 'Modern',
-    color: 'black'
+    color: 'Black'
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ export const products: ProductType[] = [
     status: 'popular',
     category: 'Table',
     tag: 'Stylish',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ export const products: ProductType[] = [
     status: 'popular',
     category: 'Lamp',
     tag: 'Ambient',
-    color: 'black'
+    color: 'Black'
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ export const products: ProductType[] = [
     status: 'new',
     category: 'Drawer',
     tag: 'Minimalistic',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ export const products: ProductType[] = [
     status: 'popular',
     category: 'Bed',
     tag: 'Luxurious',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 6,
@@ -59,7 +59,7 @@ export const products: ProductType[] = [
     status: 'new',
     category: 'Bookshelf',
     tag: 'Modern',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 7,
@@ -69,7 +69,7 @@ export const products: ProductType[] = [
     status: 'popular',
     category: 'Sofa',
     tag: 'Elegant',
-    color: 'white'
+    color: 'White'
   },
   {
     id: 8,
@@ -79,7 +79,7 @@ export const products: ProductType[] = [
     status: 'new',
     category: 'Chair',
     tag: 'Stylish',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 9,
@@ -89,7 +89,7 @@ export const products: ProductType[] = [
     status: 'popular',
     category: 'Table',
     tag: 'Minimalistic',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 10,
@@ -99,7 +99,7 @@ export const products: ProductType[] = [
     status: 'new',
     category: 'Lamp',
     tag: 'Ambient',
-    color: 'black'
+    color: 'Black'
   },
   {
     id: 11,
@@ -109,7 +109,7 @@ export const products: ProductType[] = [
     status: 'popular',
     category: 'Drawer',
     tag: 'Modern',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 12,
@@ -119,7 +119,7 @@ export const products: ProductType[] = [
     status: 'new',
     category: 'Bed',
     tag: 'Minimalistic',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 13,
@@ -129,7 +129,7 @@ export const products: ProductType[] = [
     status: 'popular',
     category: 'Bookshelf',
     tag: 'Stylish',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 14,
@@ -139,7 +139,7 @@ export const products: ProductType[] = [
     status: 'new',
     category: 'Sofa',
     tag: 'Luxurious',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 15,
@@ -149,7 +149,7 @@ export const products: ProductType[] = [
     status: 'popular',
     category: 'Chair',
     tag: 'Modern',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 16,
@@ -159,7 +159,7 @@ export const products: ProductType[] = [
     status: 'new',
     category: 'Table',
     tag: 'Elegant',
-    color: 'black'
+    color: 'Black'
   },
   {
     id: 17,
@@ -169,7 +169,7 @@ export const products: ProductType[] = [
     status: 'popular',
     category: 'Lamp',
     tag: 'Modern',
-    color: 'black'
+    color: 'Black'
   },
   {
     id: 18,
@@ -179,7 +179,7 @@ export const products: ProductType[] = [
     status: 'new',
     category: 'Drawer',
     tag: 'Minimalistic',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 19,
@@ -189,7 +189,7 @@ export const products: ProductType[] = [
     status: 'popular',
     category: 'Bed',
     tag: 'Luxurious',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 20,
@@ -199,7 +199,7 @@ export const products: ProductType[] = [
     status: 'new',
     category: 'Bookshelf',
     tag: 'Stylish',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 21,
@@ -208,7 +208,7 @@ export const products: ProductType[] = [
     price: 149,
     category: 'Bed',
     tag: 'Luxurious',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 22,
@@ -217,7 +217,7 @@ export const products: ProductType[] = [
     price: 699,
     category: 'Bed',
     tag: 'Elegant',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 23,
@@ -226,7 +226,7 @@ export const products: ProductType[] = [
     price: 799,
     category: 'Bed',
     tag: 'Modern',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 24,
@@ -235,7 +235,7 @@ export const products: ProductType[] = [
     price: 1899,
     category: 'Bookshelf',
     tag: 'Minimalistic',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 25,
@@ -244,7 +244,7 @@ export const products: ProductType[] = [
     price: 349,
     category: 'Bookshelf',
     tag: 'Stylish',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 26,
@@ -253,7 +253,7 @@ export const products: ProductType[] = [
     price: 79,
     category: 'Bookshelf',
     tag: 'Minimalistic',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 27,
@@ -262,7 +262,7 @@ export const products: ProductType[] = [
     price: 499,
     category: 'Chair',
     tag: 'Minimalistic',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 28,
@@ -271,7 +271,7 @@ export const products: ProductType[] = [
     price: 299,
     category: 'Chair',
     tag: 'Modern',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 29,
@@ -280,7 +280,7 @@ export const products: ProductType[] = [
     price: 129,
     category: 'Drawer',
     tag: 'Stylish',
-    color: 'white'
+    color: 'White'
   },
   {
     id: 30,
@@ -289,7 +289,7 @@ export const products: ProductType[] = [
     price: 999,
     category: 'Lamp',
     tag: 'Elegant',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 31,
@@ -298,7 +298,7 @@ export const products: ProductType[] = [
     price: 79,
     category: 'Lamp',
     tag: 'Modern',
-    color: 'black'
+    color: 'Black'
   },
   {
     id: 32,
@@ -307,7 +307,7 @@ export const products: ProductType[] = [
     price: 1499,
     category: 'Sofa',
     tag: 'Luxurious',
-    color: 'brown'
+    color: 'Brown'
   },
   {
     id: 33,
@@ -316,7 +316,7 @@ export const products: ProductType[] = [
     price: 299,
     category: 'Table',
     tag: 'Modern',
-    color: 'white'
+    color: 'White'
   },
   {
     id: 34,
@@ -325,7 +325,7 @@ export const products: ProductType[] = [
     price: 799,
     category: 'Table',
     tag: 'Elegant',
-    color: 'black'
+    color: 'Black'
   },
   {
     id: 35,
@@ -334,6 +334,6 @@ export const products: ProductType[] = [
     price: 399,
     category: 'Table',
     tag: 'Ambient',
-    color: 'brown'
+    color: 'Brown'
   }
 ]

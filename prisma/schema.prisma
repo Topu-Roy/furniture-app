@@ -93,34 +93,34 @@ enum Role {
 }
 
 enum Color {
-  BLACK
-  WHITE
-  RED
-  BROWN
-  GREEN
+  Black
+  White
+  Red
+  Brown
+  Green
 }
 
 enum Category {
-  CHAIR
-  TABLE
-  LAMP
-  DRAWAR
-  BED
-  BOOKSHELF
-  SOFA
+  Chair
+  Table
+  Lamp
+  Drawar
+  Bed
+  Bookshelf
+  Sofa
 }
 
 enum Tag {
-  MINIMALISTIC
-  MODERN
-  STYLISH
-  ELEGANT
-  AMBIENT
-  LUXURIOUS
+  Minimalistic
+  Modern
+  Stylish
+  Elegant
+  Ambient
+  Luxurious
 }
 
 enum Status {
-  NEW
-  POPULAR
-  OUT_OF_STOCK
+  New
+  Popular
+  Out_of_stock
 }
