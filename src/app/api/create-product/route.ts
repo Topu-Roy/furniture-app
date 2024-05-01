@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
 import { carateProductPostBodySchema, updateProductImagePatchBodySchema } from "@/zod/schema";
+import { db } from "@/lib/db";
+import { getProductById } from "@/server/queries";
 
 //* ---------------------------------- Create a new product ------------------------------------
 export async function Post(request: Request) {
@@ -32,11 +33,7 @@ export default async function PATCH(request: Request) {
 
     const validatedBody = updateProductImagePatchBodySchema.parse(body)
 
-    const isProductExist = await db.product.findFirst({
-        where: {
-            id: validatedBody.id
-        }
-    })
+    const isProductExist = getProductById(validatedBody.id);
 
     if (!isProductExist) return NextResponse.json({ message: "Product not found" }, { status: 404 })
 

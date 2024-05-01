@@ -1,22 +1,19 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
 import { syncUserPostBody } from "@/zod/schema";
+import { db } from "@/lib/db";
+import { getUserByAuthId } from "@/server/queries";
 
 export async function POST(request: Request) {
     const body: unknown = await request.json()
 
     if (!body) return NextResponse.json({ message: "Missing required fields" }, { status: 400 })
 
-    const validatedBody = syncUserPostBody.parse(body)
+    const validatedBody = syncUserPostBody.parse(body);
 
-    const isUserExist = await db.user.findFirst({
-        where: {
-            authId: validatedBody.authId
-        }
-    })
+    const isUserExist = await getUserByAuthId(validatedBody.authId);
 
     if (!isUserExist) {
-        const newUser = await db.user.create({
+        await db.user.create({
             data: {
                 authId: validatedBody.authId,
                 userName: validatedBody.userName,
@@ -24,7 +21,6 @@ export async function POST(request: Request) {
                 role: 'USER'
             }
         })
-
         return NextResponse.json({ message: `User Synced to the db` }, { status: 200 })
     }
 
