@@ -2,21 +2,29 @@
 import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
 import { UploadButton } from "@/lib/uploadthing";
+import { carateProductPostBodyType } from "@/zod/schema";
 import React, { useState } from "react";
 
 export default function CreateProduct() {
   const [productID, setProductID] = useState<string | undefined>();
-  const product = {
-    productTitle: "Adjustable Office Chair",
-    price: 159,
-    category: "Chair",
-    tag: "Modern",
-    color: "black",
-  };
 
   async function handleClick() {
-    const res = await fetch("/create-product");
+    const productDetails: carateProductPostBodyType = {
+      productTitle: "",
+      category: "Bed",
+      color: "Black",
+      price: 999,
+      tag: "Ambient",
+    };
+
+    const res = await fetch("http://localhost:3000/create-product", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(productDetails),
+    });
+
     const productId: unknown = res.json();
+
     if (productId) {
       setProductID(productId as string);
     }

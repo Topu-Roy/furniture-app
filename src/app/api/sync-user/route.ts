@@ -5,7 +5,7 @@ import { syncUserPostBody } from "@/zod/schema";
 export async function POST(request: Request) {
     const body: unknown = await request.json()
 
-    if (!body) return NextResponse.json({ message: "Missing required fields" }, { status: 404 })
+    if (!body) return NextResponse.json({ message: "Missing required fields" }, { status: 400 })
 
     const validatedBody = syncUserPostBody.parse(body)
 
@@ -25,8 +25,8 @@ export async function POST(request: Request) {
             }
         })
 
-        return NextResponse.json({ message: `${newUser.userName} User Synced to the db` }, { status: 200 })
+        return NextResponse.json({ message: `User Synced to the db` }, { status: 200 })
     }
 
-    return NextResponse.json({ message: ` User Synced to the db` }, { status: 200 })
+    return NextResponse.json({ message: `User Already Synced to the db` }, { status: 200 })
 }

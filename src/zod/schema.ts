@@ -8,6 +8,8 @@ export const syncUserPostBody = z.object({
     imageUrl: z.string().url().nullable(),
     userName: z.string().nullable()
 })
+
+export type Role = typeof roles[number]
 export type syncUserPostBodyType = z.infer<typeof syncUserPostBody>
 
 //*--------------------------- Product ------------------------------
@@ -24,6 +26,7 @@ export const carateProductPostBodySchema = z.object({
 })
 
 export const updateProductImagePatchBodySchema = z.object({
+    id: z.string(),
     image: z.string().url()
 })
 
