@@ -19,7 +19,7 @@ export const tag = ["Minimalistic", "Modern", "Stylish", "Elegant", "Ambient", "
 
 export const createProductPostBodySchema = z.object({
     productTitle: z.string().min(1, { message: "Please provide a title" }),
-    price: z.number({ message: "Please provide a price" }).min(1),
+    price: z.number({ message: "Please provide a price" }).min(5, { message: "Minimum price is $5" }),
     description: z.string({ message: "Please provide a description" }).min(20, { message: "Please provide a description" }),
     color: z.enum(color, { message: "Please select a color" }),
     category: z.enum(category, { message: "Please select a category" }),
