@@ -8,7 +8,7 @@ import CartIcon from "./cartIcon";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 
-export default async function NavBar() {
+export default function NavBar() {
   const user = auth();
   return (
     <header className="fixed top-0 z-50 flex h-[5rem] w-[100vw] items-center justify-center bg-white px-2 shadow-sm">
@@ -18,10 +18,10 @@ export default async function NavBar() {
 
           <Link href="/home">
             <Image
-              src="images/img_frame_146.svg"
-              height={146}
+              src="/logo-text.png"
+              height={100}
               width={146}
-              alt="image"
+              alt="furnit"
               className="h-[30px] w-auto"
             />
           </Link>
@@ -47,6 +47,10 @@ export default async function NavBar() {
           <Link href="/team">
             <Button variant={"ghost"}>Team</Button>
           </Link>
+
+          <Link href="/createProduct">
+            <Button variant={"ghost"}>Create</Button>
+          </Link>
         </div>
 
         <div className="flex w-auto flex-row items-center justify-between gap-3">
@@ -57,7 +61,7 @@ export default async function NavBar() {
           <CartIcon />
 
           <div>
-            {!user.userId || !user ? (
+            {!user?.userId || !user ? (
               <>
                 <Link href={"/authcallback"}>
                   <Button>Sign up</Button>

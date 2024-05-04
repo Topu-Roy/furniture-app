@@ -20,7 +20,8 @@ export const ourFileRouter = {
             })
 
             // Only admin can upload a file
-            if (userFromDB?.role !== 'ADMIN') throw new UploadThingError("Unauthorized");
+            // TODO: check
+            // if (userFromDB?.role !== 'ADMIN') throw new UploadThingError("Unauthorized");
 
             // Whatever is returned here is accessible in onUploadComplete as `metadata`
             return { userId: user.userId };

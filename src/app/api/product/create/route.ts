@@ -4,7 +4,9 @@ import { db } from "@/lib/db";
 
 //* ---------------------------------- Create a new product ------------------------------------
 export async function POST(request: Request) {
+    // TODO: Make sure Admin only
     const body: unknown = await request.json()
+    console.log(body);
 
     if (!body) return NextResponse.json({ message: "Missing required fields" }, { status: 404 })
 

@@ -58,14 +58,17 @@ export default function CreateProduct() {
 
   const onSubmit: SubmitHandler<createProductPostBodyType> = async (data) => {
     try {
-      const res = await fetch("api/product/create", {
+      const res = await fetch("/api/product/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
+      console.log("data: ", data);
       if (res.ok) {
         const resJson: unknown = await res.json();
+
+        console.log("Response: ", resJson);
 
         // * Validating the response from the server
         const expectedResponseSchema = z.object({
@@ -76,7 +79,7 @@ export default function CreateProduct() {
 
         // * Sending the recently created product id to upload route
         // * to update the product image with uploaded image url
-        router.replace(`createProduct/upload?id=${validatedRes.id}`);
+        router.replace(`/createProduct/upload?id=${validatedRes.id}`);
       }
     } catch (error) {
       if (error instanceof Error) {

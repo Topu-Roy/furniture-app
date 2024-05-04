@@ -2,7 +2,8 @@
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import { z } from "zod";
-import { UploadDropzone } from "@/lib/uploadthing";
+import { UploadDropzone, UploadButton } from "@/lib/uploadthing";
+import { Button } from "@/components/ui/button";
 
 export default function UploadImage() {
   const searchParams = useSearchParams();
@@ -22,10 +23,16 @@ export default function UploadImage() {
 
   return (
     <div className="mx-auto mt-[6rem] max-w-lg">
-      <UploadDropzone
-        endpoint="imageUploader"
-        onClientUploadComplete={() => {}}
-      />
+      <Button className="size-[20rem]" asChild>
+        <UploadButton
+          endpoint="imageUploader"
+          onClientUploadComplete={(res) => {
+            // const { url } = res[0];
+            console.log(res[0].serverData.fileUrl);
+            alert("upload successfully");
+          }}
+        />
+      </Button>
     </div>
   );
 }
