@@ -10,12 +10,15 @@ export async function PATCH(request: Request) {
 
     if (!body) return NextResponse.json({ message: "Missing required fields" }, { status: 400 })
 
+    //* Validating the body of the request
     const validatedBody = updateProductImagePatchBodySchema.parse(body)
 
+    //* Checking if the product exists in the database
     const isProductExist = getProductById(validatedBody.id);
 
     if (!isProductExist) return NextResponse.json({ message: "Product not found" }, { status: 404 })
 
+    //* Update the image url
     try {
         const updatedProduct = await db.product.update({
             where: {
@@ -26,10 +29,9 @@ export async function PATCH(request: Request) {
             }
         })
 
-        return NextResponse.json({ id: updatedProduct.id }, { status: 200 })
+        return NextResponse.json({ product: updatedProduct }, { status: 200 })
 
     } catch (error) {
         if (error instanceof Error) return NextResponse.json({ message: error.stack }, { status: 500 })
     }
-
 }

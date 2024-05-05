@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import NavBar from "@/app/_components/NavBar";
 import Footer from "@/app/_components/Footer";
 import { inter } from "@/styles/font";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Furnit",
@@ -22,6 +23,7 @@ export default function RootLayout({
           <NavBar />
           {children}
           <Footer />
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>
