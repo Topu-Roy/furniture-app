@@ -1,10 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { cn, scrollToTop } from "@/lib/utils";
-import { Category, useShopStore } from "@/zustand/shop/shopStore";
+import { useShopStore } from "@/zustand/shop/shopStore";
 import HeadingAndReset from "./headingAndReset";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/app/_components/text";
+import { Category } from "@prisma/client";
 
 type ProductCatagoriesType = {
   productName: Category;

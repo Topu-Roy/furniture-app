@@ -1,8 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { cn, scrollToTop } from "@/lib/utils";
-import { Color, useShopStore } from "@/zustand/shop/shopStore";
+import { useShopStore } from "@/zustand/shop/shopStore";
 import HeadingAndReset from "./headingAndReset";
+import { Color } from "@prisma/client";
 
 type ColorNQuantity = {
   color: Color;
@@ -16,26 +17,26 @@ export default function ColorSelector() {
   useEffect(() => {
     const colors: ColorNQuantity[] = [
       {
-        color: "black",
+        color: "Black",
         quantity: productsBackup.filter((item) => item.color === "black")
           .length,
       },
       {
-        color: "white",
+        color: "White",
         quantity: productsBackup.filter((item) => item.color === "white")
           .length,
       },
       {
-        color: "red",
+        color: "Red",
         quantity: productsBackup.filter((item) => item.color === "red").length,
       },
       {
-        color: "green",
+        color: "Green",
         quantity: productsBackup.filter((item) => item.color === "green")
           .length,
       },
       {
-        color: "brown",
+        color: "Brown",
         quantity: productsBackup.filter((item) => item.color === "brown")
           .length,
       },
@@ -71,9 +72,9 @@ export default function ColorSelector() {
             className={cn(
               `h-10 w-10 rounded-full p-6 text-xs bg-${item.color}-500/80 flex items-center justify-center`,
               {
-                "bg-black/80 text-white": item.color === "black",
-                "bg-stone-200/80 text-black": item.color === "white",
-                "bg-[#964B00]/80": item.color === "brown",
+                "bg-black/80 text-white": item.color === "Black",
+                "bg-stone-200/80 text-black": item.color === "White",
+                "bg-[#964B00]/80": item.color === "Brown",
                 "ring-[3px] ring-stone-700": selectedColor === item.color,
               },
             )}

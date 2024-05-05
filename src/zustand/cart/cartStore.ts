@@ -1,9 +1,6 @@
+import { Category, Color, Tag } from "@prisma/client";
 import { create } from "zustand";
 import { persist, createJSONStorage } from 'zustand/middleware'
-
-type Color = "black" | "white" | "red" | "brown" | "green";
-type Category = "Chair" | "Table" | "Lamp" | "Drawer" | "Bed" | "Bookshelf" | "Sofa";
-type Tag = "Minimalistic" | "Modern" | "Stylish" | "Elegant" | "Ambient" | "Luxurious";
 
 export type CartProductType = {
     id: number;

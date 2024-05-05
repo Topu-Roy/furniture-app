@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { z } from "zod";
 import { useUploadThing } from "@/lib/uploadthing";
 import Dropzone from "react-dropzone";
@@ -8,10 +8,14 @@ import { toast } from "@/components/ui/use-toast";
 import { Progress } from "@/components/ui/progress";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BiLoaderAlt } from "react-icons/bi";
+import { FiUploadCloud } from "react-icons/fi";
+import { IoCheckmarkDone, IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 
 export default function UploadImage() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [updatingImageUrl, setUpdatingImageUrl] = useState(false);
+  const [updateComplete, setUpdatingComplete] = useState(false);
 
   //* Getting id from search parameters
   const searchParams = useSearchParams();
@@ -63,6 +67,8 @@ export default function UploadImage() {
 
     if (updateImage.ok) {
       setUpdatingImageUrl(false);
+      setUpdatingComplete(true);
+      useRouter().replace("/pro");
       return toast({
         title: "Success",
         description: "File saved on the database",
@@ -124,8 +130,16 @@ export default function UploadImage() {
         }}
       >
         {({ getRootProps, getInputProps }) => (
-          <div {...getRootProps()} className="size-[15rem] bg-slate-600">
-            <span>Drop here</span>
+          <div
+            {...getRootProps()}
+            className="mx-auto flex size-[25rem] flex-col items-center justify-center rounded-md border-2 border-dashed"
+          >
+            <div className="flex flex-col items-center justify-center">
+              <FiUploadCloud size={24} />
+              <span className="text-center">
+                Drag &apos;n&apos; drop here or click to upload image
+              </span>
+            </div>
             {isUploading ? (
               <div
                 className={cn(
@@ -142,15 +156,26 @@ export default function UploadImage() {
             ) : null}
 
             {uploadProgress === 100 ? (
-              <div className="flex flex-col items-center justify-center gap-2 pt-4 text-center text-sm text-zinc-500">
+              <div className="flex items-center justify-center gap-2 pt-4 text-center text-sm text-zinc-500">
+                <IoCheckmarkDoneCircleSharp
+                  size={20}
+                  className="text-green-500"
+                />
                 <p>Upload complete...</p>
               </div>
             ) : null}
 
             {updatingImageUrl === true ? (
               <div className="flex flex-col items-center justify-center gap-2 pt-4 text-center text-sm text-zinc-500">
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <BiLoaderAlt size={30} className="h-4 w-4 animate-spin" />
                 <p>Updating in the database...</p>
+              </div>
+            ) : null}
+
+            {updateComplete ? (
+              <div className="flex flex-col items-center justify-center gap-2 pt-4 text-center text-sm text-zinc-500">
+                <BiLoaderAlt size={30} className="h-4 w-4 animate-spin" />
+                <span>Updating in the database</span>
               </div>
             ) : null}
 

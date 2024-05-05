@@ -31,8 +31,5 @@ export const updateProductImagePatchBodySchema = z.object({
     image: z.string().url()
 })
 
-export type Color = typeof color[number]
-export type Category = typeof category[number]
-export type Tag = typeof tag[number]
 export type createProductPostBodyType = z.infer<typeof createProductPostBodySchema>
 export type updateImagePatchType = z.infer<typeof updateProductImagePatchBodySchema>
