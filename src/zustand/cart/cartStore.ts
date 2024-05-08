@@ -1,13 +1,13 @@
-import { Category, Color, Tag } from "@prisma/client";
+import { Category, Color, Status, Tag } from "@prisma/client";
 import { create } from "zustand";
 import { persist, createJSONStorage } from 'zustand/middleware'
 
 export type CartProductType = {
-    id: number;
+    id: string;
     productTitle: string;
     image: string;
     price: number;
-    status?: "new" | "popular" | "out of stock";
+    status: Status
     category: Category;
     tag: Tag;
     color: Color;
@@ -18,9 +18,9 @@ export type CartProductType = {
 type UseShopStoreType = {
     products: CartProductType[]
     addToCart: (product: CartProductType) => void
-    removeFromCart: (id: number) => void
-    increaseQuantity: (id: number) => void
-    decreaseQuantity: (id: number) => void
+    removeFromCart: (id: string) => void
+    increaseQuantity: (id: string) => void
+    decreaseQuantity: (id: string) => void
 };
 
 export const useCartStore = create<UseShopStoreType>()(
@@ -53,7 +53,8 @@ export const useCartStore = create<UseShopStoreType>()(
             name: "cart-storage",
             storage: createJSONStorage(() => sessionStorage),
             partialize: (state) => ({
-                products: state.products.map(({ isSelected, ...rest }) => rest)             //* Excluding the isSelected field from the local storage 
+                //* Excluding the isSelected field from the local storage
+                products: state.products.map(({ isSelected, ...rest }) => rest)
             }),
         }
     )

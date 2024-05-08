@@ -18,26 +18,26 @@ export default function ColorSelector() {
     const colors: ColorNQuantity[] = [
       {
         color: "Black",
-        quantity: productsBackup.filter((item) => item.color === "black")
+        quantity: productsBackup.filter((item) => item.color === "Black")
           .length,
       },
       {
         color: "White",
-        quantity: productsBackup.filter((item) => item.color === "white")
+        quantity: productsBackup.filter((item) => item.color === "White")
           .length,
       },
       {
         color: "Red",
-        quantity: productsBackup.filter((item) => item.color === "red").length,
+        quantity: productsBackup.filter((item) => item.color === "Red").length,
       },
       {
         color: "Green",
-        quantity: productsBackup.filter((item) => item.color === "green")
+        quantity: productsBackup.filter((item) => item.color === "Green")
           .length,
       },
       {
         color: "Brown",
-        quantity: productsBackup.filter((item) => item.color === "brown")
+        quantity: productsBackup.filter((item) => item.color === "Brown")
           .length,
       },
     ];
@@ -73,7 +73,9 @@ export default function ColorSelector() {
               `h-10 w-10 rounded-full p-6 text-xs bg-${item.color}-500/80 flex items-center justify-center`,
               {
                 "bg-black/80 text-white": item.color === "Black",
-                "bg-stone-200/80 text-black": item.color === "White",
+                "bg-white text-black": item.color === "White",
+                "bg-red-500/80": item.color === "Red",
+                "bg-green-500/80": item.color === "Green",
                 "bg-[#964B00]/80": item.color === "Brown",
                 "ring-[3px] ring-stone-700": selectedColor === item.color,
               },

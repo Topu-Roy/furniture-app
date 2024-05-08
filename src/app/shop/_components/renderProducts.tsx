@@ -1,14 +1,16 @@
+"use client";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { scrollToTop } from "@/lib/utils";
-import { type ProductType, useShopStore } from "@/zustand/shop/shopStore";
+import { useShopStore } from "@/zustand/shop/shopStore";
 import Product from "@/app/_components/product/productCard";
 import { Button } from "@/components/ui/button";
 import { VscLoading } from "react-icons/vsc";
 import { MdRunningWithErrors } from "react-icons/md";
 import { Heading } from "@/app/_components/heading";
+import { productResponseType } from "@/zod/schema";
 
 type Props = {
-  products: ProductType[];
+  products: productResponseType;
   setSheetOpen: Dispatch<SetStateAction<boolean>>;
 };
 

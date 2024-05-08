@@ -2,11 +2,11 @@ import { Category, Color, Status, Tag } from "@prisma/client";
 import { create } from "zustand";
 
 export type ProductType = {
-  id: number;
+  id: string;
   className?: string;
   productTitle: string;
   image: string;
-  price: number | undefined;
+  price: number;
   status: Status;
   category: Category;
   tag: Tag;

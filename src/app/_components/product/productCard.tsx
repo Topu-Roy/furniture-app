@@ -39,7 +39,7 @@ export default function Product(props: ProductType) {
             <MobilePopover
               product={{
                 ...props,
-                price: props.price as number,
+                price: props.price,
                 quantity: 1,
                 isSelected: false,
               }}
@@ -101,11 +101,13 @@ export default function Product(props: ProductType) {
           <div className="absolute right-[2%] top-[2%] z-30 w-full max-w-min rounded-lg rounded-tr-full">
             {props.status ? (
               <Text
-                className={cn("px-2", {
-                  "bg-red-500/50": props.status === "new",
-                  "bg-green-500/50": props.status === "popular",
-                  "bg-gray-500/50": props.status === "out of stock",
-                })}
+                className={cn(
+                  "px-2",
+                  props.status === "Regular" ? "hidden" : "",
+                  props.status === "New" ? "bg-red-500/50" : "",
+                  props.status === "Popular" ? "bg-green-500/50" : "",
+                  props.status === "Out_of_stock" ? "bg-gray-500/50" : "",
+                )}
               >
                 {props.status}
               </Text>
