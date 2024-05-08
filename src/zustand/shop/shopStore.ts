@@ -1,4 +1,4 @@
-import { Category, Color, Tag } from "@prisma/client";
+import { Category, Color, Status, Tag } from "@prisma/client";
 import { create } from "zustand";
 
 export type ProductType = {
@@ -7,7 +7,7 @@ export type ProductType = {
   productTitle: string;
   image: string;
   price: number | undefined;
-  status?: "new" | "popular" | "out of stock";
+  status: Status;
   category: Category;
   tag: Tag;
   color: Color;

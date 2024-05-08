@@ -90,6 +90,7 @@ enum Tag {
 }
 
 enum Status {
+  Regular
   New
   Popular
   Out_of_stock
