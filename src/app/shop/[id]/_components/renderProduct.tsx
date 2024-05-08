@@ -15,7 +15,7 @@ export default function RenderProduct({ product }: props) {
     <>
       <div className="flex flex-col items-start justify-between gap-4 px-2 sm:flex-row sm:px-3">
         <div className="h-full flex-1 overflow-hidden rounded-lg sm:max-w-md">
-          // TODO: Make a default image url
+          {/* // TODO: Make a default image url */}
           <Image
             src={product.image || ""}
             height={1024}
