@@ -1,21 +1,9 @@
-import { Category, Color, Status, Tag } from "@prisma/client";
+import { Category, Color, Product, Status, Tag } from "@prisma/client";
 import { create } from "zustand";
 
-export type ProductType = {
-  id: string;
-  className?: string;
-  productTitle: string;
-  image: string;
-  price: number;
-  status: Status;
-  category: Category;
-  tag: Tag;
-  color: Color;
-};
-
 type UseShopStoreType = {
-  productsBackup: ProductType[];
-  setProductsBackup: (products: ProductType[]) => void;
+  productsBackup: Product[];
+  setProductsBackup: (products: Product[]) => void;
   selectedMinPrice: number;
   selectedMaxPrice: number;
   selectedSliderPrice: number;
@@ -28,7 +16,7 @@ type UseShopStoreType = {
 
 export const useShopStore = create<UseShopStoreType>((set) => ({
   productsBackup: [],
-  setProductsBackup: (props: ProductType[]) => set(() => ({ productsBackup: props })),
+  setProductsBackup: (props: Product[]) => set(() => ({ productsBackup: props })),
   selectedMinPrice: 0,
   selectedMaxPrice: 2000,
   selectedSliderPrice: 2000,

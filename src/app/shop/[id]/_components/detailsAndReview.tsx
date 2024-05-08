@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
-import { ProductType } from "@/zustand/shop/shopStore";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { productReviews } from "@/assets/productReviewArray";
 import { MdStar } from "react-icons/md";
 import { Text } from "@/app/_components/text";
+import { type Product } from "@prisma/client";
 
 type props = {
-  product: ProductType;
+  product: Product;
   className?: string;
 };
 
@@ -37,32 +37,7 @@ export default function DetailsAndReview({ product, className }: props) {
           <Text size="md" className="underline">
             Description:
           </Text>
-          <Text size="s">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem et tenetur id quod, in cupiditate voluptatem iste
-            iusto sequi non! Quasi laudantium deserunt ea. Quod nulla sapiente
-            fuga expedita possimus corrupti incidunt velit a. Architecto vero
-            beatae, totam laboriosam voluptate, aliquam molestiae labore quam
-            sint possimus in sit aspernatur numquam sed eaque tempora. Quis,
-            alias! Voluptatem, sequi nihil error nemo vel veritatis obcaecati
-            reprehenderit, beatae a, molestias exercitationem? Blanditiis,
-            excepturi distinctio nemo minima, corporis optio accusamus aperiam
-            cum, at aliquid illo? Illo nisi iste dolores, voluptatibus, esse,
-            nobis nulla consequatur atque officia explicabo sint. Aliquam nihil
-            natus minima voluptatum pariatur est eius reprehenderit quidem vel
-            similique hic fuga nemo necessitatibus, non earum sed molestias
-            accusamus iure autem. Nisi laborum a tempora laudantium temporibus
-            ipsum illo ipsam laboriosam eligendi at necessitatibus nemo
-            reiciendis maxime maiores, doloribus esse obcaecati deserunt unde
-            aspernatur error numquam consequatur atque. Sapiente tenetur sequi
-            exercitationem aliquid. Inventore facilis, corrupti ratione pariatur
-            reprehenderit cumque optio nam quibusdam possimus aliquid. Aperiam,
-            consectetur. Est fugiat a quos itaque reprehenderit distinctio
-            facere dolorum dolor, cumque dolore, consequatur vitae deleniti
-            autem maiores minus! Nihil, cupiditate a debitis iusto dolorum sint
-            quae reprehenderit aperiam quisquam, numquam libero soluta vitae
-            impedit doloremque, adipisci beatae?
-          </Text>
+          <Text size="s">{product.description}</Text>
         </div>
       </TabsContent>
       <TabsContent value="Reviews">

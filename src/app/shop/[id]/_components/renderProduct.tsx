@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
-import { ProductType } from "@/zustand/shop/shopStore";
 import { MdStar } from "react-icons/md";
 import ProductAddToCart from "./productAddToCart";
 import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
+import { Product } from "@prisma/client";
 
 type props = {
-  product: ProductType;
+  product: Product;
 };
 
 export default function RenderProduct({ product }: props) {
@@ -15,8 +15,9 @@ export default function RenderProduct({ product }: props) {
     <>
       <div className="flex flex-col items-start justify-between gap-4 px-2 sm:flex-row sm:px-3">
         <div className="h-full flex-1 overflow-hidden rounded-lg sm:max-w-md">
+          // TODO: Make a default image url
           <Image
-            src={product.image}
+            src={product.image || ""}
             height={1024}
             width={1024}
             alt={product.productTitle}
@@ -76,11 +77,7 @@ export default function RenderProduct({ product }: props) {
                 More Details :
               </Text>
               <Text size="s" className="mb-4 line-clamp-3 pr-6 text-black/70">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae,
-                nam! Ullam laboriosam assumenda consequatur ipsam, explicabo
-                laudantium in odio illum! Eveniet in minus dolor sapiente,
-                repellendus, vel debitis dolorem ipsam voluptate libero repellat
-                aliquam omnis saepe laboriosam incidunt voluptatibus.
+                {}
               </Text>
             </div>
           </div>
@@ -93,11 +90,7 @@ export default function RenderProduct({ product }: props) {
           More Details :
         </Text>
         <Text className="line-clamp-3 text-black/70">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, nam!
-          Ullam laboriosam assumenda consequatur ipsam, explicabo laudantium in
-          odio illum! Eveniet in minus dolor sapiente, repellendus, vel debitis
-          dolorem ipsam voluptate libero repellat aliquam omnis saepe laboriosam
-          incidunt voluptatibus.
+          {product.description}
         </Text>
       </div>
     </>

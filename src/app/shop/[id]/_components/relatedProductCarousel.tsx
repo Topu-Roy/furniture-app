@@ -1,6 +1,8 @@
 import React from "react";
-import { Category, ProductType } from "@/zustand/shop/shopStore";
-import { products } from "@/assets/productArray";
+import Product from "@/app/_components/product/productCard";
+import { Heading } from "@/app/_components/heading";
+import { Category, Product as ProductType } from "@prisma/client";
+import { productArrayResponseSchema } from "@/zod/schema";
 import { cn } from "@/lib/utils";
 import {
   Carousel,
@@ -9,27 +11,37 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Product from "@/app/_components/product/productCard";
-import { Text } from "@/app/_components/text";
-import { Heading } from "@/app/_components/heading";
 
-type props = {
-  productId: number;
+type Props = {
+  productId: string;
   productCategory: Category;
   className?: string;
 };
 
-export default function RelatedProductCarousel({
-  productId,
-  className,
-  productCategory,
-}: props) {
-  const moreProductsOfSameCategory = products.filter(
+export default async function RelatedProductCarousel(props: Props) {
+  const { productId, className, productCategory } = props;
+  // * Get all products
+  // TODO: Fix url
+  const res = await fetch("http://localhost:3000/api/product/getAllProducts");
+  if (!res.ok) {
+    return <p className="mt-[5rem]">Opps...! Something went wrong. (R)</p>;
+  }
+  const products = await res.json();
+  const validatedProducts = productArrayResponseSchema.safeParse(products);
+
+  // * If not products found render nothing
+  if (!validatedProducts.success) {
+    return null;
+  }
+
+  // * Get all products of the same category as the current product
+  const moreProductsOfSameCategory = validatedProducts.data.filter(
     (product) => product.category === productCategory,
   );
   const moreProductsOfSameCategoryWithoutCurrentOne =
     moreProductsOfSameCategory.filter((product) => product.id !== productId);
 
+  // * Making products array random by shuffling
   function shuffleArray(array: ProductType[]) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -41,6 +53,7 @@ export default function RelatedProductCarousel({
   const productsToRender = shuffleArray(
     moreProductsOfSameCategoryWithoutCurrentOne,
   );
+
   return (
     <>
       <div

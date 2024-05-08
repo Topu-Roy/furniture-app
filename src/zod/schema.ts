@@ -34,7 +34,7 @@ export const updateProductImagePatchBodySchema = z.object({
 })
 
 //* From "/get-all-products" route
-export const productResponseSchema = z.array(
+export const productArrayResponseSchema = z.array(
     z.object({
         id: z.string(),
         createdBy: z.string(),
@@ -51,6 +51,22 @@ export const productResponseSchema = z.array(
     })
 )
 
+export const singleProductResponseSchema = z.object({
+    id: z.string(),
+    createdBy: z.string(),
+    productTitle: z.string(),
+    // TODO: Make this minimum 20 characters
+    description: z.string(),
+    price: z.number().min(5),
+    // TODO: Make this a url
+    image: z.string(),
+    status: z.enum(status),
+    color: z.enum(color),
+    category: z.enum(category),
+    tag: z.enum(tag),
+})
+
+
 export type createProductPostBodyType = z.infer<typeof createProductPostBodySchema>
 export type updateImagePatchType = z.infer<typeof updateProductImagePatchBodySchema>
-export type productResponseType = z.infer<typeof productResponseSchema>
+export type productResponseType = z.infer<typeof productArrayResponseSchema>

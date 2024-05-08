@@ -4,15 +4,15 @@ import ColorSelector from "./_components/colorSelector";
 import FilterByPrice from "./_components/filterByPrice";
 import ProductTag from "./_components/productTag";
 import Products from "./_components/products";
-import { productResponseSchema } from "@/zod/schema";
+import { productArrayResponseSchema } from "@/zod/schema";
 
 export default async function ShopPage() {
-  const res = await fetch("http://localhost:3000/api/getAllProducts");
+  const res = await fetch("http://localhost:3000/api/product/getAllProducts");
   if (!res.ok) {
     return <p className="mt-[5rem]">Opps...! Something went wrong. (R)</p>;
   }
   const products = await res.json();
-  const validatedProducts = productResponseSchema.safeParse(products);
+  const validatedProducts = productArrayResponseSchema.safeParse(products);
   if (!validatedProducts.success) {
     console.log(validatedProducts.error);
     return <p className="mt-[5rem]">Opps...! Something went wrong. (V)</p>;
