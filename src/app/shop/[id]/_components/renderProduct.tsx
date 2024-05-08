@@ -4,7 +4,7 @@ import { MdStar } from "react-icons/md";
 import ProductAddToCart from "./productAddToCart";
 import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
-import { Product } from "@prisma/client";
+import { type Product } from "@prisma/client";
 
 type props = {
   product: Product;
