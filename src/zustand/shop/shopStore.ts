@@ -1,4 +1,4 @@
-import { Category, Color, Tag } from "@/zod/schema";
+import { Category, Color, Tag } from "@prisma/client";
 import { create } from "zustand";
 
 export type ProductType = {
