@@ -15,11 +15,13 @@ model User {
   imageUrl     String?
   userName     String?
   cartProducts CartProduct[]
-  reviews      Review[]
+
+  @@index([id, authId])
 }
 
 model Product {
   id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  createdBy    String
   productTitle String
   description  String
   image        String?
@@ -34,12 +36,13 @@ model Product {
 
 model Review {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  postedBy  String   @db.ObjectId
   text      String
   date      DateTime @default(now())
   Product   Product  @relation(fields: [productId], references: [id])
   productId String   @db.ObjectId
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    String?  @db.ObjectId
+
+  @@index([id, postedBy])
 }
 
 model CartProduct {
@@ -50,42 +53,8 @@ model CartProduct {
   productId  String  @db.ObjectId
   User       User    @relation(fields: [userId], references: [id])
   userId     String  @db.ObjectId
-}
 
-model Blog {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  postDate      DateTime @default(now())
-  headline      String
-  articleIntro  String
-  articleBlocks Block[]
-  thumbnail     String
-  cover         String
-  authorName    String
-  authorImage   String
-}
-
-model Block {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  heading String
-  text    String
-  Blog    Blog   @relation(fields: [blogId], references: [id])
-  blogId  String @db.ObjectId
-}
-
-model Testimonial {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  imageURL String
-  headline String
-  text     String
-  location String
-}
-
-model TeamMember {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  imageURL String
-  role     String
+  @@index([productId, userId])
 }
 
 enum Role {
@@ -125,3 +94,39 @@ enum Status {
   Popular
   Out_of_stock
 }
+
+// model Blog {
+//   id            String   @id @default(auto()) @map("_id") @db.ObjectId
+//   postDate      DateTime @default(now())
+//   headline      String
+//   articleIntro  String
+//   articleBlocks Block[]
+//   thumbnail     String
+//   cover         String
+//   authorName    String
+//   authorImage   String
+// }
+
+// model Block {
+//   id      String @id @default(auto()) @map("_id") @db.ObjectId
+//   heading String
+//   text    String
+//   Blog    Blog   @relation(fields: [blogId], references: [id])
+//   blogId  String @db.ObjectId
+// }
+
+// model Testimonial {
+//   id       String @id @default(auto()) @map("_id") @db.ObjectId
+//   name     String
+//   imageURL String
+//   headline String
+//   text     String
+//   location String
+// }
+
+// model TeamMember {
+//   id       String @id @default(auto()) @map("_id") @db.ObjectId
+//   name     String
+//   imageURL String
+//   role     String
+// }

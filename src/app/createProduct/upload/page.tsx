@@ -1,16 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { z } from "zod";
+import { cn } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
 import Dropzone from "react-dropzone";
+
 import { toast } from "@/components/ui/use-toast";
 import { Progress } from "@/components/ui/progress";
-import { Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+
 import { BiLoaderAlt } from "react-icons/bi";
 import { FiUploadCloud } from "react-icons/fi";
-import { IoCheckmarkDone, IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 
 export default function UploadImage() {
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -20,6 +21,7 @@ export default function UploadImage() {
   //* Getting id from search parameters
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
+  const router = useRouter();
 
   const { startUpload, isUploading } = useUploadThing("imageUploader");
 
@@ -47,7 +49,7 @@ export default function UploadImage() {
 
   async function updateImage(url: string) {
     setUpdatingImageUrl(true);
-    const updateImage = await fetch("/api/product/update", {
+    const res = await fetch("/api/product/update", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -56,7 +58,7 @@ export default function UploadImage() {
       }),
     });
 
-    if (!updateImage.ok) {
+    if (!res.ok) {
       setUpdatingImageUrl(false);
       return toast({
         title: "Something went wrong",
@@ -65,10 +67,16 @@ export default function UploadImage() {
       });
     }
 
-    if (updateImage.ok) {
+    if (res.ok) {
+      const product: any = res.json();
+
+      // * Reset the loading state
       setUpdatingImageUrl(false);
       setUpdatingComplete(true);
-      useRouter().replace("/pro");
+
+      // * Redirect to the product detail page
+      router.replace(`/shop/${product.id}`);
+
       return toast({
         title: "Success",
         description: "File saved on the database",
@@ -89,7 +97,6 @@ export default function UploadImage() {
       <Dropzone
         multiple={false}
         onDrop={async (acceptedFile) => {
-          console.log(acceptedFile[0].type);
           // image/png
           // image/jpeg
           // image/webp
@@ -105,10 +112,9 @@ export default function UploadImage() {
             toast({
               variant: "destructive",
               title: "Something went wrong",
-              description: "Only PDF files can be uploaded",
+              description: "Only images can be uploaded",
             });
           } else {
-            // This is giving type error, so i added any
             const { url } = res[0];
 
             if (!url) {

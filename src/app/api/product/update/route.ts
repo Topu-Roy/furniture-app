@@ -29,7 +29,7 @@ export async function PATCH(request: Request) {
             }
         })
 
-        return NextResponse.json({ product: updatedProduct }, { status: 200 })
+        return NextResponse.json({ id: updatedProduct.id }, { status: 200 })
 
     } catch (error) {
         if (error instanceof Error) return NextResponse.json({ message: error.stack }, { status: 500 })
