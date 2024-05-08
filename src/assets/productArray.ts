@@ -352,13 +352,3 @@ export let products: ProductType[] = [
     "status": "Regular"
   }
 ]
-
-for (let product of products) {
-  // Check if the product doesn't have a status field
-  if (!product.hasOwnProperty('status')) {
-    // If it doesn't have a status field, add one with the value 'Regular'
-    product['status'] = 'Regular';
-  }
-}
-
-console.log(products)

@@ -22,3 +22,9 @@ export async function getProductById(id: string) {
 
     return product;
 }
+
+export async function getAllProduct() {
+    const product = await db.product.findMany()
+
+    return product;
+}
