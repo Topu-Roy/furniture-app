@@ -36,6 +36,7 @@ export async function addProductToCart(productId: string, authId: string) {
 
     const newCartProduct = await db.cartProduct.create({
         data: {
+            quantity: 1,
             userId: user.id,
             productId: productId,
         }
@@ -68,18 +69,16 @@ export async function deleteCartProduct(productId: string) {
 }
 
 export async function getCartProductsByAuthId(authId: string) {
-    const user = await getUserByAuthId(authId);
-
-    if (user === null) return null;
-
-    const product = await db.cartProduct.findMany({
+    const userWithCartProducts = await db.user.findFirst({
         where: {
-            userId: user.id
+            authId: authId
         },
         include: {
-            product: true
+            cartProducts: true
         }
     })
 
-    return product;
+    if (userWithCartProducts === null) return null;
+
+    return userWithCartProducts.cartProducts;
 }

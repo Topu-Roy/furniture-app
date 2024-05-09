@@ -47,7 +47,7 @@ model Review {
 
 model CartProduct {
   id         String  @id @default(auto()) @map("_id") @db.ObjectId
-  quantity   Int     @default(1)
+  quantity   Int
   isSelected Boolean @default(false)
   product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId  String  @db.ObjectId

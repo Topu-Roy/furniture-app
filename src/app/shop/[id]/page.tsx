@@ -11,11 +11,15 @@ export default async function ProductDetails({
 }: {
   params: { id: string };
 }) {
-  const productID = params.id;
-
-  const res = await fetch(
-    `http://localhost:3000/api/product/getProductById?id=${productID}`,
-  );
+  const res = await fetch(`http://localhost:3000/api/product/getProductById`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      productId: params.id,
+    }),
+  });
 
   if (!res.ok) {
     return (

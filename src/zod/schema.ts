@@ -77,6 +77,35 @@ export const getCartProductsByAuthIdSchema = z.object({
     authId: z.string()
 })
 
+export const getCartProductsByAuthIdResponseSchema = z.object({
+    id: z.string(),
+    createdBy: z.string(),
+    productTitle: z.string(),
+    // TODO: Make this minimum 20 characters
+    description: z.string(),
+    // TODO: Make this a url
+    image: z.string(),
+    price: z.number().min(5),
+    status: z.enum(status),
+    color: z.enum(color),
+    category: z.enum(category),
+    tag: z.enum(tag),
+    quantity: z.number()
+})
+
+// product: {
+//     id: string;
+//     createdBy: string;
+//     productTitle: string;
+//     description: string;
+//     image: string | null;
+//     price: number;
+//     status: $Enums.Status | null;
+//     category: $Enums.Category;
+//     tag: $Enums.Tag;
+//     color: $Enums.Color;
+// };
+
 export const addToCartSchema = z.object({
     productId: z.string(),
     authId: z.string()

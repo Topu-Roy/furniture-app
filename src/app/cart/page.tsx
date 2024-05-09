@@ -4,8 +4,22 @@ import SelectAllAndReset from "./_components/selectAllAndReset";
 import RenderCart from "./_components/renderCart";
 import { Heading } from "../_components/heading";
 import { Text } from "../_components/text";
+import { auth } from "@clerk/nextjs/server";
+import { getCartProductsByAuthIdSchema } from "@/zod/schema";
 
-export default function CartPage() {
+export default async function CartPage() {
+  const user = auth();
+
+  const res = await fetch("/api/product/cart", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user.userId),
+  });
+
+  const data: unknown = await res.json();
+
   return (
     <div className="bg-stone-200">
       <Heading className="mt-[5rem] pt-8 text-center">My Cart</Heading>
