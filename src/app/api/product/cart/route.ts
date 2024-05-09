@@ -6,7 +6,7 @@ import { addToCartSchema, getCartProductsByAuthIdSchema, updateProductCartQuanti
 export async function POST(req: Request) {
     const body: unknown = await req.json()
 
-    if (!body) return NextResponse.json({ message: "No data received" }, { status: 401 })
+    if (!body) return NextResponse.json({ message: "No data received" }, { status: 400 })
 
     const parsedBody = getCartProductsByAuthIdSchema.safeParse(body);
 
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
     const body: unknown = await req.json()
 
-    if (!body) return NextResponse.json({ message: "No data received" }, { status: 401 })
+    if (!body) return NextResponse.json({ message: "No data received" }, { status: 400 })
 
     const parsedBody = addToCartSchema.safeParse(body);
 
@@ -38,7 +38,7 @@ export async function PUT(req: Request) {
 export async function PATCH(req: Request) {
     const body: unknown = await req.json()
 
-    if (!body) return NextResponse.json({ message: "No data received" }, { status: 401 })
+    if (!body) return NextResponse.json({ message: "No data received" }, { status: 400 })
 
     const parsedBody = updateProductCartQuantitySchema.safeParse(body);
 
