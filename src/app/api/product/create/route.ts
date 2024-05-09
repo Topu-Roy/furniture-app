@@ -11,6 +11,7 @@ export async function POST(request: Request) {
     if (!body) return NextResponse.json({ message: "Missing required fields" }, { status: 404 })
 
     const validatedBody = createProductPostBodySchema.parse(body)
+    //TODO: fix error
     const createdProduct = await db.product.create({
         data: {
             productTitle: validatedBody.productTitle,

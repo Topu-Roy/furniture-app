@@ -70,3 +70,28 @@ export const singleProductResponseSchema = z.object({
 export type createProductPostBodyType = z.infer<typeof createProductPostBodySchema>
 export type updateImagePatchType = z.infer<typeof updateProductImagePatchBodySchema>
 export type productResponseType = z.infer<typeof productArrayResponseSchema>
+
+
+//* For Product Api Methods and types for fetch body
+export const getCartProductsByAuthIdSchema = z.object({
+    authId: z.string()
+})
+
+export const addToCartSchema = z.object({
+    productId: z.string(),
+    authId: z.string()
+})
+
+export const updateProductCartQuantitySchema = z.object({
+    productId: z.string(),
+    quantity: z.number(),
+})
+
+export const deleteProductCartQuantitySchema = z.object({
+    productId: z.string(),
+})
+
+export type getCartProductsByAuthIdType = z.infer<typeof getCartProductsByAuthIdSchema>
+export type addToCartType = z.infer<typeof addToCartSchema>
+export type updateProductCartQuantityType = z.infer<typeof updateProductCartQuantitySchema>
+export type deleteProductCartQuantityType = z.infer<typeof deleteProductCartQuantitySchema>

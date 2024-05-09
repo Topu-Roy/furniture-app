@@ -39,7 +39,7 @@ model Review {
   postedBy  String   @db.ObjectId
   text      String
   date      DateTime @default(now())
-  Product   Product  @relation(fields: [productId], references: [id])
+  Product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId String   @db.ObjectId
 
   @@index([id, postedBy])
@@ -49,9 +49,9 @@ model CartProduct {
   id         String  @id @default(auto()) @map("_id") @db.ObjectId
   quantity   Int     @default(1)
   isSelected Boolean @default(false)
-  product    Product @relation(fields: [productId], references: [id])
+  product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId  String  @db.ObjectId
-  User       User    @relation(fields: [userId], references: [id])
+  User       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String  @db.ObjectId
 
   @@index([productId, userId])
