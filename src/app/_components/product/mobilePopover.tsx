@@ -9,14 +9,14 @@ import { Button } from "@/components/ui/button";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import { cn } from "@/lib/utils";
 import AddButton from "./addButton";
-import { CartProductType } from "@/zustand/cart/cartStore";
 import Link from "next/link";
 
 type Props = {
-  product: CartProductType;
+  authId: string;
+  productId: string;
 };
 
-export default function MobilePopover({ product }: Props) {
+export default function MobilePopover({ authId, productId }: Props) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -41,7 +41,7 @@ export default function MobilePopover({ product }: Props) {
       <PopoverContent className="max-w-[15rem] -translate-x-10">
         <div className="flex w-full flex-col items-center justify-center gap-2">
           <div className="w-full">
-            <Link href={`/shop/${product.id}`}>
+            <Link href={`/shop/${productId}`}>
               <Button size={"lg"} variant={"outline"} className="w-full">
                 View product
               </Button>
@@ -56,12 +56,9 @@ export default function MobilePopover({ product }: Props) {
           </div>
           <AddButton
             className="w-full"
-            product={{
-              ...product,
-              price: product.price,
-              quantity: 1,
-              isSelected: false,
-            }}
+            authId={authId}
+            productId={productId}
+            quantity={1}
           />
         </div>
       </PopoverContent>
