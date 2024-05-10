@@ -108,7 +108,8 @@ export const getCartProductsByAuthIdResponseSchema = z.object({
 
 export const addToCartSchema = z.object({
     productId: z.string(),
-    authId: z.string()
+    authId: z.string(),
+    quantity: z.number(),
 })
 
 export const updateProductCartQuantitySchema = z.object({

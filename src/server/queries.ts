@@ -3,6 +3,8 @@ import "server-only";
 
 import { db } from "@/lib/db";
 
+//* ----------------- User ----------------------
+
 export async function getUserByAuthId(id: string) {
     const user = await db.user.findFirst({
         where: {
@@ -12,6 +14,8 @@ export async function getUserByAuthId(id: string) {
 
     return user;
 }
+
+//* ---------------- Product --------------------
 
 export async function getProductById(id: string) {
     const product = await db.product.findFirst({
@@ -29,14 +33,26 @@ export async function getAllProduct() {
     return product;
 }
 
-export async function addProductToCart(productId: string, authId: string) {
+//* --------------- Cart -------------------------
+
+export async function getSingleCartProductById(productId: string) {
+    const cart = await db.cartProduct.findFirst({
+        where: {
+            id: productId
+        }
+    })
+
+    return cart;
+}
+
+export async function addProductToCart(productId: string, authId: string, quantity?: number) {
     const user = await getUserByAuthId(authId);
 
     if (user === null) return null;
 
     const newCartProduct = await db.cartProduct.create({
         data: {
-            quantity: 1,
+            quantity: quantity || 1,
             userId: user.id,
             productId: productId,
         }

@@ -54,7 +54,7 @@ model CartProduct {
   User       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String  @db.ObjectId
 
-  @@index([productId, userId])
+  @@unique([productId, userId])
 }
 
 enum Role {

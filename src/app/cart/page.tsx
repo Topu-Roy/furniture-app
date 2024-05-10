@@ -1,11 +1,13 @@
 import React from "react";
 import CartCheckout from "./_components/cartCheckout";
 import SelectAllAndReset from "./_components/selectAllAndReset";
-import RenderCart from "./_components/renderCart";
 import { Heading } from "../_components/heading";
 import { Text } from "../_components/text";
 import { auth } from "@clerk/nextjs/server";
-import { getCartProductsByAuthIdSchema } from "@/zod/schema";
+import { CartProduct } from "@prisma/client";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import RenderCart from "./_components/renderCart";
 
 export default async function CartPage() {
   const user = auth();
@@ -18,7 +20,20 @@ export default async function CartPage() {
     body: JSON.stringify(user.userId),
   });
 
-  const data: unknown = await res.json();
+  if (!res.ok) {
+    return (
+      <div className="mx-auto flex max-w-7xl items-center justify-center gap-6 bg-stone-200">
+        <Heading className="mt-[5rem] pt-8 text-center">
+          Cart is empty...!
+        </Heading>
+        <Link href={"/shop"}>
+          <Button>Add a new Product</Button>
+        </Link>
+      </div>
+    );
+  }
+
+  const cartProducts: CartProduct[] = await res.json();
 
   return (
     <div className="bg-stone-200">
@@ -31,7 +46,7 @@ export default async function CartPage() {
       <SelectAllAndReset />
 
       <div className="mx-auto flex max-w-7xl items-start justify-between gap-2 pb-10">
-        <RenderCart />
+        <RenderCart products={cartProducts} />
 
         <div className="bg-gray-50_01 flex max-w-sm flex-1 flex-col items-start justify-end gap-7 p-[27px]">
           <CartCheckout />

@@ -1,33 +1,30 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { CartProductType, useCartStore } from "@/zustand/cart/cartStore";
+import React, { useEffect } from "react";
+import { useCartStore } from "@/zustand/cart/cartStore";
+import { CartProduct } from "@prisma/client";
 import CartItem from "./cartItem";
-import { Button } from "@/components/ui/button";
-import { Heading } from "@/app/_components/heading";
 
-export default function RenderCart() {
-  const [productsToRender, setProductsToRender] = useState<CartProductType[]>(
-    [],
-  );
-  const { products } = useCartStore();
+type Props = {
+  products: CartProduct[];
+};
+
+export default function RenderCart({ products }: Props) {
   useEffect(() => {
-    setProductsToRender(products);
+    useCartStore.setState({ products: products });
   }, [products]);
+
   return (
-    <>
-      {productsToRender.length !== 0 ? (
-        <CartItem products={productsToRender} />
-      ) : (
-        <div className="flex h-[10rem] w-full flex-col items-center justify-center gap-4">
-          <Heading className="text-center text-neutral-700">
-            Cart is empty
-          </Heading>
-          <Link href={"/shop"}>
-            <Button variant={"outline"}>Explore new products</Button>
-          </Link>
+    <div className="w-[55rem] space-y-2">
+      {products.map((item) => (
+        <div key={item.id}>
+          <CartItem
+            quantity={item.quantity}
+            isSelected={item.isSelected}
+            productId={item.id}
+            products={products}
+          />
         </div>
-      )}
-    </>
+      ))}
+    </div>
   );
 }

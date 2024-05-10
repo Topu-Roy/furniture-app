@@ -5,12 +5,25 @@ import ProductAddToCart from "./productAddToCart";
 import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
 import { type Product } from "@prisma/client";
+import { auth } from "@clerk/nextjs/server";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 type props = {
   product: Product;
 };
 
 export default function RenderProduct({ product }: props) {
+  const user = auth();
+  if (!user.userId)
+    return (
+      <div className="mx-auto mt-[6rem] flex max-w-7xl items-center justify-center">
+        <Link href={"/authcallback"}>
+          <Button>Sign up</Button>
+        </Link>
+      </div>
+    );
+
   return (
     <>
       <div className="flex flex-col items-start justify-between gap-4 px-2 sm:flex-row sm:px-3">
@@ -82,7 +95,7 @@ export default function RenderProduct({ product }: props) {
             </div>
           </div>
 
-          <ProductAddToCart product={product} />
+          <ProductAddToCart authId={user.userId} productId={product.id} />
         </div>
       </div>
       <div className="hidden w-full space-y-2 px-3 sm:block lg:hidden">
