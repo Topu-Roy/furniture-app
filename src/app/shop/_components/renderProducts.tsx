@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 import { VscLoading } from "react-icons/vsc";
 import { MdRunningWithErrors } from "react-icons/md";
 import { Heading } from "@/app/_components/heading";
-import { productResponseType } from "@/zod/schema";
+import { type Product as ProductType } from "@prisma/client";
 
 type Props = {
-  products: productResponseType;
+  products: ProductType[];
   setSheetOpen: Dispatch<SetStateAction<boolean>>;
 };
 
@@ -164,19 +164,7 @@ export default function RenderProducts(props: Props) {
       );
     }
 
-    return productsToRender.map((item) => (
-      <Product
-        id={item.id}
-        productTitle={item.productTitle}
-        image={item.image}
-        category={item.category}
-        color={item.color}
-        price={item.price}
-        tag={item.tag}
-        key={item.productTitle + item.image}
-        status={item.status}
-      />
-    ));
+    return productsToRender.map((item) => <Product product={item} />);
   }
 
   function handleResetAll() {

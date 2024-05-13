@@ -1,8 +1,7 @@
 import React from "react";
 import Product from "@/app/_components/product/productCard";
 import { Heading } from "@/app/_components/heading";
-import { Category, Product as ProductType } from "@prisma/client";
-import { productArrayResponseSchema } from "@/zod/schema";
+import { Category, type Product as ProductType } from "@prisma/client";
 import { cn } from "@/lib/utils";
 import {
   Carousel,
@@ -26,16 +25,10 @@ export default async function RelatedProductCarousel(props: Props) {
   if (!res.ok) {
     return <p className="mt-[5rem]">Opps...! Something went wrong. (R)</p>;
   }
-  const products = await res.json();
-  const validatedProducts = productArrayResponseSchema.safeParse(products);
-
-  // * If not products found render nothing
-  if (!validatedProducts.success) {
-    return null;
-  }
+  const products: ProductType[] = await res.json();
 
   // * Get all products of the same category as the current product
-  const moreProductsOfSameCategory = validatedProducts.data.filter(
+  const moreProductsOfSameCategory = products.filter(
     (product) => product.category === productCategory,
   );
   const moreProductsOfSameCategoryWithoutCurrentOne =
@@ -68,17 +61,7 @@ export default async function RelatedProductCarousel(props: Props) {
             {productsToRender.map((item) => (
               <CarouselItem key={`${item.id}-related-products`}>
                 <div className="mx-auto max-w-[30rem]">
-                  <Product
-                    className="w-full"
-                    category={item.category}
-                    color={item.color}
-                    id={item.id}
-                    image={item.image}
-                    price={item.price}
-                    productTitle={item.productTitle}
-                    tag={item.tag}
-                    status={item.status}
-                  />
+                  <Product className="w-full" product={item} />
                 </div>
               </CarouselItem>
             ))}

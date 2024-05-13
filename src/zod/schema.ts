@@ -93,19 +93,6 @@ export const getCartProductsByAuthIdResponseSchema = z.object({
     quantity: z.number()
 })
 
-// product: {
-//     id: string;
-//     createdBy: string;
-//     productTitle: string;
-//     description: string;
-//     image: string | null;
-//     price: number;
-//     status: $Enums.Status | null;
-//     category: $Enums.Category;
-//     tag: $Enums.Tag;
-//     color: $Enums.Color;
-// };
-
 export const addToCartSchema = z.object({
     productId: z.string(),
     authId: z.string(),
@@ -125,3 +112,18 @@ export type getCartProductsByAuthIdType = z.infer<typeof getCartProductsByAuthId
 export type addToCartType = z.infer<typeof addToCartSchema>
 export type updateProductCartQuantityType = z.infer<typeof updateProductCartQuantitySchema>
 export type deleteProductCartQuantityType = z.infer<typeof deleteProductCartQuantitySchema>
+
+
+//* ----------------------- Cart ---------------------------------
+
+const cartProductSchema = z.object({
+    id: z.string(),
+    quantity: z.number(),
+    isSelected: z.boolean(),
+    productId: z.string(),
+    userId: z.string(),
+});
+
+export const getAllCartProductsSchema = z.object({
+    cartProducts: z.array(cartProductSchema),
+});

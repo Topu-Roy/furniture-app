@@ -22,7 +22,7 @@ export default function Product({ product, className }: Props) {
   const { isLoaded, userId } = useAuth();
 
   // In case the user signs out while on the page.
-  if (!isLoaded || !userId) {
+  if (!isLoaded || !userId || !product) {
     return null;
   }
 

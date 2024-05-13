@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useCartStore } from "@/zustand/cart/cartStore";
 import { CartProduct } from "@prisma/client";
 import CartItem from "./cartItem";
@@ -8,23 +8,41 @@ type Props = {
   products: CartProduct[];
 };
 
-export default function RenderCart({ products }: Props) {
+export default function RenderCart(props: Props) {
+  const [products, setProducts] = useState<CartProduct[]>(props.products);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    useCartStore.setState({ products: products });
+    setProducts(props.products);
+    useCartStore.setState({ products: props.products });
+    setLoading(false);
   }, [products]);
+
+  if (loading) {
+    // Check if products is an empty array
+    return <div className="w-[55rem]">Loading...</div>;
+  }
+
+  if (products.length === 0) {
+    // Check if products is an empty array
+    return <div className="w-[55rem]">Nothing in the cart...</div>;
+  }
 
   return (
     <div className="w-[55rem] space-y-2">
-      {products.map((item) => (
-        <div key={item.id}>
-          <CartItem
-            quantity={item.quantity}
-            isSelected={item.isSelected}
-            productId={item.id}
-            products={products}
-          />
-        </div>
-      ))}
+      {products.map((item) => {
+        console.log(item);
+        console.log(products);
+        return (
+          <div key={item.id}>
+            <CartItem
+              quantity={item.quantity}
+              isSelected={item.isSelected}
+              productId={item.id}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }

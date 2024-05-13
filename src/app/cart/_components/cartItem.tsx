@@ -20,12 +20,11 @@ import {
 } from "react-icons/io5";
 import { cn } from "@/lib/utils";
 import { Text } from "@/app/_components/text";
-import { CartProduct, Product } from "@prisma/client";
+import { Product } from "@prisma/client";
 import { useToast } from "@/components/ui/use-toast";
 import { useCartStore } from "@/zustand/cart/cartStore";
 
 type Props = {
-  products: CartProduct[];
   productId: string;
   isSelected: boolean;
   quantity: number;
@@ -34,7 +33,8 @@ type Props = {
 export default function CartItem(props: Props) {
   const [product, setProduct] = useState<Product>();
   const { toast } = useToast();
-  const { products, productId, isSelected, quantity } = props;
+  const { productId, isSelected, quantity } = props;
+  const { products } = useCartStore();
 
   async function getProduct() {
     const productRes = await fetch(
@@ -50,15 +50,22 @@ export default function CartItem(props: Props) {
       },
     );
 
+    if (!productRes.ok) {
+      console.log(productRes.json());
+    }
+
     if (productRes.ok) {
       const productData = await productRes.json();
       setProduct(productData);
+      console.log(productData);
     }
   }
 
   useEffect(() => {
+    // console.log(productId);
+    console.log(products);
     getProduct();
-  }, []);
+  }, [products]);
 
   async function handleRemove(id: string) {
     const deleteFromCartRes = await fetch(
@@ -96,7 +103,7 @@ export default function CartItem(props: Props) {
     });
   }
 
-  if (!product) return null;
+  if (product === undefined) return <div className="">no products</div>;
 
   return (
     <div
