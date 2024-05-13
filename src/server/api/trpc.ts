@@ -6,11 +6,12 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
-import { initTRPC } from "@trpc/server";
+import { db } from "@/lib/db";
+import { auth } from "@clerk/nextjs/server";
+import { TRPCError, initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-
-import { db } from "@/server/db";
+import { getUserByAuthId } from "../queries";
 
 /**
  * 1. CONTEXT
@@ -25,8 +26,10 @@ import { db } from "@/server/db";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
+  const user = auth();
   return {
     db,
+    user,
     ...opts,
   };
 };
@@ -77,7 +80,48 @@ export const createTRPCRouter = t.router;
  * Public (unauthenticated) procedure
  *
  * This is the base piece you use to build new queries and mutations on your tRPC API. It does not
- * guarantee that a user querying is authorized, but you can still access user session data if they
- * are logged in.
+ * guarantee that a user querying is authorized.
  */
 export const publicProcedure = t.procedure;
+
+/**
+ * Private (authenticated) procedure
+ *
+ * This is the base piece you use to build new queries and mutations on your tRPC API. It
+ * guaranties that a user querying is authorized.
+ */
+export const privateProcedure = t.procedure.use(async (opts) => {
+  const { ctx } = opts;
+
+  if (!ctx.user) throw new TRPCError({ code: 'UNAUTHORIZED' })
+
+  return opts.next({
+    ctx: {
+      user: ctx.user,
+    },
+  });
+})
+
+/**
+ * Admin procedure
+ *
+ * This is the base piece you use to build new queries and mutations on your tRPC API. It
+ * guaranties that a user querying is authorized and is an Admin.
+ */
+export const adminProcedure = t.procedure.use(async (opts) => {
+  const { ctx } = opts;
+
+  if (ctx.user.userId === null) throw new TRPCError({ code: 'UNAUTHORIZED' })
+
+  const dbUser = await getUserByAuthId(ctx.user.userId)
+
+  if (dbUser === null) throw new TRPCError({ code: 'NOT_FOUND' })
+
+  if (dbUser.role !== 'ADMIN') throw new TRPCError({ code: 'FORBIDDEN' })
+
+  return opts.next({
+    ctx: {
+      user: ctx.user,
+    },
+  });
+})

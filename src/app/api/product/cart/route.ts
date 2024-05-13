@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server"
-import { addProductToCart, getCartProductsByAuthId, getSingleCartProductById, updateProductCartQuantity } from "@/server/queries"
+import { addProductToCart, getCartProductById, getCartProductsByAuthId, updateProductCartQuantity } from "@/server/queries"
 import { addToCartSchema, getCartProductsByAuthIdSchema, updateProductCartQuantitySchema } from "@/zod/schema"
+
+//! Done
 
 //* This is to get a single product
 export async function GET(request: Request) {
@@ -9,7 +11,8 @@ export async function GET(request: Request) {
 
     if (!productId) return NextResponse.json({ message: "No data received" }, { status: 400 })
 
-    const product = await getSingleCartProductById(productId)
+    const product = await getCartProductById(productId)
+
 
     if (!product) return NextResponse.json({ message: "Product not found" }, { status: 404 })
 

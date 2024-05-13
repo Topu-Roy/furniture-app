@@ -22,6 +22,7 @@ export const createProductPostBodySchema = z.object({
     productTitle: z.string().min(1, { message: "Please provide a title" }),
     price: z.number({ message: "Please provide a price" }).min(5, { message: "Minimum price is $5" }),
     description: z.string({ message: "Please provide a description" }).min(20, { message: "Please provide a description" }),
+    createdBy: z.string({ message: "Must provide a admin user id" }),
     status: z.enum(status, { message: "Please select Status" }),
     color: z.enum(color, { message: "Please select a color" }),
     category: z.enum(category, { message: "Please select a category" }),

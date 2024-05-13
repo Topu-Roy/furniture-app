@@ -3,6 +3,8 @@ import { deleteProductCartQuantitySchema } from "@/zod/schema";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
+//! Done
+
 //* This is to delete a product from the cart
 export async function POST(req: Request) {
     const user = auth();

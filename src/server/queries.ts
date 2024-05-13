@@ -35,7 +35,7 @@ export async function getAllProduct() {
 
 //* --------------- Cart -------------------------
 
-export async function getSingleCartProductById(productId: string) {
+export async function getCartProductById(productId: string) {
     const cart = await db.cartProduct.findFirst({
         where: {
             id: productId

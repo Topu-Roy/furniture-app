@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 
 //* ---------------------------------- Update the image url of the product ------------------------------------
 export async function PATCH(request: Request) {
+    //! Done
     const body: unknown = await request.json()
     console.log(body)
 

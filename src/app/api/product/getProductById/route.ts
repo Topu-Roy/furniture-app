@@ -3,6 +3,7 @@ import { getProductById } from "@/server/queries";
 import { z } from "zod";
 
 export async function POST(req: NextRequest) {
+    //! Done
     const body: unknown = await req.json()
     if (!body) return NextResponse.json({ message: "Invalid input" }, { status: 400 });
 

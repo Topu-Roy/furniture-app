@@ -5,6 +5,7 @@ import NavBar from "@/app/_components/NavBar";
 import Footer from "@/app/_components/Footer";
 import { inter } from "@/styles/font";
 import { Toaster } from "@/components/ui/toaster";
+import { TRPCReactProvider } from "@/trpc/react";
 
 export const metadata: Metadata = {
   title: "Furnit",
@@ -20,10 +21,12 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className} relative`}>
-          <NavBar />
-          {children}
-          <Footer />
-          <Toaster />
+          <TRPCReactProvider>
+            <NavBar />
+            {children}
+            <Footer />
+            <Toaster />
+          </TRPCReactProvider>
         </body>
       </html>
     </ClerkProvider>
