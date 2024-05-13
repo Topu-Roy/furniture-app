@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { z } from "zod";
 
 export const authRouter = createTRPCRouter({
-    getCartItemById: privateProcedure
+    syncUserToDB: privateProcedure
         .input(z.object({
             authId: z.string(),
             role: z.enum(["USER", "ADMIN"]),
@@ -19,7 +19,7 @@ export const authRouter = createTRPCRouter({
                         authId: input.authId,
                         userName: input.userName,
                         imageUrl: input.imageUrl,
-                        role: 'USER'
+                        role: input.role
                     }
                 })
 

@@ -6,6 +6,7 @@ import CartItem from "./cartItem";
 
 type Props = {
   products: CartProduct[];
+  authId: string;
 };
 
 export default function RenderCart(props: Props) {
@@ -16,7 +17,7 @@ export default function RenderCart(props: Props) {
     setProducts(props.products);
     useCartStore.setState({ products: props.products });
     setLoading(false);
-  }, [products]);
+  }, [useCartStore, products]);
 
   if (loading) {
     // Check if products is an empty array
@@ -36,6 +37,7 @@ export default function RenderCart(props: Props) {
         return (
           <div key={item.id}>
             <CartItem
+              authId={props.authId}
               quantity={item.quantity}
               isSelected={item.isSelected}
               productId={item.id}

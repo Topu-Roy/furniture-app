@@ -23,87 +23,78 @@ import { Text } from "@/app/_components/text";
 import { Product } from "@prisma/client";
 import { useToast } from "@/components/ui/use-toast";
 import { useCartStore } from "@/zustand/cart/cartStore";
+import { api } from "@/trpc/server";
 
 type Props = {
   productId: string;
   isSelected: boolean;
   quantity: number;
+  authId: string;
 };
 
 export default function CartItem(props: Props) {
   const [product, setProduct] = useState<Product>();
   const { toast } = useToast();
+
   const { productId, isSelected, quantity } = props;
-  const { products } = useCartStore();
+  const ProductsFromStore = useCartStore().products;
+//TODO: Fix this
+  // async function getAllProducts() {
+  //   const allCartProducts = await api.cart.getAllCartItems({
+  //     authId: props.authId,
+  //   });
 
-  async function getProduct() {
-    const productRes = await fetch(
-      "http://localhost:3000/api/product/getProductByID",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productId: productId,
-        }),
-      },
-    );
+  //   if (allCartProducts !== null) {
+  //     useCartStore.setState({ products: allCartProducts });
+  //   }
+  // }
+//TODO: Fix this
+  // async function getProduct() {
+  //   const productRes = await api.product.getProductById({ productId });
 
-    if (!productRes.ok) {
-      console.log(productRes.json());
-    }
+  //   if (!productRes || productRes === null) {
+  //     return;
+  //   }
 
-    if (productRes.ok) {
-      const productData = await productRes.json();
-      setProduct(productData);
-      console.log(productData);
-    }
-  }
+  //   if (productRes.id) {
+  //     setProduct(productRes);
+  //   }
+  // }
 
-  useEffect(() => {
-    // console.log(productId);
-    console.log(products);
-    getProduct();
-  }, [products]);
+  //TODO: Fix this
+  // useEffect(() => {
+  //   getProduct();
+  // }, [ProductsFromStore]);
+//TODO: Fix this
+  // async function handleRemove(id: string) {
+  //   const deleteCartItem = await api.cart.deleteCartItem({ productId: id });
 
-  async function handleRemove(id: string) {
-    const deleteFromCartRes = await fetch(
-      "http://localhost:3000/api/product/cart/delete",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productId: id,
-        }),
-      },
-    );
+  //   if (!deleteCartItem || deleteCartItem === null) {
+  //     return toast({
+  //       title: "Something went wrong",
+  //       description: "Product not removed from cart",
+  //       variant: "destructive",
+  //     });
+  //   }
 
-    if (!deleteFromCartRes.ok) {
-      return toast({
-        title: "Something went wrong",
-        description: "Product not removed from cart",
-        variant: "destructive",
-      });
-    }
+  //   if (deleteCartItem.id) {
+  //     getAllProducts();
+  //     return toast({
+  //       title: "Success",
+  //       description: "Product removed from cart",
+  //     });
+  //   }
+  // }
+//TODO: Fix this
+  // function handleCheck(id: string) {
+  //   useCartStore.setState({
+  //     products: ProductsFromStore.map((item) =>
+  //       item.id !== id ? item : { ...item, isSelected: !item.isSelected },
+  //     ),
+  //   });
+  // }
 
-    return toast({
-      title: "Success",
-      description: "Product removed from cart",
-    });
-  }
-
-  function handleCheck(id: string) {
-    useCartStore.setState({
-      products: products.map((item) =>
-        item.id !== id ? item : { ...item, isSelected: !item.isSelected },
-      ),
-    });
-  }
-
-  if (product === undefined) return <div className="">no products</div>;
+  if (product === undefined) return null;
 
   return (
     <div
@@ -120,7 +111,8 @@ export default function CartItem(props: Props) {
             className="peer h-[2.5rem] w-[2.5rem] opacity-0"
             type="checkbox"
             checked={isSelected || false}
-            onChange={() => handleCheck(product.id)}
+            //TODO: Fix this
+            // onChange={() => handleCheck(product.id)}
           />
           <Button
             variant="ghost"
@@ -167,7 +159,8 @@ export default function CartItem(props: Props) {
                 <Button
                   type="submit"
                   variant="ghost"
-                  onClick={() => handleRemove(product.id)}
+                  //TODO: Fix this
+                  // onClick={() => handleRemove(product.id)}
                   className="flex-1 rounded-full bg-rose-300 p-0 shadow-sm hover:bg-rose-400"
                   size={"lg"}
                 >

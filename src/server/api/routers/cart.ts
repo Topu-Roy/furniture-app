@@ -1,10 +1,9 @@
 import { createTRPCRouter, privateProcedure } from "@/server/api/trpc";
-import { TRPCError } from "@trpc/server";
 import { addProductToCart, deleteCartProduct, getCartProductById, getCartProductsByAuthId, updateProductCartQuantity } from "@/server/queries";
 import { addToCartSchema, updateProductCartQuantitySchema } from "@/zod/schema";
 import { z } from "zod";
 
-export const ProductRouter = createTRPCRouter({
+export const cartRouter = createTRPCRouter({
     getCartItemById: privateProcedure
         .input(z.object({ productId: z.string() }))
         .query(async ({ input }) => {
@@ -36,7 +35,7 @@ export const ProductRouter = createTRPCRouter({
 
             if (updatedCartItem.id) return updatedCartItem;
 
-            return new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: "Couldn't update cart item" });
+            return null;
         }),
 
     deleteCartItem: privateProcedure
@@ -46,6 +45,6 @@ export const ProductRouter = createTRPCRouter({
 
             if (deletedCartItem.id) return deletedCartItem;
 
-            return new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: "Couldn't delete cart item" });
+            return null;
         }),
 })

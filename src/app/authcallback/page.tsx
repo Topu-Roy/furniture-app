@@ -1,4 +1,4 @@
-import { syncUserPostBodyType } from "@/zod/schema";
+import { api } from "@/trpc/server";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -6,18 +6,17 @@ export default async function AuthCallback() {
   const user = await currentUser();
 
   if (user) {
-    const bodyToPost: syncUserPostBodyType = {
+    const res = await api.auth.syncUserToDB({
       authId: user.id,
       imageUrl: user.imageUrl,
       role: "USER",
-      userName: user.username,
-    };
-    await fetch("http://localhost:3000/api/sync-user", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(bodyToPost),
+      userName: user.username || "",
     });
+
+    if (!res.id) return redirect("/error");
+
+    if (res.id) return redirect("/home");
   }
 
-  redirect("/home");
+  return redirect("/home");
 }

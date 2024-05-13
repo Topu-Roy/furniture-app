@@ -7,31 +7,23 @@ import { auth } from "@clerk/nextjs/server";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import RenderCart from "./_components/renderCart";
-import { getAllCartProductsSchema } from "@/zod/schema";
+import { api } from "@/trpc/server";
+import { redirect } from "next/navigation";
 
 export default async function CartPage() {
   const user = auth();
 
-  const allCartProductsRes = await fetch(
-    "http://localhost:3000/api/product/cart",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        authId: user.userId,
-      }),
-    },
-  );
+  if (!user.userId) return redirect("/home");
 
-  console.log(user.userId);
+  const allCartProducts = await api.cart.getAllCartItems({
+    authId: user.userId,
+  });
 
-  if (!allCartProductsRes.ok) {
+  if (allCartProducts === null) {
     return (
-      <div className="mx-auto flex max-w-7xl items-center justify-center gap-6 bg-stone-200">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-6">
         <Heading className="mt-[5rem] pt-8 text-center">
-          Cart is empty...!
+          Something went wrong...!
         </Heading>
         <Link href={"/shop"}>
           <Button>Add a new Product</Button>
@@ -40,14 +32,11 @@ export default async function CartPage() {
     );
   }
 
-  const cartProducts: unknown = await allCartProductsRes.json();
-  const parsedProducts = getAllCartProductsSchema.safeParse(cartProducts);
-
-  if (parsedProducts.error) {
+  if (allCartProducts.length === 0) {
     return (
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-6">
+      <div className="mx-auto flex max-w-7xl items-center justify-center gap-6 bg-stone-200">
         <Heading className="mt-[5rem] pt-8 text-center">
-          Something went wrong...!
+          Cart is empty...!
         </Heading>
         <Link href={"/shop"}>
           <Button>Add a new Product</Button>
@@ -67,7 +56,7 @@ export default async function CartPage() {
       <SelectAllAndReset />
 
       <div className="mx-auto flex max-w-7xl items-start justify-between gap-2 pb-10">
-        <RenderCart products={parsedProducts.data.cartProducts} />
+        <RenderCart products={allCartProducts} authId={user.userId} />
 
         <div className="bg-gray-50_01 flex max-w-sm flex-1 flex-col items-start justify-end gap-7 p-[27px]">
           <CartCheckout />
