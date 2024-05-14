@@ -1,10 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "../../../components/ui/button";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
-import { api } from "@/trpc/server";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { api } from "@/trpc/react";
+import { useRouter } from "next/navigation";
 
 type Props = {
   productId: string;
@@ -15,47 +16,45 @@ type Props = {
 
 export default function AddButton(props: Props) {
   const { authId, productId, quantity, className } = props;
-  const [isAdding, setIsAdding] = useState(false);
+  const router = useRouter();
   const { toast } = useToast();
-  //TODO: Fix this
-  // async function handleClick() {
-  //   setIsAdding(true);
-  //   const addedProduct = await api.cart.createNewCartItem({
-  //     productId,
-  //     authId,
-  //     quantity,
-  //   });
 
-  //   if (!addedProduct) {
-  //     setIsAdding(false);
-  //     return toast({
-  //       variant: "destructive",
-  //       title: "Something went wrong",
-  //       description: "Product not added to cart",
-  //     });
-  //   }
+  const { mutate, isPending } = api.cart.createNewCartItem.useMutation({
+    onSuccess: () => {
+      router.refresh();
+      toast({
+        title: "Added to cart",
+        description: "Product successfully added to cart",
+      });
+    },
+    onError: () => {
+      toast({
+        variant: "destructive",
+        title: "Something went wrong",
+        description: "Product not added to cart",
+      });
+    },
+  });
 
-  //   if (addedProduct.id) {
-  //     setIsAdding(false);
-  //     return toast({
-  //       title: "Added to cart",
-  //       description: "Product successfully added to cart",
-  //     });
-  //   }
-  // }
+  const handleClick = () => {
+    mutate({
+      productId,
+      authId,
+      quantity,
+    });
+  };
 
   return (
     <Button
-      // onClick={handleClick}
+      onClick={() => handleClick()}
       size="lg"
       className={cn("rounded-md font-bold", className)}
     >
-      {isAdding ? (
+      {isPending ? (
         <AiOutlineLoading3Quarters className="animate-spin" />
       ) : (
         "Add to cart"
       )}
-      Add to cart
     </Button>
   );
 }
