@@ -10,6 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { api } from "@/trpc/server";
 
 type Props = {
   productId: string;
@@ -20,14 +21,9 @@ type Props = {
 export default async function RelatedProductCarousel(props: Props) {
   const { productId, className, productCategory } = props;
   // * Get all products
-  // TODO: Fix url
-  const res = await fetch("http://localhost:3000/api/product/getAllProducts");
-  if (!res.ok) {
-    return <p className="mt-[5rem]">Opps...! Something went wrong. (R)</p>;
-  }
-  const products: ProductType[] = await res.json();
+  const products = await api.product.getAllProducts();
 
-  // * Get all products of the same category as the current product
+  // * Filter products of same category as the current product
   const moreProductsOfSameCategory = products.filter(
     (product) => product.category === productCategory,
   );
@@ -38,6 +34,7 @@ export default async function RelatedProductCarousel(props: Props) {
   function shuffleArray(array: ProductType[]) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
+      //@ts-ignore
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
@@ -46,6 +43,10 @@ export default async function RelatedProductCarousel(props: Props) {
   const productsToRender = shuffleArray(
     moreProductsOfSameCategoryWithoutCurrentOne,
   );
+
+  if (!products) {
+    return <p className="mt-[5rem]">Opps...! Something went wrong. (R)</p>;
+  }
 
   return (
     <>

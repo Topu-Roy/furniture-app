@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { TiPlus, TiMinus } from "react-icons/ti";
 import { useToast } from "@/components/ui/use-toast";
+import { api } from "@/trpc/react";
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 type props = {
   authId: string;
@@ -12,40 +15,27 @@ type props = {
 export default function ProductAddToCart({ authId, productId }: props) {
   const [quantity, setQuantity] = useState(1);
   const { toast } = useToast();
+  const router = useRouter();
+
+  const { mutate, isPending } = api.cart.createNewCartItem.useMutation({
+    onSuccess: () => {
+      router.refresh();
+      toast({
+        title: "Added to cart",
+        description: "Product successfully added to cart",
+      });
+    },
+    onError: () => {
+      toast({
+        variant: "destructive",
+        title: "Something went wrong",
+        description: "Product not added to cart",
+      });
+    },
+  });
+
   async function handleAddToCart() {
-    const isProductExistInCartRes = await fetch(
-      `http://localhost:3000/api/product/cart?productId=${productId}`,
-    );
-
-    // This means that the product is not already in the cart
-    if (!isProductExistInCartRes.ok) {
-      //* add a product to the cart
-      const addToCartRes = await fetch(
-        "http://localhost:3000/api/product/cart",
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            productId,
-            authId,
-            quantity,
-          }),
-        },
-      );
-
-      if (!addToCartRes.ok) {
-        return toast({
-          variant: "destructive",
-          title: "Something went wrong",
-          description: "Product not added to cart",
-        });
-      }
-    }
-
-    return toast({
-      title: "Added to cart",
-      description: "Product successfully added to cart",
-    });
+    mutate({ productId, authId, quantity });
   }
 
   function updateQuantity(num: 1 | -1) {
@@ -76,9 +66,14 @@ export default function ProductAddToCart({ authId, productId }: props) {
 
         <Button
           onClick={() => handleAddToCart()}
-          className="h-14 flex-1 rounded-md md:max-w-56"
+          className={cn(
+            "h-14 flex-1 rounded-md md:max-w-56",
+            isPending ? "opacity-90" : "",
+          )}
         >
-          {`Add to cart (${quantity})`}
+          {isPending
+            ? `Adding item (${quantity})`
+            : `Add to cart (${quantity})`}
         </Button>
       </div>
     </div>

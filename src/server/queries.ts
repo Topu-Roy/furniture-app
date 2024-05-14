@@ -38,7 +38,7 @@ export async function getAllProduct() {
 export async function getCartProductById(productId: string) {
     const cart = await db.cartProduct.findFirst({
         where: {
-            id: productId
+            id: productId,
         }
     })
 

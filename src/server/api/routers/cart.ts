@@ -1,6 +1,8 @@
+import { db } from "@/lib/db";
 import { createTRPCRouter, privateProcedure } from "@/server/api/trpc";
-import { addProductToCart, deleteCartProduct, getCartProductById, getCartProductsByAuthId, updateProductCartQuantity } from "@/server/queries";
+import { addProductToCart, deleteCartProduct, getCartProductById, getCartProductsByAuthId, getUserByAuthId, updateProductCartQuantity } from "@/server/queries";
 import { addToCartSchema, updateProductCartQuantitySchema } from "@/zod/schema";
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 export const cartRouter = createTRPCRouter({
@@ -23,6 +25,25 @@ export const cartRouter = createTRPCRouter({
     createNewCartItem: privateProcedure
         .input(addToCartSchema)
         .mutation(async ({ input }) => {
+
+            const user = await getUserByAuthId(input.authId)
+
+            if (!user) return new TRPCError({ code: "NOT_FOUND" })
+
+            const isExist = await db.cartProduct.findFirst({
+                where: {
+                    productId: input.productId,
+                    userId: user.id
+                }
+            })
+
+            if (isExist) {
+                if (input.quantity !== isExist.quantity) {
+                    const updatedCartProduct = await updateProductCartQuantity(input.productId, input.quantity)
+                    return updatedCartProduct;
+                }
+            }
+
             const createdCartProduct = await addProductToCart(input.productId, input.authId, input.quantity);
 
             return createdCartProduct;
