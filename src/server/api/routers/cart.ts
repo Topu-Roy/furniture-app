@@ -2,7 +2,6 @@ import { db } from "@/lib/db";
 import { createTRPCRouter, privateProcedure } from "@/server/api/trpc";
 import { addProductToCart, deleteCartProduct, getCartProductById, getCartProductsByAuthId, getUserByAuthId, updateProductCartQuantity } from "@/server/queries";
 import { addToCartSchema, updateProductCartQuantitySchema } from "@/zod/schema";
-import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 export const cartRouter = createTRPCRouter({
@@ -26,9 +25,13 @@ export const cartRouter = createTRPCRouter({
         .input(addToCartSchema)
         .mutation(async ({ input }) => {
 
+            type ActionType = "updated" | "created" | "alreadyInCart"
+            type Action = { updated: ActionType; created: ActionType; alreadyInCart: ActionType }
+            const action: Action = { updated: "updated", created: "created", alreadyInCart: "alreadyInCart" }
+
             const user = await getUserByAuthId(input.authId)
 
-            if (!user) return new TRPCError({ code: "NOT_FOUND" })
+            if (!user) return;
 
             const isExist = await db.cartProduct.findFirst({
                 where: {
@@ -40,13 +43,18 @@ export const cartRouter = createTRPCRouter({
             if (isExist) {
                 if (input.quantity !== isExist.quantity) {
                     const updatedCartProduct = await updateProductCartQuantity(input.productId, input.quantity)
-                    return updatedCartProduct;
+                    return { action: action.updated, updatedCartProduct };
+                }
+                if (input.quantity === isExist.quantity) {
+                    return { action: action.alreadyInCart };
                 }
             }
 
-            const createdCartProduct = await addProductToCart(input.productId, input.authId, input.quantity);
+            const createdCartProduct = await addProductToCart(
+                input.productId, input.authId, input.productTitle, input.price, input.quantity
+            );
 
-            return createdCartProduct;
+            return { action: action.created, createdCartProduct };
         }),
 
     updatedCartItem: privateProcedure

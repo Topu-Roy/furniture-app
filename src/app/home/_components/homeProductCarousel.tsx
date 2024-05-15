@@ -2,8 +2,10 @@ import React from "react";
 import RenderProductCarousel from "./renderProductCarousel";
 import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
+import { api } from "@/trpc/server";
 
-export default function HomeProductCarousel() {
+export default async function HomeProductCarousel() {
+  const products = await api.product.getAllProducts();
   return (
     <div className="bg-wh flex flex-col items-center justify-center bg-white py-10 lg:py-16">
       <div className="flex w-full flex-col items-center justify-center gap-5 pb-10">
@@ -13,7 +15,7 @@ export default function HomeProductCarousel() {
         </Text>
       </div>
 
-      <RenderProductCarousel />
+      <RenderProductCarousel products={products} />
     </div>
   );
 }

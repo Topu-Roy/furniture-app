@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Product from "@/app/_components/product/productCard";
-import { type ProductType } from "@/zustand/shop/shopStore";
 import {
   Carousel,
   CarouselApi,
@@ -13,6 +12,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { type Product as ProductType } from "@prisma/client";
 
 type props = {
   products: ProductType[];
@@ -59,6 +59,8 @@ export default function WideScreenProductCarousel(props: props) {
     </Button>
   ));
 
+  console.log(props.products);
+
   return (
     <Carousel
       setApi={setApi}
@@ -74,34 +76,16 @@ export default function WideScreenProductCarousel(props: props) {
           <div className="flex w-full flex-col justify-start gap-4">
             <div className="flex items-center justify-center gap-4">
               {productsListOne.map((item) => (
-                <Product
-                  key={`${item.id}-home-carousel`}
-                  category={item.category}
-                  color={item.color}
-                  id={item.id}
-                  image={item.image}
-                  price={item.price}
-                  productTitle={item.productTitle}
-                  tag={item.tag}
-                  className={item.className}
-                  status={item.status}
-                />
+                <div key={item.id}>
+                  <Product product={item} />
+                </div>
               ))}
             </div>
             <div className="flex w-full flex-row justify-start gap-4">
               {productsListTwo.map((item) => (
-                <Product
-                  key={`${item.id}-home-carousel`}
-                  category={item.category}
-                  color={item.color}
-                  id={item.id}
-                  image={item.image}
-                  price={item.price}
-                  productTitle={item.productTitle}
-                  tag={item.tag}
-                  className={item.className}
-                  status={item.status}
-                />
+                <div key={item.id}>
+                  <Product product={item} />
+                </div>
               ))}
             </div>
           </div>
@@ -110,34 +94,16 @@ export default function WideScreenProductCarousel(props: props) {
           <div className="flex w-full flex-col justify-start gap-4">
             <div className="flex w-full flex-row justify-start gap-4">
               {productsListThree.map((item) => (
-                <Product
-                  key={`${item.id}-home-carousel`}
-                  category={item.category}
-                  color={item.color}
-                  id={item.id}
-                  image={item.image}
-                  price={item.price}
-                  productTitle={item.productTitle}
-                  tag={item.tag}
-                  className={item.className}
-                  status={item.status}
-                />
+                <div key={item.id}>
+                  <Product product={item} />
+                </div>
               ))}
             </div>
             <div className="flex items-center justify-center gap-4">
               {productsListFour.map((item) => (
-                <Product
-                  key={`${item.id}-home-carousel`}
-                  category={item.category}
-                  color={item.color}
-                  id={item.id}
-                  image={item.image}
-                  price={item.price}
-                  productTitle={item.productTitle}
-                  tag={item.tag}
-                  className={item.className}
-                  status={item.status}
-                />
+                <div key={item.id}>
+                  <Product product={item} />
+                </div>
               ))}
             </div>
           </div>

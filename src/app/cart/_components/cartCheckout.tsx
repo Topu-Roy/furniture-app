@@ -2,18 +2,22 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CartProductType, useCartStore } from "@/zustand/cart/cartStore";
+import { useCartStore } from "@/zustand/cart/cartStore";
 import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
+import { type CartProduct } from "@prisma/client";
 
 export default function CartCheckout() {
-  const [productsToRender, setProductsToRender] = useState<CartProductType[]>(
-    [],
-  );
-  const { products } = useCartStore();
+  const [productsToRender, setProductsToRender] = useState<CartProduct[]>([]);
+  const [products, setProducts] = useState<CartProduct[]>([]);
+
+  const { products: storedProducts } = useCartStore();
+
   useEffect(() => {
+    setProducts(storedProducts);
     setProductsToRender(products);
   }, [products]);
+
   const [isAnySelected, setIsAnySelected] = useState(false);
   const [checkoutPrice, setCheckoutPrice] = useState<number | null>(null);
 
@@ -29,6 +33,8 @@ export default function CartCheckout() {
       setIsAnySelected(false);
     }
   }, [productsToRender]);
+
+  //* Calculate the total price according to the quantity
   useEffect(() => {
     let totalPriceForSelectedProducts = 0;
 

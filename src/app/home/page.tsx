@@ -1,5 +1,4 @@
 import React from "react";
-import { products } from "../../assets/productArray";
 import BrandsWorkedWith from "./_components/brandsWorkedWith";
 import CategoryCTA from "./_components/categoryCTA";
 import HeroSection from "./_components/heroSection";
@@ -8,8 +7,9 @@ import NewArrivals from "./_components/newArrivals";
 import OurBenefits from "./_components/ourBenefits";
 import ReadBlogSection from "./_components/readBlogSection";
 import SecondCTA from "./_components/secondCTA";
+import { api } from "@/trpc/server";
 
-export default function HomepagePage() {
+export default async function HomepagePage() {
   return (
     <div className="bg-stone-200">
       <HeroSection />
@@ -17,7 +17,7 @@ export default function HomepagePage() {
       <CategoryCTA />
       <HomeProductCarousel />
       <SecondCTA />
-      <NewArrivals products={products} />
+      <NewArrivals />
       <OurBenefits />
       <ReadBlogSection />
     </div>

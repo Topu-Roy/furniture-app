@@ -10,13 +10,19 @@ import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import { cn } from "@/lib/utils";
 import AddButton from "./addButton";
 import Link from "next/link";
+import { useAuth } from "@clerk/nextjs";
 
 type Props = {
-  authId: string;
   productId: string;
+  productTitle: string;
+  price: number;
 };
 
-export default function MobilePopover({ authId, productId }: Props) {
+export default function MobilePopover({
+  productId,
+  price,
+  productTitle,
+}: Props) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -55,8 +61,9 @@ export default function MobilePopover({ authId, productId }: Props) {
             </Link>
           </div>
           <AddButton
+            price={price}
+            productTitle={productTitle}
             className="w-full"
-            authId={authId}
             productId={productId}
             quantity={1}
           />

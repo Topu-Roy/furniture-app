@@ -46,13 +46,15 @@ model Review {
 }
 
 model CartProduct {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
-  quantity   Int
-  isSelected Boolean @default(false)
-  product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId  String  @db.ObjectId
-  User       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId     String  @db.ObjectId
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  quantity     Int
+  price        Int
+  productTitle String
+  isSelected   Boolean @default(false)
+  product      Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId    String  @db.ObjectId
+  User         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String  @db.ObjectId
 
   @@unique([productId, userId])
 }

@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Product from "@/app/_components/product/productCard";
-import { type ProductType } from "@/zustand/shop/shopStore";
 import {
   Carousel,
   CarouselApi,
@@ -13,6 +12,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { type Product as ProductType } from "@prisma/client";
 
 type props = {
   products: ProductType[];
@@ -69,18 +69,7 @@ export default function MobileProductCarousel(props: props) {
             key={`${item.id}-mobile-carousel`}
             className="flex flex-col items-center justify-center rounded-md bg-white p-2"
           >
-            <Product
-              key={`${item.id}-home-carousel`}
-              category={item.category}
-              color={item.color}
-              id={item.id}
-              image={item.image}
-              price={item.price}
-              productTitle={item.productTitle}
-              tag={item.tag}
-              className={item.className}
-              status={item.status}
-            />
+            <Product product={item} />
           </CarouselItem>
         ))}
       </CarouselContent>

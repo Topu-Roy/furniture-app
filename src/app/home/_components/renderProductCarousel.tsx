@@ -1,15 +1,20 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { products } from "@/assets/productArray";
 import useDeviceWidth from "@/hooks/windowDimensions";
 import WideScreenProductCarousel from "./_carousels/wideScreenProductCarousel";
 import DesktopProductCarousel from "./_carousels/desktopProductCarousel";
 import MobileProductCarousel from "./_carousels/mobileProductCarousel";
 import TabletProductCarousel from "./_carousels/tabletProductCarousel";
+import { Product } from "@prisma/client";
 
-export default function RenderProductCarousel() {
+type Props = {
+  products: Product[];
+};
+
+export default function RenderProductCarousel({ products }: Props) {
   const width = useDeviceWidth();
   const [deviceWidth, setDeviceWidth] = useState(width);
+
   useEffect(() => {
     setDeviceWidth(width);
   }, [width]);

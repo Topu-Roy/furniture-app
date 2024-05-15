@@ -1,48 +1,74 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../../../components/ui/button";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { api } from "@/trpc/react";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 type Props = {
   productId: string;
-  authId: string;
   quantity: number;
   className?: string;
+  productTitle: string;
+  price: number;
 };
 
 export default function AddButton(props: Props) {
-  const { authId, productId, quantity, className } = props;
-  const router = useRouter();
+  const { productId, quantity, className, price, productTitle } = props;
   const { toast } = useToast();
+  const user = useAuth();
 
-  const { mutate, isPending } = api.cart.createNewCartItem.useMutation({
-    onSuccess: () => {
-      router.refresh();
-      toast({
-        title: "Added to cart",
-        description: "Product successfully added to cart",
-      });
-    },
-    onError: () => {
-      toast({
-        variant: "destructive",
-        title: "Something went wrong",
-        description: "Product not added to cart",
-      });
-    },
-  });
+  const { mutate, isPending, data } = api.cart.createNewCartItem.useMutation();
+
+  function giveFeedback() {
+    if (data === undefined) return;
+
+    if (data) {
+      if (data.action === "alreadyInCart") {
+        return toast({
+          title: "Already in cart",
+          description: "Product already exist in the cart",
+        });
+      }
+      if (data.action === "updated") {
+        toast({
+          title: "Updated cart",
+          description: "Product updated successfully",
+        });
+      }
+
+      if (data.action === "created") {
+        toast({
+          title: "Added to cart",
+          description: "Product successfully added to cart",
+        });
+      }
+    }
+  }
 
   const handleClick = () => {
+    if (!user.userId || user.userId === undefined || user.userId === null) {
+      return toast({
+        variant: "destructive",
+        title: "Please login first",
+        description: "Oh no, you are not logged in",
+      });
+    }
+
     mutate({
       productId,
-      authId,
+      authId: user.userId,
+      productTitle,
+      price,
       quantity,
     });
   };
+
+  useEffect(() => {
+    giveFeedback();
+  }, [data]);
 
   return (
     <Button

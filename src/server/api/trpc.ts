@@ -26,10 +26,8 @@ import { getUserByAuthId } from "../queries";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const user = auth();
   return {
     db,
-    user,
     ...opts,
   };
 };
@@ -91,13 +89,13 @@ export const publicProcedure = t.procedure;
  * guaranties that a user querying is authorized.
  */
 export const privateProcedure = t.procedure.use(async (opts) => {
-  const { ctx } = opts;
+  const user = auth();
 
-  if (!ctx.user) throw new TRPCError({ code: 'UNAUTHORIZED' })
+  if (!user) throw new TRPCError({ code: 'UNAUTHORIZED' })
 
   return opts.next({
     ctx: {
-      user: ctx.user,
+      user: user,
     },
   });
 })
@@ -109,11 +107,11 @@ export const privateProcedure = t.procedure.use(async (opts) => {
  * guaranties that a user querying is authorized and is an Admin.
  */
 export const adminProcedure = t.procedure.use(async (opts) => {
-  const { ctx } = opts;
+  const user = auth()
 
-  if (ctx.user.userId === null) throw new TRPCError({ code: 'UNAUTHORIZED' })
+  if (user.userId === null) throw new TRPCError({ code: 'UNAUTHORIZED' })
 
-  const dbUser = await getUserByAuthId(ctx.user.userId)
+  const dbUser = await getUserByAuthId(user.userId)
 
   if (dbUser === null) throw new TRPCError({ code: 'NOT_FOUND' })
 
@@ -121,7 +119,7 @@ export const adminProcedure = t.procedure.use(async (opts) => {
 
   return opts.next({
     ctx: {
-      user: ctx.user,
+      user: user,
     },
   });
 })

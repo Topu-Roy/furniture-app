@@ -45,7 +45,13 @@ export async function getCartProductById(productId: string) {
     return cart;
 }
 
-export async function addProductToCart(productId: string, authId: string, quantity?: number) {
+export async function addProductToCart(
+    productId: string,
+    authId: string,
+    productTitle: string,
+    price: number,
+    quantity?: number
+) {
     const user = await getUserByAuthId(authId);
 
     if (user === null) return null;
@@ -53,6 +59,8 @@ export async function addProductToCart(productId: string, authId: string, quanti
     const newCartProduct = await db.cartProduct.create({
         data: {
             quantity: quantity || 1,
+            productTitle: productTitle,
+            price: price,
             userId: user.id,
             productId: productId,
         }

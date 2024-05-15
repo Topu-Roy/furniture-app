@@ -19,13 +19,6 @@ type Props = {
 };
 
 export default function Product({ product, className }: Props) {
-  const { isLoaded, userId } = useAuth();
-
-  // In case the user signs out while on the page.
-  if (!isLoaded || !userId || !product) {
-    return null;
-  }
-
   return (
     <div
       key={product.id}
@@ -50,7 +43,11 @@ export default function Product({ product, className }: Props) {
 
           {/* Mobile Popover button */}
           <div className="absolute bottom-[2%] right-[2%] md:hidden">
-            <MobilePopover authId={userId} productId={product.id} />
+            <MobilePopover
+              price={product.price}
+              productTitle={product.productTitle}
+              productId={product.id}
+            />
           </div>
 
           {/* Overlay - Decoration Only */}
@@ -58,7 +55,12 @@ export default function Product({ product, className }: Props) {
 
           <div className="absolute bottom-[3%] left-0 z-20 hidden w-full translate-y-[150%] flex-row items-center justify-around gap-2 ring-0 transition-all duration-300 group-hover:translate-y-0 md:flex">
             {product.price ? (
-              <AddButton authId={userId} productId={product.id} quantity={1} />
+              <AddButton
+                price={product.price}
+                productTitle={product.productTitle}
+                productId={product.id}
+                quantity={1}
+              />
             ) : (
               <Button
                 disabled={true}
@@ -71,7 +73,8 @@ export default function Product({ product, className }: Props) {
             <div className="flex flex-row items-center justify-between gap-3">
               {product.price ? (
                 <ButtonWithIcon
-                  authId={userId}
+                  price={product.price}
+                  productTitle={product.productTitle}
                   productId={product.id}
                   quantity={1}
                 >
@@ -80,7 +83,8 @@ export default function Product({ product, className }: Props) {
               ) : null}
               {product.price ? (
                 <ButtonWithIcon
-                  authId={userId}
+                  price={product.price}
+                  productTitle={product.productTitle}
                   productId={product.id}
                   quantity={1}
                 >

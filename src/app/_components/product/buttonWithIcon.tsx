@@ -4,16 +4,19 @@ import { Button } from "../../../components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 type Props = {
   children: React.JSX.Element;
   productId: string;
-  authId: string;
   quantity: number;
+  productTitle: string;
+  price: number;
 };
 
 export default function ButtonWithIcon(props: Props) {
-  const { children, productId, authId, quantity } = props;
+  const { children, productId, quantity, price, productTitle } = props;
+  const user = useAuth();
   const { toast } = useToast();
   const router = useRouter();
 
@@ -35,9 +38,18 @@ export default function ButtonWithIcon(props: Props) {
   });
 
   const handleClick = () => {
+    if (!user.userId || user.userId === undefined || user.userId === null) {
+      return toast({
+        variant: "destructive",
+        title: "Please login first",
+        description: "Oh no, you are not logged in",
+      });
+    }
     mutate({
       productId,
-      authId,
+      authId: user.userId,
+      productTitle,
+      price,
       quantity,
     });
   };

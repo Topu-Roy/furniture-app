@@ -1,4 +1,4 @@
-import { adminProcedure, createTRPCRouter, privateProcedure, publicProcedure } from "@/server/api/trpc";
+import { adminProcedure, createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { getAllProduct, getProductById } from "@/server/queries";
 import { db } from "@/lib/db";
 import { TRPCError } from "@trpc/server";
