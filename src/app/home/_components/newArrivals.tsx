@@ -4,7 +4,6 @@ import Product from "@/app/_components/product/productCard";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/app/_components/heading";
 import { api } from "@/trpc/server";
-import { type Product as ProductType } from "@prisma/client";
 
 export default async function NewArrivals() {
   const products = await api.product.getAllProducts();

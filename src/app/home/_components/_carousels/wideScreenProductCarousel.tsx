@@ -59,8 +59,6 @@ export default function WideScreenProductCarousel(props: props) {
     </Button>
   ));
 
-  console.log(props.products);
-
   return (
     <Carousel
       setApi={setApi}
@@ -77,14 +75,14 @@ export default function WideScreenProductCarousel(props: props) {
             <div className="flex items-center justify-center gap-4">
               {productsListOne.map((item) => (
                 <div key={item.id}>
-                  <Product product={item} />
+                  <Product product={item} className="w-[18.5rem]" />
                 </div>
               ))}
             </div>
             <div className="flex w-full flex-row justify-start gap-4">
               {productsListTwo.map((item) => (
                 <div key={item.id}>
-                  <Product product={item} />
+                  <Product product={item} className="w-[18.5rem]" />
                 </div>
               ))}
             </div>
@@ -95,14 +93,14 @@ export default function WideScreenProductCarousel(props: props) {
             <div className="flex w-full flex-row justify-start gap-4">
               {productsListThree.map((item) => (
                 <div key={item.id}>
-                  <Product product={item} />
+                  <Product product={item} className="w-[18.5rem]" />
                 </div>
               ))}
             </div>
             <div className="flex items-center justify-center gap-4">
               {productsListFour.map((item) => (
                 <div key={item.id}>
-                  <Product product={item} />
+                  <Product product={item} className="w-[18.5rem]" />
                 </div>
               ))}
             </div>

@@ -75,54 +75,72 @@ export default function DesktopProductCarousel(props: props) {
     >
       <CarouselContent className="mx-auto">
         <CarouselItem>
-          <div className="flex w-full flex-col justify-start gap-4">
-            <div className="flex items-center justify-center gap-4">
+          <div className="flex w-full flex-col justify-center gap-4">
+            <div className="flex w-full flex-row items-center justify-center gap-4">
               {productsListOne.map((item) => (
-                <div key={item.id}>
-                  <Product product={item} />
+                <div
+                  key={item.id}
+                  className="flex items-center justify-center gap-4"
+                >
+                  <Product product={item} className="w-[17rem]" />
                 </div>
               ))}
             </div>
-            <div className="flex w-full flex-row justify-start gap-4">
+            <div className="flex w-full flex-row justify-center gap-4">
               {productsListTwo.map((item) => (
-                <div key={item.id}>
-                  <Product product={item} />
+                <div
+                  key={item.id}
+                  className="flex items-center justify-center gap-4"
+                >
+                  <Product product={item} className="w-[17rem]" />
                 </div>
               ))}
             </div>
           </div>
         </CarouselItem>
         <CarouselItem>
-          <div className="flex w-full flex-col justify-start gap-4">
-            <div className="flex w-full flex-row justify-start gap-4">
+          <div className="flex w-full flex-col justify-center gap-4">
+            <div className="flex w-full flex-row justify-center gap-4">
               {productsListThree.map((item) => (
-                <div key={item.id}>
-                  <Product product={item} />
+                <div
+                  key={item.id}
+                  className="flex items-center justify-center gap-4"
+                >
+                  <Product product={item} className="w-[17rem]" />
                 </div>
               ))}
             </div>
             <div className="flex items-center justify-center gap-4">
               {productsListFour.map((item) => (
-                <div key={item.id}>
-                  <Product product={item} />
+                <div
+                  key={item.id}
+                  className="flex items-center justify-center gap-4"
+                >
+                  <Product product={item} className="w-[17rem]" />
                 </div>
               ))}
             </div>
           </div>
         </CarouselItem>
         <CarouselItem>
-          <div className="flex w-full flex-col justify-start gap-4">
-            <div className="flex w-full flex-row justify-start gap-4">
+          <div className="flex w-full flex-col justify-center gap-4">
+            <div className="flex w-full flex-row justify-center gap-4">
               {productsListFive.map((item) => (
-                <div key={item.id}>
-                  <Product product={item} />
+                <div
+                  key={item.id}
+                  className="flex items-center justify-center gap-4"
+                >
+                  <Product product={item} className="w-[17rem]" />
                 </div>
               ))}
             </div>
             <div className="flex items-center justify-center gap-4">
               {productsListSix.map((item) => (
-                <div key={item.id}>
-                  <Product product={item} />
+                <div
+                  key={item.id}
+                  className="flex items-center justify-center gap-4"
+                >
+                  <Product product={item} className="w-[17rem]" />
                 </div>
               ))}
             </div>
