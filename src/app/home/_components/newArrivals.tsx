@@ -32,28 +32,28 @@ export default async function NewArrivals() {
             </Link>
             <div className="flex w-full flex-row flex-wrap justify-center gap-4 md:hidden">
               {newProductsMobile.map((item) => (
-                <div className="w-[95%] sm:w-[43%]">
+                <div className="w-[95%] sm:w-[43%]" key={item.id}>
                   <Product product={item} />
                 </div>
               ))}
             </div>
             <div className="hidden w-full flex-row flex-wrap justify-center gap-4 md:flex lg:hidden">
               {newProductsTablet.map((item) => (
-                <div className="w-[40%]">
+                <div className="w-[40%]" key={item.id}>
                   <Product product={item} />
                 </div>
               ))}
             </div>
             <div className="hidden w-full flex-row flex-wrap justify-center gap-4 lg:flex xl:hidden">
               {newProductsDesktop.map((item) => (
-                <div className="w-[31%] xl:w-[18rem]">
+                <div className="w-[31%] xl:w-[18rem]" key={item.id}>
                   <Product product={item} />
                 </div>
               ))}
             </div>
             <div className="hidden w-full flex-row flex-wrap justify-center gap-4 xl:flex">
               {newProductsWideScreen.map((item) => (
-                <div className="w-[18rem]">
+                <div className="w-[18rem]" key={item.id}>
                   <Product product={item} />
                 </div>
               ))}
