@@ -11,7 +11,6 @@ import ButtonWithIcon from "./buttonWithIcon";
 import { Text } from "../text";
 import MobilePopover from "./mobilePopover";
 import { type Product } from "@prisma/client";
-import { useAuth } from "@clerk/nextjs";
 
 type Props = {
   product: Product;
@@ -42,7 +41,7 @@ export default function Product({ product, className }: Props) {
           </Link>
 
           {/* Mobile Popover button */}
-          <div className="absolute bottom-[2%] right-[2%] md:hidden">
+          <div className="absolute bottom-[2%] right-[2%] lg:hidden">
             <MobilePopover
               price={product.price}
               productTitle={product.productTitle}
@@ -51,9 +50,9 @@ export default function Product({ product, className }: Props) {
           </div>
 
           {/* Overlay - Decoration Only */}
-          <div className="pointer-events-none absolute bottom-0 left-0 z-[19] hidden h-[40%] w-full translate-y-[150%] select-none bg-gradient-to-t from-white/50 to-transparent ring-0 transition-all duration-300 group-hover:translate-y-0 md:block" />
+          <div className="pointer-events-none absolute bottom-0 left-0 z-[19] hidden h-[40%] w-full translate-y-[150%] select-none bg-gradient-to-t from-white/50 to-transparent ring-0 transition-all duration-300 group-hover:translate-y-0 lg:block" />
 
-          <div className="absolute bottom-[3%] left-0 z-20 hidden w-full translate-y-[150%] flex-row items-center justify-around gap-2 ring-0 transition-all duration-300 group-hover:translate-y-0 md:flex">
+          <div className="absolute bottom-[3%] left-0 z-20 hidden w-full translate-y-[150%] flex-row items-center justify-around gap-2 ring-0 transition-all duration-300 group-hover:translate-y-0 lg:flex">
             {product.price ? (
               <AddButton
                 price={product.price}
