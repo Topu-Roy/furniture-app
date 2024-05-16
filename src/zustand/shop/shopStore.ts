@@ -1,9 +1,8 @@
-import { Category, Color, Product, Status, Tag } from "@prisma/client";
-import { create } from "zustand";
+import { Category, Color, Product, Tag } from "@prisma/client";
+import { createStore } from "zustand";
 
-type UseShopStoreType = {
+type ShopState = {
   productsBackup: Product[];
-  setProductsBackup: (products: Product[]) => void;
   selectedMinPrice: number;
   selectedMaxPrice: number;
   selectedSliderPrice: number;
@@ -12,11 +11,24 @@ type UseShopStoreType = {
   selectedCategory: Category | "All";
   selectedTag: Tag | "All";
   searchInputText: string;
-};
+}
 
-export const useShopStore = create<UseShopStoreType>((set) => ({
+type ShopAction = {
+  setProductsBackup: (products: Product[]) => void;
+  setSelectedCategory: (category: Category | "All") => void;
+  setSelectedColor: (color: Color | undefined) => void;
+  setSelectedSliderPrice: (price: number) => void;
+  setSelectedMinPrice: (price: number) => void;
+  setSelectedMaxPrice: (price: number) => void;
+  setSelectedSorting: (sort: "default" | "price") => void;
+  setSearchInputText: (text: string) => void;
+  setSelectedTag: (tag: Tag | "All") => void;
+}
+
+export type ShopStoreType = ShopState & ShopAction
+
+const defaultInitState: ShopState = {
   productsBackup: [],
-  setProductsBackup: (props: Product[]) => set(() => ({ productsBackup: props })),
   selectedMinPrice: 0,
   selectedMaxPrice: 2000,
   selectedSliderPrice: 2000,
@@ -25,4 +37,35 @@ export const useShopStore = create<UseShopStoreType>((set) => ({
   selectedCategory: "All",
   selectedTag: "All",
   searchInputText: '',
-}));
+}
+
+export const createShopStore = (
+  initState: ShopState = defaultInitState,
+) => {
+  return createStore<ShopStoreType>()((set) => ({
+    ...initState,
+    setProductsBackup: (products) => set(() => ({ productsBackup: products })),
+    setSelectedCategory: (category) => set(() => ({ selectedCategory: category })),
+    setSelectedColor: (color) => set(() => ({ selectedColor: color })),
+    setSelectedSliderPrice: (price) => set(() => ({ selectedSliderPrice: price })),
+    setSelectedMinPrice: (price) => set(() => ({ selectedMinPrice: price })),
+    setSelectedMaxPrice: (price) => set(() => ({ selectedMaxPrice: price })),
+    setSelectedSorting: (sort) => set(() => ({ selectedSorting: sort })),
+    setSearchInputText: (text) => set(() => ({ searchInputText: text })),
+    setSelectedTag: (tag) => set(() => ({ selectedTag: tag })),
+
+  }))
+}
+
+// export const useShopStore = create<ShopStoreType>((set) => ({
+//   productsBackup: [],
+//   setProductsBackup: (props: Product[]) => set(() => ({ productsBackup: props })),
+//   selectedMinPrice: 0,
+//   selectedMaxPrice: 2000,
+//   selectedSliderPrice: 2000,
+//   selectedSorting: 'default',
+//   selectedColor: undefined,
+//   selectedCategory: "All",
+//   selectedTag: "All",
+//   searchInputText: '',
+// }));

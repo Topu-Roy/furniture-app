@@ -1,13 +1,13 @@
 "use client";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { scrollToTop } from "@/lib/utils";
-import { useShopStore } from "@/zustand/shop/shopStore";
 import Product from "@/app/_components/product/productCard";
 import { Button } from "@/components/ui/button";
 import { VscLoading } from "react-icons/vsc";
 import { MdRunningWithErrors } from "react-icons/md";
 import { Heading } from "@/app/_components/heading";
 import { type Product as ProductType } from "@prisma/client";
+import { useShopStore } from "@/zustand/shop/shopStoreProvider";
 
 type Props = {
   products: ProductType[];
@@ -26,7 +26,15 @@ export default function RenderProducts(props: Props) {
     selectedSliderPrice,
     selectedSorting,
     searchInputText,
-  } = useShopStore();
+    setSelectedCategory,
+    setSelectedColor,
+    setSelectedTag,
+    setSelectedMinPrice,
+    setSelectedMaxPrice,
+    setSelectedSliderPrice,
+    setSelectedSorting,
+    setSearchInputText,
+  } = useShopStore((store) => store);
 
   // Local state
   const [filteredProducts, setFilteredProducts] = useState(props.products);
@@ -168,14 +176,14 @@ export default function RenderProducts(props: Props) {
   }
 
   function handleResetAll() {
-    useShopStore.setState({ selectedCategory: "All" });
-    useShopStore.setState({ selectedMinPrice: 0 });
-    useShopStore.setState({ selectedMaxPrice: 2000 });
-    useShopStore.setState({ selectedSliderPrice: 2000 });
-    useShopStore.setState({ selectedColor: undefined });
-    useShopStore.setState({ selectedSorting: "default" });
-    useShopStore.setState({ selectedTag: "All" });
-    useShopStore.setState({ searchInputText: "" });
+    setSelectedCategory("All");
+    setSelectedColor(undefined);
+    setSelectedTag("All");
+    setSelectedMinPrice(0);
+    setSelectedMaxPrice(2000);
+    setSelectedSliderPrice(2000);
+    setSelectedSorting("default");
+    setSearchInputText("");
   }
 
   return (

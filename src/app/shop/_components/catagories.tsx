@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { cn, scrollToTop } from "@/lib/utils";
-import { useShopStore } from "@/zustand/shop/shopStore";
 import HeadingAndReset from "./headingAndReset";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/app/_components/text";
 import { Category } from "@prisma/client";
+import { useShopStore } from "@/zustand/shop/shopStoreProvider";
 
 type ProductCatagoriesType = {
   productName: Category;
@@ -13,7 +13,8 @@ type ProductCatagoriesType = {
 }[];
 
 export default function Catagories() {
-  const { productsBackup, selectedCategory } = useShopStore();
+  const { productsBackup, selectedCategory, setSelectedCategory } =
+    useShopStore((store) => store);
 
   const [productCategories, setProductCategories] =
     useState<ProductCatagoriesType>([]);
@@ -66,13 +67,13 @@ export default function Catagories() {
   }, [productsBackup]);
 
   function handleCategory(category: Category) {
-    useShopStore.setState({ selectedCategory: category });
+    setSelectedCategory(category);
 
     scrollToTop();
   }
 
   function handleReset() {
-    useShopStore.setState({ selectedCategory: "All" });
+    setSelectedCategory("All");
 
     scrollToTop();
   }

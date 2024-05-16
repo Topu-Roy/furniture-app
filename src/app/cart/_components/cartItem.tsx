@@ -24,7 +24,7 @@ import { type Product } from "@prisma/client";
 import { useToast } from "@/components/ui/use-toast";
 import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
-import { useCartStore } from "@/zustand/provider/cartStoreProvider";
+import { useCartStore } from "@/zustand/cart/cartStoreProvider";
 
 type Props = {
   cartItemId: string;

@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { cn, scrollToTop } from "@/lib/utils";
-import { useShopStore } from "@/zustand/shop/shopStore";
 import HeadingAndReset from "./headingAndReset";
 import { Color } from "@prisma/client";
+import { useShopStore } from "@/zustand/shop/shopStoreProvider";
 
 type ColorNQuantity = {
   color: Color;
@@ -11,7 +11,9 @@ type ColorNQuantity = {
 };
 
 export default function ColorSelector() {
-  const { selectedColor, productsBackup } = useShopStore();
+  const { selectedColor, productsBackup, setSelectedColor } = useShopStore(
+    (store) => store,
+  );
   const [colors, setColors] = useState<ColorNQuantity[]>([]);
 
   useEffect(() => {
@@ -47,16 +49,16 @@ export default function ColorSelector() {
 
   function handleColorChange(color: Color) {
     if (color === selectedColor) {
-      useShopStore.setState({ selectedColor: undefined });
+      setSelectedColor(undefined);
     } else {
-      useShopStore.setState({ selectedColor: color });
+      setSelectedColor(color);
     }
 
     scrollToTop();
   }
 
   function handleReset() {
-    useShopStore.setState({ selectedCategory: "All" });
+    setSelectedColor(undefined);
 
     scrollToTop();
   }

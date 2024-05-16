@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useShopStore } from "@/zustand/shop/shopStore";
 import { cn, scrollToTop } from "@/lib/utils";
 import HeadingAndReset from "./headingAndReset";
 import { Tag } from "@prisma/client";
+import { useShopStore } from "@/zustand/shop/shopStoreProvider";
 
 type ProductTagsType = {
   tag: Tag;
@@ -12,7 +12,9 @@ type ProductTagsType = {
 };
 
 export default function ProductTag() {
-  const { selectedTag, productsBackup } = useShopStore();
+  const { selectedTag, productsBackup, setSelectedTag } = useShopStore(
+    (store) => store,
+  );
   const [productTags, setProductTags] = useState<ProductTagsType[]>([]);
 
   useEffect(() => {
@@ -56,8 +58,14 @@ export default function ProductTag() {
     setProductTags(tags);
   }, [productsBackup]);
 
+  function handleClick(tag: Tag | "All") {
+    setSelectedTag(tag);
+
+    scrollToTop();
+  }
+
   function handleReset() {
-    useShopStore.setState({ selectedTag: "All" });
+    setSelectedTag("All");
 
     scrollToTop();
   }
@@ -69,7 +77,7 @@ export default function ProductTag() {
         <div className="flex flex-row flex-wrap justify-start gap-2">
           {productTags.map((item) => (
             <Button
-              onClick={() => useShopStore.setState({ selectedTag: item.tag })}
+              onClick={() => handleClick(item.tag)}
               size="lg"
               variant={"link"}
               className={cn(

@@ -12,7 +12,7 @@ type CartAction = {
 
 export type CartStoreType = CartState & CartAction
 
-export const defaultInitState: CartState = {
+const defaultInitState: CartState = {
     products: []
 }
 
@@ -21,7 +21,6 @@ export const createCartStore = (
 ) => {
     return createStore<CartStoreType>()((set) => ({
         ...initState,
-        products: [],
         setProducts: (products) => set(() => ({ products: products }))
     }))
 }

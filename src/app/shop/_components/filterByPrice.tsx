@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import useDebounce from "@/hooks/debounce";
-import { useShopStore } from "@/zustand/shop/shopStore";
 import HeadingAndReset from "./headingAndReset";
 import { scrollToTop } from "@/lib/utils";
+import { useShopStore } from "@/zustand/shop/shopStoreProvider";
 
 export default function FilterByPrice() {
   const [sliderValue, setSliderValue] = useState(2000);
@@ -15,25 +15,31 @@ export default function FilterByPrice() {
   const debouncedMinPrice = useDebounce(minPrice);
   const debouncedMaxPrice = useDebounce(maxPrice);
 
-  const { selectedMinPrice, selectedMaxPrice, selectedSliderPrice } =
-    useShopStore();
+  const {
+    selectedMinPrice,
+    selectedMaxPrice,
+    selectedSliderPrice,
+    setSelectedSliderPrice,
+    setSelectedMinPrice,
+    setSelectedMaxPrice,
+  } = useShopStore((store) => store);
 
   useEffect(() => {
     if (selectedMaxPrice !== 2000 && selectedMinPrice !== 0) {
-      useShopStore.setState({ selectedSliderPrice: 2000 });
       setSliderValue(2000);
+      setSelectedSliderPrice(sliderValue);
     }
-  }, [selectedMaxPrice, selectedMinPrice]);
+  }, [selectedMaxPrice, selectedMinPrice, sliderValue]);
 
   useEffect(() => {
     if (selectedSliderPrice !== 2000) {
-      useShopStore.setState({ selectedMinPrice: 0 });
-      useShopStore.setState({ selectedMaxPrice: 2000 });
-
       setMinPrice(0);
       setMaxPrice(2000);
+
+      setSelectedMinPrice(minPrice);
+      setSelectedMaxPrice(maxPrice);
     }
-  }, [selectedSliderPrice]);
+  }, [selectedSliderPrice, minPrice, maxPrice]);
 
   useEffect(() => {
     setMinPrice(selectedMinPrice);
@@ -64,24 +70,18 @@ export default function FilterByPrice() {
   };
 
   function handleReset() {
-    useShopStore.setState({ selectedMinPrice: 0 });
-    useShopStore.setState({ selectedMaxPrice: 2000 });
-    useShopStore.setState({ selectedSliderPrice: 2000 });
+    setSelectedMinPrice(0);
+    setSelectedMaxPrice(2000);
+    setSelectedSliderPrice(2000);
 
     scrollToTop();
   }
 
   useEffect(() => {
-    useShopStore.setState({ selectedMinPrice: debouncedMinPrice });
-  }, [debouncedMinPrice]);
-
-  useEffect(() => {
-    useShopStore.setState({ selectedMaxPrice: debouncedMaxPrice });
-  }, [debouncedMaxPrice]);
-
-  useEffect(() => {
-    useShopStore.setState({ selectedSliderPrice: debouncedSliderPrice });
-  }, [debouncedSliderPrice]);
+    setSelectedMinPrice(debouncedMinPrice);
+    setSelectedMaxPrice(debouncedMaxPrice);
+    setSelectedSliderPrice(debouncedSliderPrice);
+  }, [debouncedMaxPrice, debouncedMinPrice, debouncedSliderPrice]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -111,7 +111,7 @@ export default function FilterByPrice() {
         <Slider
           defaultValue={[sliderValue]}
           value={[sliderValue]}
-          onValueChange={(val) => setSliderValue(val[0])}
+          onValueChange={(val) => setSliderValue(val[0] || 0)}
           className="flex-1"
           max={2000}
           step={1}

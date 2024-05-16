@@ -2,10 +2,11 @@
 
 import { type ReactNode, createContext, useRef, useContext } from "react";
 import { type StoreApi, useStore } from "zustand";
-import { createCartStore, type CartStoreType } from "../cart/cartStore";
+import { createCartStore, type CartStoreType } from "./cartStore";
 
-export const CounterStoreContext =
-  createContext<StoreApi<CartStoreType> | null>(null);
+export const CartStoreContext = createContext<StoreApi<CartStoreType> | null>(
+  null,
+);
 
 export interface cartStoreProviderProps {
   children: ReactNode;
@@ -19,18 +20,18 @@ export const CartStoreProvider = ({ children }: cartStoreProviderProps) => {
 
   //! Implement this method to prevent hydration errors
   return (
-    <CounterStoreContext.Provider value={storeRef.current}>
+    <CartStoreContext.Provider value={storeRef.current}>
       {children}
-    </CounterStoreContext.Provider>
+    </CartStoreContext.Provider>
   );
 };
 
 export const useCartStore = <T,>(selector: (store: CartStoreType) => T): T => {
-  const counterStoreContext = useContext(CounterStoreContext);
+  const cartStoreContext = useContext(CartStoreContext);
 
-  if (!counterStoreContext) {
-    throw new Error(`useCounterStore must be use within CounterStoreProvider`);
+  if (!cartStoreContext) {
+    throw new Error(`useCartStore must be use within CartStoreProvider`);
   }
 
-  return useStore(counterStoreContext, selector);
+  return useStore(cartStoreContext, selector);
 };

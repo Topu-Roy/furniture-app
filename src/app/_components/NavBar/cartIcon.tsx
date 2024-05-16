@@ -6,7 +6,7 @@ import { BsCart2 } from "react-icons/bs";
 import { cn } from "@/lib/utils";
 import { api } from "@/trpc/react";
 import { useAuth } from "@clerk/nextjs";
-import { useCartStore } from "@/zustand/provider/cartStoreProvider";
+import { useCartStore } from "@/zustand/cart/cartStoreProvider";
 
 export default function CartIconWithUser() {
   const [willShow, setWillShow] = useState(false);

@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useShopStore } from "@/zustand/shop/shopStore";
 import useDebounce from "@/hooks/debounce";
 import { cn } from "@/lib/utils";
 import ColorSelector from "./colorSelector";
@@ -19,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { MdClear } from "react-icons/md";
 import { LuFilter } from "react-icons/lu";
+import { useShopStore } from "@/zustand/shop/shopStoreProvider";
 
 type SortingMethodType = "default" | "price";
 
@@ -28,7 +28,7 @@ type Props = {
 };
 
 export default function ProductHeader({ sheetOpen, setSheetOpen }: Props) {
-  const { searchInputText } = useShopStore();
+  const { searchInputText, setSelectedSorting, setSearchInputText } = useShopStore((store) => store);
 
   // * States
   const [searchText, setSearchText] = useState("");
@@ -44,7 +44,7 @@ export default function ProductHeader({ sheetOpen, setSheetOpen }: Props) {
   }
 
   useEffect(() => {
-    useShopStore.setState({ searchInputText: debouncedText });
+    setSearchInputText(debouncedText)
   }, [debouncedText]);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function ProductHeader({ sheetOpen, setSheetOpen }: Props) {
   }, [searchInputText]);
 
   useEffect(() => {
-    useShopStore.setState({ selectedSorting: sortingMethod });
+    setSortingMethod(sortingMethod)
   }, [sortingMethod]);
 
   return (
