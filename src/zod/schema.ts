@@ -103,7 +103,7 @@ export const addToCartSchema = z.object({
 })
 
 export const updateProductCartQuantitySchema = z.object({
-    productId: z.string(),
+    cartItemId: z.string(),
     quantity: z.number(),
 })
 

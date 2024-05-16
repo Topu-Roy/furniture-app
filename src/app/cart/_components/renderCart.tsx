@@ -36,6 +36,7 @@ export default function RenderCart({
         return (
           <div key={item.id}>
             <CartItem
+              cartItemId={item.id}
               authId={authId}
               quantity={item.quantity}
               isSelected={item.isSelected}

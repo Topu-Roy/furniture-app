@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { createTRPCRouter, privateProcedure } from "@/server/api/trpc";
 import { addProductToCart, deleteCartProduct, getCartProductById, getCartProductsByAuthId, getUserByAuthId, updateProductCartQuantity } from "@/server/queries";
 import { addToCartSchema, updateProductCartQuantitySchema } from "@/zod/schema";
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 export const cartRouter = createTRPCRouter({
@@ -60,11 +61,13 @@ export const cartRouter = createTRPCRouter({
     updatedCartItem: privateProcedure
         .input(updateProductCartQuantitySchema)
         .mutation(async ({ input }) => {
-            const updatedCartItem = await updateProductCartQuantity(input.productId, input.quantity);
+            const item = await getCartProductById(input.cartItemId);
+
+            if (!item) throw new TRPCError({ code: 'NOT_FOUND' })
+
+            const updatedCartItem = await updateProductCartQuantity(item.id, input.quantity);
 
             if (updatedCartItem.id) return updatedCartItem;
-
-            return null;
         }),
 
     deleteCartItem: privateProcedure

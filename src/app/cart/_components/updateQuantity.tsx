@@ -1,24 +1,26 @@
 "use client";
-import React, { useOptimistic } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { TiMinus, TiPlus } from "react-icons/ti";
 import { Text } from "@/app/_components/text";
-import { revalidatePath } from "next/cache";
 import { api } from "@/trpc/react";
-import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
+import useDebounce from "@/hooks/debounce";
 
 type Props = {
-  productId: string;
+  cartItemId: string;
   quantity: number;
 };
 
-export default function UpdateQuantity({ productId, quantity }: Props) {
-  const [optimisticQuantity, addOptimisticQuantity] = useOptimistic(quantity);
+export default function UpdateQuantity({ cartItemId, quantity }: Props) {
+  const [quantityState, setQuantityState] = useState(quantity);
+  const [prevQuantity, setPrevQuantity] = useState(quantity);
+  const debouncedQuantity = useDebounce(quantityState);
+
   const { toast } = useToast();
-  const router = useRouter();
   const { mutate } = api.cart.updatedCartItem.useMutation({
     onError() {
+      setQuantityState(prevQuantity);
       return toast({
         variant: "destructive",
         title: "Something went wrong",
@@ -26,18 +28,21 @@ export default function UpdateQuantity({ productId, quantity }: Props) {
       });
     },
     onSuccess() {
-      router.refresh();
+      setPrevQuantity(quantityState);
     },
   });
 
   async function handleClick(count: 1 | -1) {
-    if (optimisticQuantity === 1 && count === -1) return;
-    addOptimisticQuantity((prev) => prev + count);
-    mutate({
-      productId: productId,
-      quantity: quantity + count,
-    });
+    if (debouncedQuantity === 1 && count === -1) return;
+    setQuantityState((prev) => prev + count);
   }
+
+  useEffect(() => {
+    mutate({
+      cartItemId,
+      quantity: debouncedQuantity,
+    });
+  }, [debouncedQuantity]);
 
   return (
     <div className="flex items-center justify-between gap-2">
@@ -50,7 +55,7 @@ export default function UpdateQuantity({ productId, quantity }: Props) {
         >
           <TiMinus size={20} className="text-black" />
         </Button>
-        <span className="">{optimisticQuantity}</span>
+        <span className="">{quantityState}</span>
         <Button
           onClick={() => handleClick(1)}
           className="flex h-8 w-8 items-center justify-center rounded-full p-2"

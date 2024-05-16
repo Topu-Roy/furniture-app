@@ -27,6 +27,7 @@ import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
 
 type Props = {
+  cartItemId: string
   productId: string;
   isSelected: boolean;
   quantity: number;
@@ -34,7 +35,7 @@ type Props = {
 };
 
 export default function CartItem(props: Props) {
-  const { productId, isSelected, quantity } = props;
+  const { productId, isSelected, quantity, cartItemId, authId } = props;
   const [product, setProduct] = useState<Product>();
 
   const products_store = useCartStore((store) => store.products);
@@ -182,7 +183,7 @@ export default function CartItem(props: Props) {
         </Text>
       </div>
       <div className="col-span-2 space-y-4">
-        <UpdateQuantity productId={product.id} quantity={quantity} />
+        <UpdateQuantity cartItemId={cartItemId} quantity={quantity} />
 
         <div className="flex items-center justify-between gap-2">
           <Text className="font-semibold text-black/75">Total price:</Text>

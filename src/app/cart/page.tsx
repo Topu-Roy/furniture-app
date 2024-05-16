@@ -19,20 +19,15 @@ export default async function CartPage() {
     authId: user.userId,
   });
 
-  if (allCartProducts === null) {
+  if (!allCartProducts) {
     return (
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-6">
-        <Heading className="mt-[5rem] pt-8 text-center">
-          Something went wrong...!
-        </Heading>
-        <Link href={"/shop"}>
-          <Button>Add a new Product</Button>
-        </Link>
+        <Heading className="mt-[5rem] pt-8 text-center">Loading...</Heading>
       </div>
     );
   }
 
-  if (allCartProducts.length === 0) {
+  if (allCartProducts === null || allCartProducts.length === 0) {
     return (
       <div className="mx-auto flex max-w-7xl items-center justify-center gap-6 bg-stone-200">
         <Heading className="mt-[5rem] pt-8 text-center">
