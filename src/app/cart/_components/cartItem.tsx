@@ -54,6 +54,8 @@ export default function CartItem(props: Props) {
     }
   }, [data, product]);
 
+  useEffect(() => {}, [products_store]);
+
   const { mutate, isPending } = api.cart.deleteCartItem.useMutation({
     onSuccess: () => {
       router.refresh();
@@ -71,20 +73,22 @@ export default function CartItem(props: Props) {
     },
   });
 
-  function handleRemove(id: string) {
-    mutate({ productId: id });
+  function handleRemove() {
+    mutate({ productId: cartItemId });
   }
 
-  function handleCheck(id: string) {
+  function handleCheck() {
     setProducts_store(
       products_store.map((item) =>
-        item.id !== id ? item : { ...item, isSelected: !item.isSelected },
+        item.id !== cartItemId
+          ? item
+          : { ...item, isSelected: !item.isSelected },
       ),
     );
   }
 
   if (product === undefined) return <div className="mt-[5rem]">Loading...</div>;
-  if (product === null) return <div className="mt-[5rem]">Not found...</div>;
+  if (product === null) return null;
 
   return (
     <div
@@ -99,7 +103,7 @@ export default function CartItem(props: Props) {
             className="peer h-[2.5rem] w-[2.5rem] opacity-0"
             type="checkbox"
             checked={isSelected || false}
-            onChange={() => handleCheck(product.id)}
+            onChange={() => handleCheck()}
           />
           <Button
             variant="ghost"
@@ -146,7 +150,7 @@ export default function CartItem(props: Props) {
                 <Button
                   type="submit"
                   variant="ghost"
-                  onClick={() => handleRemove(cartItemId)}
+                  onClick={() => handleRemove()}
                   className="flex-1 rounded-full bg-rose-300 p-0 shadow-sm hover:bg-rose-400"
                   size={"lg"}
                 >
