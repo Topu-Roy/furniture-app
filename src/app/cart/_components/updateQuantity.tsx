@@ -1,5 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, {
+  type Dispatch,
+  type SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { Button } from "@/components/ui/button";
 import { TiMinus, TiPlus } from "react-icons/ti";
 import { Text } from "@/app/_components/text";
@@ -10,9 +15,16 @@ import useDebounce from "@/hooks/debounce";
 type Props = {
   cartItemId: string;
   quantity: number;
+  price: number;
+  setTotalPrice: Dispatch<SetStateAction<number | undefined>>;
 };
 
-export default function UpdateQuantity({ cartItemId, quantity }: Props) {
+export default function UpdateQuantity({
+  cartItemId,
+  quantity,
+  price,
+  setTotalPrice,
+}: Props) {
   const [quantityState, setQuantityState] = useState(quantity);
   const [prevQuantity, setPrevQuantity] = useState(quantity);
   const debouncedQuantity = useDebounce(quantityState);
@@ -33,7 +45,7 @@ export default function UpdateQuantity({ cartItemId, quantity }: Props) {
   });
 
   async function handleClick(count: 1 | -1) {
-    if (debouncedQuantity === 1 && count === -1) return;
+    if (quantityState === 1 && count === -1) return;
     setQuantityState((prev) => prev + count);
   }
 
@@ -43,6 +55,10 @@ export default function UpdateQuantity({ cartItemId, quantity }: Props) {
       quantity: debouncedQuantity,
     });
   }, [debouncedQuantity]);
+
+  useEffect(() => {
+    setTotalPrice(quantityState * price);
+  }, [quantityState]);
 
   return (
     <div className="flex items-center justify-between gap-2">

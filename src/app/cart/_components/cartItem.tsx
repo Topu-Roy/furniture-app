@@ -31,12 +31,12 @@ type Props = {
   productId: string;
   isSelected: boolean;
   quantity: number;
-  authId: string;
 };
 
 export default function CartItem(props: Props) {
-  const { productId, isSelected, quantity, cartItemId, authId } = props;
+  const { productId, isSelected, quantity, cartItemId } = props;
   const [product, setProduct] = useState<Product>();
+  const [totalPrice, setTotalPrice] = useState(product?.price);
 
   const products_store = useCartStore((store) => store.products);
   const setProducts_store = useCartStore((store) => store.setProducts);
@@ -187,12 +187,17 @@ export default function CartItem(props: Props) {
         </Text>
       </div>
       <div className="col-span-2 space-y-4">
-        <UpdateQuantity cartItemId={cartItemId} quantity={quantity} />
+        <UpdateQuantity
+          price={product.price}
+          setTotalPrice={setTotalPrice}
+          cartItemId={cartItemId}
+          quantity={quantity}
+        />
 
         <div className="flex items-center justify-between gap-2">
           <Text className="font-semibold text-black/75">Total price:</Text>
           <Text size="lg" className="font-semibold">
-            ${product.price * quantity}
+            ${totalPrice}
           </Text>
         </div>
       </div>
