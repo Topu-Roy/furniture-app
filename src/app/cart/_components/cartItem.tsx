@@ -22,9 +22,9 @@ import { cn } from "@/lib/utils";
 import { Text } from "@/app/_components/text";
 import { type Product } from "@prisma/client";
 import { useToast } from "@/components/ui/use-toast";
-import { useCartStore } from "@/zustand/cart/cartStore";
 import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
+import { useCartStore } from "@/zustand/provider/cartStoreProvider";
 
 type Props = {
   cartItemId: string;

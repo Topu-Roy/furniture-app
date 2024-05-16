@@ -3,19 +3,33 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { BsCart2 } from "react-icons/bs";
-import { useCartStore } from "@/zustand/cart/cartStore";
 import { cn } from "@/lib/utils";
-import { CartProduct } from "@prisma/client";
+import { api } from "@/trpc/react";
+import { useAuth } from "@clerk/nextjs";
+import { useCartStore } from "@/zustand/provider/cartStoreProvider";
 
-export default function CartIcon() {
+export default function CartIconWithUser() {
   const [willShow, setWillShow] = useState(false);
-  const [products, setProducts] = useState<CartProduct[]>([]);
-  const { products: storedProducts } = useCartStore();
+  const user = useAuth();
+
+  if (!user.userId) return null;
+
+  const { data } = api.cart.getAllCartItems.useQuery({ authId: user.userId });
+
+  const products_store = useCartStore((store) => store.products);
+  const setProducts_store = useCartStore((store) => store.setProducts);
+
+  if (data) {
+    setProducts_store(data);
+  }
 
   useEffect(() => {
-    setProducts(storedProducts);
-    setWillShow(products.length > 0 ? true : false);
-  }, [products, storedProducts]);
+    setWillShow(products_store.length > 0);
+
+    if (data) {
+      setProducts_store(data);
+    }
+  }, [products_store, data]);
 
   return (
     <Link href={"/cart"}>

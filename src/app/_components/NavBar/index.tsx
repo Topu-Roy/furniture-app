@@ -4,9 +4,11 @@ import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 import MobileMenu from "./mobileMenu";
 import { IoSearchOutline } from "react-icons/io5";
-import CartIcon from "./cartIcon";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
+import { cn } from "@/lib/utils";
+import { BsCart2 } from "react-icons/bs";
+import CartIconWithUser from "./cartIcon";
 
 export default function NavBar() {
   const user = auth();
@@ -58,7 +60,16 @@ export default function NavBar() {
             <IoSearchOutline size={20} />
           </Button>
 
-          <CartIcon />
+          {user.userId ? <CartIconWithUser /> : null}
+
+          <Link href={"/cart"}>
+            <Button
+              variant={"ghost"}
+              className={cn("p-1", user.userId ? "hidden" : "block")}
+            >
+              <BsCart2 size={20} />
+            </Button>
+          </Link>
 
           <div>
             {!user?.userId || !user ? (

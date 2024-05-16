@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useCartStore } from "@/zustand/cart/cartStore";
 import { CartProduct } from "@prisma/client";
 import CartItem from "./cartItem";
+import { useCartStore } from "@/zustand/provider/cartStoreProvider";
 
 type Props = {
   products: CartProduct[];

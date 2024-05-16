@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useCartStore } from "@/zustand/cart/cartStore";
 import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
 import { type CartProduct } from "@prisma/client";
+import { useCartStore } from "@/zustand/provider/cartStoreProvider";
 
 export default function CartCheckout() {
   const [productsToRender, setProductsToRender] = useState<CartProduct[]>([]);

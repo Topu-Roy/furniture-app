@@ -1,30 +1,30 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { CartProductType, useCartStore } from "@/zustand/cart/cartStore";
+import { CartProduct } from "@prisma/client";
+import { useCartStore } from "@/zustand/provider/cartStoreProvider";
 
 export default function SelectAllAndReset() {
-  const [productsToRender, setProductsToRender] = useState<CartProductType[]>(
-    [],
-  );
-  const { products } = useCartStore();
+  const [productsToRender, setProductsToRender] = useState<CartProduct[]>([]);
+  const products = useCartStore((store) => store.products);
+  const setProducts = useCartStore((store) => store.setProducts);
 
   function handleSelectAll() {
-    useCartStore.setState({
-      products: products.map((item) => ({
+    setProducts(
+      products.map((item) => ({
         ...item,
         isSelected: true,
       })),
-    });
+    );
   }
 
   function handleReset() {
-    useCartStore.setState({
-      products: products.map((item) => ({
+    setProducts(
+      products.map((item) => ({
         ...item,
         isSelected: false,
       })),
-    });
+    );
   }
 
   useEffect(() => {

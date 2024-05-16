@@ -6,6 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { api } from "@/trpc/react";
 import { useAuth } from "@clerk/nextjs";
+import { useCartStore } from "@/zustand/provider/cartStoreProvider";
 
 type Props = {
   productId: string;
@@ -17,6 +18,10 @@ type Props = {
 
 export default function AddButton(props: Props) {
   const { productId, quantity, className, price, productTitle } = props;
+
+  const products_store = useCartStore((store) => store.products);
+  const setProducts_store = useCartStore((store) => store.setProducts);
+
   const { toast } = useToast();
   const user = useAuth();
 
@@ -32,6 +37,7 @@ export default function AddButton(props: Props) {
           description: "Product already exist in the cart",
         });
       }
+
       if (data.action === "updated") {
         toast({
           title: "Updated cart",
@@ -40,6 +46,9 @@ export default function AddButton(props: Props) {
       }
 
       if (data.action === "created") {
+        if (data.createdCartProduct) {
+          setProducts_store([...products_store, data.createdCartProduct]);
+        }
         toast({
           title: "Added to cart",
           description: "Product successfully added to cart",
@@ -53,7 +62,7 @@ export default function AddButton(props: Props) {
       return toast({
         variant: "destructive",
         title: "Please login first",
-        description: "Oh no, you are not logged in",
+        description: "Oh no, you are not logged in...!",
       });
     }
 
