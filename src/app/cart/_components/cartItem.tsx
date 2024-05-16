@@ -27,7 +27,7 @@ import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
 
 type Props = {
-  cartItemId: string
+  cartItemId: string;
   productId: string;
   isSelected: boolean;
   quantity: number;
@@ -56,7 +56,7 @@ export default function CartItem(props: Props) {
 
   const { mutate, isPending } = api.cart.deleteCartItem.useMutation({
     onSuccess: () => {
-      // router.refresh();
+      router.refresh();
       toast({
         title: "Removed from cart",
         description: "Product successfully removed from cart",
@@ -146,11 +146,11 @@ export default function CartItem(props: Props) {
                 <Button
                   type="submit"
                   variant="ghost"
-                  onClick={() => handleRemove(product.id)}
+                  onClick={() => handleRemove(cartItemId)}
                   className="flex-1 rounded-full bg-rose-300 p-0 shadow-sm hover:bg-rose-400"
                   size={"lg"}
                 >
-                  {isPending ? "Deleting" : "Delete"}
+                  {isPending ? "Deleting..." : "Delete"}
                 </Button>
               </DialogFooter>
             </DialogContent>
