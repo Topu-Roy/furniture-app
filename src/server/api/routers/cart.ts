@@ -18,7 +18,7 @@ export const cartRouter = createTRPCRouter({
         .query(async ({ input }) => {
             const products = await getCartProductsByAuthId(input.authId);
 
-            return products;
+            return products?.cartProducts;
         }),
 
     createNewCartItem: privateProcedure

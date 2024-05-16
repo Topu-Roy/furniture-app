@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { TiMinus, TiPlus } from "react-icons/ti";
 import { Text } from "@/app/_components/text";
 import { revalidatePath } from "next/cache";
+import { api } from "@/trpc/react";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 type Props = {
   productId: string;
@@ -12,21 +15,27 @@ type Props = {
 
 export default function UpdateQuantity({ productId, quantity }: Props) {
   const [optimisticQuantity, addOptimisticQuantity] = useOptimistic(quantity);
+  const { toast } = useToast();
+  const router = useRouter();
+  const { mutate } = api.cart.updatedCartItem.useMutation({
+    onError() {
+      return toast({
+        variant: "destructive",
+        title: "Something went wrong",
+        description: "Something went wrong while updating the quantity",
+      });
+    },
+    onSuccess() {
+      router.refresh();
+    },
+  });
 
   async function handleClick(count: 1 | -1) {
     if (optimisticQuantity === 1 && count === -1) return;
     addOptimisticQuantity((prev) => prev + count);
-    await fetch("http://localhost:3000/api/product/cart", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        productId: productId,
-        quantity: quantity + count,
-      }),
-    }).then(() => {
-      revalidatePath("/cart");
+    mutate({
+      productId: productId,
+      quantity: quantity + count,
     });
   }
 

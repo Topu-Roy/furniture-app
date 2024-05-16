@@ -9,35 +9,34 @@ type Props = {
   authId: string;
 };
 
-export default function RenderCart(props: Props) {
-  const [products, setProducts] = useState<CartProduct[]>(props.products);
+export default function RenderCart({
+  authId,
+  products: productsFromProp,
+}: Props) {
   const [loading, setLoading] = useState(true);
+  const products = useCartStore((state) => state.products);
+  const setProducts = useCartStore((state) => state.setProducts);
 
   useEffect(() => {
-    setProducts(props.products);
-    useCartStore.setState({ products: props.products });
+    setProducts(productsFromProp);
     setLoading(false);
-  }, [useCartStore, products]);
+  }, [productsFromProp]);
 
   if (loading) {
-    // Check if products is an empty array
     return <div className="w-[55rem]">Loading...</div>;
   }
 
   if (products.length === 0) {
-    // Check if products is an empty array
     return <div className="w-[55rem]">Nothing in the cart...</div>;
   }
 
   return (
     <div className="w-[55rem] space-y-2">
       {products.map((item) => {
-        console.log(item);
-        console.log(products);
         return (
           <div key={item.id}>
             <CartItem
-              authId={props.authId}
+              authId={authId}
               quantity={item.quantity}
               isSelected={item.isSelected}
               productId={item.id}

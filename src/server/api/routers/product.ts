@@ -15,7 +15,19 @@ export const ProductRouter = createTRPCRouter({
     getProductById: publicProcedure
         .input(z.object({ productId: z.string() }))
         .query(async ({ input }) => {
-            const product = await getProductById(input.productId);
+            const product = await getProductById(input.productId)
+
+            return product;
+        }),
+
+    getProductByIdRaw: publicProcedure
+        .input(z.object({ productId: z.string() }))
+        .query(async ({ input }) => {
+            const product = await db.product.findFirst({
+                where: {
+                    id: input.productId
+                }
+            })
 
             return product;
         }),

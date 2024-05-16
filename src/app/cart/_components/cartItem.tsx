@@ -20,7 +20,7 @@ import {
 } from "react-icons/io5";
 import { cn } from "@/lib/utils";
 import { Text } from "@/app/_components/text";
-import { Product } from "@prisma/client";
+import { type Product } from "@prisma/client";
 import { useToast } from "@/components/ui/use-toast";
 import { useCartStore } from "@/zustand/cart/cartStore";
 import { api } from "@/trpc/react";
@@ -34,31 +34,28 @@ type Props = {
 };
 
 export default function CartItem(props: Props) {
+  const { productId, isSelected, quantity } = props;
   const [product, setProduct] = useState<Product>();
+
+  const products_store = useCartStore((store) => store.products);
+  const setProducts_store = useCartStore((store) => store.setProducts);
+
   const { toast } = useToast();
   const router = useRouter();
 
-  const { productId, isSelected, quantity, authId } = props;
-  const ProductsFromStore = useCartStore().products;
+  const data = api.cart.getCartItemById.useQuery({
+    productId: productId,
+  }).data;
 
-  const {
-    data: allCartItems,
-    isLoading: allCartItemsIsLoading,
-    isError: allCartItemsIsError,
-  } = api.cart.getAllCartItems.useQuery({
-    authId: authId,
-  });
-  const {
-    data: getProduct,
-    isLoading: getProductIsLoading,
-    isError: getProductIsError,
-  } = api.product.getProductById.useQuery({
-    productId,
-  });
+  useEffect(() => {
+    if (data && data !== null) {
+      setProduct(data.product);
+    }
+  }, [data, product]);
 
   const { mutate, isPending } = api.cart.deleteCartItem.useMutation({
     onSuccess: () => {
-      router.refresh();
+      // router.refresh();
       toast({
         title: "Removed from cart",
         description: "Product successfully removed from cart",
@@ -73,37 +70,26 @@ export default function CartItem(props: Props) {
     },
   });
 
-  if (allCartItems !== null) {
-    useCartStore.setState({ products: allCartItems });
-  }
-
-  useEffect(() => {
-    if (getProduct) {
-      setProduct(getProduct);
-    }
-  }, [getProduct]);
-
   function handleRemove(id: string) {
     mutate({ productId: id });
   }
 
   function handleCheck(id: string) {
-    useCartStore.setState({
-      products: ProductsFromStore.map((item) =>
+    setProducts_store(
+      products_store.map((item) =>
         item.id !== id ? item : { ...item, isSelected: !item.isSelected },
       ),
-    });
+    );
   }
 
-  if (product === undefined) return null;
+  if (product === undefined) return <div className="mt-[5rem]">Loading...</div>;
+  if (product === null) return <div className="mt-[5rem]">Not found...</div>;
 
   return (
     <div
       className={cn(
-        "grid w-full grid-cols-8 gap-2 rounded-lg bg-zinc-100 p-2 shadow-md",
-        {
-          "ring-2 ring-neutral-500/50": isSelected,
-        },
+        "mt-[5rem] grid w-full grid-cols-8 gap-2 rounded-lg bg-zinc-100 p-2 shadow-md",
+        isSelected ? "ring-2 ring-neutral-500/50" : "",
       )}
     >
       <div className="relative col-span-1 flex flex-col items-center justify-center">
@@ -163,7 +149,7 @@ export default function CartItem(props: Props) {
                   className="flex-1 rounded-full bg-rose-300 p-0 shadow-sm hover:bg-rose-400"
                   size={"lg"}
                 >
-                  Delete
+                  {isPending ? "Deleting" : "Delete"}
                 </Button>
               </DialogFooter>
             </DialogContent>

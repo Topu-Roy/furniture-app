@@ -18,17 +18,14 @@ export async function getUserByAuthId(id: string) {
 //* ---------------- Product --------------------
 
 export async function getProductById(id: string) {
-    const product = await db.product.findFirst({
-        where: {
-            id: id
-        }
-    })
+    const product = await db.product.findFirst({ where: { id }, });
 
     return product;
 }
 
 export async function getAllProduct() {
     const product = await db.product.findMany()
+
 
     return product;
 }
@@ -39,6 +36,9 @@ export async function getCartProductById(productId: string) {
     const cart = await db.cartProduct.findFirst({
         where: {
             id: productId,
+        },
+        include: {
+            product: true
         }
     })
 
@@ -93,16 +93,13 @@ export async function deleteCartProduct(productId: string) {
 }
 
 export async function getCartProductsByAuthId(authId: string) {
+
     const userWithCartProducts = await db.user.findFirst({
-        where: {
-            authId: authId
-        },
+        where: { authId },
         include: {
             cartProducts: true
         }
     })
 
-    if (userWithCartProducts === null) return null;
-
-    return userWithCartProducts.cartProducts;
+    return userWithCartProducts;
 }
