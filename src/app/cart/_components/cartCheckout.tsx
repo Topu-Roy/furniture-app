@@ -9,67 +9,40 @@ import { type CartProduct } from "@prisma/client";
 
 export default function CartCheckout() {
   const [productsToRender, setProductsToRender] = useState<CartProduct[]>([]);
-  const [products, setProducts] = useState<CartProduct[]>([]);
+  const [checkoutPrice, setCheckoutPrice] = useState<number>(0);
 
-  const { products: storedProducts } = useCartStore();
-
-  useEffect(() => {
-    setProducts(storedProducts);
-    setProductsToRender(products);
-  }, [products]);
-
-  const [isAnySelected, setIsAnySelected] = useState(false);
-  const [checkoutPrice, setCheckoutPrice] = useState<number | null>(null);
+  const products_store = useCartStore((store) => store.products);
 
   useEffect(() => {
-    //* Check if at least one of the object of the array satisfies the condition
-    const selectedProducts = productsToRender.some(
-      (item) => item.isSelected === true,
+    let checkOut = 0;
+    const selectedProducts = products_store.filter(
+      (product) => product.isSelected === true,
     );
-
-    if (selectedProducts) {
-      setIsAnySelected(true);
-    } else {
-      setIsAnySelected(false);
-    }
-  }, [productsToRender]);
-
-  //* Calculate the total price according to the quantity
-  useEffect(() => {
-    let totalPriceForSelectedProducts = 0;
-
-    const selectedProductsArr = products.filter(
-      (item) => item.isSelected == true,
-    );
-
-    selectedProductsArr.forEach((item) => {
+    selectedProducts.forEach((item) => {
       const priceWithQuantity = item.price * item.quantity;
-      totalPriceForSelectedProducts += priceWithQuantity;
+      checkOut += priceWithQuantity;
     });
 
-    setCheckoutPrice(totalPriceForSelectedProducts);
-  }, [products]);
+    setProductsToRender(selectedProducts);
+    setCheckoutPrice(checkOut);
+  }, [products_store]);
+
   return (
     <>
       <Heading className="mt-[9px] !font-bold">
         Total for selected items
       </Heading>
       <div className="w-full space-y-2">
-        {isAnySelected ? (
-          products.map((item) => {
-            if (item.isSelected) {
-              return (
-                <div
-                  key={`${item.id}-cart-checkout`}
-                  className="flex items-center justify-between gap-4"
-                >
-                  <p className="truncate">{item.productTitle}</p>
-                  <p className="">${item.price * item.quantity}</p>
-                </div>
-              );
-            }
-            return null;
-          })
+        {productsToRender.length > 0 ? (
+          productsToRender.map((item) => (
+            <div
+              key={item.id}
+              className="flex items-center justify-between gap-4"
+            >
+              <p className="truncate">{item.productTitle}</p>
+              <p className="">${item.price * item.quantity}</p>
+            </div>
+          ))
         ) : (
           <p className="text-rose-400">* No products selected</p>
         )}
