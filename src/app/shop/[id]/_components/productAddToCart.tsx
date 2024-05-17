@@ -4,38 +4,79 @@ import { Button } from "@/components/ui/button";
 import { TiPlus, TiMinus } from "react-icons/ti";
 import { useToast } from "@/components/ui/use-toast";
 import { api } from "@/trpc/react";
-import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useCartStore } from "@/zustand/cart/cartStoreProvider";
+import { redirect } from "next/navigation";
 
-type props = {
-  authId: string;
+type Props = {
+  authId: string | null;
   productId: string;
+  productTitle: string;
+  price: number;
 };
 
-export default function ProductAddToCart({ authId, productId }: props) {
+export default function ProductAddToCart(props: Props) {
+  const { authId, productId, price, productTitle } = props;
   const [quantity, setQuantity] = useState(1);
   const { toast } = useToast();
-  const router = useRouter();
 
-  const { mutate, isPending } = api.cart.createNewCartItem.useMutation({
-    onSuccess: () => {
-      router.refresh();
-      toast({
-        title: "Added to cart",
-        description: "Product successfully added to cart",
-      });
-    },
-    onError: () => {
-      toast({
-        variant: "destructive",
-        title: "Something went wrong",
-        description: "Product not added to cart",
-      });
+  const products_store = useCartStore((store) => store.products);
+  const setProducts_store = useCartStore((store) => store.setProducts);
+
+  const { mutate, isPending, data } = api.cart.createNewCartItem.useMutation({
+    onSettled() {
+      if (data === undefined || data === null) {
+        return toast({
+          variant: "destructive",
+          title: "Something went wrong",
+          description: "Couldn't add to the cart. Please try again",
+        });
+      }
+
+      if (
+        data.action === "alreadyInCart" ||
+        data.alreadyExist?.quantity === quantity
+      ) {
+        return toast({
+          title: "Already in cart",
+          description: "Product already exist in the cart",
+        });
+      }
+
+      if (data.action === "updated") {
+        setProducts_store(
+          products_store.map((product) =>
+            product.id === productId
+              ? { ...product, ...data.updatedCartProduct }
+              : product,
+          ),
+        );
+
+        toast({
+          title: "Updated cart",
+          description: "Product updated successfully",
+        });
+      }
+
+      if (data.action === "created") {
+        if (data.createdCartProduct) {
+          setProducts_store([...products_store, data.createdCartProduct]);
+        }
+        toast({
+          title: "Added to cart",
+          description: "Product successfully added to cart",
+        });
+      }
     },
   });
 
   async function handleAddToCart() {
-    mutate({ productId, authId, quantity });
+    //TODO: Add fallback url
+    if (!authId) {
+      redirect("/authcallback");
+    }
+
+    mutate({ authId, productId, productTitle, price, quantity });
   }
 
   function updateQuantity(num: 1 | -1) {

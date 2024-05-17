@@ -11,7 +11,7 @@ type ShopState = {
   selectedCategory: Category | "All";
   selectedTag: Tag | "All";
   searchInputText: string;
-}
+};
 
 type ShopAction = {
   setProductsBackup: (products: Product[]) => void;
@@ -23,25 +23,23 @@ type ShopAction = {
   setSelectedSorting: (sort: "default" | "price") => void;
   setSearchInputText: (text: string) => void;
   setSelectedTag: (tag: Tag | "All") => void;
-}
+};
 
-export type ShopStoreType = ShopState & ShopAction
+export type ShopStoreType = ShopState & ShopAction;
 
 const defaultInitState: ShopState = {
   productsBackup: [],
   selectedMinPrice: 0,
   selectedMaxPrice: 2000,
   selectedSliderPrice: 2000,
-  selectedSorting: 'default',
+  selectedSorting: "default",
   selectedColor: undefined,
   selectedCategory: "All",
   selectedTag: "All",
-  searchInputText: '',
-}
+  searchInputText: "",
+};
 
-export const createShopStore = (
-  initState: ShopState = defaultInitState,
-) => {
+export const createShopStore = (initState: ShopState = defaultInitState) => {
   return createStore<ShopStoreType>()((set) => ({
     ...initState,
     setProductsBackup: (products) => set(() => ({ productsBackup: products })),
@@ -53,19 +51,5 @@ export const createShopStore = (
     setSelectedSorting: (sort) => set(() => ({ selectedSorting: sort })),
     setSearchInputText: (text) => set(() => ({ searchInputText: text })),
     setSelectedTag: (tag) => set(() => ({ selectedTag: tag })),
-
-  }))
-}
-
-// export const useShopStore = create<ShopStoreType>((set) => ({
-//   productsBackup: [],
-//   setProductsBackup: (props: Product[]) => set(() => ({ productsBackup: props })),
-//   selectedMinPrice: 0,
-//   selectedMaxPrice: 2000,
-//   selectedSliderPrice: 2000,
-//   selectedSorting: 'default',
-//   selectedColor: undefined,
-//   selectedCategory: "All",
-//   selectedTag: "All",
-//   searchInputText: '',
-// }));
+  }));
+};

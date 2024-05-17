@@ -15,14 +15,6 @@ type props = {
 
 export default function RenderProduct({ product }: props) {
   const user = auth();
-  if (!user.userId)
-    return (
-      <div className="mx-auto mt-[6rem] flex max-w-7xl items-center justify-center">
-        <Link href={"/authcallback"}>
-          <Button>Sign up</Button>
-        </Link>
-      </div>
-    );
 
   return (
     <>
@@ -95,7 +87,12 @@ export default function RenderProduct({ product }: props) {
             </div>
           </div>
 
-          <ProductAddToCart authId={user.userId} productId={product.id} />
+          <ProductAddToCart
+            price={product.price}
+            productTitle={product.productTitle}
+            authId={user.userId}
+            productId={product.id}
+          />
         </div>
       </div>
       <div className="hidden w-full space-y-2 px-3 sm:block lg:hidden">

@@ -1,5 +1,4 @@
 import { CartProduct } from "@prisma/client";
-import { create } from "zustand";
 import { createStore } from 'zustand/vanilla'
 
 type CartState = {
@@ -24,8 +23,3 @@ export const createCartStore = (
         setProducts: (products) => set(() => ({ products: products }))
     }))
 }
-
-// export const useCartStore = create<CartStoreType>()((set) => ({
-//     products: [],
-//     setProducts: (products) => set(() => ({ products: products }))
-// }));

@@ -24,7 +24,7 @@ export const cartRouter = createTRPCRouter({
 
     createNewCartItem: privateProcedure
         .input(addToCartSchema)
-        .mutation(async ({ input }) => {
+        .mutation(async ({ input, ctx }) => {
 
             type ActionType = "updated" | "created" | "alreadyInCart"
             type Action = { updated: ActionType; created: ActionType; alreadyInCart: ActionType }
@@ -32,12 +32,14 @@ export const cartRouter = createTRPCRouter({
 
             const user = await getUserByAuthId(input.authId)
 
-            if (!user) return;
+            if (!user) throw new TRPCError({ code: 'UNAUTHORIZED' })
+            if (input.authId !== ctx.user.userId) throw new TRPCError({ code: 'FORBIDDEN' })
+
 
             const isExist = await db.cartProduct.findFirst({
                 where: {
                     productId: input.productId,
-                    userId: user.id
+                    userId: user.id,
                 }
             })
 
@@ -46,8 +48,9 @@ export const cartRouter = createTRPCRouter({
                     const updatedCartProduct = await updateProductCartQuantity(input.productId, input.quantity)
                     return { action: action.updated, updatedCartProduct };
                 }
+
                 if (input.quantity === isExist.quantity) {
-                    return { action: action.alreadyInCart };
+                    return { action: action.alreadyInCart, alreadyExist: isExist };
                 }
             }
 
