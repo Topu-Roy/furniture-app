@@ -20,45 +20,52 @@ import {
 } from "react-icons/io5";
 import { cn } from "@/lib/utils";
 import { Text } from "@/app/_components/text";
-import { type Product } from "@prisma/client";
+import { CartProduct, type Product } from "@prisma/client";
 import { useToast } from "@/components/ui/use-toast";
 import { api } from "@/trpc/react";
-import { useRouter } from "next/navigation";
-import { useCartStore } from "@/zustand/cart/cartStoreProvider";
+import { useCartStore } from "@/zustand/cart/cartStore";
 
 type Props = {
   cartItemId: string;
   productId: string;
   isSelected: boolean;
   quantity: number;
+  setProducts: React.Dispatch<React.SetStateAction<CartProduct[]>>;
 };
 
 export default function CartItem(props: Props) {
-  const { productId, isSelected, quantity, cartItemId } = props;
+  const { productId, isSelected, quantity, cartItemId, setProducts } = props;
   const [product, setProduct] = useState<Product>();
   const [totalPrice, setTotalPrice] = useState(product?.price);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
+  //* Zustand
   const products_store = useCartStore((store) => store.products);
   const setProducts_store = useCartStore((store) => store.setProducts);
+  const removeProductById_store = useCartStore(
+    (store) => store.removeProductById,
+  );
 
   const { toast } = useToast();
-  const router = useRouter();
 
   const data = api.cart.getCartItemById.useQuery({
     productId: productId,
   }).data;
 
   useEffect(() => {
+    setProducts(products_store);
+  }, [products_store]);
+
+  useEffect(() => {
     if (data && data !== null) {
       setProduct(data.product);
     }
-  }, [data, product]);
-
-  useEffect(() => {}, [products_store]);
+  }, [data]);
 
   const { mutate, isPending } = api.cart.deleteCartItem.useMutation({
     onSuccess: () => {
-      router.refresh();
+      // setProducts(products_store.filter((item) => item.id !== product?.id));
+      removeProductById_store(productId);
       toast({
         title: "Removed from cart",
         description: "Product successfully removed from cart",
@@ -70,6 +77,9 @@ export default function CartItem(props: Props) {
         title: "Failed to remove from cart",
         description: "Failed to remove product from cart",
       });
+    },
+    onSettled() {
+      dialogOpen && setDialogOpen(!dialogOpen);
     },
   });
 
@@ -126,7 +136,7 @@ export default function CartItem(props: Props) {
         <div className="h-0.5 w-[100%] rounded-full bg-black/10" />
 
         <div className="flex flex-1 items-center justify-center">
-          <Dialog>
+          <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
               <Button
                 variant="ghost"

@@ -6,8 +6,6 @@ import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
 import { type Product } from "@prisma/client";
 import { auth } from "@clerk/nextjs/server";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 type props = {
   product: Product;

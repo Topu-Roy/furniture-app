@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CartProduct } from "@prisma/client";
-import { useCartStore } from "@/zustand/cart/cartStoreProvider";
+import { useCartStore } from "@/zustand/cart/cartStore";
 
 export default function SelectAllAndReset() {
   const [productsToRender, setProductsToRender] = useState<CartProduct[]>([]);

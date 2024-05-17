@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn, scrollToTop } from "@/lib/utils";
 import HeadingAndReset from "./headingAndReset";
 import { Tag } from "@prisma/client";
-import { useShopStore } from "@/zustand/shop/shopStoreProvider";
+import { useShopStore } from "@/zustand/shop/shopStore";
 
 type ProductTagsType = {
   tag: Tag;

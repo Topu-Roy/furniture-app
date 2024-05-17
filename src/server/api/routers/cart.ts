@@ -79,7 +79,5 @@ export const cartRouter = createTRPCRouter({
             const deletedCartItem = await deleteCartProduct(input.productId)
 
             if (deletedCartItem.id) return deletedCartItem;
-
-            return null;
         }),
 })

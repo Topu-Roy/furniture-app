@@ -5,7 +5,7 @@ import { Slider } from "@/components/ui/slider";
 import useDebounce from "@/hooks/debounce";
 import HeadingAndReset from "./headingAndReset";
 import { scrollToTop } from "@/lib/utils";
-import { useShopStore } from "@/zustand/shop/shopStoreProvider";
+import { useShopStore } from "@/zustand/shop/shopStore";
 
 export default function FilterByPrice() {
   const [sliderValue, setSliderValue] = useState(2000);

@@ -5,7 +5,7 @@ import HeadingAndReset from "./headingAndReset";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/app/_components/text";
 import { Category } from "@prisma/client";
-import { useShopStore } from "@/zustand/shop/shopStoreProvider";
+import { useShopStore } from "@/zustand/shop/shopStore";
 
 type ProductCatagoriesType = {
   productName: Category;

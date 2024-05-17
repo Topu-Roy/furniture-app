@@ -6,7 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { api } from "@/trpc/react";
 import { useAuth } from "@clerk/nextjs";
-import { useCartStore } from "@/zustand/cart/cartStoreProvider";
+import { useCartStore } from "@/zustand/cart/cartStore";
 
 type Props = {
   productId: string;

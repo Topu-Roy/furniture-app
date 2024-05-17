@@ -7,7 +7,7 @@ import { VscLoading } from "react-icons/vsc";
 import { MdRunningWithErrors } from "react-icons/md";
 import { Heading } from "@/app/_components/heading";
 import { type Product as ProductType } from "@prisma/client";
-import { useShopStore } from "@/zustand/shop/shopStoreProvider";
+import { useShopStore } from "@/zustand/shop/shopStore";
 
 type Props = {
   products: ProductType[];

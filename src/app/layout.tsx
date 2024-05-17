@@ -9,8 +9,6 @@ import { TRPCReactProvider } from "@/trpc/react";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
-import { CartStoreProvider } from "@/zustand/cart/cartStoreProvider";
-import { ShopStoreProvider } from "@/zustand/shop/shopStoreProvider";
 
 export const metadata: Metadata = {
   title: "Furnit",
@@ -29,12 +27,8 @@ export default function RootLayout({
           //* This is for uploadthing ssr hydration
           <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
           <TRPCReactProvider>
-            <CartStoreProvider>
-              <ShopStoreProvider>
-                <NavBar />
-                {children}
-              </ShopStoreProvider>
-            </CartStoreProvider>
+            <NavBar />
+            {children}
             <Footer />
             <Toaster />
           </TRPCReactProvider>

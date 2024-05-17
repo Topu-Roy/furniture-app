@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { cn, scrollToTop } from "@/lib/utils";
 import HeadingAndReset from "./headingAndReset";
 import { Color } from "@prisma/client";
-import { useShopStore } from "@/zustand/shop/shopStoreProvider";
+import { useShopStore } from "@/zustand/shop/shopStore";
 
 type ColorNQuantity = {
   color: Color;

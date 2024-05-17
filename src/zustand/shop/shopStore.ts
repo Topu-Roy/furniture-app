@@ -1,5 +1,5 @@
 import { Category, Color, Product, Tag } from "@prisma/client";
-import { createStore } from "zustand";
+import { create, createStore } from "zustand";
 
 type ShopState = {
   productsBackup: Product[];
@@ -39,17 +39,15 @@ const defaultInitState: ShopState = {
   searchInputText: "",
 };
 
-export const createShopStore = (initState: ShopState = defaultInitState) => {
-  return createStore<ShopStoreType>()((set) => ({
-    ...initState,
-    setProductsBackup: (products) => set(() => ({ productsBackup: products })),
-    setSelectedCategory: (category) => set(() => ({ selectedCategory: category })),
-    setSelectedColor: (color) => set(() => ({ selectedColor: color })),
-    setSelectedSliderPrice: (price) => set(() => ({ selectedSliderPrice: price })),
-    setSelectedMinPrice: (price) => set(() => ({ selectedMinPrice: price })),
-    setSelectedMaxPrice: (price) => set(() => ({ selectedMaxPrice: price })),
-    setSelectedSorting: (sort) => set(() => ({ selectedSorting: sort })),
-    setSearchInputText: (text) => set(() => ({ searchInputText: text })),
-    setSelectedTag: (tag) => set(() => ({ selectedTag: tag })),
-  }));
-};
+export const useShopStore = create<ShopStoreType>((set) => ({
+  ...defaultInitState,
+  setProductsBackup: (products) => set(() => ({ productsBackup: products })),
+  setSelectedCategory: (category) => set(() => ({ selectedCategory: category })),
+  setSelectedColor: (color) => set(() => ({ selectedColor: color })),
+  setSelectedSliderPrice: (price) => set(() => ({ selectedSliderPrice: price })),
+  setSelectedMinPrice: (price) => set(() => ({ selectedMinPrice: price })),
+  setSelectedMaxPrice: (price) => set(() => ({ selectedMaxPrice: price })),
+  setSelectedSorting: (sort) => set(() => ({ selectedSorting: sort })),
+  setSearchInputText: (text) => set(() => ({ searchInputText: text })),
+  setSelectedTag: (tag) => set(() => ({ selectedTag: tag })),
+}))

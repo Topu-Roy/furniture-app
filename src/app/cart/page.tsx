@@ -51,7 +51,7 @@ export default async function CartPage() {
       <SelectAllAndReset />
 
       <div className="mx-auto flex max-w-7xl items-start justify-between gap-2 pb-10">
-        <RenderCart products={allCartProducts} authId={user.userId} />
+        <RenderCart products={allCartProducts} />
 
         <div className="bg-gray-50_01 flex max-w-sm flex-1 flex-col items-start justify-end gap-7 p-[27px]">
           <CartCheckout />

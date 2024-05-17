@@ -83,13 +83,13 @@ export async function updateProductCartQuantity(productId: string, quantity: num
 }
 
 export async function deleteCartProduct(productId: string) {
-    const updateCartProduct = await db.cartProduct.delete({
+    const deleteCartItem = await db.cartProduct.delete({
         where: {
             id: productId,
         }
     })
 
-    return updateCartProduct;
+    return deleteCartItem;
 }
 
 export async function getCartProductsByAuthId(authId: string) {

@@ -5,8 +5,8 @@ import { TiPlus, TiMinus } from "react-icons/ti";
 import { useToast } from "@/components/ui/use-toast";
 import { api } from "@/trpc/react";
 import { cn } from "@/lib/utils";
-import { useCartStore } from "@/zustand/cart/cartStoreProvider";
 import { redirect } from "next/navigation";
+import { useCartStore } from "@/zustand/cart/cartStore";
 
 type Props = {
   authId: string | null;
