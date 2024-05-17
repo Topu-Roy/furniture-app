@@ -10,6 +10,7 @@ import SecondCTA from "./_components/secondCTA";
 import { api } from "@/trpc/server";
 
 export default async function HomepagePage() {
+  const products = await api.product.getAllProducts();
   return (
     <div className="bg-stone-200">
       <HeroSection />
@@ -17,7 +18,7 @@ export default async function HomepagePage() {
       <CategoryCTA />
       <HomeProductCarousel />
       <SecondCTA />
-      <NewArrivals />
+      {/* <NewArrivals products={products} /> */}
       <OurBenefits />
       <ReadBlogSection />
     </div>

@@ -1,23 +1,42 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { type Product } from "@prisma/client";
 import useDeviceWidth from "@/hooks/windowDimensions";
-import WideScreenProductCarousel from "./_carousels/wideScreenProductCarousel";
-import DesktopProductCarousel from "./_carousels/desktopProductCarousel";
-import MobileProductCarousel from "./_carousels/mobileProductCarousel";
-import TabletProductCarousel from "./_carousels/tabletProductCarousel";
-import { Product } from "@prisma/client";
+
+//* Disable SSR for hydration errors
+const WideScreenProductCarousel = dynamic(
+  () => import("./_carousels/wideScreenProductCarousel"),
+  { ssr: false },
+);
+const DesktopProductCarousel = dynamic(
+  () => import("./_carousels/desktopProductCarousel"),
+  { ssr: false },
+);
+const MobileProductCarousel = dynamic(
+  () => import("./_carousels/mobileProductCarousel"),
+  { ssr: false },
+);
+const TabletProductCarousel = dynamic(
+  () => import("./_carousels/tabletProductCarousel"),
+  { ssr: false },
+);
 
 type Props = {
   products: Product[];
 };
 
 export default function RenderProductCarousel({ products }: Props) {
+  const [deviceWidth, setDeviceWidth] = useState<number | null>(null);
   const width = useDeviceWidth();
-  const [deviceWidth, setDeviceWidth] = useState(width);
 
   useEffect(() => {
     setDeviceWidth(width);
   }, [width]);
+
+  if (deviceWidth === null) {
+    return null;
+  }
 
   if (deviceWidth >= 1280) {
     return <WideScreenProductCarousel products={products} />;
@@ -31,9 +50,5 @@ export default function RenderProductCarousel({ products }: Props) {
     return <TabletProductCarousel products={products} />;
   }
 
-  return (
-    <>
-      <MobileProductCarousel products={products} />
-    </>
-  );
+  return <MobileProductCarousel products={products} />;
 }

@@ -3,11 +3,13 @@ import Link from "next/link";
 import Product from "@/app/_components/product/productCard";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/app/_components/heading";
-import { api } from "@/trpc/server";
+import { type Product as ProductType } from "@prisma/client";
 
-export default async function NewArrivals() {
-  const products = await api.product.getAllProducts();
+type Props = {
+  products: ProductType[];
+};
 
+export default async function NewArrivals({ products }: Props) {
   const AllNewProducts = products.filter((item) => item.status === "New");
   const newProductsMobile = AllNewProducts.slice(0, 4);
   const newProductsTablet = AllNewProducts.slice(0, 6);
@@ -63,11 +65,3 @@ export default async function NewArrivals() {
     </div>
   );
 }
-
-// return (
-//   <div>
-//     {products.map((item) => (
-//       <div>{item.productTitle}</div>
-//     ))}
-//   </div>
-// );
