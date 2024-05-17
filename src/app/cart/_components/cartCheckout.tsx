@@ -7,56 +7,122 @@ import Link from "next/link";
 
 export default function CartCheckout() {
   const [productsToRender, setProductsToRender] = useState<CartProduct[]>([]);
-  const [checkoutPrice, setCheckoutPrice] = useState<number>(0);
+
+  const [summary, setSummary] = useState({
+    subtotal: 0,
+    discount: 0,
+    tax: 0,
+    logisticsFee: 0,
+    shippingCost: 0,
+    total: 0,
+  });
+  const [taxRate] = useState<number>(0.09); // 9% tax rate
+  const [logisticsRate] = useState<number>(0.02); // 2% logistics fee
+  const [shippingCostPerProduct] = useState<number>(50.0); // $50 per product for shipping
+  const [discountRate] = useState<number>(0.02); // 2% discount
 
   const products_store = useCartStore((store) => store.products);
 
   useEffect(() => {
-    let checkOut = 0;
+    let subTotal = 0;
     const selectedProducts = products_store.filter(
       (product) => product.isSelected === true,
     );
     selectedProducts.forEach((item) => {
       const priceWithQuantity = item.price * item.quantity;
-      checkOut += priceWithQuantity;
+      subTotal += priceWithQuantity;
     });
 
     setProductsToRender(selectedProducts);
-    setCheckoutPrice(checkOut);
+
+    // Calculate discount
+    const discount = subTotal * discountRate;
+
+    // Apply discount
+    const discountedTotal = subTotal - discount;
+
+    // Calculate tax
+    const tax = discountedTotal * taxRate;
+
+    // Calculate logistics fee
+    const logisticsFee = discountedTotal * logisticsRate;
+
+    // Calculate shipping cost
+    const shippingCost = selectedProducts.length * shippingCostPerProduct;
+
+    // Calculate final checkout price
+    const finalCheckoutPrice =
+      discountedTotal + tax + logisticsFee + shippingCost;
+
+    // Set the summary object
+    setSummary({
+      subtotal: subTotal,
+      discount: discount,
+      tax: tax,
+      logisticsFee: logisticsFee,
+      shippingCost: shippingCost,
+      total: finalCheckoutPrice,
+    });
   }, [products_store]);
 
   return (
     <>
       <div className="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
         <div className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
-          <p className="text-xl font-semibold text-gray-900 dark:text-white">
-            Order summary
-          </p>
+          <p className="text-xl font-semibold text-gray-900">Order summary</p>
 
-          <div className="space-y-4">
-            <div className="space-y-2">
-              {productsToRender.length > 0 ? (
-                productsToRender.map((item) => (
-                  <dl className="flex items-center justify-between gap-4">
-                    <dt className="truncate text-base font-normal text-gray-500">
-                      {item.productTitle}
-                    </dt>
-                    <dd className="text-base font-medium text-gray-900 dark:text-white">
-                      ${item.price * item.quantity}
-                    </dd>
-                  </dl>
-                ))
-              ) : (
-                <p className="text-rose-400">* No products selected</p>
-              )}
-            </div>
+          <div className="space-y-2">
+            {productsToRender.length > 0 ? (
+              productsToRender.map((item) => (
+                <dl className="flex items-center justify-between gap-4">
+                  <dt className="truncate text-base font-medium text-gray-600">
+                    {item.productTitle}
+                  </dt>
+                  <dd className="text-base font-medium text-gray-900">
+                    ${item.price * item.quantity}
+                  </dd>
+                </dl>
+              ))
+            ) : (
+              <p className="text-rose-400">* No products selected</p>
+            )}
 
-            <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
-              <dt className="text-base font-bold text-gray-900 dark:text-white">
-                Total
-              </dt>
-              <dd className="text-base font-bold text-gray-900 dark:text-white">
-                ${checkoutPrice}
+            {productsToRender.length > 0 ? (
+              <>
+                <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2">
+                  <dt className="text-base text-gray-500">Shipping Cost</dt>
+                  <dd className="text-base text-gray-500">
+                    ${summary.shippingCost.toFixed(2)}
+                  </dd>
+                </dl>
+
+                <dl className="flex items-center justify-between gap-4 pt-2">
+                  <dt className="text-base text-gray-500">Discount</dt>
+                  <dd className="text-base text-gray-500">
+                    ${summary.discount.toFixed(2)}
+                  </dd>
+                </dl>
+
+                <dl className="flex items-center justify-between gap-4 pt-2">
+                  <dt className="text-base text-gray-500">Logistics Fee</dt>
+                  <dd className="text-base text-gray-500">
+                    ${summary.logisticsFee.toFixed(2)}
+                  </dd>
+                </dl>
+
+                <dl className="flex items-center justify-between gap-4 pt-2">
+                  <dt className="text-base text-gray-500">Tax</dt>
+                  <dd className="text-base text-gray-500">
+                    ${summary.tax.toFixed(2)}
+                  </dd>
+                </dl>
+              </>
+            ) : null}
+
+            <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2">
+              <dt className="text-base font-bold text-gray-900">Total</dt>
+              <dd className="text-base font-bold text-gray-900">
+                ${summary.total.toFixed(2)}
               </dd>
             </dl>
           </div>
