@@ -18,7 +18,7 @@ export default async function HomepagePage() {
       <CategoryCTA />
       <HomeProductCarousel />
       <SecondCTA />
-      {/* <NewArrivals products={products} /> */}
+      <NewArrivals products={products} />
       <OurBenefits />
       <ReadBlogSection />
     </div>

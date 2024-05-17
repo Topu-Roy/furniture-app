@@ -1,5 +1,5 @@
-"use client";
-import React, { useState } from "react";
+"use state";
+import React, { useEffect, useState } from "react";
 import {
   Popover,
   PopoverContent,
@@ -10,7 +10,6 @@ import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import { cn } from "@/lib/utils";
 import AddButton from "./addButton";
 import Link from "next/link";
-import { useAuth } from "@clerk/nextjs";
 
 type Props = {
   productId: string;
@@ -24,6 +23,15 @@ export default function MobilePopover({
   productTitle,
 }: Props) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null; // Ensure this component only renders on the client
+  }
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

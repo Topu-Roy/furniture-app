@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 import { cn } from "@/lib/utils";
@@ -9,8 +10,11 @@ import { LucideShoppingCart } from "lucide-react";
 import AddButton from "./addButton";
 import ButtonWithIcon from "./buttonWithIcon";
 import { Text } from "../text";
-import MobilePopover from "./mobilePopover";
 import { type Product } from "@prisma/client";
+
+const DynamicMobilePopover = dynamic(() => import("./mobilePopover"), {
+  ssr: false,
+});
 
 type Props = {
   product: Product;
@@ -30,6 +34,7 @@ export default function Product({ product, className }: Props) {
         <div className="relative w-full overflow-hidden">
           <Link href={`/shop/${product.id}`}>
             <div className="z-10 aspect-square overflow-hidden rounded-md">
+              {/* //TODO: Fix default image url */}
               <Image
                 height={1024}
                 width={1024}
@@ -42,7 +47,7 @@ export default function Product({ product, className }: Props) {
 
           {/* Mobile Popover button */}
           <div className="absolute bottom-[2%] right-[2%] lg:hidden">
-            <MobilePopover
+            <DynamicMobilePopover
               price={product.price}
               productTitle={product.productTitle}
               productId={product.id}
