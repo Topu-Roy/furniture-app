@@ -1,26 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import { type Product } from "@prisma/client";
 import useDeviceWidth from "@/hooks/windowDimensions";
-
-//* Disable SSR for hydration errors
-const WideScreenProductCarousel = dynamic(
-  () => import("./_carousels/wideScreenProductCarousel"),
-  { ssr: false },
-);
-const DesktopProductCarousel = dynamic(
-  () => import("./_carousels/desktopProductCarousel"),
-  { ssr: false },
-);
-const MobileProductCarousel = dynamic(
-  () => import("./_carousels/mobileProductCarousel"),
-  { ssr: false },
-);
-const TabletProductCarousel = dynamic(
-  () => import("./_carousels/tabletProductCarousel"),
-  { ssr: false },
-);
+import WideScreenProductCarousel from "./_carousels/wideScreenProductCarousel";
+import DesktopProductCarousel from "./_carousels/desktopProductCarousel";
+import TabletProductCarousel from "./_carousels/tabletProductCarousel";
+import MobileProductCarousel from "./_carousels/mobileProductCarousel";
 
 type Props = {
   products: Product[];

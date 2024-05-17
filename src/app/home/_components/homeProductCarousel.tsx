@@ -2,10 +2,13 @@ import React from "react";
 import RenderProductCarousel from "./renderProductCarousel";
 import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
-import { api } from "@/trpc/server";
+import { Product } from "@prisma/client";
 
-export default async function HomeProductCarousel() {
-  const products = await api.product.getAllProducts();
+type Props = {
+  products: Array<Product>;
+};
+
+export default async function HomeProductCarousel({ products }: Props) {
   return (
     <div className="bg-wh flex flex-col items-center justify-center bg-white py-10 lg:py-16">
       <div className="flex w-full flex-col items-center justify-center gap-5 pb-10">

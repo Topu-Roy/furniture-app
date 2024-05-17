@@ -16,7 +16,7 @@ export default async function HomepagePage() {
       <HeroSection />
       <BrandsWorkedWith />
       <CategoryCTA />
-      <HomeProductCarousel />
+      <HomeProductCarousel products={products} />
       <SecondCTA />
       <NewArrivals products={products} />
       <OurBenefits />
