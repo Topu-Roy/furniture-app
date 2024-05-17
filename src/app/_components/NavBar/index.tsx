@@ -60,16 +60,7 @@ export default function NavBar() {
             <IoSearchOutline size={20} />
           </Button>
 
-          {user.userId ? <CartIconWithUser /> : null}
-
-          <Link href={"/cart"}>
-            <Button
-              variant={"ghost"}
-              className={cn("p-1", user.userId ? "hidden" : "block")}
-            >
-              <BsCart2 size={20} />
-            </Button>
-          </Link>
+          <CartIconWithUser />
 
           <div>
             {!user?.userId || !user ? (

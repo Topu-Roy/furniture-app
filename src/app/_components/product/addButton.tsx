@@ -39,6 +39,13 @@ export default function AddButton(props: Props) {
       }
 
       if (data.action === "updated") {
+        setProducts_store(
+          products_store.map((product) =>
+            product.id === productId
+              ? { ...product, ...data.updatedCartProduct }
+              : product,
+          ),
+        );
         toast({
           title: "Updated cart",
           description: "Product updated successfully",
@@ -57,6 +64,10 @@ export default function AddButton(props: Props) {
     }
   }
 
+  useEffect(() => {
+    giveFeedback();
+  }, [data]);
+
   const handleClick = () => {
     if (!user.userId || user.userId === undefined || user.userId === null) {
       return toast({
@@ -74,10 +85,6 @@ export default function AddButton(props: Props) {
       quantity,
     });
   };
-
-  useEffect(() => {
-    giveFeedback();
-  }, [data]);
 
   return (
     <Button

@@ -13,7 +13,7 @@ import { redirect } from "next/navigation";
 export default async function CartPage() {
   const user = auth();
 
-  if (!user.userId) return redirect("/home");
+  if (!user.userId) return redirect("/authcallback");
 
   const allCartProducts = await api.cart.getAllCartItems({
     authId: user.userId,
@@ -53,7 +53,7 @@ export default async function CartPage() {
       <div className="mx-auto flex max-w-7xl items-start justify-between gap-2 pb-10">
         <RenderCart products={allCartProducts} />
 
-        <div className="bg-gray-50_01 flex max-w-sm flex-1 flex-col items-start justify-end gap-7 p-[27px]">
+        <div className="flex max-w-sm flex-1 flex-col items-start justify-end gap-7">
           <CartCheckout />
         </div>
       </div>

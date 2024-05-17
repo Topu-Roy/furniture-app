@@ -6,11 +6,10 @@ import React, {
   useState,
 } from "react";
 import { Button } from "@/components/ui/button";
-import { TiMinus, TiPlus } from "react-icons/ti";
-import { Text } from "@/app/_components/text";
 import { api } from "@/trpc/react";
 import { useToast } from "@/components/ui/use-toast";
 import useDebounce from "@/hooks/debounce";
+import { useCartStore } from "@/zustand/cart/cartStore";
 
 type Props = {
   cartItemId: string;
@@ -19,15 +18,15 @@ type Props = {
   setTotalPrice: Dispatch<SetStateAction<number | undefined>>;
 };
 
-export default function UpdateQuantity({
-  cartItemId,
-  quantity,
-  price,
-  setTotalPrice,
-}: Props) {
+export default function UpdateQuantity(props: Props) {
+  const { cartItemId, quantity, price, setTotalPrice } = props;
+
   const [quantityState, setQuantityState] = useState(quantity);
   const [prevQuantity, setPrevQuantity] = useState(quantity);
   const debouncedQuantity = useDebounce(quantityState);
+
+  const products_store = useCartStore((store) => store.products);
+  const setProducts_store = useCartStore((store) => store.setProducts);
 
   const { toast } = useToast();
   const { mutate } = api.cart.updatedCartItem.useMutation({
@@ -41,12 +40,28 @@ export default function UpdateQuantity({
     },
     onSuccess() {
       setPrevQuantity(quantityState);
+      setProducts_store(
+        products_store.map((product) =>
+          product.id === cartItemId
+            ? { ...product, quantity: quantityState }
+            : product,
+        ),
+      );
     },
   });
 
-  async function handleClick(count: 1 | -1) {
-    if (quantityState === 1 && count === -1) return;
-    setQuantityState((prev) => prev + count);
+  function updateQuantity({ action }: { action: "increment" | "decrement" }) {
+    if (action === "decrement" && quantity === 1) {
+      return;
+    }
+
+    if (action === "increment") {
+      setQuantityState(quantityState + 1);
+    }
+
+    if (action === "decrement") {
+      setQuantityState(quantityState - 1);
+    }
   }
 
   useEffect(() => {
@@ -61,25 +76,56 @@ export default function UpdateQuantity({
   }, [quantityState]);
 
   return (
-    <div className="flex items-center justify-between gap-2">
-      <Text className="font-semibold text-black/75">Quantity:</Text>
-      <div className="flex h-14 items-center justify-center gap-5 rounded-md border border-black/40 p-2">
-        <Button
-          onClick={() => handleClick(-1)}
-          className="flex h-8 w-8 items-center justify-center rounded-full p-2"
-          variant={"outline"}
+    <div className="flex items-center">
+      <Button
+        onClick={() => updateQuantity({ action: "decrement" })}
+        className="flex size-6 items-center justify-center rounded-md border border-gray-300 bg-gray-100 p-0 hover:bg-gray-200"
+      >
+        <svg
+          className="size-3 text-gray-900/75"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 18 2"
         >
-          <TiMinus size={20} className="text-black" />
-        </Button>
-        <span className="">{quantityState}</span>
-        <Button
-          onClick={() => handleClick(1)}
-          className="flex h-8 w-8 items-center justify-center rounded-full p-2"
-          variant={"outline"}
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M1 1h16"
+          />
+        </svg>
+      </Button>
+      <input
+        type="text"
+        id="counter-input"
+        data-input-counter
+        className="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white"
+        placeholder=""
+        value={quantityState}
+        required
+      />
+      <Button
+        onClick={() => updateQuantity({ action: "increment" })}
+        className="flex size-6 items-center justify-center rounded-md border border-gray-300 bg-gray-100 p-0 hover:bg-gray-200"
+      >
+        <svg
+          className="size-3 text-gray-900/75"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 18 18"
         >
-          <TiPlus size={20} className="text-black" />
-        </Button>
-      </div>
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 1v16M1 9h16"
+          />
+        </svg>
+      </Button>
     </div>
   );
 }

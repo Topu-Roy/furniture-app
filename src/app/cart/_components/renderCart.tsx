@@ -11,24 +11,23 @@ type Props = {
 export default function RenderCart({ products: productsFromProp }: Props) {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<CartProduct[]>([]);
+
   const setProducts_store = useCartStore((state) => state.setProducts);
+  const products_store = useCartStore((state) => state.products);
 
+  // Set products in store once on mount
   useEffect(() => {
-    setProducts(productsFromProp);
-    setProducts_store(products);
+    setProducts_store(productsFromProp);
     setLoading(false);
-  }, []);
+  }, [productsFromProp, setProducts_store]);
 
+  // Sync local products state with store
   useEffect(() => {
-    setProducts_store(products);
-  }, [products]);
+    setProducts(products_store);
+  }, [products_store]);
 
   if (loading) {
     return <div className="w-[55rem]">Loading...</div>;
-  }
-
-  if (products.length === 0) {
-    return <div className="w-[55rem]">Nothing in the cart...</div>;
   }
 
   return (
