@@ -6,14 +6,12 @@ import MobileMenu from "./mobileMenu";
 import { IoSearchOutline } from "react-icons/io5";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { cn } from "@/lib/utils";
-import { BsCart2 } from "react-icons/bs";
 import CartIconWithUser from "./cartIcon";
 
 export default function NavBar() {
   const user = auth();
   return (
-    <header className="fixed top-0 z-50 flex h-[5rem] w-[100vw] items-center justify-center bg-white px-2 shadow-sm">
+    <header className="fixed top-0 z-50 flex h-[5.5rem] w-[100vw] items-center justify-center bg-white px-2 shadow-sm">
       <div className="mx-auto flex w-[98vw] max-w-[85rem] flex-row justify-between">
         <div className="relative flex items-center justify-between gap-2">
           <MobileMenu />

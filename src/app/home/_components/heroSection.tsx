@@ -8,7 +8,7 @@ import { Text } from "@/app/_components/text";
 
 export default function HeroSection() {
   return (
-    <div className="mt-[5rem] w-full py-8 md:py-10 lg:px-4">
+    <div className="mt-[4rem] h-[65vh] w-full py-8 md:py-10 lg:px-4 lg:pt-16">
       <div className="mx-auto w-full max-w-7xl">
         <div className="my-[5px] flex w-full max-w-[1290px] flex-col-reverse items-center justify-between px-2 md:flex-row">
           <div className="flex w-full flex-col items-center justify-start gap-[30px] sm:px-4 md:w-[50%] md:items-start md:px-0">

@@ -22,7 +22,7 @@ export default async function CartPage() {
   if (!allCartProducts) {
     return (
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-6">
-        <Heading className="mt-[5rem] pt-8 text-center">Loading...</Heading>
+        <Heading className="mt-[4rem] pt-8 text-center">Loading...</Heading>
       </div>
     );
   }
@@ -30,7 +30,7 @@ export default async function CartPage() {
   if (allCartProducts === null || allCartProducts.length === 0) {
     return (
       <div className="mx-auto flex max-w-7xl items-center justify-center gap-6 bg-stone-200">
-        <Heading className="mt-[5rem] pt-8 text-center">
+        <Heading className="mt-[4rem] pt-8 text-center">
           Cart is empty...!
         </Heading>
         <Link href={"/shop"}>
@@ -42,7 +42,7 @@ export default async function CartPage() {
 
   return (
     <div className="bg-stone-200">
-      <Heading className="mt-[5rem] pt-8 text-center">My Cart</Heading>
+      <Heading className="mt-[4rem] pt-6 text-center">My Cart</Heading>
 
       <Text size="md" className="pb-8 pt-5 text-center text-rose-500 underline">
         * Select products to Checkout
