@@ -15,6 +15,7 @@ model User {
   imageUrl     String?
   userName     String?
   cartProducts CartProduct[]
+  reviews      Review[]
 
   @@index([id, authId])
 }
@@ -35,14 +36,16 @@ model Product {
 }
 
 model Review {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  postedBy  String   @db.ObjectId
-  text      String
-  date      DateTime @default(now())
-  Product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId String   @db.ObjectId
+  id   String   @id @default(auto()) @map("_id") @db.ObjectId
+  text String
+  date DateTime @default(now())
+  name String
+  rate Int
 
-  @@index([id, postedBy])
+  Product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String  @db.ObjectId
+  User      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String  @db.ObjectId
 }
 
 model CartProduct {
