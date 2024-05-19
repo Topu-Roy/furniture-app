@@ -17,13 +17,35 @@ export const reviewRouter = createTRPCRouter({
         }))
         .query(async ({ input }) => {
 
+            //* Fetch the first 5 reviews for a given product.  
             const reviews = await db.review.findMany({
                 where: {
                     productId: input.productId
+                },
+                take: 5,
+                orderBy: {
+                    date: 'desc'
                 }
             })
 
             return reviews;
+        }),
+
+    getReviewCountByRating: publicProcedure
+        .input(z.object({
+            productId: z.string(),
+            rate: z.number().min(1).max(5)
+        }))
+        .query(async ({ input }) => {
+
+            const count = await db.review.count({
+                where: {
+                    productId: input.productId,
+                    rate: input.rate,
+                }
+            })
+
+            return count;
         }),
 
     createReview: privateProcedure

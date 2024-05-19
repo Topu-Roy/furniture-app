@@ -1,8 +1,8 @@
 import { adminProcedure, createTRPCRouter, publicProcedure } from "@/server/api/trpc";
+import { category, createProductPostBodySchema } from "@/zod/schema";
 import { getAllProduct, getProductById } from "@/server/queries";
-import { db } from "@/lib/db";
 import { TRPCError } from "@trpc/server";
-import { createProductPostBodySchema } from "@/zod/schema";
+import { db } from "@/lib/db";
 import { z } from "zod";
 
 export const ProductRouter = createTRPCRouter({
@@ -48,7 +48,7 @@ export const ProductRouter = createTRPCRouter({
             })
 
             if (updatedProduct.id) {
-                return new TRPCError({ code: "NOT_FOUND" });
+                throw new TRPCError({ code: "NOT_FOUND" });
 
             }
 
@@ -60,7 +60,7 @@ export const ProductRouter = createTRPCRouter({
         .mutation(async ({ input, ctx }) => {
 
             if (ctx.user.userId === null) {
-                return new TRPCError({ code: "UNAUTHORIZED" });
+                throw new TRPCError({ code: "UNAUTHORIZED" });
             }
 
             const createdProduct = await db.product.create({
@@ -76,10 +76,23 @@ export const ProductRouter = createTRPCRouter({
             })
 
             if (createdProduct.id) {
-                return new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+                throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
             }
 
             return createdProduct;
+        }),
+
+    getProductsByCategory: publicProcedure
+        .input(z.object({ category: z.enum(category) }))
+        .query(async ({ input }) => {
+
+            const filteredProducts = await db.product.findMany({
+                where: {
+                    category: input.category
+                },
+            })
+
+            return filteredProducts;
         }),
 });
