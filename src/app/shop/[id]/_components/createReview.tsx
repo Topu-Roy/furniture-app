@@ -2,12 +2,13 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import React, { useEffect, useState } from "react";
-import Rating from "./rating";
 import { Text } from "@/app/_components/text";
 import { api } from "@/trpc/react";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+import Rating from "./rating";
 
 type Props = {
   userId: string | null;

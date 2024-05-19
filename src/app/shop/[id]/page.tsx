@@ -4,12 +4,14 @@ import { api } from "@/trpc/server";
 import Image from "next/image";
 import Rating from "./_components/rating";
 import Review from "./_components/review";
-import CreateReview from "./_components/createReview";
 import { cn } from "@/lib/utils";
 import { auth } from "@clerk/nextjs/server";
 import ReviewByRateItem from "./_components/reviewByRateItem";
 import ProductAddToCart from "./_components/productAddToCart";
 import RelatedProducts from "./_components/relatedProducts";
+import dynamic from "next/dynamic";
+import Chip from "@/app/cart/_components/chip";
+const CreateReview = dynamic(() => import("./_components/createReview"), { ssr: false });
 
 export default async function ProductDetails({
   params,
@@ -25,6 +27,7 @@ export default async function ProductDetails({
   const threeStarReviews = await api.review.getReviewCountByRating({ productId: params.id, rate: 3 });
   const fourStarReviews = await api.review.getReviewCountByRating({ productId: params.id, rate: 4 });
   const fiveStarReviews = await api.review.getReviewCountByRating({ productId: params.id, rate: 5 });
+
   const totalReviews = oneStarReviews + twoStarReviews + threeStarReviews + fourStarReviews + fiveStarReviews;
   const totalStars = oneStarReviews * 1 + twoStarReviews * 2 + threeStarReviews * 3 + fourStarReviews * 4 + fiveStarReviews * 5;
   const averageRating_Float = totalReviews > 0 ? (totalStars / totalReviews).toFixed(1) : 0;
@@ -100,7 +103,12 @@ export default async function ProductDetails({
               />
 
               <hr className="my-6 border-gray-200 dark:border-gray-800 md:my-8" />
-
+              <div className="flex items-center justify-start gap-2 py-2">
+                {product.color ? <Chip text={product.color} /> : null}
+                {product.category ? <Chip text={product.category} /> : null}
+                {product.status ? <Chip text={product.status} /> : null}
+                {product.tag ? <Chip text={product.tag} /> : null}
+              </div>
               {/* //TODO: Add Product description */}
               <p className="mb-6 text-gray-500 dark:text-gray-400">
                 Studio quality three mic array for crystal clear calls and voice

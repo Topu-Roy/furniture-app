@@ -1,10 +1,6 @@
 import React from 'react'
-import { Button } from '@/components/ui/button'
 import { api } from '@/trpc/server'
 import { Category } from '@prisma/client'
-import Image from 'next/image'
-import Link from 'next/link'
-import AddToCartButtonForRelated from './addToCartButtonForRelated'
 import { auth } from '@clerk/nextjs/server'
 import Product from './product'
 
