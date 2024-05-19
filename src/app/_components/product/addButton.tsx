@@ -93,7 +93,7 @@ export default function AddButton(props: Props) {
       className={cn("rounded-md font-bold", className)}
     >
       {isPending ? (
-        <AiOutlineLoading3Quarters className="animate-spin" />
+        "Adding to cart"
       ) : (
         "Add to cart"
       )}

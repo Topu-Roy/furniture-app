@@ -41,7 +41,7 @@ export default async function CartPage() {
   }
 
   return (
-    <div className="bg-stone-200">
+    <div className="bg-stone-200/30">
       <Heading className="mt-[4rem] pt-6 text-center">My Cart</Heading>
 
       <Text size="md" className="pb-8 pt-5 text-center text-rose-500 underline">
@@ -50,10 +50,10 @@ export default async function CartPage() {
 
       <SelectAllAndReset />
 
-      <div className="mx-auto flex max-w-7xl items-start justify-between gap-2 pb-10">
+      <div className="mx-auto flex flex-col xl:flex-row max-w-7xl items-start justify-between gap-2 pb-10">
         <RenderCart products={allCartProducts} />
 
-        <div className="flex max-w-sm flex-1 flex-col items-start justify-end gap-7">
+        <div className="flex px-2 md:px-0 w-[97%] lg:w-[55rem] mx-auto xl:max-w-sm flex-1 flex-col">
           <CartCheckout />
         </div>
       </div>

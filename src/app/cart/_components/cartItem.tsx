@@ -106,9 +106,9 @@ export default function CartItem(props: Props) {
           isSelected ? "ring-2 ring-primary/90" : "",
         )}
       >
-        <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-          <Link href="#">
-            <div className="shrink-0 md:order-1">
+        <div className="space-y-4 sm:flex sm:items-center sm:justify-between sm:gap-6 sm:space-y-0">
+          <Link href={`/shop/${productId}`}>
+            <div className="shrink-0 lg:order-1">
               <Image
                 className="size-36 rounded-md"
                 src={product.image || ""}
@@ -119,10 +119,7 @@ export default function CartItem(props: Props) {
             </div>
           </Link>
 
-          <label htmlFor="counter-input" className="sr-only">
-            Choose quantity:
-          </label>
-          <div className="flex items-center justify-between md:order-3 md:justify-end">
+          <div className="flex sm:hidden lg:flex items-center justify-between lg:order-3 lg:justify-end">
             <div className="flex items-center">
               <UpdateQuantity
                 price={product.price}
@@ -131,16 +128,17 @@ export default function CartItem(props: Props) {
                 quantity={quantity}
               />
             </div>
-            <div className="text-end md:order-4 md:w-32">
+
+            <div className="text-end lg:order-4 lg:w-32">
               <p className="text-base font-bold text-gray-900 dark:text-white">
                 ${totalPrice}
               </p>
             </div>
           </div>
 
-          <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
+          <div className="w-full min-w-0 flex-1 space-y-4 lg:order-2 lg:max-w-md">
             <div className="space-y-2">
-              <Link href={`/cart/${product.id}`}>
+              <Link href={`/shop/${product.id}`}>
                 <p className="line-clamp-2 text-base font-medium text-gray-900 hover:underline dark:text-white">
                   {product.productTitle}
                 </p>
@@ -154,20 +152,37 @@ export default function CartItem(props: Props) {
               <p className="text-base font-bold text-gray-900 dark:text-white">
                 ${product.price}
               </p>
+
+              <div className="hidden sm:flex lg:hidden items-center justify-start gap-4">
+                <div className="flex items-center">
+                  <UpdateQuantity
+                    price={product.price}
+                    setTotalPrice={setTotalPrice}
+                    cartItemId={cartItemId}
+                    quantity={quantity}
+                  />
+                </div>
+
+                <div className="text-end lg:order-4 lg:w-32">
+                  <p className="text-base font-bold text-gray-900 dark:text-white">
+                    (${totalPrice})
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="flex items-center gap-16 px-2">
-              <label className="flex items-center justify-center">
+            <div className="flex items-center justify-between gap-4 px-2">
+              <label className="flex items-center justify-between">
                 <input
-                  className="peer h-[2.5rem] w-[2.5rem] opacity-0"
+                  className="peer h-[2.5rem] w-[45vw] sm:w-[11rem] opacity-0"
                   type="checkbox"
                   checked={isSelected || false}
                   onChange={() => handleCheck()}
                 />
                 <Button
-                  variant="link"
+                  variant="outline"
                   className={cn(
-                    "pointer-events-none absolute text-sm font-medium text-green-600 hover:underline peer-hover:scale-105",
+                    "pointer-events-none w-[45%] sm:w-[11rem] h-[2.5rem] absolute text-sm font-medium peer-hover:bg-green-200 text-green-600 hover:underline",
                     {
                       "bg-green-200 peer-hover:bg-green-300/80": isSelected,
                     },
@@ -177,14 +192,14 @@ export default function CartItem(props: Props) {
                   {isSelected ? (
                     <IoCheckmarkDoneCircleSharp
                       size={30}
-                      className={cn(
+                      className={cn("pr-1",
                         isSelected
                           ? "bg-green-200 text-green-900 peer-hover:bg-green-300/80"
                           : "",
                       )}
                     />
                   ) : (
-                    <IoCheckmarkDoneCircleOutline size={30} className="" />
+                    <IoCheckmarkDoneCircleOutline className="pr-1" size={30} />
                   )}
                   {isSelected ? "Selected" : "Select"}
                 </Button>
@@ -195,7 +210,7 @@ export default function CartItem(props: Props) {
                   <Button
                     type="button"
                     variant={"link"}
-                    className="flex items-center justify-between text-sm font-medium text-red-600 hover:underline"
+                    className="flex w-[45%] sm:w-[11rem] items-center justify-center gap-2 text-sm font-medium text-red-600 hover:underline hover:text-red-600 hover:bg-red-200"
                   >
                     <svg
                       className="me-1.5 h-5 w-5"

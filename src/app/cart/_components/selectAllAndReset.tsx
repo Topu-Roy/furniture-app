@@ -27,7 +27,7 @@ export default function SelectAllAndReset() {
 
   return (
     <>
-      <div className="mx-auto flex max-w-7xl items-start justify-start gap-2 pb-4">
+      <div className="mx-auto lg:w-[55rem] xl:w-[80rem] lg:pl-0 px-3 sm:px-4 flex max-w-7xl items-start justify-start gap-2 pb-4">
         <Button
           variant={"outline"}
           onClick={() => handleSelectAll()}

@@ -31,7 +31,7 @@ export default function RenderCart({ products: productsFromProp }: Props) {
   }
 
   return (
-    <div className="w-[55rem] space-y-2">
+    <div className="lg:w-[55rem] w-[95%] mx-auto space-y-2">
       {products.map((item) => (
         <div key={item.id}>
           <CartItem
