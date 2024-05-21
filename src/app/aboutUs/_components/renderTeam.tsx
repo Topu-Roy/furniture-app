@@ -22,7 +22,7 @@ export default function Team(props: props) {
             <Heading className="text-center py-10 md:py-14 lg:py-16">Meet Our Talented Team Members</Heading>
             <div className="flex flex-wrap justify-center items-center gap-2 mx-auto max-w-7xl">
                 {teamMembers.map((member) => (
-                    <Card className='w-[45%] md:w-[31%] p-2'>
+                    <Card key={`${member.id}-member-card`} className='w-[45%] md:w-[31%] p-2'>
                         <Image
                             className='rounded-md aspect-square'
                             src={member.imageUrl}

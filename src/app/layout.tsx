@@ -24,7 +24,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className} relative`}>
-          //* This is for uploadthing ssr hydration
+          {/* //* This is for uploadthing ssr hydration */}
           <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
           <TRPCReactProvider>
             <NavBar />

@@ -69,11 +69,11 @@ export default function UpdateQuantity(props: Props) {
       cartItemId,
       quantity: debouncedQuantity,
     });
-  }, [debouncedQuantity]);
+  }, [debouncedQuantity, cartItemId, mutate]);
 
   useEffect(() => {
     setTotalPrice(quantityState * price);
-  }, [quantityState]);
+  }, [quantityState, price, setTotalPrice]);
 
   return (
     <div className="flex items-center">

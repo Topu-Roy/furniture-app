@@ -63,7 +63,7 @@ export default function CartCheckout() {
       shippingCost: shippingCost,
       total: finalCheckoutPrice,
     });
-  }, [products_store]);
+  }, [products_store, discountRate, logisticsRate, shippingCostPerProduct, taxRate]);
 
   return (
     <>

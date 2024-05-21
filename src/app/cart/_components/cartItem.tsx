@@ -53,7 +53,7 @@ export default function CartItem(props: Props) {
 
   useEffect(() => {
     setProducts(products_store);
-  }, [products_store]);
+  }, [products_store, setProducts]);
 
   useEffect(() => {
     if (data && data !== null) {
