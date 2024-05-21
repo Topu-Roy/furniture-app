@@ -6,13 +6,14 @@ import { teamMembers } from "../../assets/teamMembersArray";
 import { testimonialsArray } from "../../assets/testimonialsArray";
 import SecondCTA from "../home/_components/secondCTA";
 import BrandsWorkedWith from "../home/_components/brandsWorkedWith";
+import Team from "./_components/renderTeam";
 
 export default function AboutusPage() {
   return (
     <>
       <Hero />
       <BrandsWorkedWith />
-      <OurTeam teamMembers={teamMembers} className="bg-stone-200" />
+      <Team teamMembers={teamMembers} className="bg-stone-100" />
       <SecondCTA />
       <Testimonials testimonials={testimonialsArray} />
     </>
