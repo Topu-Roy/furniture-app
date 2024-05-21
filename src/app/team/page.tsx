@@ -5,7 +5,7 @@ import TeamHeading from "./_components/teamHeading";
 
 export default function TeamPage() {
   return (
-    <div className="mt-[5rem] bg-stone-200 pt-2 md:pt-4 lg:pt-6">
+    <div className="mt-[4rem] bg-stone-100 pt-8 md:pt-10 lg:pt-14">
       <TeamHeading />
       <RenderTeamMembers teamMembers={teamMembers} />
     </div>
