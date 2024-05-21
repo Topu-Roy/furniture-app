@@ -16,16 +16,16 @@ export default function CategoryCTA() {
         <ThreeDCard
           heading="Try new our chairs"
           subHeading="Brand new collection of chairs and modern design."
-          imageURL={chair.image}
-          imageAlt={chair.productTitle}
+          imageURL={chair?.image || ""}
+          imageAlt={chair?.productTitle || ""}
           link="/shop"
           linkName="Shop Now"
         />
         <ThreeDCard
           heading="Check out our new Lamps"
           subHeading="Brand new collection of Lamps with minimal design."
-          imageURL={lamp.image}
-          imageAlt={lamp.productTitle}
+          imageURL={lamp?.image || ""}
+          imageAlt={lamp?.productTitle || ""}
           link="/shop"
           linkName="Shop Now"
         />
