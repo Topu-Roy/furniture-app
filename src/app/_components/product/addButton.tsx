@@ -66,7 +66,7 @@ export default function AddButton(props: Props) {
 
   useEffect(() => {
     giveFeedback();
-  }, [data, giveFeedback]);
+  }, [data]);
 
   const handleClick = () => {
     if (!user.userId || user.userId === undefined || user.userId === null) {

@@ -172,7 +172,7 @@ export default function RenderProducts(props: Props) {
       );
     }
 
-    return productsToRender.map((item) => <Product product={item} />);
+    return productsToRender.map((item) => <Product key={item.id} product={item} />);
   }
 
   function handleResetAll() {

@@ -74,7 +74,7 @@ export default function CartCheckout() {
           <div className="space-y-2">
             {productsToRender.length > 0 ? (
               productsToRender.map((item) => (
-                <dl className="flex items-center justify-between gap-4">
+                <dl key={item.id} className="flex items-center justify-between gap-4">
                   <dt className="truncate text-base font-medium text-gray-600">
                     {item.productTitle}
                   </dt>
