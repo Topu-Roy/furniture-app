@@ -1,20 +1,24 @@
-import { ProductType } from "@/zustand/shop/shopStore";
+import { Product } from "@prisma/client";
 
-export let products: ProductType[] = [
+export let products: Product[] = [
   {
-    "id": 1,
+    "id": "1",
     "productTitle": "Adjustable Office Chair",
     "image": "/products/Chair - Black - Adjustable Office Chair.jpg",
     "price": 159,
     "status": "New",
     "category": "Chair",
     "tag": "Modern",
-    "color": "Black"
+    "color": "Black",
+    description: "",
+    createdBy: ""
   },
   {
-    "id": 2,
+    "id": "2",
     "productTitle": "Rustic Wooden Dining Table",
     "image": "/products/Table - Brown - Rustic Wooden Dining Table (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 849,
     "status": "Popular",
     "category": "Table",
@@ -22,9 +26,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 3,
+    "id": "3",
     "productTitle": "Contemporary Floor Lamp",
     "image": "/products/Lamp - Black - Contemporary Floor Lamp (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 1299,
     "status": "Popular",
     "category": "Lamp",
@@ -32,9 +38,11 @@ export let products: ProductType[] = [
     "color": "Black"
   },
   {
-    "id": 4,
+    "id": "4",
     "productTitle": "Compact Nightstand",
     "image": "/products/Drawer - Brown - Compact Nightstand (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 499,
     "status": "Popular",
     "category": "Drawer",
@@ -42,9 +50,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 5,
+    "id": "5",
     "productTitle": "Queen Size Canopy Bed",
     "image": "/products/Bed - Brown - Queen Size Canopy Bed (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 1499,
     "status": "Popular",
     "category": "Bed",
@@ -52,9 +62,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 6,
+    "id": "6",
     "productTitle": "Classic Bookshelf",
     "image": "/products/Bookshelf - Brown - Contemporary Bookcase (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 479,
     "status": "New",
     "category": "Bookshelf",
@@ -62,9 +74,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 7,
+    "id": "7",
     "productTitle": "L-shaped Sectional Sofa",
     "image": "/products/Sofa - White - L-shaped Sectional Sofa.jpg",
+    description: "",
+    createdBy: "",
     "price": 799,
     "status": "Popular",
     "category": "Sofa",
@@ -72,9 +86,11 @@ export let products: ProductType[] = [
     "color": "White"
   },
   {
-    "id": 8,
+    "id": "8",
     "productTitle": "Classic Rocking Chair",
     "image": "/products/Chair - Brown - Classic Rocking Chair (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 189,
     "status": "New",
     "category": "Chair",
@@ -82,9 +98,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 9,
+    "id": "9",
     "productTitle": "Glass Top Coffee Table",
     "image": "/products/Table - Brown - Glass Top Coffee Table (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 349,
     "status": "Popular",
     "category": "Table",
@@ -92,9 +110,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 10,
+    "id": "10",
     "productTitle": "Vintage Desk Lamp",
     "image": "/products/Lamp - Black - Vintage Desk Lamp (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 899,
     "status": "New",
     "category": "Lamp",
@@ -102,9 +122,11 @@ export let products: ProductType[] = [
     "color": "Black"
   },
   {
-    "id": 11,
+    "id": "11",
     "productTitle": "Spacious Chest of Drawers",
     "image": "/products/Drawer - Brown - Spacious Chest of Drawers.jpg",
+    description: "",
+    createdBy: "",
     "price": 899,
     "status": "Popular",
     "category": "Drawer",
@@ -112,9 +134,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 12,
+    "id": "12",
     "productTitle": "Sleek Platform Bed",
     "image": "/products/Bed - Brown - Sleek Platform Bed (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 1299,
     "status": "New",
     "category": "Bed",
@@ -122,9 +146,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 13,
+    "id": "13",
     "productTitle": "Floating Wall Shelf",
     "image": "/products/Bookshelf - Brown - Floating Wall Shelf (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 89,
     "status": "Popular",
     "category": "Bookshelf",
@@ -132,9 +158,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 14,
+    "id": "14",
     "productTitle": "Velvet Upholstered Sofa",
     "image": "/products/Sofa - Brown - Velvet Upholstered Sofa (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 1399,
     "status": "New",
     "category": "Sofa",
@@ -142,9 +170,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 15,
+    "id": "15",
     "productTitle": "Mid-century Armchair",
     "image": "/products/Chair - Brown - Mid-century Armchair (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 799,
     "status": "Popular",
     "category": "Chair",
@@ -152,9 +182,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 16,
+    "id": "16",
     "productTitle": "Round Glass Dining Table",
     "image": "/products/Table - Black - Round Glass Dining Table (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 599,
     "status": "New",
     "category": "Table",
@@ -162,9 +194,11 @@ export let products: ProductType[] = [
     "color": "Black"
   },
   {
-    "id": 17,
+    "id": "17",
     "productTitle": "Industrial Desk Lamp",
     "image": "/products/Lamp - Black - Industrial Desk Lamp (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 399,
     "status": "Popular",
     "category": "Lamp",
@@ -172,9 +206,11 @@ export let products: ProductType[] = [
     "color": "Black"
   },
   {
-    "id": 18,
+    "id": "18",
     "productTitle": "Minimalist Bedside Table",
     "image": "/products/Table - Brown - Minimalist Bedside Table (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 129,
     "status": "New",
     "category": "Drawer",
@@ -182,9 +218,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 19,
+    "id": "19",
     "productTitle": "Four Poster Canopy Bed",
     "image": "/products/Bed - Brown - Four Poster Canopy Bed (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 999,
     "status": "Popular",
     "category": "Bed",
@@ -192,9 +230,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 20,
+    "id": "20",
     "productTitle": "Contemporary Bookcase",
     "image": "/products/Bookshelf - Brown - Contemporary Bookcase (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 899,
     "status": "New",
     "category": "Bookshelf",
@@ -202,9 +242,11 @@ export let products: ProductType[] = [
     "color": "Brown"
   },
   {
-    "id": 21,
+    "id": "21",
     "productTitle": "Queen Canopy Bed - Additional View with Gold Trim",
     "image": "/products/Bed - Brown - Queen Size Canopy Bed (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 149,
     "category": "Bed",
     "tag": "Luxurious",
@@ -212,9 +254,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 22,
+    "id": "22",
     "productTitle": "Four Poster Canopy Bed - Side View in Oak Finish",
     "image": "/products/Bed - Brown - Four Poster Canopy Bed (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 699,
     "category": "Bed",
     "tag": "Elegant",
@@ -222,9 +266,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 23,
+    "id": "23",
     "productTitle": "Sleek Platform Bed - Alternate View with Storage",
     "image": "/products/Bed - Brown - Sleek Platform Bed (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 799,
     "category": "Bed",
     "tag": "Modern",
@@ -232,9 +278,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 24,
+    "id": "24",
     "productTitle": "Contemporary Bookcase - Second Option in Walnut",
     "image": "/products/Bookshelf - Brown - Contemporary Bookcase (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 1899,
     "category": "Bookshelf",
     "tag": "Minimalistic",
@@ -242,9 +290,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 25,
+    "id": "25",
     "productTitle": "Floating Wall Bookshelf - Variant with Adjustable Shelves",
     "image": "/products/Bookshelf - Brown - Floating Wall Bookshelf (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 349,
     "category": "Bookshelf",
     "tag": "Stylish",
@@ -252,9 +302,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 26,
+    "id": "26",
     "productTitle": "Floating Wall Shelf - Second Version with Matte Finish",
     "image": "/products/Bookshelf - Brown - Floating Wall Shelf (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 79,
     "category": "Bookshelf",
     "tag": "Minimalistic",
@@ -262,9 +314,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 27,
+    "id": "27",
     "productTitle": "Classic Rocking Chair - Additional Angle with Cushioned Seat",
     "image": "/products/Chair - Brown - Classic Rocking Chair (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 499,
     "category": "Chair",
     "tag": "Minimalistic",
@@ -272,9 +326,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 28,
+    "id": "28",
     "productTitle": "Mid-century Armchair - Alternate Design with Leather Upholstery",
     "image": "/products/Chair - Brown - Mid-century Armchair (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 299,
     "category": "Chair",
     "tag": "Modern",
@@ -282,9 +338,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 29,
+    "id": "29",
     "productTitle": "Compact Nightstand - Side View with Drawer Organizer",
     "image": "/products/Drawer - White - Compact Nightstand (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 129,
     "category": "Drawer",
     "tag": "Stylish",
@@ -292,9 +350,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 30,
+    "id": "30",
     "productTitle": "Contemporary Floor Lamp - Second Variation with Adjustable Height",
     "image": "/products/Lamp - Brown - Contemporary Floor Lamp (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 999,
     "category": "Lamp",
     "tag": "Elegant",
@@ -302,9 +362,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 31,
+    "id": "31",
     "productTitle": "Vintage Desk Lamp - Alternate Design with Brass Finish",
     "image": "/products/Lamp - Black - Vintage Desk Lamp (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 79,
     "category": "Lamp",
     "tag": "Modern",
@@ -312,9 +374,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 32,
+    "id": "32",
     "productTitle": "Velvet Upholstered Sofa - Additional View with Throw Pillows",
     "image": "/products/Sofa - Brown - Velvet Upholstered Sofa (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 1499,
     "category": "Sofa",
     "tag": "Luxurious",
@@ -322,9 +386,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 33,
+    "id": "33",
     "productTitle": "Minimalist Bedside Table - Second Option with Built-in USB Charger",
     "image": "/products/Table - White - Minimalist Bedside Table (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 299,
     "category": "Table",
     "tag": "Modern",
@@ -332,9 +398,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 34,
+    "id": "34",
     "productTitle": "Round Glass Dining Table - Alternate View with Chrome Legs",
     "image": "/products/Table - Black - Round Glass Dining Table (1).jpg",
+    description: "",
+    createdBy: "",
     "price": 799,
     "category": "Table",
     "tag": "Elegant",
@@ -342,9 +410,11 @@ export let products: ProductType[] = [
     "status": "Regular"
   },
   {
-    "id": 35,
+    "id": "35",
     "productTitle": "Rustic Wooden Dining Table - Additional View with Matching Bench",
     "image": "/products/Table - Brown - Rustic Wooden Dining Table (2).jpg",
+    description: "",
+    createdBy: "",
     "price": 399,
     "category": "Table",
     "tag": "Ambient",
