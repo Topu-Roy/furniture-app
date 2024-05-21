@@ -5,18 +5,20 @@ import CompactIconsRating from "./compactIconsRating";
 import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
 import Link from "next/link";
+import Rating from "@/app/shop/[id]/_components/rating";
 
 export default function Hero() {
   return (
     <>
-      <section className="mt-[5rem] h-[70dvh] bg-stone-200">
+      <section className="mt-[4rem] py-[1.5rem] md:py-[5rem] md:px-4 h-[70dvh] bg-stone-200">
         <div className="mx-auto my-auto flex w-full max-w-7xl items-center justify-between gap-4 py-8">
           <div className="flex-1">
-            <div className="space-y-2 pb-8">
+            <div className="space-y-4 pb-8 text-center md:text-left px-4 md:px-0">
               <Heading>
                 Provide the best quality ingredients for home products
               </Heading>
-              <Text muted>
+              {/* //TODO: Get Real copy text*/}
+              <Text muted className="pb-4">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit dictumst
                 posuere, lectus dis vehicula augue elementum quam risus.
                 Placerat dictum lobortis lacinia volutpat morbi cum justo
@@ -31,28 +33,22 @@ export default function Hero() {
                 </Button>
               </Link>
             </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex flex-col items-start justify-start gap-[7px]">
+            <div className="flex flex-col gap-2 justify-center items-center md:justify-start md:items-start">
+              <div className="flex flex-col justify-center items-center md:items-start md:justify-start gap-[7px]">
                 <Text size="max" className="font-bold text-black/70">
                   Happy Customers
                 </Text>
-                <div className="flex w-[45%] flex-row items-center justify-start gap-[5px]">
-                  <Image
-                    src={"/images/img_ant_design_star_filled.svg"}
-                    alt="image_one"
-                    className="h-[30px] w-[30px]"
-                    height={30}
-                    width={30}
-                  />
+                <div className="flex md:w-[45%] flex-row items-center justify-start gap-[5px]">
+                  <Rating rate={5} readonly={true} />
                   <Heading className=" text-black/70">5.0</Heading>
                 </div>
               </div>
-              <div className="flex w-[37%] flex-row justify-center">
+              <div className="flex flex-row justify-center">
                 <CompactIconsRating />
               </div>
             </div>
           </div>
-          <div className="flex flex-1 items-center justify-end">
+          <div className="md:flex flex-1 items-center justify-end hidden">
             <Image
               src={"/products/Lamp - Black - Vintage Desk Lamp (1).jpg"}
               alt="Topu Roy"

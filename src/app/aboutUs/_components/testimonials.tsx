@@ -67,13 +67,13 @@ export default function Testimonials(props: props) {
               {props.testimonials.slice(0, 3).map((item) => (
                 <div
                   key={item.name + item.imageURL}
-                  className="my-10 flex h-[28dvh] w-full flex-col items-start justify-start  gap-5 rounded-md border bg-stone-300/50 p-4"
+                  className="my-10 flex h-[30dvh] w-full flex-col items-start justify-start  gap-5 rounded-md border bg-stone-300/50 p-4"
                 >
                   <div className="flex w-full flex-col items-center justify-start gap-4">
                     <div className="flex w-full flex-col items-center justify-start gap-1">
-                      <Heading className="!font-poppins tracking-[0.12px]">
+                      <Text size="xl" className="font-semibold">
                         {item.headline}
-                      </Heading>
+                      </Text>
 
                       <div className="space-y-1">
                         <div className="flex items-center justify-start">
@@ -81,7 +81,7 @@ export default function Testimonials(props: props) {
                         </div>
                         <Text
                           size="md"
-                          className="!text-black-900_87 !font-poppins opacity-0.5 h-[9dvh] tracking-[0.12px]"
+                          className="opacity-0.5 h-[9dvh]"
                         >
                           {item.text}
                         </Text>
@@ -90,16 +90,16 @@ export default function Testimonials(props: props) {
                         </div>
                       </div>
                     </div>
-                    <div className="flex h-[5dvh] w-full flex-row items-center justify-start gap-4">
+                    <div className="flex mt-3 h-[5dvh] w-full flex-row items-center justify-start gap-4">
                       <Avatar className="h-14 w-14 rounded-full">
                         <AvatarImage src={item.imageURL} />
                         <AvatarFallback>{item.name}</AvatarFallback>
                       </Avatar>
                       <div className="flex w-4/5 flex-col items-start justify-start gap-1">
-                        <Heading className="!font-poppins tracking-[0.12px]">
+                        <Text size="md" className="font-medium">
                           {item.name}
-                        </Heading>
-                        <Text className="!text-black-900_7f_01 !font-poppins tracking-[0.12px]">
+                        </Text>
+                        <Text muted size="s" className="">
                           {item.location}
                         </Text>
                       </div>
@@ -114,13 +114,13 @@ export default function Testimonials(props: props) {
               {props.testimonials.slice(3, 6).map((item) => (
                 <div
                   key={item.name + item.imageURL}
-                  className="my-10 flex h-[28dvh] w-full flex-col items-start justify-start gap-5 rounded-md border bg-stone-300/50 p-4"
+                  className="my-10 flex h-[30dvh] w-full flex-col items-start justify-start  gap-5 rounded-md border bg-stone-300/50 p-4"
                 >
                   <div className="flex w-full flex-col items-center justify-start gap-4">
                     <div className="flex w-full flex-col items-center justify-start gap-1">
-                      <Heading className="!font-poppins tracking-[0.12px]">
+                      <Text size="xl" className="font-semibold">
                         {item.headline}
-                      </Heading>
+                      </Text>
 
                       <div className="space-y-1">
                         <div className="flex items-center justify-start">
@@ -128,7 +128,7 @@ export default function Testimonials(props: props) {
                         </div>
                         <Text
                           size="md"
-                          className="!text-black-900_87 !font-poppins opacity-0.5 h-[9dvh] tracking-[0.12px]"
+                          className="opacity-0.5 h-[9dvh]"
                         >
                           {item.text}
                         </Text>
@@ -137,16 +137,16 @@ export default function Testimonials(props: props) {
                         </div>
                       </div>
                     </div>
-                    <div className="flex h-[5dvh] w-full flex-row items-center justify-start gap-4">
+                    <div className="flex mt-3 h-[5dvh] w-full flex-row items-center justify-start gap-4">
                       <Avatar className="h-14 w-14 rounded-full">
                         <AvatarImage src={item.imageURL} />
                         <AvatarFallback>{item.name}</AvatarFallback>
                       </Avatar>
                       <div className="flex w-4/5 flex-col items-start justify-start gap-1">
-                        <Heading className="!font-poppins tracking-[0.12px]">
+                        <Text size="md" className="font-medium">
                           {item.name}
-                        </Heading>
-                        <Text className="!text-black-900_7f_01 !font-poppins tracking-[0.12px]">
+                        </Text>
+                        <Text muted size="s" className="">
                           {item.location}
                         </Text>
                       </div>
@@ -161,13 +161,13 @@ export default function Testimonials(props: props) {
               {props.testimonials.slice(6, 9).map((item) => (
                 <div
                   key={item.name + item.imageURL}
-                  className="my-10 flex h-[28dvh] w-full flex-col items-start justify-start gap-5 rounded-md border bg-stone-300/50 p-4"
+                  className="my-10 flex h-[30dvh] w-full flex-col items-start justify-start  gap-5 rounded-md border bg-stone-300/50 p-4"
                 >
                   <div className="flex w-full flex-col items-center justify-start gap-4">
                     <div className="flex w-full flex-col items-center justify-start gap-1">
-                      <Heading className="!font-poppins tracking-[0.12px]">
+                      <Text size="xl" className="font-semibold">
                         {item.headline}
-                      </Heading>
+                      </Text>
 
                       <div className="space-y-1">
                         <div className="flex items-center justify-start">
@@ -175,7 +175,7 @@ export default function Testimonials(props: props) {
                         </div>
                         <Text
                           size="md"
-                          className="!text-black-900_87 !font-poppins opacity-0.5 h-[9dvh] tracking-[0.12px]"
+                          className="opacity-0.5 h-[9dvh]"
                         >
                           {item.text}
                         </Text>
@@ -184,16 +184,16 @@ export default function Testimonials(props: props) {
                         </div>
                       </div>
                     </div>
-                    <div className="flex h-[5dvh] w-full flex-row items-center justify-start gap-[19px]">
+                    <div className="flex mt-3 h-[5dvh] w-full flex-row items-center justify-start gap-4">
                       <Avatar className="h-14 w-14 rounded-full">
                         <AvatarImage src={item.imageURL} />
                         <AvatarFallback>{item.name}</AvatarFallback>
                       </Avatar>
                       <div className="flex w-4/5 flex-col items-start justify-start gap-1">
-                        <Heading className="!font-poppins tracking-[0.12px]">
+                        <Text size="md" className="font-medium">
                           {item.name}
-                        </Heading>
-                        <Text className="!text-black-900_7f_01 !font-poppins tracking-[0.12px]">
+                        </Text>
+                        <Text muted size="s" className="">
                           {item.location}
                         </Text>
                       </div>
@@ -203,6 +203,7 @@ export default function Testimonials(props: props) {
               ))}
             </div>
           </CarouselItem>
+
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />

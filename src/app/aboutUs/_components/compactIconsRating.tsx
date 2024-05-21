@@ -17,7 +17,7 @@ export default function CompactIconsRating() {
           key={`${icon}-icon`}
           src={`/images/${icon}`}
           alt=""
-          className="-ml-2 h-[50px] w-[50px] rounded-[50%]"
+          className="h-[50px] w-[50px] rounded-[50%]"
           height={50}
           width={50}
         />
