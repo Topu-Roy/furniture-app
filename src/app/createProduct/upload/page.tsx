@@ -115,9 +115,7 @@ export default function UploadImage() {
               description: "Only images can be uploaded",
             });
           } else {
-            const { url } = res[0];
-
-            if (!url) {
+            if (!res[0]?.url) {
               setUploadProgress(0);
               return toast({
                 title: "Something went wrong",
@@ -131,7 +129,7 @@ export default function UploadImage() {
             setUploadProgress(100);
 
             // Update image url in the database
-            await updateImage(url);
+            await updateImage(res[0]?.url);
           }
         }}
       >
