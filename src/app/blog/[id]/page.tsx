@@ -19,7 +19,7 @@ export default function BlogDetails({ params }: { params: { id: string } }) {
 
   return (
     <div className="w-full bg-gray-200">
-      <div className="prose mx-auto mt-[5rem] max-w-7xl px-4 py-2 sm:py-3 md:py-4 xl:px-6">
+      <div className="prose mx-auto mt-[4rem] max-w-7xl px-4 py-2 sm:py-3 md:py-4 xl:px-6">
         <Heading className="my-4 pt-2 text-center sm:mt-8 sm:text-left md:hidden">
           {blog.headline}
         </Heading>

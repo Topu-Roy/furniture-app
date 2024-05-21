@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { TbWritingSign } from "react-icons/tb";
 import { MdDateRange } from "react-icons/md";
 import { type BlogType } from "../blogPostArray";
-import { cn } from "@/lib/utils";
 import { Text } from "@/app/_components/text";
 
 type Props = {

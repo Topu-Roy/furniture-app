@@ -6,7 +6,7 @@ import { Text } from "../_components/text";
 
 export default function BlogPage() {
   return (
-    <div className="mt-[5rem] bg-gray-200 pt-2 md:pt-4 lg:pt-6">
+    <div className="mt-[4rem] bg-gray-200 pt-2 md:pt-4 lg:pt-6">
       <div className="flex w-full flex-col items-center justify-start gap-2">
         <Heading className="text-center">Read Our Latest Blog</Heading>
         <Text size="lg" muted={true} className="px-4 text-center">
