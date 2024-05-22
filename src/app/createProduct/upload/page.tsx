@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
@@ -26,6 +26,7 @@ export default function UploadImage() {
   const { startUpload, isUploading } = useUploadThing("imageUploader");
 
   //* Validating the id
+  if (!id || id === undefined) return redirect('/error')
   const expectedIdSchema = z.string().min(20).max(28);
   const parsedId = expectedIdSchema.safeParse(id);
 
