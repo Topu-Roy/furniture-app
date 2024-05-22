@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
@@ -13,7 +13,7 @@ import { BiLoaderAlt } from "react-icons/bi";
 import { FiUploadCloud } from "react-icons/fi";
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 
-export default function UploadImage() {
+function UploaderComponent() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [updatingImageUrl, setUpdatingImageUrl] = useState(false);
   const [updateComplete, setUpdatingComplete] = useState(false);
@@ -98,11 +98,6 @@ export default function UploadImage() {
       <Dropzone
         multiple={false}
         onDrop={async (acceptedFile) => {
-          // image/png
-          // image/jpeg
-          // image/webp
-
-          // Start the progress bar
           const progressInterval = startFakedUploadProgress();
 
           // Upload the file to uploadthing
@@ -195,4 +190,12 @@ export default function UploadImage() {
       </Dropzone>
     </div>
   );
+}
+
+export default function UploadImage() {
+  return (
+    <Suspense>
+      <UploaderComponent />
+    </Suspense>
+  )
 }
