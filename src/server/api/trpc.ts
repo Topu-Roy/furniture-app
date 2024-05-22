@@ -7,7 +7,6 @@
  * need to use are documented accordingly near the end.
  */
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
 import { TRPCError, initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
