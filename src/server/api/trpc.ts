@@ -12,6 +12,7 @@ import { TRPCError, initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 import { getUserByAuthId } from "../queries";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 /**
  * 1. CONTEXT
@@ -89,7 +90,8 @@ export const publicProcedure = t.procedure;
  * guaranties that a user querying is authorized.
  */
 export const privateProcedure = t.procedure.use(async (opts) => {
-  const user = auth();
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
 
   if (!user) throw new TRPCError({ code: 'UNAUTHORIZED' })
 
@@ -107,13 +109,14 @@ export const privateProcedure = t.procedure.use(async (opts) => {
  * guaranties that a user querying is authorized and is an Admin.
  */
 export const adminProcedure = t.procedure.use(async (opts) => {
-  const user = auth()
+  const { getUser } = getKindeServerSession();
+  const user = await getUser()
 
-  if (user.userId === null) throw new TRPCError({ code: 'UNAUTHORIZED' })
+  if (!user) throw new TRPCError({ code: 'UNAUTHORIZED' })
 
-  const dbUser = await getUserByAuthId(user.userId)
+  const dbUser = await getUserByAuthId(user.id)
 
-  if (dbUser === null) throw new TRPCError({ code: 'NOT_FOUND' })
+  if (!dbUser) throw new TRPCError({ code: 'NOT_FOUND' })
 
   if (dbUser.role !== 'ADMIN') throw new TRPCError({ code: 'FORBIDDEN' })
 

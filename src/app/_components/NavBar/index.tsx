@@ -4,12 +4,14 @@ import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 import MobileMenu from "./mobileMenu";
 import { IoSearchOutline } from "react-icons/io5";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
 import CartIconWithUser from "./cartIcon";
+import { LoginLink, LogoutLink, getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-export default function NavBar() {
-  const user = auth();
+export default async function NavBar() {
+  const { isAuthenticated: checkAuth, getUser } = getKindeServerSession();
+  const isAuthenticated = await checkAuth();
+  const user = await getUser();
+  console.log(user);
   return (
     <header className="fixed top-0 z-50 flex h-[5.5rem] w-[100vw] items-center justify-center bg-white px-2 shadow-sm">
       <div className="mx-auto flex w-[98vw] max-w-[85rem] flex-row justify-between">
@@ -61,22 +63,28 @@ export default function NavBar() {
           <CartIconWithUser />
 
           <div>
-            {!user?.userId || !user ? (
-              <>
-                <Link href={"/authcallback"}>
-                  <Button>Sign up</Button>
-                </Link>
-              </>
-            ) : (
-              <div className="">
-                <SignedIn>
-                  <UserButton />
-                </SignedIn>
-                <SignedOut>
-                  <Button>
-                    <SignInButton />
-                  </Button>
-                </SignedOut>
+            {!isAuthenticated ? <LoginLink>Sign In</LoginLink> : (
+              <div className="profile-blob">
+                {user?.picture ? (
+                  <img
+                    className="avatar"
+                    src={user?.picture}
+                    alt="user profile avatar"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <div className="avatar">
+                    {user?.given_name?.[0]}
+                    {user?.family_name?.[0]}
+                  </div>
+                )}
+                <div>
+                  <p className="text-heading-2">
+                    {user?.given_name} {user?.family_name}
+                  </p>
+
+                  <LogoutLink className="text-subtle">Log out</LogoutLink>
+                </div>
               </div>
             )}
           </div>

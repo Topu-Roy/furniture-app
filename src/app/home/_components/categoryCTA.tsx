@@ -1,11 +1,11 @@
 import React from "react";
-import { products } from "@/assets/productArray";
 import ThreeDCard from "@/components/aceternity/3d/threeDCard";
 import { Heading } from "@/app/_components/heading";
+import { api } from "@/trpc/server";
 
-export default function CategoryCTA() {
-  const chair = products.filter((item) => item.category === "Chair")[2];
-  const lamp = products.filter((item) => item.category === "Lamp")[4];
+export default async function CategoryCTA() {
+  const chairs = await api.product.getProductsByCategory({ category: "Chair" })
+  const lamps = await api.product.getProductsByCategory({ category: "Lamp" })
   return (
     <div className="mx-auto w-full max-w-7xl py-10 lg:py-16">
       <Heading className={"px-8 text-center"}>
@@ -16,16 +16,16 @@ export default function CategoryCTA() {
         <ThreeDCard
           heading="Try new our chairs"
           subHeading="Brand new collection of chairs and modern design."
-          imageURL={chair?.image || ""}
-          imageAlt={chair?.productTitle || ""}
+          imageURL={chairs[4]?.image || ""}
+          imageAlt={chairs[4]?.productTitle || ""}
           link="/shop"
           linkName="Shop Now"
         />
         <ThreeDCard
           heading="Check out our new Lamps"
           subHeading="Brand new collection of Lamps with minimal design."
-          imageURL={lamp?.image || ""}
-          imageAlt={lamp?.productTitle || ""}
+          imageURL={lamps[2]?.image || ""}
+          imageAlt={lamps[2]?.productTitle || ""}
           link="/shop"
           linkName="Shop Now"
         />

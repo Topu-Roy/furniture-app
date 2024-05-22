@@ -1,16 +1,20 @@
 import { api } from "@/trpc/server";
-import { currentUser } from "@clerk/nextjs/server";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 
 export default async function AuthCallback() {
-  const user = await currentUser();
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
 
   if (user) {
     const res = await api.auth.syncUserToDB({
       authId: user.id,
-      imageUrl: user.imageUrl,
+      //TODO: Add default fallback image for user
+      imageUrl: user.picture || "",
       role: "USER",
-      userName: user.username || "",
+      firstName: user.given_name,
+      lastName: user.family_name,
+      email: user.email
     });
 
     if (!res.id) return redirect("/error");

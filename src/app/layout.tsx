@@ -1,5 +1,4 @@
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import NavBar from "@/app/_components/NavBar";
 import Footer from "@/app/_components/Footer";
@@ -21,19 +20,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={`${inter.className} relative`}>
-          {/* //* This is for uploadthing ssr hydration */}
-          <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-          <TRPCReactProvider>
-            <NavBar />
-            {children}
-            <Footer />
-            <Toaster />
-          </TRPCReactProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={`${inter.className} relative`}>
+        {/* //* This is for uploadthing ssr hydration */}
+        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+        <TRPCReactProvider>
+          <NavBar />
+          {children}
+          <Footer />
+          <Toaster />
+        </TRPCReactProvider>
+      </body>
+    </html>
   );
 }

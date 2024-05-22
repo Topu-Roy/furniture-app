@@ -26,15 +26,14 @@ export const cartRouter = createTRPCRouter({
         .input(addToCartSchema)
         .mutation(async ({ input, ctx }) => {
 
+            if (input.authId !== ctx.user.id) throw new TRPCError({ code: 'FORBIDDEN' })
+
             type ActionType = "updated" | "created" | "alreadyInCart"
             type Action = { updated: ActionType; created: ActionType; alreadyInCart: ActionType }
             const action: Action = { updated: "updated", created: "created", alreadyInCart: "alreadyInCart" }
 
-            const user = await getUserByAuthId(input.authId)
-
+            const user = await getUserByAuthId(input.authId);
             if (!user) throw new TRPCError({ code: 'UNAUTHORIZED' })
-            if (input.authId !== ctx.user.userId) throw new TRPCError({ code: 'FORBIDDEN' })
-
 
             const isExist = await db.cartProduct.findFirst({
                 where: {
@@ -70,7 +69,7 @@ export const cartRouter = createTRPCRouter({
 
             const updatedCartItem = await updateProductCartQuantity(item.id, input.quantity);
 
-            if (updatedCartItem.id) return updatedCartItem;
+            return updatedCartItem;
         }),
 
     deleteCartItem: privateProcedure
@@ -78,6 +77,6 @@ export const cartRouter = createTRPCRouter({
         .mutation(async ({ input }) => {
             const deletedCartItem = await deleteCartProduct(input.productId)
 
-            if (deletedCartItem.id) return deletedCartItem;
+            return deletedCartItem;
         }),
 })

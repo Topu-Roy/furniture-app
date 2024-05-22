@@ -12,8 +12,10 @@ model User {
   id           String        @id @default(auto()) @map("_id") @db.ObjectId
   authId       String
   role         Role          @default(USER)
+  email        String?
   imageUrl     String?
-  userName     String?
+  firstName    String?
+  lastName     String?
   cartProducts CartProduct[]
   reviews      Review[]
 

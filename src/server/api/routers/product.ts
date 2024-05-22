@@ -47,7 +47,7 @@ export const ProductRouter = createTRPCRouter({
                 }
             })
 
-            if (updatedProduct.id) {
+            if (!updatedProduct.id) {
                 throw new TRPCError({ code: "NOT_FOUND" });
 
             }
@@ -59,13 +59,9 @@ export const ProductRouter = createTRPCRouter({
         .input(createProductPostBodySchema)
         .mutation(async ({ input, ctx }) => {
 
-            if (ctx.user.userId === null) {
-                throw new TRPCError({ code: "UNAUTHORIZED" });
-            }
-
             const createdProduct = await db.product.create({
                 data: {
-                    createdBy: ctx.user.userId,
+                    createdBy: ctx.user.id,
                     productTitle: input.productTitle,
                     description: input.description,
                     price: input.price,
@@ -75,7 +71,7 @@ export const ProductRouter = createTRPCRouter({
                 }
             })
 
-            if (createdProduct.id) {
+            if (!createdProduct.id) {
                 throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
             }

@@ -52,13 +52,9 @@ export const reviewRouter = createTRPCRouter({
         .input(createReviewSchema)
         .mutation(async ({ input, ctx }) => {
 
-            if (ctx.user.userId === null) {
-                throw new TRPCError({ code: "UNAUTHORIZED" });
-            }
-
             const user = await db.user.findFirst({
                 where: {
-                    authId: ctx.user.userId,
+                    authId: ctx.user.id,
                 },
             })
 
@@ -75,6 +71,5 @@ export const reviewRouter = createTRPCRouter({
             })
 
             return createdReview
-        }
-        ),
+        }),
 });

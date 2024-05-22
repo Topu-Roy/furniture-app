@@ -3,20 +3,21 @@ import CartCheckout from "./_components/cartCheckout";
 import SelectAllAndReset from "./_components/selectAllAndReset";
 import { Heading } from "../_components/heading";
 import { Text } from "../_components/text";
-import { auth } from "@clerk/nextjs/server";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import RenderCart from "./_components/renderCart";
 import { api } from "@/trpc/server";
 import { redirect } from "next/navigation";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export default async function CartPage() {
-  const user = auth();
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
 
-  if (!user.userId) return redirect("/authcallback");
+  if (!user) return redirect("/authcallback");
 
   const allCartProducts = await api.cart.getAllCartItems({
-    authId: user.userId,
+    authId: user.id,
   });
 
   if (!allCartProducts) {
