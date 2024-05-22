@@ -1,8 +1,8 @@
 import React from 'react'
 import { api } from '@/trpc/server'
 import { Category } from '@prisma/client'
-import { auth } from '@clerk/nextjs/server'
 import Product from './product'
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 
 type Props = {
     productId: string,
@@ -14,7 +14,8 @@ type Props = {
 }
 
 export default async function RelatedProducts(props: Props) {
-    const user = auth()
+    const { getUser } = getKindeServerSession()
+    const user = await getUser()
     const productsByCategory = await api.product.getProductsByCategory({ category: props.productCategory });
     const products = productsByCategory.filter(product => product.id !== props.productId);
 
@@ -27,7 +28,7 @@ export default async function RelatedProducts(props: Props) {
                     {products.slice(0, 4).map((product) => (
                         <div key={product.id}>
                             <Product
-                                userId={user.userId}
+                                userId={user!!.id}
                                 description={product.description}
                                 price={product.price}
                                 productId={product.id}
@@ -42,7 +43,7 @@ export default async function RelatedProducts(props: Props) {
                     {products.slice(0, 6).map((product) => (
                         <div key={product.id}>
                             <Product
-                                userId={user.userId}
+                                userId={user!!.id}
                                 description={product.description}
                                 price={product.price}
                                 productId={product.id}
@@ -57,7 +58,7 @@ export default async function RelatedProducts(props: Props) {
                     {products.slice(0, 8).map((product) => (
                         <div key={product.id}>
                             <Product
-                                userId={user.userId}
+                                userId={user!!.id}
                                 description={product.description}
                                 price={product.price}
                                 productId={product.id}

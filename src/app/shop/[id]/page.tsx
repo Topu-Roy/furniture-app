@@ -5,12 +5,12 @@ import Image from "next/image";
 import Rating from "./_components/rating";
 import Review from "./_components/review";
 import { cn } from "@/lib/utils";
-import { auth } from "@clerk/nextjs/server";
 import ReviewByRateItem from "./_components/reviewByRateItem";
 import ProductAddToCart from "./_components/productAddToCart";
 import RelatedProducts from "./_components/relatedProducts";
 import dynamic from "next/dynamic";
 import Chip from "@/app/cart/_components/chip";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 const CreateReview = dynamic(() => import("./_components/createReview"), { ssr: false });
 
 export default async function ProductDetails({
@@ -18,7 +18,8 @@ export default async function ProductDetails({
 }: {
   params: { id: string };
 }) {
-  const user = auth();
+  const { getUser } = getKindeServerSession()
+  const user = await getUser();
   const product = await api.product.getProductById({ productId: params.id });
   const reviews = await api.review.getReviews({ productId: params.id });
 
@@ -96,7 +97,7 @@ export default async function ProductDetails({
               </div>
 
               <ProductAddToCart
-                authId={user.userId}
+                authId={user!!.id}
                 price={product.price}
                 productId={product.id}
                 productTitle={product.productTitle}
@@ -149,7 +150,7 @@ export default async function ProductDetails({
                 {averageRating_Float} out of 5
               </p>
               <CreateReview
-                userId={user.userId}
+                userId={user!!.id}
                 productId={product.id}
                 productTitle={product.productTitle}
               />

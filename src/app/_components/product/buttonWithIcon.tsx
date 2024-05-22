@@ -5,6 +5,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 type Props = {
   children: React.JSX.Element;
@@ -16,7 +17,8 @@ type Props = {
 
 export default function ButtonWithIcon(props: Props) {
   const { children, productId, quantity, price, productTitle } = props;
-  const user = useAuth();
+  const { getUser } = useKindeBrowserClient()
+  const user = getUser();
   const { toast } = useToast();
   const router = useRouter();
 
@@ -38,7 +40,7 @@ export default function ButtonWithIcon(props: Props) {
   });
 
   const handleClick = () => {
-    if (!user.userId || user.userId === undefined || user.userId === null) {
+    if (!user) {
       return toast({
         variant: "destructive",
         title: "Please login first",
@@ -47,7 +49,7 @@ export default function ButtonWithIcon(props: Props) {
     }
     mutate({
       productId,
-      authId: user.userId,
+      authId: user.id,
       productTitle,
       price,
       quantity,

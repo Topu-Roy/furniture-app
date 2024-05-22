@@ -3,10 +3,9 @@ import React, { useEffect } from "react";
 import { Button } from "../../../components/ui/button";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { api } from "@/trpc/react";
-import { useAuth } from "@clerk/nextjs";
 import { useCartStore } from "@/zustand/cart/cartStore";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 type Props = {
   productId: string;
@@ -23,7 +22,8 @@ export default function AddButton(props: Props) {
   const setProducts_store = useCartStore((store) => store.setProducts);
 
   const { toast } = useToast();
-  const user = useAuth();
+  const { getUser } = useKindeBrowserClient()
+  const user = getUser();
 
   const { mutate, isPending, data } = api.cart.createNewCartItem.useMutation();
 
@@ -69,7 +69,7 @@ export default function AddButton(props: Props) {
   }, [data]);
 
   const handleClick = () => {
-    if (!user.userId || user.userId === undefined || user.userId === null) {
+    if (!user) {
       return toast({
         variant: "destructive",
         title: "Please login first",
@@ -79,7 +79,7 @@ export default function AddButton(props: Props) {
 
     mutate({
       productId,
-      authId: user.userId,
+      authId: user.id,
       productTitle,
       price,
       quantity,
