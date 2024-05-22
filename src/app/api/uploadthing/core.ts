@@ -1,7 +1,7 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
-import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const f = createUploadthing();
 
@@ -9,13 +9,14 @@ export const ourFileRouter = {
     imageUploader: f({ image: { maxFileSize: "4MB" } })
         .middleware(async () => {
             // This code runs on your server before upload
-            const user = auth();
+            const { getUser } = getKindeServerSession()
+            const user = await getUser()
 
-            if (!user || !user.userId) throw new UploadThingError("Unauthorized");
+            if (!user) throw new UploadThingError("Unauthorized");
 
             const userFromDB = await db.user.findFirst({
                 where: {
-                    authId: user.userId
+                    authId: user.id
                 }
             })
 

@@ -3,7 +3,7 @@ export default function middleware(req: unknown) {
     return withAuth(req);
 }
 export const config = {
-    matcher: ["/cart", "/authcallback"]
+    matcher: ["/cart", "/authcallback", "/createProduct",]
 };
 
 // export const config = {
