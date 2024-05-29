@@ -1,17 +1,16 @@
 "use client";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { scrollToTop } from "@/lib/utils";
 import Product from "@/app/_components/product/productCard";
 import { Button } from "@/components/ui/button";
-import { VscLoading } from "react-icons/vsc";
-import { MdRunningWithErrors } from "react-icons/md";
 import { Heading } from "@/app/_components/heading";
 import { type Product as ProductType } from "@prisma/client";
 import { useShopStore } from "@/zustand/shop/shopStore";
+import { Frown, LoaderCircle } from "lucide-react";
 
 type Props = {
   products: ProductType[];
-  setSheetOpen: Dispatch<SetStateAction<boolean>>;
+  setSheetOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function RenderProducts(props: Props) {
@@ -155,7 +154,7 @@ export default function RenderProducts(props: Props) {
       return (
         <div className="col-span-3 flex w-full flex-col items-center justify-center gap-4 pt-14">
           <Heading>Hold Tight, Products are loading...</Heading>
-          <VscLoading className="animate-spin p-2 text-gray-700" size={20} />
+          <LoaderCircle className="animate-spin p-2 text-gray-700" />
         </div>
       );
     }
@@ -163,7 +162,7 @@ export default function RenderProducts(props: Props) {
       // No products
       return (
         <div className="col-span-3 flex w-full flex-col items-center justify-center gap-4 pt-14">
-          <MdRunningWithErrors className="p-2 text-gray-700" size={20} />
+          <Frown />
           <Heading>Oops! No products found...</Heading>
           <Button onClick={handleResetAll} variant={"outline"}>
             Reset all filters

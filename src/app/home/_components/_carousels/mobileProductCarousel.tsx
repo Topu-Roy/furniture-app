@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Product from "@/app/_components/product/productCard";
 import {
   Carousel,
-  CarouselApi,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,

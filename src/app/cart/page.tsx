@@ -6,9 +6,9 @@ import { Text } from "../_components/text";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import RenderCart from "./_components/renderCart";
-import { api } from "@/trpc/server";
 import { redirect } from "next/navigation";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { getAllCartItems } from "@/actions/cartAction";
 
 export default async function CartPage() {
   const { getUser } = getKindeServerSession();
@@ -16,9 +16,7 @@ export default async function CartPage() {
 
   if (!user) return redirect("/authcallback");
 
-  const allCartProducts = await api.cart.getAllCartItems({
-    authId: user.id,
-  });
+  const allCartProducts = await getAllCartItems({ authId: user.id })
 
   if (!allCartProducts) {
     return (

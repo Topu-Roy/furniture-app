@@ -5,8 +5,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 import { cn } from "@/lib/utils";
-import { FaRegHeart } from "react-icons/fa";
-import { LucideShoppingCart } from "lucide-react";
+import { Heart, LucideShoppingCart } from "lucide-react";
 import AddButton from "./addButton";
 import ButtonWithIcon from "./buttonWithIcon";
 import { Text } from "../text";
@@ -38,7 +37,7 @@ export default function Product({ product, className }: Props) {
               <Image
                 height={1024}
                 width={1024}
-                src={product.image || "/images/defaultNoData.png"}
+                src={product.image ?? "/images/defaultNoData.png"}
                 alt={product.productTitle}
                 className="aspect-square h-full w-full justify-center transition-all duration-500 ease-in-out group-hover:scale-105"
               />
@@ -92,7 +91,7 @@ export default function Product({ product, className }: Props) {
                   productId={product.id}
                   quantity={1}
                 >
-                  <FaRegHeart size={25} />
+                  <Heart />
                 </ButtonWithIcon>
               ) : null}
             </div>

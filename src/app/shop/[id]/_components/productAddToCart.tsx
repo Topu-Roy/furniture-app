@@ -1,79 +1,89 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { api } from "@/trpc/react";
 import { cn } from "@/lib/utils";
 import { useCartStore } from "@/zustand/cart/cartStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { addToCart } from "@/actions/cartAction";
 
 type Props = {
-  authId: string | null;
   productId: string;
   productTitle: string;
   price: number;
 };
 
 export default function ProductAddToCart(props: Props) {
-  const { authId, productId, price, productTitle } = props;
+  const { productId, price, productTitle } = props;
+  const { getUser } = useKindeBrowserClient()
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const user = getUser();
   const router = useRouter();
 
   const products_store = useCartStore((store) => store.products);
   const setProducts_store = useCartStore((store) => store.setProducts);
 
-  const { mutate, isPending, data } = api.cart.createNewCartItem.useMutation();
-
-  function giveFeedback() {
-    if (data === undefined) return;
-
-    if (data) {
-      if (data.action === "alreadyInCart") {
-        return toast({
-          title: "Already in cart",
-          description: "Product already exist in the cart",
-        });
-      }
-
-      if (data.action === "updated") {
-        setProducts_store(
-          products_store.map((product) =>
-            product.id === productId
-              ? { ...product, ...data.updatedCartProduct }
-              : product,
-          ),
-        );
-        toast({
-          title: "Updated cart",
-          description: "Product updated successfully",
-        });
-      }
-
-      if (data.action === "created") {
-        if (data.createdCartProduct) {
-          setProducts_store([...products_store, data.createdCartProduct]);
-        }
-        toast({
-          title: "Added to cart",
-          description: "Product successfully added to cart",
-        });
-      }
-    }
-  }
-
-  useEffect(() => {
-    giveFeedback();
-  }, [data]);
-
   async function handleAddToCart() {
-    //TODO: Add fallback url
-    if (!authId) {
+    if (!user) {
       router.push("/authcallback");
       return;
     }
 
-    mutate({ authId, productId, productTitle, price, quantity: 1 });
+    setIsLoading(true);
+
+    const response = await addToCart({
+      authId: user.id,
+      price: price,
+      productId: productId,
+      productTitle: productTitle,
+      quantity: 1,
+    }).finally(() => {
+      setIsLoading(false);
+    });
+
+    if (!response) {
+      return toast({
+        variant: "destructive",
+        title: "Something went wrong",
+        description: "Please try again later",
+      })
+    }
+
+    if (response.action === "alreadyInCart") {
+      return toast({
+        title: "Already in cart",
+        description: "Product already exist in the cart",
+      });
+    }
+
+    if (response.action === "updated") {
+      setProducts_store(
+        products_store.map((product) =>
+          product.id === productId
+            ? { ...product, ...response.product }
+            : product,
+        ),
+      );
+
+      toast({
+        title: "Updated cart",
+        description: "Product updated successfully",
+      });
+    }
+
+    if (response.action === "created") {
+      if (response.product) {
+        setProducts_store([...products_store, response.product]);
+      }
+      toast({
+        title: "Added to cart",
+        description: "Product successfully added to cart",
+      });
+    }
   }
 
   return (
@@ -107,7 +117,7 @@ export default function ProductAddToCart(props: Props) {
           onClick={() => handleAddToCart()}
           className={cn(
             "mt-4 w-full sm:flex-1 flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 sm:mt-0",
-            isPending ? "opacity-90" : "",
+            isLoading ? "opacity-90" : "",
           )}
         >
           <svg

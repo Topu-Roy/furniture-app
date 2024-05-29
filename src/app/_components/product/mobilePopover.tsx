@@ -6,10 +6,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import { cn } from "@/lib/utils";
 import AddButton from "./addButton";
 import Link from "next/link";
+import { GripHorizontal } from "lucide-react";
 
 type Props = {
   productId: string;
@@ -44,8 +44,7 @@ export default function MobilePopover({
             },
           )}
         >
-          <PiDotsThreeOutlineFill
-            size={22}
+          <GripHorizontal
             className={cn("text-primary hover:text-secondary", {
               "text-secondary": open,
             })}

@@ -7,10 +7,20 @@ import NewArrivals from "./_components/newArrivals";
 import OurBenefits from "./_components/ourBenefits";
 import ReadBlogSection from "./_components/readBlogSection";
 import SecondCTA from "./_components/secondCTA";
-import { api } from "@/trpc/server";
+import { getAllProducts } from "@/actions/productAction";
 
 export default async function HomepagePage() {
-  const products = await api.product.getAllProducts();
+  const products = await getAllProducts();
+
+  if (!products) {
+    console.error(products);
+    return (
+      <div className="">
+        Products not found
+      </div>
+    )
+  }
+
   return (
     <div className="bg-stone-200">
       <HeroSection />

@@ -1,35 +1,28 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import NavBar from "@/app/_components/NavBar";
-import Footer from "@/app/_components/Footer";
-import { inter } from "@/styles/font";
-import { Toaster } from "@/components/ui/toaster";
-import { TRPCReactProvider } from "@/trpc/react";
-import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
-import { extractRouterConfig } from "uploadthing/server";
-import { ourFileRouter } from "./api/uploadthing/core";
+import "@/styles/globals.css";
 
-export const metadata: Metadata = {
+import NavBar from "./_components/NavBar";
+import Footer from "./_components/Footer";
+import { Toaster } from "@/components/ui/toaster";
+import { inter } from "@/styles/font";
+
+
+export const metadata = {
   title: "Furnit",
-  description: "Decorate your house with beautiful furniture's.",
+  description: "Decorate your house with beautiful furniture's",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} relative`}>
-        {/* //* This is for uploadthing ssr hydration */}
-        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-        <TRPCReactProvider>
-          <NavBar />
-          {children}
-          <Footer />
-          <Toaster />
-        </TRPCReactProvider>
+    <html lang="en" className={`${inter.className}`}>
+      <body>
+        <NavBar />
+        {children}
+        <Toaster />
+        <Footer />
       </body>
     </html>
   );

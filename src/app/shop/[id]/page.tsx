@@ -1,6 +1,5 @@
 import React from "react";
 import { Text } from "@/app/_components/text";
-import { api } from "@/trpc/server";
 import Image from "next/image";
 import Rating from "./_components/rating";
 import Review from "./_components/review";
@@ -10,7 +9,7 @@ import ProductAddToCart from "./_components/productAddToCart";
 import RelatedProducts from "./_components/relatedProducts";
 import dynamic from "next/dynamic";
 import Chip from "@/app/cart/_components/chip";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { getProductByIdWithReviews, getProductReviewCountByRating } from "@/actions/productAction";
 const CreateReview = dynamic(() => import("./_components/createReview"), { ssr: false });
 
 export default async function ProductDetails({
@@ -18,16 +17,13 @@ export default async function ProductDetails({
 }: {
   params: { id: string };
 }) {
-  const { getUser } = getKindeServerSession()
-  const user = await getUser();
-  const product = await api.product.getProductById({ productId: params.id });
-  const reviews = await api.review.getReviews({ productId: params.id });
+  const product = await getProductByIdWithReviews({ id: params.id });
 
-  const oneStarReviews = await api.review.getReviewCountByRating({ productId: params.id, rate: 1 });
-  const twoStarReviews = await api.review.getReviewCountByRating({ productId: params.id, rate: 2 });
-  const threeStarReviews = await api.review.getReviewCountByRating({ productId: params.id, rate: 3 });
-  const fourStarReviews = await api.review.getReviewCountByRating({ productId: params.id, rate: 4 });
-  const fiveStarReviews = await api.review.getReviewCountByRating({ productId: params.id, rate: 5 });
+  const oneStarReviews = await getProductReviewCountByRating({ productId: params.id, rate: 1 });
+  const twoStarReviews = await getProductReviewCountByRating({ productId: params.id, rate: 2 });
+  const threeStarReviews = await getProductReviewCountByRating({ productId: params.id, rate: 3 });
+  const fourStarReviews = await getProductReviewCountByRating({ productId: params.id, rate: 4 });
+  const fiveStarReviews = await getProductReviewCountByRating({ productId: params.id, rate: 5 });
 
   const totalReviews = oneStarReviews + twoStarReviews + threeStarReviews + fourStarReviews + fiveStarReviews;
   const totalStars = oneStarReviews * 1 + twoStarReviews * 2 + threeStarReviews * 3 + fourStarReviews * 4 + fiveStarReviews * 5;
@@ -64,7 +60,7 @@ export default async function ProductDetails({
                 height={1000}
                 width={1000}
                 className="w-full"
-                src={product.image || ""}
+                src={product.image ?? ""}
                 alt={product.productTitle}
               />
             </div>
@@ -97,7 +93,6 @@ export default async function ProductDetails({
               </div>
 
               <ProductAddToCart
-                authId={user!!.id}
                 price={product.price}
                 productId={product.id}
                 productTitle={product.productTitle}
@@ -150,7 +145,6 @@ export default async function ProductDetails({
                 {averageRating_Float} out of 5
               </p>
               <CreateReview
-                userId={user!!.id}
                 productId={product.id}
                 productTitle={product.productTitle}
               />
@@ -165,13 +159,13 @@ export default async function ProductDetails({
             </div>
           </div>
 
-          {reviews.length > 0 ? (
+          {product.review.length > 0 ? (
             <>
-              {reviews.map((review, index) => (
+              {product.review.map((review, index) => (
                 <div
                   className={cn(
                     "border-t-2 border-black/10",
-                    index === reviews.length - 1
+                    index === product.review.length - 1
                       ? "border-b-2 border-black/10"
                       : "",
                   )}
@@ -200,7 +194,7 @@ export default async function ProductDetails({
           description={product.description}
           price={product.price}
           productId={product.id}
-          productImage={product.image || ""}
+          productImage={product.image ?? ""}
           productTitle={product.productTitle}
         />
       </div>

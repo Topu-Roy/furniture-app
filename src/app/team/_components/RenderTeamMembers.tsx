@@ -3,14 +3,13 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Text } from "../../_components/text";
-import { FaFacebookF, FaGithub } from "react-icons/fa6";
-import { IoLogoWhatsapp } from "react-icons/io";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Facebook, Github, MessageCircle } from "lucide-react";
 
 type TeamMember = {
   id: number;
@@ -29,15 +28,15 @@ export default function RenderTeamMembers(props: props) {
   const socialIcons = [
     {
       name: "Facebook",
-      icon: <FaFacebookF size={25} />,
+      icon: <Facebook />,
     },
     {
       name: "Whatsapp",
-      icon: <IoLogoWhatsapp size={25} />,
+      icon: <MessageCircle />,
     },
     {
       name: "Github",
-      icon: <FaGithub size={25} />,
+      icon: <Github />,
     },
   ];
 

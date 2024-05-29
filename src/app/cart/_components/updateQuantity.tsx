@@ -1,21 +1,16 @@
 "use client";
-import React, {
-  type Dispatch,
-  type SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { api } from "@/trpc/react";
 import { useToast } from "@/components/ui/use-toast";
 import useDebounce from "@/hooks/debounce";
 import { useCartStore } from "@/zustand/cart/cartStore";
+import { updateCartItemQuantity } from "@/actions/cartAction";
 
 type Props = {
   cartItemId: string;
   quantity: number;
   price: number;
-  setTotalPrice: Dispatch<SetStateAction<number | undefined>>;
+  setTotalPrice: React.Dispatch<React.SetStateAction<number | undefined>>;
 };
 
 export default function UpdateQuantity(props: Props) {
@@ -23,34 +18,14 @@ export default function UpdateQuantity(props: Props) {
 
   const [quantityState, setQuantityState] = useState(quantity);
   const [prevQuantity, setPrevQuantity] = useState(quantity);
-  const debouncedQuantity = useDebounce(quantityState);
+  const debouncedQuantity = useDebounce(quantityState, 300);
 
   const products_store = useCartStore((store) => store.products);
   const setProducts_store = useCartStore((store) => store.setProducts);
 
   const { toast } = useToast();
-  const { mutate } = api.cart.updatedCartItem.useMutation({
-    onError() {
-      setQuantityState(prevQuantity);
-      return toast({
-        variant: "destructive",
-        title: "Something went wrong",
-        description: "Something went wrong while updating the quantity",
-      });
-    },
-    onSuccess() {
-      setPrevQuantity(quantityState);
-      setProducts_store(
-        products_store.map((product) =>
-          product.id === cartItemId
-            ? { ...product, quantity: quantityState }
-            : product,
-        ),
-      );
-    },
-  });
 
-  function updateQuantity({ action }: { action: "increment" | "decrement" }) {
+  function handleQuantityChange({ action }: { action: "increment" | "decrement" }) {
     if (action === "decrement" && quantity === 1) {
       return;
     }
@@ -65,11 +40,45 @@ export default function UpdateQuantity(props: Props) {
   }
 
   useEffect(() => {
-    mutate({
-      cartItemId,
-      quantity: debouncedQuantity,
-    });
-  }, [debouncedQuantity, cartItemId, mutate]);
+    async function handleUpdateQuantity() {
+      try {
+        const response = await updateCartItemQuantity({
+          id: cartItemId,
+          quantity: debouncedQuantity,
+        }).catch(err => console.log(err));
+
+        if (response) {
+          setPrevQuantity(quantityState);
+          setProducts_store(
+            products_store.map((product) =>
+              product.id === cartItemId
+                ? { ...product, quantity: quantityState }
+                : product
+            )
+          );
+        } else {
+          setQuantityState(prevQuantity);
+          toast({
+            variant: "destructive",
+            title: "Something went wrong",
+            description: "Failed to update the quantity",
+          });
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error);
+          setQuantityState(prevQuantity);
+          toast({
+            variant: "destructive",
+            title: "Something went wrong",
+            description: "Something went wrong while updating the quantity",
+          });
+        }
+      }
+    }
+
+    void handleUpdateQuantity()
+  }, [debouncedQuantity]);
 
   useEffect(() => {
     setTotalPrice(quantityState * price);
@@ -78,7 +87,7 @@ export default function UpdateQuantity(props: Props) {
   return (
     <div className="flex items-center">
       <Button
-        onClick={() => updateQuantity({ action: "decrement" })}
+        onClick={() => handleQuantityChange({ action: "decrement" })}
         className="flex size-6 items-center justify-center rounded-md border border-gray-300 bg-gray-100 p-0 hover:bg-gray-200"
       >
         <svg
@@ -107,7 +116,7 @@ export default function UpdateQuantity(props: Props) {
         required
       />
       <Button
-        onClick={() => updateQuantity({ action: "increment" })}
+        onClick={() => handleQuantityChange({ action: "increment" })}
         className="flex size-6 items-center justify-center rounded-md border border-gray-300 bg-gray-100 p-0 hover:bg-gray-200"
       >
         <svg

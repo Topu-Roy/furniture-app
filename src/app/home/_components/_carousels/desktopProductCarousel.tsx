@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import Product from "@/app/_components/product/productCard";
 import { cn } from "@/lib/utils";
-import { Product as ProductType } from "@prisma/client";
+import { type Product as ProductType } from "@prisma/client";
 import {
   Carousel,
-  CarouselApi,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,

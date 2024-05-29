@@ -4,10 +4,10 @@ import ColorSelector from "./_components/colorSelector";
 import FilterByPrice from "./_components/filterByPrice";
 import ProductTag from "./_components/productTag";
 import Products from "./_components/products";
-import { api } from "@/trpc/server";
+import { getAllProducts } from "@/actions/productAction";
 
 export default async function ShopPage() {
-  const products = await api.product.getAllProducts();
+  const products = await getAllProducts();
 
   if (!products) {
     return <p className="mt-[5rem]">Opps...! Something went wrong. (V)</p>;

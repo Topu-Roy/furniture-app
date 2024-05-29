@@ -1,4 +1,5 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import useDebounce from "@/hooks/debounce";
 import { cn } from "@/lib/utils";
 import ColorSelector from "./colorSelector";
@@ -16,33 +17,25 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { MdClear } from "react-icons/md";
-import { LuFilter } from "react-icons/lu";
 import { useShopStore } from "@/zustand/shop/shopStore";
+import { Filter, X } from "lucide-react";
 
 type SortingMethodType = "default" | "price";
 
 type Props = {
   sheetOpen: boolean;
-  setSheetOpen: Dispatch<SetStateAction<boolean>>;
+  setSheetOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function ProductHeader({ sheetOpen, setSheetOpen }: Props) {
-  const { searchInputText, setSelectedSorting, setSearchInputText } =
-    useShopStore((store) => store);
+  const { searchInputText, setSearchInputText, setSelectedSorting, } = useShopStore((store) => store);
 
   // * States
   const [searchText, setSearchText] = useState("");
-  const [sortingMethod, setSortingMethod] =
-    useState<SortingMethodType>("default");
-
+  const [sortingMethod, setSortingMethod] = useState<SortingMethodType>("default");
   const debouncedText = useDebounce(searchText);
 
   const sortingOptions: SortingMethodType[] = ["default", "price"];
-
-  function handleClearSearch() {
-    setSearchText("");
-  }
 
   useEffect(() => {
     setSearchInputText(debouncedText);
@@ -53,7 +46,7 @@ export default function ProductHeader({ sheetOpen, setSheetOpen }: Props) {
   }, [searchInputText]);
 
   useEffect(() => {
-    setSortingMethod(sortingMethod);
+    setSelectedSorting(sortingMethod);
   }, [sortingMethod]);
 
   return (
@@ -66,7 +59,7 @@ export default function ProductHeader({ sheetOpen, setSheetOpen }: Props) {
               className="w-24 space-x-2 text-gray-900/70 lg:hidden"
             >
               <span>Filter</span>
-              <LuFilter size={20} />
+              <Filter />
             </Button>
           </SheetTrigger>
           <SheetContent className="w-[80%]" side={"left"}>
@@ -88,12 +81,11 @@ export default function ProductHeader({ sheetOpen, setSheetOpen }: Props) {
               className="h-10 rounded-md border-0 bg-transparent bg-white px-3 text-sm"
             />
             <Button
-              onClick={handleClearSearch}
+              onClick={() => setSearchText("")}
               variant={"outline"}
               className="h-10 rounded-full  p-2.5"
             >
-              <MdClear
-                size={20}
+              <X
                 className={cn("text-gray-900/70", {
                   "text-gray-900": searchText.length > 0,
                 })}

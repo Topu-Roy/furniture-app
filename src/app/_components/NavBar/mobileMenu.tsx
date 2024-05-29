@@ -5,9 +5,9 @@ import Link from "next/link";
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Squeeze as Hamburger } from 'hamburger-react'
 
 export default function MobileMenu() {
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -22,60 +22,56 @@ export default function MobileMenu() {
         <SheetTrigger asChild>
           <Button
             onClick={() => handleClick()}
-            className="flex h-[2rem] flex-col items-center justify-center gap-1.5 rounded p-1 md:hidden"
+            className="p-0 md:hidden"
           >
-            <div className="h-[2px] w-[1.6rem] rounded-full bg-white" />
-            <div className="h-[2px] w-[1.6rem] rounded-full bg-white" />
-            <div className="h-[2px] w-[1.6rem] rounded-full bg-white" />
+            <Hamburger toggled={sheetOpen} toggle={setSheetOpen} />
           </Button>
         </SheetTrigger>
-        <SheetContent side={"left"}>
-          <SheetHeader>
-            <Link
-              href="/home"
-              className="flex w-[80%] items-center justify-center border-b border-stone-300/20"
-            >
-              <Button onClick={() => handleClick()} variant={"ghost"}>
-                Home
-              </Button>
-            </Link>
+        <SheetContent side={'left'}>
+          <Link
+            href="/home"
+            className="flex w-[80%] items-center justify-center border-b border-stone-300/20"
+          >
+            <Button onClick={() => handleClick()} variant={"ghost"}>
+              Home
+            </Button>
+          </Link>
 
-            <Link
-              href="/shop"
-              className="flex w-[80%] items-center justify-center border-b border-stone-300/20"
-            >
-              <Button onClick={() => handleClick()} variant={"ghost"}>
-                Shop
-              </Button>
-            </Link>
+          <Link
+            href="/shop"
+            className="flex w-[80%] items-center justify-center border-b border-stone-300/20"
+          >
+            <Button onClick={() => handleClick()} variant={"ghost"}>
+              Shop
+            </Button>
+          </Link>
 
-            <Link
-              href="/blog"
-              className="flex w-[80%] items-center justify-center border-b border-stone-300/20"
-            >
-              <Button onClick={() => handleClick()} variant={"ghost"}>
-                Blog
-              </Button>
-            </Link>
+          <Link
+            href="/blog"
+            className="flex w-[80%] items-center justify-center border-b border-stone-300/20"
+          >
+            <Button onClick={() => handleClick()} variant={"ghost"}>
+              Blog
+            </Button>
+          </Link>
 
-            <Link
-              href="/aboutUs"
-              className="flex w-[80%] items-center justify-center border-b border-stone-300/20"
-            >
-              <Button onClick={() => handleClick()} variant={"ghost"}>
-                About Us
-              </Button>
-            </Link>
+          <Link
+            href="/aboutUs"
+            className="flex w-[80%] items-center justify-center border-b border-stone-300/20"
+          >
+            <Button onClick={() => handleClick()} variant={"ghost"}>
+              About Us
+            </Button>
+          </Link>
 
-            <Link
-              href="/team"
-              className="flex w-[80%] items-center justify-center border-b border-stone-300/20"
-            >
-              <Button onClick={() => handleClick()} variant={"ghost"}>
-                Team
-              </Button>
-            </Link>
-          </SheetHeader>
+          <Link
+            href="/team"
+            className="flex w-[80%] items-center justify-center border-b border-stone-300/20"
+          >
+            <Button onClick={() => handleClick()} variant={"ghost"}>
+              Team
+            </Button>
+          </Link>
         </SheetContent>
       </Sheet>
     </>

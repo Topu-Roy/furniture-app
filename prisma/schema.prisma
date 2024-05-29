@@ -1,140 +1,106 @@
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider     = "mongodb"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+    provider     = "mongodb"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
 }
 
 model User {
-  id           String        @id @default(auto()) @map("_id") @db.ObjectId
-  authId       String
-  role         Role          @default(USER)
-  email        String?
-  imageUrl     String?
-  firstName    String?
-  lastName     String?
-  cartProducts CartProduct[]
-  reviews      Review[]
+    id           String        @id @default(auto()) @map("_id") @db.ObjectId
+    authId       String
+    role         Role          @default(USER)
+    email        String?
+    imageUrl     String?
+    firstName    String?
+    lastName     String?
+    cartProducts CartProduct[]
+    reviews      Review[]
 
-  @@index([id, authId])
+    @@index([authId])
 }
 
 model Product {
-  id           String        @id @default(auto()) @map("_id") @db.ObjectId
-  createdBy    String
-  productTitle String
-  description  String
-  image        String?
-  price        Int
-  status       Status?
-  category     Category
-  tag          Tag
-  color        Color
-  cartProduct  CartProduct[]
-  review       Review[]
+    id           String        @id @default(auto()) @map("_id") @db.ObjectId
+    createdBy    String
+    productTitle String
+    description  String
+    image        String?
+    price        Int
+    status       Status?
+    category     Category
+    tag          Tag
+    color        Color
+    cartProduct  CartProduct[]
+    review       Review[]
+
+    @@index([category, createdBy])
 }
 
 model Review {
-  id   String   @id @default(auto()) @map("_id") @db.ObjectId
-  text String
-  date DateTime @default(now())
-  name String
-  rate Int
+    id   String   @id @default(auto()) @map("_id") @db.ObjectId
+    text String
+    date DateTime @default(now())
+    name String
+    rate Int
 
-  Product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId String  @db.ObjectId
-  User      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String  @db.ObjectId
+    Product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+    productId String  @db.ObjectId
+    User      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId    String  @db.ObjectId
 }
 
 model CartProduct {
-  id           String  @id @default(auto()) @map("_id") @db.ObjectId
-  quantity     Int
-  price        Int
-  productTitle String
-  isSelected   Boolean @default(false)
-  product      Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId    String  @db.ObjectId
-  User         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       String  @db.ObjectId
+    id           String  @id @default(auto()) @map("_id") @db.ObjectId
+    quantity     Int
+    price        Int
+    productTitle String
+    isSelected   Boolean @default(false)
+    product      Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+    productId    String  @db.ObjectId
+    User         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId       String  @db.ObjectId
 
-  @@unique([productId, userId])
+    @@unique([productId, userId])
 }
 
 enum Role {
-  USER
-  ADMIN
+    USER
+    ADMIN
 }
 
 enum Color {
-  Black
-  White
-  Red
-  Brown
-  Green
+    Black
+    White
+    Red
+    Brown
+    Green
 }
 
 enum Category {
-  Chair
-  Table
-  Lamp
-  Drawer
-  Bed
-  Bookshelf
-  Sofa
+    Chair
+    Table
+    Lamp
+    Drawer
+    Bed
+    Bookshelf
+    Sofa
 }
 
 enum Tag {
-  Minimalistic
-  Modern
-  Stylish
-  Elegant
-  Ambient
-  Luxurious
+    Minimalistic
+    Modern
+    Stylish
+    Elegant
+    Ambient
+    Luxurious
 }
 
 enum Status {
-  Regular
-  New
-  Popular
-  Out_of_stock
+    Regular
+    New
+    Popular
+    Out_of_stock
 }
-
-// model Blog {
-//   id            String   @id @default(auto()) @map("_id") @db.ObjectId
-//   postDate      DateTime @default(now())
-//   headline      String
-//   articleIntro  String
-//   articleBlocks Block[]
-//   thumbnail     String
-//   cover         String
-//   authorName    String
-//   authorImage   String
-// }
-
-// model Block {
-//   id      String @id @default(auto()) @map("_id") @db.ObjectId
-//   heading String
-//   text    String
-//   Blog    Blog   @relation(fields: [blogId], references: [id])
-//   blogId  String @db.ObjectId
-// }
-
-// model Testimonial {
-//   id       String @id @default(auto()) @map("_id") @db.ObjectId
-//   name     String
-//   imageURL String
-//   headline String
-//   text     String
-//   location String
-// }
-
-// model TeamMember {
-//   id       String @id @default(auto()) @map("_id") @db.ObjectId
-//   name     String
-//   imageURL String
-//   role     String
-// }

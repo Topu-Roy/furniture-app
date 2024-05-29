@@ -3,11 +3,8 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Heading } from "../heading";
 import { Text } from "../text";
-import { FaSquareInstagram } from "react-icons/fa6";
-import { FaFacebookF } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { FaTiktok } from "react-icons/fa";
 import { Button } from "../../../components/ui/button";
+import { Facebook, Instagram, Twitter } from "lucide-react";
 
 export default function FooterLinks() {
   const footerData = [
@@ -66,24 +63,19 @@ export default function FooterLinks() {
   const socialLinks = [
     {
       name: "Instagram",
-      icon: <FaSquareInstagram size={25} className="" />,
+      icon: <Instagram />,
       url: "#",
     },
     {
       name: "Facebook",
-      icon: <FaFacebookF size={25} className="" />,
+      icon: <Facebook />,
       url: "#",
     },
     {
       name: "Twitter",
-      icon: <FaTwitter size={25} className="" />,
+      icon: <Twitter />,
       url: "#",
-    },
-    {
-      name: "Tiktok",
-      icon: <FaTiktok size={25} className="" />,
-      url: "#",
-    },
+    }
   ];
 
   return (

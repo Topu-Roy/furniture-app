@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/carousel";
 import { type TestimonialsArrayType } from "../../../assets/testimonialsArray";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
 import {
@@ -24,6 +23,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import useDeviceWidth from "@/hooks/windowDimensions";
+import { Quote } from "lucide-react";
 
 type Props = {
   testimonials: TestimonialsArrayType[];
@@ -37,13 +37,13 @@ const TestimonialCard = ({ item }: { item: TestimonialsArrayType }) => (
     <div className="flex w-full flex-col items-center justify-between gap-2">
       <div className="space-y-1">
         <div className="flex items-center justify-start">
-          <RiDoubleQuotesL size={20} />
+          <Quote />
         </div>
         <Text size="md" className="opacity-0.5 line-clamp-4">
           {item.text}
         </Text>
         <div className="flex items-center justify-end">
-          <RiDoubleQuotesR size={20} />
+          <Quote className="rotate-180" />
         </div>
       </div>
       <div className="flex w-full flex-row items-center justify-start gap-4">

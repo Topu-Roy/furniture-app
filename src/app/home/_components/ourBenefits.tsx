@@ -1,39 +1,36 @@
 import React from "react";
 import Image from "next/image";
-import { BiRocket } from "react-icons/bi";
-import { MdOutlineLock } from "react-icons/md";
-import { GrPowerReset } from "react-icons/gr";
-import { IoCallOutline } from "react-icons/io5";
 import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
+import { ListRestart, PhoneForwarded, Rocket, ShieldCheck } from "lucide-react";
 
 export default function OurBenefits() {
   const features = [
     {
       id: 1,
       title: "Fast Shipping",
-      icon: <BiRocket size={26} className="text-black/60" />,
+      icon: <Rocket />,
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has",
     },
     {
       id: 2,
       title: "Safe Delivery",
-      icon: <MdOutlineLock size={26} className="text-black/60" />,
+      icon: <ShieldCheck />,
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has",
     },
     {
       id: 3,
       title: "365 Days Return",
-      icon: <GrPowerReset size={26} className="text-black/60" />,
+      icon: <ListRestart />,
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has",
     },
     {
       id: 4,
       title: "24 hours CS",
-      icon: <IoCallOutline size={26} className="text-black/60" />,
+      icon: <PhoneForwarded />,
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has",
     },

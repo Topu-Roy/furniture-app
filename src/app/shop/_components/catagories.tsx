@@ -4,25 +4,22 @@ import { cn, scrollToTop } from "@/lib/utils";
 import HeadingAndReset from "./headingAndReset";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/app/_components/text";
-import { Category } from "@prisma/client";
+import { type Category } from "@prisma/client";
 import { useShopStore } from "@/zustand/shop/shopStore";
 
 type ProductCatagoriesType = {
-  productName: Category;
+  productName: Category | "All";
   quantity: number;
 }[];
 
 export default function Catagories() {
-  const { productsBackup, selectedCategory, setSelectedCategory } =
-    useShopStore((store) => store);
+  const { productsBackup, selectedCategory, setSelectedCategory } = useShopStore((store) => store);
 
-  const [productCategories, setProductCategories] =
-    useState<ProductCatagoriesType>([]);
+  const [productCategories, setProductCategories] = useState<ProductCatagoriesType>([]);
 
   useEffect(() => {
     const categories: ProductCatagoriesType = [
       {
-        // @ts-ignore
         productName: "All",
         quantity: productsBackup.length,
       },
@@ -66,7 +63,7 @@ export default function Catagories() {
     setProductCategories(categories);
   }, [productsBackup]);
 
-  function handleCategory(category: Category) {
+  function handleCategory(category: Category | 'All') {
     setSelectedCategory(category);
 
     scrollToTop();

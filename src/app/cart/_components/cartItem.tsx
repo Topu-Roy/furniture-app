@@ -13,16 +13,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  IoCheckmarkDoneCircleOutline,
-  IoCheckmarkDoneCircleSharp,
-} from "react-icons/io5";
 import { cn } from "@/lib/utils";
-import { CartProduct, type Product } from "@prisma/client";
+import { type CartProduct, type Product } from "@prisma/client";
 import { useToast } from "@/components/ui/use-toast";
-import { api } from "@/trpc/react";
 import { useCartStore } from "@/zustand/cart/cartStore";
 import Link from "next/link";
+import { Check, CheckCheck } from "lucide-react";
+import { deleteCartItem, getCartItemById } from "@/actions/cartAction";
 
 type Props = {
   cartItemId: string;
@@ -35,54 +32,58 @@ type Props = {
 export default function CartItem(props: Props) {
   const { productId, isSelected, quantity, cartItemId, setProducts } = props;
   const [product, setProduct] = useState<Product>();
+  const [isLoading, setIsLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(product?.price);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   //* Zustand
   const products_store = useCartStore((store) => store.products);
   const setProducts_store = useCartStore((store) => store.setProducts);
-  const removeProductById_store = useCartStore(
-    (store) => store.removeProductById,
-  );
+  const removeProductById_store = useCartStore((store) => store.removeProductById);
 
   const { toast } = useToast();
 
-  const data = api.cart.getCartItemById.useQuery({
-    productId: productId,
-  }).data;
-
-  useEffect(() => {
+  //* Abstracted for linting purposes
+  function setProduct_opt() {
     setProducts(products_store);
-  }, [products_store, setProducts]);
+  }
 
   useEffect(() => {
-    if (data && data !== null) {
-      setProduct(data.product);
-    }
-  }, [data]);
+    setProduct_opt()
+  }, [products_store]);
 
-  const { mutate, isPending } = api.cart.deleteCartItem.useMutation({
-    onSuccess: () => {
+  useEffect(() => {
+    async function getCartItemInfo() {
+      await getCartItemById({ id: productId }).then((data) => {
+        if (data) setProduct(data.product);
+      })
+    }
+
+    void getCartItemInfo();
+  }, [productId]);
+
+  async function handleRemove() {
+    setIsLoading(true);
+    const response = await deleteCartItem({ id: cartItemId }).finally(() => {
+      setIsLoading(false);
+      dialogOpen && setDialogOpen(!dialogOpen)
+    });
+
+    if (response.success === true) {
       removeProductById_store(productId);
-      toast({
+      return toast({
         title: "Removed from cart",
         description: "Product successfully removed from cart",
       });
-    },
-    onError: () => {
-      toast({
+    }
+
+    if (response.success === false) {
+      return toast({
         variant: "destructive",
         title: "Failed to remove from cart",
         description: "Failed to remove product from cart",
       });
-    },
-    onSettled() {
-      dialogOpen && setDialogOpen(!dialogOpen);
-    },
-  });
-
-  function handleRemove() {
-    mutate({ productId: cartItemId });
+    }
   }
 
   function handleCheck() {
@@ -111,7 +112,7 @@ export default function CartItem(props: Props) {
             <div className="shrink-0 lg:order-1">
               <Image
                 className="size-36 rounded-md"
-                src={product.image || ""}
+                src={product.image ?? ""}
                 alt={product.productTitle}
                 height={300}
                 width={300}
@@ -176,7 +177,7 @@ export default function CartItem(props: Props) {
                 <input
                   className="peer h-[2.5rem] w-[45vw] sm:w-[11rem] opacity-0"
                   type="checkbox"
-                  checked={isSelected || false}
+                  checked={isSelected ?? false}
                   onChange={() => handleCheck()}
                 />
                 <Button
@@ -190,7 +191,7 @@ export default function CartItem(props: Props) {
                   size={"sm"}
                 >
                   {isSelected ? (
-                    <IoCheckmarkDoneCircleSharp
+                    <CheckCheck
                       size={30}
                       className={cn("pr-1",
                         isSelected
@@ -199,7 +200,7 @@ export default function CartItem(props: Props) {
                       )}
                     />
                   ) : (
-                    <IoCheckmarkDoneCircleOutline className="pr-1" size={30} />
+                    <Check className="pr-1" size={30} />
                   )}
                   {isSelected ? "Selected" : "Select"}
                 </Button>
@@ -252,7 +253,7 @@ export default function CartItem(props: Props) {
                       className="flex-1 rounded-full bg-rose-300 p-0 shadow-sm hover:bg-rose-400"
                       size={"lg"}
                     >
-                      {isPending ? "Deleting..." : "Delete"}
+                      {isLoading ? "Deleting..." : "Delete"}
                     </Button>
                   </DialogFooter>
                 </DialogContent>

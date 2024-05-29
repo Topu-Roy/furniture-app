@@ -1,7 +1,7 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
-import { db } from "@/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { db } from "@/server/db";
 
 const f = createUploadthing();
 
@@ -20,7 +20,7 @@ export const ourFileRouter = {
                 }
             })
 
-            if (userFromDB?.role !== 'ADMIN') throw new UploadThingError("Unauthorized");
+            if (userFromDB?.role !== 'ADMIN') throw new UploadThingError("Forbidden");
 
             // Whatever is returned here is accessible in onUploadComplete as `metadata`
             return { isAdmin: true }

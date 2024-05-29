@@ -1,8 +1,8 @@
 import React from 'react'
-import { api } from '@/trpc/server'
-import { Category } from '@prisma/client'
+import { type Category } from '@prisma/client'
 import Product from './product'
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import { getProductsByCategory } from '@/actions/productAction'
 
 type Props = {
     productId: string,
@@ -16,7 +16,7 @@ type Props = {
 export default async function RelatedProducts(props: Props) {
     const { getUser } = getKindeServerSession()
     const user = await getUser()
-    const productsByCategory = await api.product.getProductsByCategory({ category: props.productCategory });
+    const productsByCategory = await getProductsByCategory({ category: props.productCategory });
     const products = productsByCategory.filter(product => product.id !== props.productId);
 
     return (
@@ -28,11 +28,11 @@ export default async function RelatedProducts(props: Props) {
                     {products.slice(0, 4).map((product) => (
                         <div key={product.id}>
                             <Product
-                                userId={user!!.id}
+                                userId={user ? user.id : null}
                                 description={product.description}
                                 price={product.price}
                                 productId={product.id}
-                                productImage={product.image || ""}
+                                productImage={product.image ?? ""}
                                 productTitle={product.productTitle}
                             />
                         </div>
@@ -43,11 +43,11 @@ export default async function RelatedProducts(props: Props) {
                     {products.slice(0, 6).map((product) => (
                         <div key={product.id}>
                             <Product
-                                userId={user!!.id}
+                                userId={user ? user.id : null}
                                 description={product.description}
                                 price={product.price}
                                 productId={product.id}
-                                productImage={product.image || ""}
+                                productImage={product.image ?? ""}
                                 productTitle={product.productTitle}
                             />
                         </div>
@@ -58,11 +58,11 @@ export default async function RelatedProducts(props: Props) {
                     {products.slice(0, 8).map((product) => (
                         <div key={product.id}>
                             <Product
-                                userId={user!!.id}
+                                userId={user ? user.id : null}
                                 description={product.description}
                                 price={product.price}
                                 productId={product.id}
-                                productImage={product.image || ""}
+                                productImage={product.image ?? ""}
                                 productTitle={product.productTitle}
                             />
                         </div>

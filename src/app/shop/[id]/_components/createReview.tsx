@@ -1,17 +1,16 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Text } from "@/app/_components/text";
-import { api } from "@/trpc/react";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import Rating from "./rating";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { createRevive } from "@/actions/reviewAction";
 
 type Props = {
-  userId: string | null;
   productId: string;
   productTitle: string;
 };
@@ -19,10 +18,10 @@ type Props = {
 export default function CreateReview({
   productTitle,
   productId,
-  userId,
 }: Props) {
   const [open, setOpen] = useState(false);
   const [rate, setRate] = useState(0);
+  const handleSetRate = useCallback((newRate: number) => setRate && setRate(newRate), []);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [rateErr, setRateErr] = useState(false);
@@ -31,17 +30,18 @@ export default function CreateReview({
   const { toast } = useToast();
   const router = useRouter();
 
-  const { mutate } = api.review.createReview.useMutation({
-    onSuccess() {
-      router.refresh();
-      toast({
-        title: "Review created",
-        description: "Review successfully created",
-      });
-    },
-  });
+  const { getUser } = useKindeBrowserClient();
+  const user = getUser()
 
-  function handleSubmit() {
+  async function handleCreateReview() {
+    if (!user) {
+      return toast({
+        variant: "destructive",
+        title: "Please login first",
+        description: "Oh no, you are not logged in...!",
+      });
+    }
+
     if (rate === 0) {
       setRateErr(true);
       return;
@@ -55,14 +55,23 @@ export default function CreateReview({
       return;
     }
 
-    mutate({
-      description: description,
+    setOpen(false);
+
+    const response = await createRevive({
+      authId: user.id,
       productId: productId,
       rate: rate,
       name: name,
+      description: description,
+    }).finally(() => {
+      router.refresh();
     });
 
-    setOpen(false);
+    if (!response) return toast({
+      variant: "destructive",
+      title: "Something went wrong",
+      description: "Please try again later",
+    });
   }
 
   useEffect(() => {
@@ -79,7 +88,7 @@ export default function CreateReview({
 
   return (
     <>
-      {userId !== null ? (
+      {user !== null ? (
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger>
             <Button className="mb-2 me-2 rounded-lg px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4">
@@ -112,7 +121,7 @@ export default function CreateReview({
                       rate={rate}
                       readonly={false}
                       className="-mx-4 scale-75"
-                      setRate={setRate}
+                      handleSetRate={handleSetRate}
                     />
                     <span>({rate})</span>
                   </div>
@@ -162,7 +171,7 @@ export default function CreateReview({
                   </div>
                 </div>
                 <div className="flex items-center justify-end gap-4">
-                  <Button className="min-w-20" onClick={() => handleSubmit()}>
+                  <Button className="min-w-20" onClick={() => handleCreateReview()}>
                     Done
                   </Button>
                   <Button

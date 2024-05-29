@@ -2,10 +2,9 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { TbWritingSign } from "react-icons/tb";
-import { MdDateRange } from "react-icons/md";
 import { type BlogType } from "../blogPostArray";
 import { Text } from "@/app/_components/text";
+import { Calendar, NotebookPen } from "lucide-react";
 
 type Props = {
   blog: BlogType;
@@ -27,12 +26,12 @@ export default function Blog({ blog }: Props) {
 
       <div className="flex items-center justify-center gap-4">
         <div className="flex items-center justify-center gap-2">
-          <TbWritingSign size={20} />
+          <NotebookPen />
           <Text className="line-clamp-1">{author.name}</Text>
         </div>
         <div className="h-4 w-0.5 rounded-xl bg-black/50" />
         <div className="flex items-center justify-center gap-2">
-          <MdDateRange size={20} />
+          <Calendar />
           <span>{postDate}</span>
         </div>
       </div>

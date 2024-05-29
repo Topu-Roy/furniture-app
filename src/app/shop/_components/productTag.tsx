@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn, scrollToTop } from "@/lib/utils";
 import HeadingAndReset from "./headingAndReset";
-import { Tag } from "@prisma/client";
+import { type Tag } from "@prisma/client";
 import { useShopStore } from "@/zustand/shop/shopStore";
 
+
 type ProductTagsType = {
-  tag: Tag;
+  tag: Tag | 'All';
   quantity: number;
 };
 
@@ -20,7 +21,6 @@ export default function ProductTag() {
   useEffect(() => {
     const tags: ProductTagsType[] = [
       {
-        // @ts-ignore
         tag: "All",
         quantity: productsBackup.length,
       },
