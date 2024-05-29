@@ -16,7 +16,7 @@ export default async function HomepagePage() {
     console.error(products);
     return (
       <div className="">
-        Products not found
+        Products not found.
       </div>
     )
   }
