@@ -1,8 +1,8 @@
 import React from "react";
-import { blogPosts } from "../../blog/blogPostArray";
 import Blog from "@/app/blog/_components/blog";
 import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
+import { blogPosts } from "@/app/blog/blogPostArray";
 
 export default function ReadBlogSection() {
   const blogsMobile = blogPosts.slice(0, 2);

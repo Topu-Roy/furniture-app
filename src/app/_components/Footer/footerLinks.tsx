@@ -83,7 +83,7 @@ export default function FooterLinks() {
       <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row">
         <div className="w-full space-y-8 pb-4 md:w-1/2 md:pb-0 lg:pl-8 2xl:pl-0">
           <div className="mx-auto space-y-2 px-2 text-center md:pr-14 lg:px-0 lg:text-left">
-            <Link href={"/home"}>
+            <Link href={"/"}>
               <Heading className="text-primary">Furnit.</Heading>
             </Link>
             <Text size="md" muted={true} className="sm:px-8 md:px-4 lg:px-0">

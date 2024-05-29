@@ -19,7 +19,7 @@ export default async function AuthCallback() {
     email: user.email,
   })
 
-  if (response.user.id) return redirect("/home");
+  if (response.user.id) return redirect("/");
 
 
   return redirect('/api/auth/login?post_login_redirect_url=/shop');

@@ -3,9 +3,9 @@ import Hero from "./_components/hero";
 import Testimonials from "./_components/testimonials";
 import { teamMembers } from "../../assets/teamMembersArray";
 import { testimonialsArray } from "../../assets/testimonialsArray";
-import SecondCTA from "../home/_components/secondCTA";
-import BrandsWorkedWith from "../home/_components/brandsWorkedWith";
 import Team from "./_components/renderTeam";
+import BrandsWorkedWith from "../_components/home/_components/brandsWorkedWith";
+import SecondCTA from "../_components/home/_components/secondCTA";
 
 export default function AboutusPage() {
   return (

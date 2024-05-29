@@ -29,7 +29,7 @@ export default function MobileMenu() {
         </SheetTrigger>
         <SheetContent side={'left'}>
           <Link
-            href="/home"
+            href="/"
             className="flex w-[80%] items-center justify-center border-b border-stone-300/20"
           >
             <Button onClick={() => handleClick()} variant={"ghost"}>

@@ -9,11 +9,11 @@ async function getData(): Promise<Array<User>> {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
-    if (!user) return redirect("/home");
+    if (!user) return redirect("/");
 
     const users = await getAllUsersByAdminId({ adminId: user.id });
 
-    if (!users) return redirect("/home");
+    if (!users) return redirect("/");
 
     return users;
 }

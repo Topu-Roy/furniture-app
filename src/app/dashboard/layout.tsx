@@ -33,11 +33,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         if (isUserInfoLoading === true) return;
 
         async function checkAdmin() {
-            if (!user) return router.push('/api/auth/login?post_login_redirect_url=/home');
+            if (!user) return router.push('/api/auth/login?post_login_redirect_url=/');
 
             const isAdmin = await getUserDetailsByAuthId({ authId: user?.id });
 
-            if (isAdmin?.role !== 'ADMIN') return router.push('/api/auth/login?post_login_redirect_url=/home');
+            if (isAdmin?.role !== 'ADMIN') return router.push('/api/auth/login?post_login_redirect_url=/');
             setIsLoading(false);
         }
 

@@ -28,7 +28,7 @@ export default function Dashboard() {
             const totalProducts = await getTotalProductCount();
             const totalUsers = await getTotalUsersCount({ authId: user?.id });
 
-            if (!totalUsers || totalUsers === null) return router.push('/api/auth/login?post_login_redirect_url=/home');
+            if (!totalUsers || totalUsers === null) return router.push('/api/auth/login?post_login_redirect_url=/');
 
             setTotalProducts(totalProducts);
             setTotalUsers(totalUsers);

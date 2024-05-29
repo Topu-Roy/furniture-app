@@ -23,7 +23,7 @@ export default async function NavBar() {
         <div className="relative flex items-center justify-between gap-2">
           <MobileMenu />
 
-          <Link href="/home">
+          <Link href="/">
             <Image
               src="/logo-text.png"
               height={100}
@@ -35,7 +35,7 @@ export default async function NavBar() {
         </div>
 
         <div className="hidden items-center justify-center gap-4 font-semibold md:flex">
-          <Link href="/home">
+          <Link href="/">
             <Button variant={"ghost"}>Home</Button>
           </Link>
 
