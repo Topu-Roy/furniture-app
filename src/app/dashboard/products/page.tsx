@@ -6,6 +6,8 @@ import { type Product } from '@prisma/client';
 import { getPaginatedProducts, getTotalProductCount } from '@/actions/productAction';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { DataTable } from './data-table';
+import { columns } from './columns';
 
 export default function ProductDashboard() {
     const [products, setProducts] = useState<Product[]>([])
@@ -61,19 +63,8 @@ export default function ProductDashboard() {
     }, [currentPage, perPage])
 
     return (
-        <main className='max-w-5xl mx-auto'>
-            <div className="space-y-3 divide-y">
-                {products.map((product, index) => (
-                    <div key={product.id} className="">
-                        <ol>
-                            <span>{index + 1}</span>
-                            <li>{product.productTitle}</li>
-                            <span>{product.price}</span>
-                        </ol>
-                    </div>
-                ))}
-                <div className="flex justify-center items-center gap-2">{PaginationButtons}</div>
-            </div>
+        <main className='max-w-7xl mx-auto'>
+            <DataTable columns={columns} data={products} PaginationButtons={PaginationButtons} />
         </main>
     )
 }
