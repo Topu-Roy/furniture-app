@@ -24,6 +24,28 @@ export async function getTotalProductCount() {
     return total;
 }
 
+export async function getTotalProductCount_withoutDescription() {
+    const total = await db.product.count({
+        where: {
+            description: ""
+        }
+    });
+
+    return total;
+}
+
+export async function getPaginatedProducts_withoutDescription({ currentPage, perPage }: { currentPage: number, perPage: number }) {
+    const products = await db.product.findMany({
+        skip: (currentPage - 1) * perPage,
+        take: perPage,
+        where: {
+            description: ''
+        }
+    })
+
+    return products;
+}
+
 export async function getProductById({ id }: { id: string }) {
     const product = await db.product.findFirst({
         where: {
@@ -135,4 +157,49 @@ export async function getProductNeedUpdate_description() {
     })
 
     return products;
+}
+
+export async function updateProductDetls({ productId, description }: { productId: string, description: string }) {
+    const updatedProduct = await db.product.update({
+        where: {
+            id: productId
+        },
+        data: {
+            description
+        }
+    })
+
+    return updatedProduct;
+}
+
+type ReturnTypeForUpdateProductDetails = Promise<{
+    status: "NOT_FOUND" | "NOT_ADMIN" | "FAILED" | "SUCCESS";
+    product: Product | null;
+}>
+
+export async function updateProductDetails(productDetails: Product): ReturnTypeForUpdateProductDetails {
+
+    //* First check if the user exists
+    const user = await db.user.findFirst({
+        where: {
+            authId: productDetails.createdBy
+        }
+    })
+
+    if (!user) return { status: 'NOT_FOUND', product: null };
+    if (user.role !== 'ADMIN') return { status: 'NOT_ADMIN', product: null };
+
+    //* Then create the product
+    const updatedProduct = await db.product.update({
+        where: {
+            id: productDetails.id
+        },
+        data: {
+            ...productDetails
+        }
+    })
+
+    if (!updatedProduct) return { status: 'FAILED', product: null };
+
+    return { status: 'SUCCESS', product: updatedProduct };
 }

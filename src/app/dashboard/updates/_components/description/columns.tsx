@@ -3,30 +3,20 @@
 import { type ColumnDef } from "@tanstack/react-table";
 import { type Product } from "@prisma/client";
 
-import { useEffect, useState } from "react";
-import { getUserDetailsByAuthId } from "@/actions/userAction";
-import { Text } from "@/app/_components/text";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const CreatedByCell: React.FC<{ product: Product }> = ({ product }) => {
-    const [userEmail, setUserEmail] = useState<string | null>('');
+    const router = useRouter();
 
-    async function getUserDetails() {
-        const user = await getUserDetailsByAuthId({ authId: product.createdBy });
-
-        if (user) {
-            setUserEmail(user.email);
-        }
+    function handleClick() {
+        router.push(`/dashboard/updates/edit?productId=${product.id}`)
     }
 
-    useEffect(() => {
-        void getUserDetails();
-    }, [])
-
-
     return (
-        <Text size="xs">
-            {userEmail}
-        </Text>
+        <Button variant={'outline'} onClick={() => handleClick()} className="hover:bg-primary hover:text-white">
+            Edit product
+        </Button>
     );
 };
 
@@ -40,16 +30,12 @@ export const columns: ColumnDef<Product>[] = [
         header: "Category",
     },
     {
-        accessorKey: "description",
-        header: "Description",
-    },
-    {
         accessorKey: "image",
         header: "ImageUrl",
     },
     {
         accessorKey: "price",
-        header: () => <div className="text-right">Price</div>,
+        header: () => <div className="text-right">Amount</div>,
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue("price"))
 
@@ -76,7 +62,6 @@ export const columns: ColumnDef<Product>[] = [
     },
     {
         id: "createdBy",
-        header: "Email",
         cell: ({ row }) => <CreatedByCell product={row.original} />,
     },
 ];

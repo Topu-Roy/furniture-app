@@ -69,8 +69,8 @@ export default function Dashboard() {
                 icon={<Shirt />}
             />
             <CardComponent
-                link='/dashboard/users'
-                title='Total users'
+                link='/dashboard/customers'
+                title='Total customers'
                 count={totalUsers}
                 icon={<UsersRound />}
             />

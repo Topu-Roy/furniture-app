@@ -56,7 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 
     return (
-        <div className='mt-[5rem] max-w-[100rem] mx-auto py-20'>
+        <div className='mt-[4rem] max-w-[100rem] mx-auto py-10'>
             <div className="flex">
                 <aside className='w-[15rem] min-h-[60vh] bg-slate-700 rounded-md p-4 flex flex-col justify-start items-start gap-3'>
                     <LinkItem

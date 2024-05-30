@@ -1,5 +1,9 @@
 "use client"
 
+import { getProductById, updateProductDetails } from '@/actions/productAction'
+import { Product } from '@prisma/client'
+import { useSearchParams } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
@@ -14,39 +18,43 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
-import { createProduct } from "@/actions/productAction"
-import { CreateProductPostBodySchema, type CreateProductPostBodyType } from "@/zod/create"
+import { UpdateProductPostBodySchema, type UpdateProductPostBodyType } from "@/zod/create"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { category, color, status, tag } from "@/zod/common"
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs"
 import { useRouter } from "next/navigation"
-import { useEffect } from "react"
-import { Card } from "@/components/ui/card"
-import { Text } from "@/app/_components/text"
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
+import { Card } from '@/components/ui/card'
+import { Text } from '@/app/_components/text'
 
-export default function CreateProduct() {
+export default function EditPage() {
+    const [product, setProduct] = useState<Product>()
+    const [mount, setMount] = useState(false)
+    const [notFound, setNotFound] = useState(false)
+    const searchParams = useSearchParams();
+    const productId = searchParams.get("productId");
     const { getUser, isLoading } = useKindeBrowserClient()
     const user = getUser();
     const router = useRouter();
     const { toast } = useToast();
 
-    const form = useForm<CreateProductPostBodyType>({
-        resolver: zodResolver(CreateProductPostBodySchema)
+    const form = useForm<UpdateProductPostBodyType>({
+        resolver: zodResolver(UpdateProductPostBodySchema)
     })
 
-    //* Checking if user after loading is finished
-    //* Otherwise, initially user object is null and redirect to login page
-    useEffect(() => {
-        if (!isLoading) {
-            if (!user) router.replace("/api/auth/login?post_login_redirect_url=/authcallback")
+    async function onSubmit(data: UpdateProductPostBodyType) {
+        if (!user) return router.replace("/api/auth/login?post_login_redirect_url=/authcallback");
+        if (!productId) {
+            return toast({
+                variant: "destructive",
+                title: "Something went wrong",
+                description: "Product not found",
+            })
         }
-    }, [isLoading])
 
-    async function onSubmit(data: CreateProductPostBodyType) {
-        if (!user) return router.replace("/api/auth/login?post_login_redirect_url=/authcallback")
-
-        const response = await createProduct({
+        const response = await updateProductDetails({
+            id: productId,
+            image: data.imageUrl,
             productTitle: data.productTitle,
             description: data.description,
             category: data.category,
@@ -67,17 +75,46 @@ export default function CreateProduct() {
 
         toast({
             title: "Success",
-            description: "Product created successfully",
+            description: "Product updated successfully",
         })
 
         router.replace(`/dashboard/create/update?id=${response.product?.id}`);
     }
 
+    if (!productId || notFound) return (
+        <div className="">Product Not Found...</div>
+    )
+
+    useEffect(() => {
+        if (!isLoading) {
+            if (!user) router.replace("/api/auth/login?post_login_redirect_url=/authcallback")
+        }
+    }, [isLoading])
+
+    useEffect(() => {
+        async function getProductDetails() {
+            if (mount) {
+                if (!productId) return;
+
+                const response = await getProductById({ id: productId });
+
+                if (response) {
+                    setProduct(response);
+                } else {
+                    setNotFound(true);
+                }
+            }
+        }
+
+        void getProductDetails();
+        setMount(true);
+    }, [mount]);
+
     return (
         <div className="w-full max-w-7xl mx-auto">
             <Form {...form}>
                 <Card className='py-8 divide-y space-y-4'>
-                    <Text muted size='max' className='text-center'>Create a new product</Text>
+                    <Text muted size='max' className='text-center'>Edit product details</Text>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 mx-auto space-y-6 pt-4">
                         <FormField
                             control={form.control}
@@ -86,10 +123,26 @@ export default function CreateProduct() {
                                 <FormItem>
                                     <FormLabel><span className="text-rose-500">*</span>Title</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="title" {...field} />
+                                        <Input placeholder="title" {...field} defaultValue={product?.productTitle} />
                                     </FormControl>
                                     <FormDescription>
                                         Provide a title for the product.
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="imageUrl"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel><span className="text-rose-500">*</span>Image Url</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="image url here.." {...field} defaultValue={product?.image ? product?.image : "image url here.."} />
+                                    </FormControl>
+                                    <FormDescription>
+                                        Provide a valid image url of the product.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -102,7 +155,7 @@ export default function CreateProduct() {
                                 <FormItem>
                                     <FormLabel><span className="text-rose-500">*</span>Description</FormLabel>
                                     <FormControl>
-                                        <Textarea placeholder="description"  {...field} />
+                                        <Textarea placeholder="description"  {...field} defaultValue={product?.description} />
                                     </FormControl>
                                     <FormDescription>
                                         Give a brief description of the product.
@@ -122,6 +175,7 @@ export default function CreateProduct() {
                                             type="number"
                                             placeholder="price"
                                             {...field}
+                                            defaultValue={product?.price}
                                             onChange={(e) => field.onChange(Number(e.target.value.replace(/[^0-9]/, "")))}
                                         />
                                     </FormControl>
@@ -140,7 +194,7 @@ export default function CreateProduct() {
                                     <FormItem>
                                         <FormLabel><span className="text-rose-500">*</span>Color</FormLabel>
                                         <FormControl>
-                                            <Select {...field} onValueChange={field.onChange}>
+                                            <Select {...field} onValueChange={field.onChange} defaultValue={product?.color}>
                                                 <SelectTrigger className="w-[180px]">
                                                     <SelectValue placeholder="Select a color" />
                                                 </SelectTrigger>
@@ -165,7 +219,7 @@ export default function CreateProduct() {
                                     <FormItem>
                                         <FormLabel><span className="text-rose-500">*</span>Category</FormLabel>
                                         <FormControl>
-                                            <Select {...field} onValueChange={field.onChange}>
+                                            <Select {...field} onValueChange={field.onChange} defaultValue={product?.category}>
                                                 <SelectTrigger className="w-[180px]">
                                                     <SelectValue placeholder="Select a category" />
                                                 </SelectTrigger>
@@ -190,7 +244,7 @@ export default function CreateProduct() {
                                     <FormItem>
                                         <FormLabel><span className="text-rose-500">*</span>Status</FormLabel>
                                         <FormControl>
-                                            <Select {...field} onValueChange={field.onChange}>
+                                            <Select {...field} onValueChange={field.onChange} defaultValue={product?.status ? product?.status : undefined}>
                                                 <SelectTrigger className="w-[180px]">
                                                     <SelectValue placeholder="Select a status" />
                                                 </SelectTrigger>
@@ -215,7 +269,7 @@ export default function CreateProduct() {
                                     <FormItem>
                                         <FormLabel><span className="text-rose-500">*</span>Tag</FormLabel>
                                         <FormControl>
-                                            <Select {...field} onValueChange={field.onChange}>
+                                            <Select {...field} onValueChange={field.onChange} defaultValue={product?.tag}>
                                                 <SelectTrigger className="w-[180px]">
                                                     <SelectValue placeholder="Select a tag" />
                                                 </SelectTrigger>
