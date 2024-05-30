@@ -1,7 +1,7 @@
 "use client"
 
 import { getProductById, updateProductDetails } from '@/actions/productAction'
-import { Product } from '@prisma/client'
+import { type Product } from '@prisma/client'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -81,10 +81,6 @@ export default function EditPage() {
         router.replace(`/dashboard/create/update?id=${response.product?.id}`);
     }
 
-    if (!productId || notFound) return (
-        <div className="">Product Not Found...</div>
-    )
-
     useEffect(() => {
         if (!isLoading) {
             if (!user) router.replace("/api/auth/login?post_login_redirect_url=/authcallback")
@@ -109,6 +105,10 @@ export default function EditPage() {
         void getProductDetails();
         setMount(true);
     }, [mount]);
+
+    if (!productId || notFound) return (
+        <div className="">Product Not Found...</div>
+    )
 
     return (
         <div className="w-full max-w-7xl mx-auto">

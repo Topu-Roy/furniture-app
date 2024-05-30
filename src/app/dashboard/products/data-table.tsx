@@ -16,13 +16,11 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
-    PaginationButtons: React.ReactElement<any, string | React.JSXElementConstructor<any>>[]
+    PaginationButtons: React.ReactElement<unknown, string | React.JSXElementConstructor<unknown>>[]
 }
 
 export function DataTable<TData, TValue>({

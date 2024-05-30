@@ -50,8 +50,8 @@ export default function Updates() {
             imageUrl: z.string().url()
         })
 
-        let tempArr_description: Product[] = []
-        let tempArr_imageUrl: Product[] = []
+        const tempArr_description: Product[] = []
+        const tempArr_imageUrl: Product[] = []
 
         //* Check if product description is empty
         products.forEach((product) => {
