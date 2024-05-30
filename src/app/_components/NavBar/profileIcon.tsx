@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/link';
+import { Link } from 'next-view-transitions'
 import { Text } from '../text';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';

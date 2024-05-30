@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
 import { useCartStore } from "@/zustand/cart/cartStore";
-import Link from "next/link";
+import { Link } from 'next-view-transitions';
 import { useRouter } from "next/navigation";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { addToCart } from "@/actions/cartAction";

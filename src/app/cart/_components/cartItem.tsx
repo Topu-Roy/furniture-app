@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 import { type CartProduct, type Product } from "@prisma/client";
 import { useToast } from "@/components/ui/use-toast";
 import { useCartStore } from "@/zustand/cart/cartStore";
-import Link from "next/link";
+import { Link } from 'next-view-transitions';
 import { Check, CheckCheck } from "lucide-react";
 import { deleteCartItem, getCartItemById } from "@/actions/cartAction";
 

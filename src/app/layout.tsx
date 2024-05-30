@@ -1,5 +1,7 @@
 import "@/styles/globals.css";
 
+import { ViewTransitions } from 'next-view-transitions'
+
 import NavBar from "./_components/NavBar";
 import Footer from "./_components/Footer";
 import { Toaster } from "@/components/ui/toaster";
@@ -17,13 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.className}`}>
-      <body>
-        <NavBar />
-        {children}
-        <Toaster />
-        <Footer />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en" className={`${inter.className}`}>
+        <body>
+          <NavBar />
+          {children}
+          <Toaster />
+          <Footer />
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

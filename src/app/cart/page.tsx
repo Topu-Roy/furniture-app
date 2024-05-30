@@ -4,7 +4,7 @@ import SelectAllAndReset from "./_components/selectAllAndReset";
 import { Heading } from "../_components/heading";
 import { Text } from "../_components/text";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from 'next-view-transitions';
 import RenderCart from "./_components/renderCart";
 import { redirect } from "next/navigation";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";

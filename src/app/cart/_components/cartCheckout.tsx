@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { type CartProduct } from "@prisma/client";
 import { useCartStore } from "@/zustand/cart/cartStore";
-import Link from "next/link";
+import { Link } from 'next-view-transitions';
 
 export default function CartCheckout() {
   const [productsToRender, setProductsToRender] = useState<CartProduct[]>([]);
