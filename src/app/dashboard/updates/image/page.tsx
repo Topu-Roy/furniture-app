@@ -114,12 +114,12 @@ export default function ImageUpdater() {
         }
     ]
 
-    const filterMethod = [
-        {
-            value: "name",
-            title: "Name",
-        },
-    ]
+    // const filterMethod = [
+    //     {
+    //         value: "name",
+    //         title: "Name",
+    //     },
+    // ]
 
 
     return (
@@ -128,7 +128,7 @@ export default function ImageUpdater() {
             <div>
                 <div className=""></div>
                 <div className="">
-                    <Select value='' onValueChange={(val) => { }}>
+                    {/* <Select value='' onValueChange={(val) => { }}>
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Filter" />
                         </SelectTrigger>
@@ -137,14 +137,16 @@ export default function ImageUpdater() {
                             <SelectItem value="dark">Dark</SelectItem>
                             <SelectItem value="system">System</SelectItem>
                         </SelectContent>
-                    </Select>
+                    </Select> */}
 
                     <Select>
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Sort" />
                         </SelectTrigger>
                         <SelectContent>
-                            {sortMethod.map(item => <SelectItem value={item.value}>{item.title}</SelectItem>)}
+                            {sortMethod.map(item =>
+                                <SelectItem key={item.value} value={item.value}>{item.title}</SelectItem>
+                            )}
                         </SelectContent>
                     </Select>
                 </div>
