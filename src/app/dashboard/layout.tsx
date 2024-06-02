@@ -14,7 +14,7 @@ function LinkItem({ url, className, name }: { url: string, className?: string, n
         <Link className='w-full' href={url}>
             <Button
                 variant={'ghost'}
-                className={cn('text-white font-semibold w-full', className)}
+                className={cn('text-white font-semibold w-full hover:bg-stone-300/20 hover:text-white', className)}
             >
                 {name}
             </Button>
@@ -28,6 +28,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     const { getUser, isLoading: isUserInfoLoading } = useKindeBrowserClient();
     const user = getUser();
     const router = useRouter();
+    const [isMargin, setIsMargin] = useState(false);
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const handleScroll = () => {
+        const position = window.scrollY;
+        setScrollPosition(position);
+    };
+
+    useEffect(() => {
+        if (scrollPosition > 150) {
+            setIsMargin(true);
+        } else {
+            setIsMargin(false);
+        }
+    }, [scrollPosition])
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     useEffect(() => {
         if (isUserInfoLoading === true) return;
@@ -58,32 +80,39 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <div className='mt-[4rem] max-w-[100rem] mx-auto py-10'>
             <div className="flex">
-                <aside className='w-[15rem] min-h-[60vh] bg-slate-700 rounded-md p-4 flex flex-col justify-start items-start gap-3'>
-                    <LinkItem
-                        url='/dashboard'
-                        className={path.length < 11 ? "bg-white text-black" : ""}
-                        name='Dashboard'
-                    />
-                    <LinkItem
-                        url='/dashboard/create'
-                        className={path.includes("create") ? "text-black bg-white" : ""}
-                        name='Create'
-                    />
-                    <LinkItem
-                        url='/dashboard/products'
-                        className={path.includes("products") ? "text-black bg-white" : ""}
-                        name='Products'
-                    />
-                    <LinkItem
-                        url='/dashboard/customers'
-                        className={path.includes("customers") ? "text-black bg-white" : ""}
-                        name='Customers'
-                    />
-                    <LinkItem
-                        url='/dashboard/updates'
-                        className={path.includes("updates") ? "text-black bg-white" : ""}
-                        name='Edit Products'
-                    />
+                <aside className='w-[15rem] relative min-h-[80dvh] bg-slate-700 rounded-md p-4 flex flex-col justify-start items-start gap-3'>
+                    <div className={cn("sticky top-0 left-0 right-0 ease-in-out duration-150 transition-transform", isMargin ? "translate-y-[6.5rem]" : "")}>
+                        <LinkItem
+                            url='/dashboard'
+                            className={path.length < 11 ? "bg-white text-gray-900 hover:text-gray-900 hover:bg-slate-200" : ""}
+                            name='Dashboard'
+                        />
+                        <LinkItem
+                            url='/dashboard/create'
+                            className={path.includes("create") ? "text-gray-900 bg-white hover:text-gray-900 hover:bg-slate-300" : ""}
+                            name='Create'
+                        />
+                        <LinkItem
+                            url='/dashboard/products'
+                            className={path.includes("products") ? "text-gray-900 bg-white hover:text-gray-900 hover:bg-slate-300" : ""}
+                            name='Products'
+                        />
+                        <LinkItem
+                            url='/dashboard/customers'
+                            className={path.includes("customers") ? "text-gray-900 bg-white hover:text-gray-900 hover:bg-slate-300" : ""}
+                            name='Customers'
+                        />
+                        <LinkItem
+                            url='/dashboard/updates'
+                            className={path.includes("/dashboard/updates") && !path.includes("/dashboard/updates/image") ? "text-gray-900 bg-white hover:text-gray-900 hover:bg-slate-300" : ""}
+                            name='Edit Products'
+                        />
+                        <LinkItem
+                            url='/dashboard/updates/image'
+                            className={path.includes("dashboard/updates/image") ? "text-gray-900 bg-white hover:text-gray-900 hover:bg-slate-300" : ""}
+                            name='Reupload Image'
+                        />
+                    </div>
                 </aside>
                 <div className="flex-1 mx-auto">
                     {children}

@@ -1,7 +1,9 @@
 "use server"
 
 import { db } from "@/server/db";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { type Product, type Category } from "@prisma/client";
+import { getUserDetailsByAuthId } from "./userAction";
 
 export async function getAllProducts() {
     const products = await db.product.findMany()
@@ -202,4 +204,29 @@ export async function updateProductDetails(productDetails: Product): ReturnTypeF
     if (!updatedProduct) return { status: 'FAILED', product: null };
 
     return { status: 'SUCCESS', product: updatedProduct };
+}
+
+type ReturnTypeForDeleteProduct = Promise<{
+    status: "NO_PERMIT" | "FAILED" | "SUCCESS";
+    product: Product | null;
+}>
+
+export async function deleteProduct({ productId }: { productId: string }): Promise<ReturnTypeForDeleteProduct> {
+    const { getUser } = getKindeServerSession();
+    const user = await getUser();
+
+    if (!user) return { status: "NO_PERMIT", product: null }
+
+    const admin = await getUserDetailsByAuthId({ authId: user.id });
+
+    if (admin?.role !== 'ADMIN') return { status: "NO_PERMIT", product: null }
+
+    const deletedProduct = await db.product.delete({
+        where: {
+            id: productId
+        }
+    })
+
+    if (!deletedProduct) return { status: "FAILED", product: null }
+    return { status: "SUCCESS", product: deletedProduct }
 }
