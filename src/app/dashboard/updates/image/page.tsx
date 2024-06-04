@@ -22,14 +22,52 @@ import { useRouter } from 'next/navigation';
 import { BASE_URL } from '@/lib/utils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
+type SortingMethodType = "Name" | "Default" | "Price";
+
 export default function ImageUpdater() {
     const [products, setProducts] = useState<Product[]>([]);
     const [productWithInvalidImage, setProductWithInvalidImage] = useState<Product[]>([]);
+    const [productWithInvalidImageSorted, setProductWithInvalidImageSorted] = useState<Product[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<Category | "All">("All")
+
     const [isDeleting, setIsDeleting] = useState<boolean>(false);
+
     const { toast } = useToast();
     const router = useRouter();
 
-    //* Getting all products
+    //* Sorting Variables
+    const [sort, setSort] = useState<SortingMethodType>('Default')
+    const sortMethod: SortingMethodType[] = ['Default', 'Name', 'Price']
+    const categories: Array<Category | "All"> = ["All", 'Bed', 'Bookshelf', 'Chair', 'Drawer', 'Lamp', 'Sofa', 'Table']
+
+    //* Sorting methods
+    useEffect(() => {
+        let sortedArr = [...productWithInvalidImage];
+
+        if (selectedCategory !== 'All') {
+            sortedArr = sortedArr.filter((product) => product.category === selectedCategory);
+        }
+
+        if (sort === 'Name') {
+            sortedArr.sort((a, b) => a.productTitle.toLowerCase().localeCompare(b.productTitle.toLowerCase()));
+        }
+
+        if (sort === 'Price') {
+            sortedArr.sort((a, b) => {
+                if (a.price === undefined && b.price === undefined) return 0;
+                if (a.price === undefined) return 1;
+                if (b.price === undefined) return -1;
+
+                return a.price - b.price;
+            });
+        }
+
+        if (sort === 'Default') setProductWithInvalidImageSorted(productWithInvalidImage);
+
+        setProductWithInvalidImageSorted(sortedArr);
+    }, [products, sort, selectedCategory]);
+
+    //* Fetching all products
     useEffect(() => {
         async function getProducts() {
             const res = await getAllProducts();
@@ -54,6 +92,7 @@ export default function ImageUpdater() {
         setProductWithInvalidImage(tempArr);
     }, [products])
 
+    //* Delete product
     async function handleDelete({ id }: { id: string }) {
         setIsDeleting(true);
 
@@ -103,56 +142,38 @@ export default function ImageUpdater() {
         }
     }
 
-    const sortMethod = [
-        {
-            value: "name",
-            title: "Name",
-        },
-        {
-            value: "price",
-            title: "Price",
-        }
-    ]
-
-    // const filterMethod = [
-    //     {
-    //         value: "name",
-    //         title: "Name",
-    //     },
-    // ]
-
-
     return (
         <>
             <div>productWithInvalidImage: {productWithInvalidImage.length}</div>
             <div>
                 <div className=""></div>
                 <div className="">
-                    {/* <Select value='' onValueChange={(val) => { }}>
+
+                    <Select onValueChange={(e: Category | "All") => setSelectedCategory(e)} value={selectedCategory}>
                         <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Filter" />
+                            <SelectValue placeholder="Category" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="light">Light</SelectItem>
-                            <SelectItem value="dark">Dark</SelectItem>
-                            <SelectItem value="system">System</SelectItem>
+                            {categories.map(item =>
+                                <SelectItem key={item} value={item}>{item}</SelectItem>
+                            )}
                         </SelectContent>
-                    </Select> */}
+                    </Select>
 
-                    <Select>
+                    <Select onValueChange={(e: SortingMethodType) => setSort(e)} value={sort}>
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Sort" />
                         </SelectTrigger>
                         <SelectContent>
                             {sortMethod.map(item =>
-                                <SelectItem key={item.value} value={item.value}>{item.title}</SelectItem>
+                                <SelectItem key={item} value={item}>{item}</SelectItem>
                             )}
                         </SelectContent>
                     </Select>
                 </div>
             </div>
             <div className="grid grid-cols-3 gap-3 p-4">
-                {productWithInvalidImage.map(product => (
+                {productWithInvalidImageSorted.map(product => (
                     <Card key={product.id} className='w-full aspect-square h-[16rem] p-3 divide-y-2 space-y-4 border-primary/50'>
                         <div className='flex h-[3.5rem] justify-start items-start gap-2'>
                             <Text className='line-clamp-2 font-medium'>

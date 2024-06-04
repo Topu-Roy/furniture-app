@@ -44,18 +44,9 @@ export default function RenderProducts(props: Props) {
   useEffect(() => {
     let tempFilteredProducts = [...props.products];
 
-    if (selectedCategory !== "All")
-      tempFilteredProducts = tempFilteredProducts.filter(
-        (item) => item.category === selectedCategory,
-      );
-    if (selectedColor !== undefined)
-      tempFilteredProducts = tempFilteredProducts.filter(
-        (item) => item.color === selectedColor,
-      );
-    if (selectedTag !== "All")
-      tempFilteredProducts = tempFilteredProducts.filter(
-        (item) => item.tag === selectedTag,
-      );
+    if (selectedCategory !== "All") tempFilteredProducts = tempFilteredProducts.filter((item) => item.category === selectedCategory);
+    if (selectedColor !== undefined) tempFilteredProducts = tempFilteredProducts.filter((item) => item.color === selectedColor);
+    if (selectedTag !== "All") tempFilteredProducts = tempFilteredProducts.filter((item) => item.tag === selectedTag);
 
     if (selectedMinPrice !== 0 && selectedMaxPrice !== 2000) {
       tempFilteredProducts = tempFilteredProducts.filter((item) => {
