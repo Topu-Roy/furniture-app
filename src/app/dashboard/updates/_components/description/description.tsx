@@ -63,7 +63,7 @@ export default function WithoutDescriptionTable() {
     }, [currentPage, perPage])
 
     return (
-        <main className='max-w-7xl mx-auto'>
+        <main className='w-full mx-auto'>
             <DataTable columns={columns} data={products} PaginationButtons={PaginationButtons} />
         </main>
     )

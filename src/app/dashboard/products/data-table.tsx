@@ -85,7 +85,6 @@ export function DataTable<TData, TValue>({
             <div className="flex justify-center items-center gap-4">
                 {PaginationButtons}
             </div>
-
         </>
     )
 }

@@ -13,7 +13,7 @@ type CardComponentPropsType = {
 
 export default function CardComponent({ count, title, icon, iconClassName, link }: CardComponentPropsType) {
     return (
-        <Link href={link} className="w-full">
+        <Link href={link} className="w-full hover:scale-105 transition-all ease-in-out">
             <Card className='p-4 text-left space-y-3 w-full'>
                 <div className="flex justify-between items-center">
                     <Text muted size='md' className='font-bold'>

@@ -1,12 +1,12 @@
 "use client"
 
+import React, { useEffect, useState } from 'react';
 import { deleteProduct, getAllProducts } from '@/actions/productAction'
 import { Text } from '@/app/_components/text';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { type Category, type Product } from '@prisma/client';
 import { Armchair, BedDouble, BookUser, GalleryVertical, Lamp, Loader2, PaintbrushVertical, RockingChair, Videotape } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
 
 import {
     Dialog,
@@ -144,13 +144,14 @@ export default function ImageUpdater() {
 
     return (
         <>
-            <div>productWithInvalidImage: {productWithInvalidImage.length}</div>
-            <div>
-                <div className=""></div>
-                <div className="">
 
+            <div className='flex justify-between items-center px-4'>
+                <Card className='p-3'>
+                    Total: {productWithInvalidImage.length}
+                </Card>
+                <div className="flex justify-between items-center gap-4">
                     <Select onValueChange={(e: Category | "All") => setSelectedCategory(e)} value={selectedCategory}>
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger className="w-36">
                             <SelectValue placeholder="Category" />
                         </SelectTrigger>
                         <SelectContent>
@@ -161,7 +162,7 @@ export default function ImageUpdater() {
                     </Select>
 
                     <Select onValueChange={(e: SortingMethodType) => setSort(e)} value={sort}>
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger className="w-36">
                             <SelectValue placeholder="Sort" />
                         </SelectTrigger>
                         <SelectContent>

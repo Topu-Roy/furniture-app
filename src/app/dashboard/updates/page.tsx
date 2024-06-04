@@ -5,19 +5,16 @@ import { getAllProducts, getTotalProductCount } from '@/actions/productAction';
 import { getTotalUsersCount } from '@/actions/userAction';
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 import { type Product } from '@prisma/client';
-import { z } from 'zod';
 import { Card } from '@/components/ui/card';
 import { useRouter } from 'next/navigation';
 import { ImageOff, ShoppingBasket, Text as TextIcon } from 'lucide-react';
 import { Text } from '@/app/_components/text';
 import { cn } from '@/lib/utils';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import CardComponent from './_components/cardComponent';
 import WithoutDescriptionTable from './_components/description/description';
 
 export default function Updates() {
     const [products, setProducts] = useState<Product[]>([]);
-    const [needChangeCount, setNeedChangeCount] = useState(0);
     const [emptyDescription, setEmptyDescription] = useState<Product[]>([]);
     const [invalidImageUrl, setInvalidImageUrl] = useState<Product[]>([]);
     const [totalProducts, setTotalProducts] = useState(0);
@@ -46,10 +43,6 @@ export default function Updates() {
     useEffect(() => {
         if (isLoading) return;
 
-        const imageUrlSchema = z.object({
-            imageUrl: z.string().url()
-        })
-
         const tempArr_description: Product[] = []
         const tempArr_imageUrl: Product[] = []
 
@@ -58,32 +51,24 @@ export default function Updates() {
             if (product.description === '') {
                 tempArr_description.push(product);
             }
-
         })
 
         //* Check if product ImageUrl is not a valid URL
         products.forEach((product) => {
-            const parsedUrl = imageUrlSchema.safeParse(product.image);
-
-            if (parsedUrl.error) {
-                tempArr_imageUrl.push(product);
-            }
+            const valid = !product.image?.includes("utfs.io");
+            if (valid) tempArr_imageUrl.push(product);
         })
 
         setEmptyDescription(tempArr_description);
         setInvalidImageUrl(tempArr_imageUrl);
     }, [products, isLoading])
 
-    useEffect(() => {
-        setNeedChangeCount(emptyDescription.length + invalidImageUrl.length);
-    }, [emptyDescription, invalidImageUrl])
-
     return (
         <main className='space-y-4 px-4'>
             <Card className='w-full p-3 flex justify-between items-center'>
                 <Text>Total Products: <span className='font-bold'>{totalProducts}</span></Text>
-                <Text>Issues found: <span className={cn('font-bold', needChangeCount > 0 ? "text-rose-500" : "")}>
-                    {needChangeCount}</span>
+                <Text>Issues found: <span className={cn('font-bold', emptyDescription.length + invalidImageUrl.length > 0 ? "text-rose-500" : "")}>
+                    {emptyDescription.length + invalidImageUrl.length}</span>
                 </Text>
             </Card>
 
@@ -110,16 +95,7 @@ export default function Updates() {
             </div>
 
             <section>
-                <Tabs defaultValue="description" className="w-full">
-                    <TabsList>
-                        <TabsTrigger value="description">Description</TabsTrigger>
-                        <TabsTrigger value="image_url">Image URL</TabsTrigger>
-                    </TabsList>
-                    <TabsContent value="description">
-                        <WithoutDescriptionTable />
-                    </TabsContent>
-                    <TabsContent value="image_url">Change your password here.</TabsContent>
-                </Tabs>
+                <WithoutDescriptionTable />
             </section>
         </main>
     )
