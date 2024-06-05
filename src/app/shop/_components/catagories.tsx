@@ -1,69 +1,97 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import React, { useCallback, useEffect, useState } from "react";
 import { cn, scrollToTop } from "@/lib/utils";
 import HeadingAndReset from "./headingAndReset";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/app/_components/text";
-import { type Category } from "@prisma/client";
-import { useShopStore } from "@/zustand/shop/shopStore";
+import { type Product, type Category } from "@prisma/client";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type ProductCatagoriesType = {
   productName: Category | "All";
   quantity: number;
 }[];
 
-export default function Catagories() {
-  const { productsBackup, selectedCategory, setSelectedCategory } = useShopStore((store) => store);
+export default function Catagories({ products }: { products: Product[] }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const selectedCategoryParam = searchParams.get("category");
 
-  const [productCategories, setProductCategories] = useState<ProductCatagoriesType>([]);
+  const [selectedCategory, setSelectedCategory] = useState<Category | "All">(
+    "All",
+  );
+
+  useEffect(() => {
+    const category: Category | "All" =
+      selectedCategoryParam === "Chair" ||
+      selectedCategoryParam === "Table" ||
+      selectedCategoryParam === "Lamp" ||
+      selectedCategoryParam === "Drawer" ||
+      selectedCategoryParam === "Bed" ||
+      selectedCategoryParam === "Bookshelf" ||
+      selectedCategoryParam === "Sofa"
+        ? (selectedCategoryParam as Category)
+        : "All";
+        
+    setSelectedCategory(category);
+  }, [selectedCategoryParam]);
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams],
+  );
+
+  const [productCategories, setProductCategories] =
+    useState<ProductCatagoriesType>([]);
 
   useEffect(() => {
     const categories: ProductCatagoriesType = [
       {
         productName: "All",
-        quantity: productsBackup.length,
+        quantity: products.length,
       },
       {
         productName: "Chair",
-        quantity: productsBackup.filter((item) => item.category === "Chair")
-          .length,
+        quantity: products.filter((item) => item.category === "Chair").length,
       },
       {
         productName: "Table",
-        quantity: productsBackup.filter((item) => item.category === "Table")
-          .length,
+        quantity: products.filter((item) => item.category === "Table").length,
       },
       {
         productName: "Lamp",
-        quantity: productsBackup.filter((item) => item.category === "Lamp")
-          .length,
+        quantity: products.filter((item) => item.category === "Lamp").length,
       },
       {
         productName: "Drawer",
-        quantity: productsBackup.filter((item) => item.category === "Drawer")
-          .length,
+        quantity: products.filter((item) => item.category === "Drawer").length,
       },
       {
         productName: "Bed",
-        quantity: productsBackup.filter((item) => item.category === "Bed")
-          .length,
+        quantity: products.filter((item) => item.category === "Bed").length,
       },
       {
         productName: "Bookshelf",
-        quantity: productsBackup.filter((item) => item.category === "Bookshelf")
+        quantity: products.filter((item) => item.category === "Bookshelf")
           .length,
       },
       {
         productName: "Sofa",
-        quantity: productsBackup.filter((item) => item.category === "Sofa")
-          .length,
+        quantity: products.filter((item) => item.category === "Sofa").length,
       },
     ];
 
     setProductCategories(categories);
-  }, [productsBackup]);
+  }, [products]);
 
-  function handleCategory(category: Category | 'All') {
+  function handleCategory(category: Category | "All") {
     setSelectedCategory(category);
 
     scrollToTop();
@@ -74,6 +102,12 @@ export default function Catagories() {
 
     scrollToTop();
   }
+
+  useEffect(() => {
+    router.push(
+      pathname + "?" + createQueryString("category", selectedCategory),
+    );
+  }, [selectedCategory]);
 
   return (
     <div className="flex w-full flex-col items-start justify-start gap-4">

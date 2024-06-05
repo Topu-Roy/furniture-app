@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { CustomCartProduct } from "./renderItems";
+import { type CustomCartProduct } from "./renderItems";
 
 type Props = {
   setCartItems: React.Dispatch<React.SetStateAction<CustomCartProduct[]>>;

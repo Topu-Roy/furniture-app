@@ -1,55 +1,51 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import React, { useCallback, useEffect, useState } from "react";
 import { cn, scrollToTop } from "@/lib/utils";
 import HeadingAndReset from "./headingAndReset";
-import { type Color } from "@prisma/client";
-import { useShopStore } from "@/zustand/shop/shopStore";
+import { type Product, type Color } from "@prisma/client";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type ColorNQuantity = {
   color: Color;
   quantity: number;
 };
 
-export default function ColorSelector() {
-  const { selectedColor, productsBackup, setSelectedColor } = useShopStore(
-    (store) => store,
-  );
+export default function ColorSelector({ products }: { products: Product[] }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const selectedColorParam = searchParams.get("color");
+
   const [colors, setColors] = useState<ColorNQuantity[]>([]);
+  const [selectedColor, setSelectedColor] = useState<Color | "All">("All");
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams],
+  );
 
   useEffect(() => {
-    const colors: ColorNQuantity[] = [
-      {
-        color: "Black",
-        quantity: productsBackup.filter((item) => item.color === "Black")
-          .length,
-      },
-      {
-        color: "White",
-        quantity: productsBackup.filter((item) => item.color === "White")
-          .length,
-      },
-      {
-        color: "Red",
-        quantity: productsBackup.filter((item) => item.color === "Red").length,
-      },
-      {
-        color: "Green",
-        quantity: productsBackup.filter((item) => item.color === "Green")
-          .length,
-      },
-      {
-        color: "Brown",
-        quantity: productsBackup.filter((item) => item.color === "Brown")
-          .length,
-      },
-    ];
+    const color: Color | "All" =
+      selectedColorParam === "Black" ||
+      selectedColorParam === "White" ||
+      selectedColorParam === "Red" ||
+      selectedColorParam === "Brown" ||
+      selectedColorParam === "Green"
+        ? (selectedColorParam as Color)
+        : "All";
 
-    setColors(colors);
-  }, [productsBackup]);
+    setSelectedColor(color);
+  }, [selectedColorParam]);
 
   function handleColorChange(color: Color) {
     if (color === selectedColor) {
-      setSelectedColor(undefined);
+      setSelectedColor("All");
     } else {
       setSelectedColor(color);
     }
@@ -58,10 +54,41 @@ export default function ColorSelector() {
   }
 
   function handleReset() {
-    setSelectedColor(undefined);
+    setSelectedColor("All");
 
     scrollToTop();
   }
+
+  useEffect(() => {
+    router.push(pathname + "?" + createQueryString("color", selectedColor));
+  }, [selectedColor]);
+
+  useEffect(() => {
+    const colors: ColorNQuantity[] = [
+      {
+        color: "Black",
+        quantity: products.filter((item) => item.color === "Black").length,
+      },
+      {
+        color: "White",
+        quantity: products.filter((item) => item.color === "White").length,
+      },
+      {
+        color: "Red",
+        quantity: products.filter((item) => item.color === "Red").length,
+      },
+      {
+        color: "Green",
+        quantity: products.filter((item) => item.color === "Green").length,
+      },
+      {
+        color: "Brown",
+        quantity: products.filter((item) => item.color === "Brown").length,
+      },
+    ];
+
+    setColors(colors);
+  }, [products]);
 
   return (
     <div className="flex w-full flex-col items-start justify-start gap-[21px]">

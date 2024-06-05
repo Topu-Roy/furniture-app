@@ -1,12 +1,14 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { scrollToTop } from "@/lib/utils";
 import Product from "@/app/_components/product/productCard";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/app/_components/heading";
 import { type Product as ProductType } from "@prisma/client";
-import { useShopStore } from "@/zustand/shop/shopStore";
 import { Frown, LoaderCircle } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useShopStore } from "@/zustand/shop/shopStore";
 
 type Props = {
   products: ProductType[];
@@ -14,60 +16,39 @@ type Props = {
 };
 
 export default function RenderProducts(props: Props) {
-  // Zustand
-  const {
-    setProductsBackup,
-    selectedCategory,
-    selectedColor,
-    selectedTag,
-    selectedMinPrice,
-    selectedMaxPrice,
-    selectedSliderPrice,
-    selectedSorting,
-    searchInputText,
-    setSelectedCategory,
-    setSelectedColor,
-    setSelectedTag,
-    setSelectedMinPrice,
-    setSelectedMaxPrice,
-    setSelectedSliderPrice,
-    setSelectedSorting,
-    setSearchInputText,
-  } = useShopStore((store) => store);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const selectedColor = searchParams.get("color") ?? "All";
+  const selectedCategory = searchParams.get("category") ?? "All";
+  const selectedTag = searchParams.get("tag") ?? "All";
 
-  // Local state
-  const [filteredProducts, setFilteredProducts] = useState(props.products);
+  const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
+
+  const searchInputText = useShopStore((state) => state.searchInputText);
+  const selectedSorting = useShopStore((state) => state.selectedSorting);
 
   // Filtering Logic
   useEffect(() => {
     let tempFilteredProducts = [...props.products];
 
-    if (selectedCategory !== "All") tempFilteredProducts = tempFilteredProducts.filter((item) => item.category === selectedCategory);
-    if (selectedColor !== undefined) tempFilteredProducts = tempFilteredProducts.filter((item) => item.color === selectedColor);
-    if (selectedTag !== "All") tempFilteredProducts = tempFilteredProducts.filter((item) => item.tag === selectedTag);
-
-    if (selectedMinPrice !== 0 && selectedMaxPrice !== 2000) {
-      tempFilteredProducts = tempFilteredProducts.filter((item) => {
-        if (item.price !== undefined) {
-          return (
-            item.price <= selectedMinPrice && item.price <= selectedMaxPrice
-          );
-        } else {
-          return true;
-        }
-      });
+    if (selectedCategory !== "All") {
+      tempFilteredProducts = tempFilteredProducts.filter(
+        (item) => item.category === selectedCategory,
+      );
     }
 
-    if (selectedSliderPrice !== 2000) {
-      tempFilteredProducts = tempFilteredProducts.filter((item) => {
-        if (item.price !== undefined) {
-          return item.price <= selectedSliderPrice;
-        } else {
-          return true;
-        }
-      });
+    if (selectedColor !== "All") {
+      tempFilteredProducts = tempFilteredProducts.filter(
+        (item) => item.color === selectedColor,
+      );
+    }
+
+    if (selectedTag !== "All") {
+      tempFilteredProducts = tempFilteredProducts.filter(
+        (item) => item.tag === selectedTag,
+      );
     }
 
     if (selectedSorting === "price") {
@@ -75,7 +56,6 @@ export default function RenderProducts(props: Props) {
         if (a.price === undefined && b.price === undefined) return 0;
         if (a.price === undefined) return 1;
         if (b.price === undefined) return -1;
-
         return a.price - b.price;
       });
     }
@@ -95,20 +75,13 @@ export default function RenderProducts(props: Props) {
     setFilteredProducts(tempFilteredProducts);
     setCurrentPage(1);
   }, [
-    props,
-    selectedCategory,
+    searchInputText,
+    selectedSorting,
     selectedColor,
     selectedTag,
-    selectedMaxPrice,
-    selectedMinPrice,
-    selectedSliderPrice,
-    selectedSorting,
-    searchInputText,
+    selectedCategory,
+    props.products,
   ]);
-
-  useEffect(() => {
-    setProductsBackup(props.products);
-  }, [props.products, setProductsBackup]);
 
   // Pagination
   const totalProducts = filteredProducts.length;
@@ -121,7 +94,6 @@ export default function RenderProducts(props: Props) {
 
   const handlePaginationClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-
     scrollToTop();
   };
 
@@ -136,6 +108,10 @@ export default function RenderProducts(props: Props) {
         {i}
       </Button>,
     );
+  }
+
+  function handleResetAll() {
+    router.push("/shop");
   }
 
   // Render Products and handle empty and loading states
@@ -162,18 +138,9 @@ export default function RenderProducts(props: Props) {
       );
     }
 
-    return productsToRender.map((item) => <Product key={item.id} product={item} />);
-  }
-
-  function handleResetAll() {
-    setSelectedCategory("All");
-    setSelectedColor(undefined);
-    setSelectedTag("All");
-    setSelectedMinPrice(0);
-    setSelectedMaxPrice(2000);
-    setSelectedSliderPrice(2000);
-    setSelectedSorting("default");
-    setSearchInputText("");
+    return productsToRender.map((item) => (
+      <Product key={item.id} product={item} />
+    ));
   }
 
   return (

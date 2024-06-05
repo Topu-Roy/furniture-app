@@ -13,7 +13,11 @@ export default function Products(props: Props) {
   const [sheetOpen, setSheetOpen] = useState(false);
   return (
     <div className="flex w-full flex-col items-center justify-start gap-8 px-2">
-      <ProductHeader sheetOpen={sheetOpen} setSheetOpen={setSheetOpen} />
+      <ProductHeader
+        products={props.products}
+        sheetOpen={sheetOpen}
+        setSheetOpen={setSheetOpen}
+      />
       <RenderProducts products={props.products} setSheetOpen={setSheetOpen} />
     </div>
   );

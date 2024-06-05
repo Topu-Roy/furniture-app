@@ -1,7 +1,6 @@
 import React from "react";
 import Catagories from "./_components/catagories";
 import ColorSelector from "./_components/colorSelector";
-import FilterByPrice from "./_components/filterByPrice";
 import ProductTag from "./_components/productTag";
 import Products from "./_components/products";
 import { getAllProducts } from "@/actions/productAction";
@@ -24,10 +23,9 @@ export default async function ShopPage() {
             
             */}
             <div className="sticky top-[5rem] hidden w-[30%] flex-col items-center justify-start gap-10 lg:flex">
-              <ColorSelector />
-              <FilterByPrice />
-              <Catagories />
-              <ProductTag />
+              <ColorSelector products={products} />
+              <Catagories products={products} />
+              <ProductTag products={products} />
             </div>
 
             <Products products={products} />

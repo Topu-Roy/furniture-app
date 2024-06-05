@@ -1,62 +1,84 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import React, { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn, scrollToTop } from "@/lib/utils";
 import HeadingAndReset from "./headingAndReset";
-import { type Tag } from "@prisma/client";
-import { useShopStore } from "@/zustand/shop/shopStore";
-
+import { type Product, type Tag } from "@prisma/client";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type ProductTagsType = {
-  tag: Tag | 'All';
+  tag: Tag | "All";
   quantity: number;
 };
 
-export default function ProductTag() {
-  const { selectedTag, productsBackup, setSelectedTag } = useShopStore(
-    (store) => store,
-  );
+export default function ProductTag({ products }: { products: Product[] }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const selectedTagParam = searchParams.get("tag");
+
   const [productTags, setProductTags] = useState<ProductTagsType[]>([]);
+  const [selectedTag, setSelectedTag] = useState<Tag | "All">("All");
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams],
+  );
+
+  useEffect(() => {
+    const tag: Tag | "All" =
+      selectedTagParam === "Minimalistic" ||
+      selectedTagParam === "Modern" ||
+      selectedTagParam === "Stylish" ||
+      selectedTagParam === "Elegant" ||
+      selectedTagParam === "Ambient" ||
+      selectedTagParam === "Luxurious"
+        ? (selectedTagParam as Tag)
+        : "All";
+
+    setSelectedTag(tag);
+  }, [selectedTagParam]);
 
   useEffect(() => {
     const tags: ProductTagsType[] = [
       {
         tag: "All",
-        quantity: productsBackup.length,
+        quantity: products.length,
       },
       {
         tag: "Minimalistic",
-        quantity: productsBackup.filter((item) => item.tag === "Minimalistic")
-          .length,
+        quantity: products.filter((item) => item.tag === "Minimalistic").length,
       },
       {
         tag: "Modern",
-        quantity: productsBackup.filter((item) => item.tag === "Modern").length,
+        quantity: products.filter((item) => item.tag === "Modern").length,
       },
       {
         tag: "Stylish",
-        quantity: productsBackup.filter((item) => item.tag === "Stylish")
-          .length,
+        quantity: products.filter((item) => item.tag === "Stylish").length,
       },
       {
         tag: "Elegant",
-        quantity: productsBackup.filter((item) => item.tag === "Elegant")
-          .length,
+        quantity: products.filter((item) => item.tag === "Elegant").length,
       },
       {
         tag: "Ambient",
-        quantity: productsBackup.filter((item) => item.tag === "Ambient")
-          .length,
+        quantity: products.filter((item) => item.tag === "Ambient").length,
       },
       {
         tag: "Luxurious",
-        quantity: productsBackup.filter((item) => item.tag === "Luxurious")
-          .length,
+        quantity: products.filter((item) => item.tag === "Luxurious").length,
       },
     ];
 
     setProductTags(tags);
-  }, [productsBackup]);
+  }, [products]);
 
   function handleClick(tag: Tag | "All") {
     setSelectedTag(tag);
@@ -69,6 +91,10 @@ export default function ProductTag() {
 
     scrollToTop();
   }
+
+  useEffect(() => {
+    router.push(pathname + "?" + createQueryString("tag", selectedTag));
+  }, [selectedTag]);
 
   return (
     <div className="flex w-full flex-col items-start justify-start gap-4">

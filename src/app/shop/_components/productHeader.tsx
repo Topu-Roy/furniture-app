@@ -1,11 +1,6 @@
-"use client"
 import React, { useEffect, useState } from "react";
 import useDebounce from "@/hooks/debounce";
 import { cn } from "@/lib/utils";
-import ColorSelector from "./colorSelector";
-import FilterByPrice from "./filterByPrice";
-import Catagories from "./catagories";
-import ProductTag from "./productTag";
 import {
   Select,
   SelectContent,
@@ -19,20 +14,31 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useShopStore } from "@/zustand/shop/shopStore";
 import { Filter, X } from "lucide-react";
+import ColorSelector from "./colorSelector";
+import Catagories from "./catagories";
+import ProductTag from "./productTag";
+import { type Product } from "@prisma/client";
 
 type SortingMethodType = "default" | "price";
 
 type Props = {
   sheetOpen: boolean;
+  products: Product[];
   setSheetOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function ProductHeader({ sheetOpen, setSheetOpen }: Props) {
-  const { searchInputText, setSearchInputText, setSelectedSorting, } = useShopStore((store) => store);
+export default function ProductHeader({
+  sheetOpen,
+  setSheetOpen,
+  products,
+}: Props) {
+  const { searchInputText, setSearchInputText, setSelectedSorting } =
+    useShopStore((store) => store);
 
   // * States
   const [searchText, setSearchText] = useState("");
-  const [sortingMethod, setSortingMethod] = useState<SortingMethodType>("default");
+  const [sortingMethod, setSortingMethod] =
+    useState<SortingMethodType>("default");
   const debouncedText = useDebounce(searchText);
 
   const sortingOptions: SortingMethodType[] = ["default", "price"];
@@ -64,10 +70,9 @@ export default function ProductHeader({ sheetOpen, setSheetOpen }: Props) {
           </SheetTrigger>
           <SheetContent className="w-[80%]" side={"left"}>
             <div className="w-full flex-col items-center justify-start gap-5 space-y-4 pt-8 lg:hidden">
-              <ColorSelector />
-              <FilterByPrice />
-              <Catagories />
-              <ProductTag />
+              <ColorSelector products={products} />
+              <Catagories products={products} />
+              <ProductTag products={products} />
             </div>
           </SheetContent>
         </Sheet>
