@@ -1,22 +1,56 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
-import { Link } from 'next-view-transitions'
+import { Link } from "next-view-transitions";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useCartStore } from "@/zustand/cart/cartStore";
 import { ShoppingCart } from "lucide-react";
+import { getCartItemsCount } from "@/actions/cartAction";
+import { type Role } from "@prisma/client";
 
-export default function CartIconWithUser() {
+type Props = {
+  userInfo: {
+    id: string;
+    authId: string;
+    role: Role;
+    email: string | null;
+    imageUrl: string | null;
+    firstName: string | null;
+    lastName: string | null;
+  } | null;
+};
+
+export default function CartIcon({ userInfo }: Props) {
   const [willShow, setWillShow] = useState(false);
-  const products_store = useCartStore((store) => store.products);
+  const [count, setCount] = useState(0);
+
+  async function checkCart() {
+    if (!userInfo) return;
+
+    const count = await getCartItemsCount({ userId: userInfo.id });
+
+    setCount(count);
+  }
 
   useEffect(() => {
-    if (products_store.length > 0) {
+    void checkCart();
+  }, [userInfo]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      void checkCart();
+    }, 6000);
+
+    return () => clearInterval(timer);
+  }, [userInfo]);
+
+  useEffect(() => {
+    if (count > 0) {
       setWillShow(true);
     } else {
       setWillShow(false);
     }
-  }, [products_store]);
+  }, [count]);
 
   return (
     <Link href={"/cart"}>

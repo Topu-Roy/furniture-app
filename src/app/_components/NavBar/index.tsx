@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from 'next-view-transitions'
+import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 import MobileMenu from "./mobileMenu";
-import CartIconWithUser from "./cartIcon";
+import CartIcon from "./cartIcon";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Search } from "lucide-react";
 import ProfileIcon from "./profileIcon";
@@ -15,7 +15,7 @@ export default async function NavBar() {
 
   const userInfo = await getUserDetailsByAuthId({
     authId: user?.id ?? "",
-  })
+  });
 
   return (
     <header className="fixed top-0 z-50 flex h-[5.5rem] w-[100vw] items-center justify-center bg-white px-2 shadow-sm">
@@ -55,7 +55,7 @@ export default async function NavBar() {
             <Button variant={"ghost"}>Team</Button>
           </Link>
 
-          {userInfo?.role === 'ADMIN' ? (
+          {userInfo?.role === "ADMIN" ? (
             <Link href="/dashboard">
               <Button variant={"ghost"}>Dashboard</Button>
             </Link>
@@ -67,20 +67,22 @@ export default async function NavBar() {
             <Search />
           </Button>
 
-          <CartIconWithUser />
+          <CartIcon userInfo={userInfo} />
 
           <div>
             {!user ? (
-              <div className="flex justify-center items-center gap-2">
-                <Link href={"/api/auth/login?post_login_redirect_url=/authcallback"}>
-                  <Button variant={'ghost'}>
-                    Sign In
-                  </Button>
+              <div className="flex items-center justify-center gap-2">
+                <Link
+                  href={"/api/auth/login?post_login_redirect_url=/authcallback"}
+                >
+                  <Button variant={"ghost"}>Sign In</Button>
                 </Link>
-                <Link href={"/api/auth/register?post_login_redirect_url=/authcallback"}>
-                  <Button>
-                    Register
-                  </Button>
+                <Link
+                  href={
+                    "/api/auth/register?post_login_redirect_url=/authcallback"
+                  }
+                >
+                  <Button>Register</Button>
                 </Link>
               </div>
             ) : (

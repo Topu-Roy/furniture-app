@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { db } from "@/server/db";
 
@@ -8,18 +8,26 @@ type AddToCartProps = {
     productTitle: string;
     price: number;
     quantity: number;
-}
+};
 
 export async function addToCart(props: AddToCartProps) {
     type ActionType = "updated" | "created" | "alreadyInCart";
-    type Action = { updated: ActionType; created: ActionType; alreadyInCart: ActionType };
-    const action: Action = { updated: "updated", created: "created", alreadyInCart: "alreadyInCart" };
+    type Action = {
+        updated: ActionType;
+        created: ActionType;
+        alreadyInCart: ActionType;
+    };
+    const action: Action = {
+        updated: "updated",
+        created: "created",
+        alreadyInCart: "alreadyInCart",
+    };
 
     const user = await db.user.findFirst({
         where: {
-            authId: props.authId
-        }
-    })
+            authId: props.authId,
+        },
+    });
 
     if (!user) return null;
 
@@ -27,8 +35,8 @@ export async function addToCart(props: AddToCartProps) {
         where: {
             productId: props.productId,
             userId: user.id,
-        }
-    })
+        },
+    });
 
     if (isExist) {
         if (props.quantity !== isExist.quantity) {
@@ -38,8 +46,8 @@ export async function addToCart(props: AddToCartProps) {
                 },
                 data: {
                     quantity: props.quantity,
-                }
-            })
+                },
+            });
 
             return { action: action.updated, product: updatedCartProduct };
         }
@@ -52,69 +60,81 @@ export async function addToCart(props: AddToCartProps) {
     const createdCartProduct = await db.cartProduct.create({
         data: {
             quantity: props.quantity || 1,
-            productTitle: props.productTitle,
-            price: props.price,
             userId: user.id,
             productId: props.productId,
-        }
-    })
+        },
+    });
 
     return { action: action.created, product: createdCartProduct };
 }
 
 export async function getAllCartItems({ authId }: { authId: string }) {
-
-    const user = await db.user.findFirst({
+    const cartProducts = await db.user.findFirst({
         where: {
             authId,
-        }
-    })
-
-    const cartProducts = await db.cartProduct.findMany({
-        where: {
-            userId: user?.id,
-        }
-    })
+        },
+        include: {
+            cartProducts: {
+                include: {
+                    product: true,
+                },
+            },
+        },
+    });
 
     return cartProducts;
 }
 
-export async function getCartItemById({ id }: { id: string }) {
+export async function getCartItemsCount({ userId }: { userId: string }) {
+    const cartProductsCount = await db.cartProduct.count({
+        where: {
+            userId: userId,
+        },
+    });
 
+    return cartProductsCount;
+}
+
+export async function getCartItemById({ id }: { id: string }) {
     const cartItem = await db.cartProduct.findFirst({
         where: {
-            id
+            id,
         },
         include: {
-            product: true
-        }
-    })
+            product: true,
+        },
+    });
 
     return cartItem;
 }
 
 export async function deleteCartItem({ id }: { id: string }) {
-
     const cartItem = await db.cartProduct.delete({
         where: {
-            id
-        }
-    })
+            id,
+        },
+    });
 
-    if (cartItem.id) return { success: true }
+    if (cartItem.id) return { success: true };
 
     return { success: false };
 }
 
-export async function updateCartItemQuantity({ id, quantity }: { id: string, quantity: number }) {
+export async function updateCartItemQuantity({
+    id,
+    quantity,
+}: {
+    id: string;
+    quantity: number;
+}) {
     const updatedItem = await db.cartProduct.update({
         where: {
-            id
+            id,
         },
         data: {
-            quantity
-        }
-    })
+            quantity,
+        },
+    });
 
     return updatedItem;
 }
