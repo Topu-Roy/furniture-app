@@ -29,28 +29,33 @@ export default function RenderProducts(props: Props) {
   const searchInputText = useShopStore((state) => state.searchInputText);
   const selectedSorting = useShopStore((state) => state.selectedSorting);
 
-  // Filtering Logic
+  //* Filtering Logic
   useEffect(() => {
+    //* Start with a copy of the original products
     let tempFilteredProducts = [...props.products];
 
+    //* Filter by category if a specific category is selected
     if (selectedCategory !== "All") {
       tempFilteredProducts = tempFilteredProducts.filter(
         (item) => item.category === selectedCategory,
       );
     }
 
+    //* Filter by color if a specific color is selected
     if (selectedColor !== "All") {
       tempFilteredProducts = tempFilteredProducts.filter(
         (item) => item.color === selectedColor,
       );
     }
 
+    //* Filter by tag if a specific tag is selected
     if (selectedTag !== "All") {
       tempFilteredProducts = tempFilteredProducts.filter(
         (item) => item.tag === selectedTag,
       );
     }
 
+    //* Sort by price if sorting by price is selected
     if (selectedSorting === "price") {
       tempFilteredProducts.sort((a, b) => {
         if (a.price === undefined && b.price === undefined) return 0;
@@ -60,6 +65,7 @@ export default function RenderProducts(props: Props) {
       });
     }
 
+    //* Filter by search input text if any
     if (searchInputText !== "") {
       tempFilteredProducts = tempFilteredProducts.filter(
         (item) =>
@@ -70,8 +76,10 @@ export default function RenderProducts(props: Props) {
       );
     }
 
-    props.setSheetOpen((prev) => (prev === true ? !prev : prev)); //* Close the side panel whenever any filtering is done
+    //* Close the side panel whenever any filtering is done
+    props.setSheetOpen((prev) => (prev === true ? !prev : prev));
 
+    //* Update the filtered products state and reset pagination to the first page
     setFilteredProducts(tempFilteredProducts);
     setCurrentPage(1);
   }, [
@@ -83,7 +91,7 @@ export default function RenderProducts(props: Props) {
     props.products,
   ]);
 
-  // Pagination
+  //* Pagination
   const totalProducts = filteredProducts.length;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -114,10 +122,10 @@ export default function RenderProducts(props: Props) {
     router.push("/shop");
   }
 
-  // Render Products and handle empty and loading states
+  //* Render Products and handle empty and loading states
   function Products() {
     if (props.products.length === 0) {
-      // loading
+      //* Loading state
       return (
         <div className="col-span-3 flex w-full flex-col items-center justify-center gap-4 pt-14">
           <Heading>Hold Tight, Products are loading...</Heading>
@@ -126,7 +134,7 @@ export default function RenderProducts(props: Props) {
       );
     }
     if (filteredProducts.length === 0) {
-      // No products
+      //* No products found state
       return (
         <div className="col-span-3 flex w-full flex-col items-center justify-center gap-4 pt-14">
           <Frown />
@@ -138,6 +146,7 @@ export default function RenderProducts(props: Props) {
       );
     }
 
+    //* Render the filtered products
     return productsToRender.map((item) => (
       <Product key={item.id} product={item} />
     ));
