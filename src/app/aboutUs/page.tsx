@@ -7,6 +7,8 @@ import Team from "./_components/renderTeam";
 import BrandsWorkedWith from "../_components/home/_components/brandsWorkedWith";
 import SecondCTA from "../_components/home/_components/secondCTA";
 
+export const dynamic = "force-static";
+
 export default function AboutusPage() {
   return (
     <>

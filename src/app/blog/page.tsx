@@ -4,6 +4,8 @@ import { blogPosts } from "./blogPostArray";
 import { Heading } from "../_components/heading";
 import { Text } from "../_components/text";
 
+export const dynamic = "force-static";
+
 export default function BlogPage() {
   return (
     <div className="mt-[4rem] bg-gray-200 pt-2 md:pt-4 lg:pt-6">

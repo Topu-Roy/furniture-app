@@ -5,6 +5,8 @@ import RecommendedBlogs from "./recommendedBlogs";
 import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
 
+export const dynamic = "force-static";
+
 export default function BlogDetails({ params }: { params: { id: string } }) {
   const { id } = params;
   const parsedId = parseInt(id);
