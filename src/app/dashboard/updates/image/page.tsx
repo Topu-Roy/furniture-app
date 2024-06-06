@@ -271,7 +271,7 @@ export default function ImageUpdater() {
                             <Button
                                 onClick={() =>
                                     router.push(
-                                        `${BASE_URL}/dashboard/updates/image/upload?id=${product.id}&title=${product.productTitle.replace(" ", "-")}`,
+                                        `${BASE_URL}/dashboard/updates/image/upload?id=${product.id}&title=${product.productTitle.replace(" ", "%")}`,
                                     )
                                 }
                                 className="h-12 w-full flex-1 hover:bg-primary hover:text-white"

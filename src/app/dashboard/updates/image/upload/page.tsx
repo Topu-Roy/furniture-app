@@ -135,7 +135,7 @@ function UpdateImageComponent() {
         <main className="max-w-4xl mx-auto pt-20">
             <div className='divide-y-2'>
                 <Text size='lg' className='text-center font-semibold pb-4'>Upload a new image</Text>
-                <Text className='text-center font-medium pt-4'>{productTitle?.replace("-", " ")}</Text>
+                <Text className='text-center font-medium pt-4'>{productTitle?.replace("%", " ")}</Text>
             </div>
             <Dropzone
                 multiple={false}
