@@ -64,7 +64,7 @@ export default function Updates() {
     }, [products, isLoading])
 
     return (
-        <main className='space-y-4 px-4'>
+        <main className='space-y-4 px-4 max-w-7xl w-[100dvw] lg:w-[80dvw]'>
             <Card className='w-full p-3 flex justify-between items-center'>
                 <Text>Total Products: <span className='font-bold'>{totalProducts}</span></Text>
                 <Text>Issues found: <span className={cn('font-bold', emptyDescription.length + invalidImageUrl.length > 0 ? "text-rose-500" : "")}>
@@ -72,7 +72,7 @@ export default function Updates() {
                 </Text>
             </Card>
 
-            <div className="flex justify-between items-center gap-2">
+            <div className="grid grid-cols-2 md:grid-cols-3 items-center gap-2">
                 <CardComponent
                     count={products.length}
                     icon={<ShoppingBasket />}
@@ -94,7 +94,7 @@ export default function Updates() {
                 />
             </div>
 
-            <section>
+            <section className='w-full overflow-y-scroll mx-auto'>
                 <WithoutDescriptionTable />
             </section>
         </main>
