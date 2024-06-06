@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'next-view-transitions'
+import Link from "next/link";
 import { Text } from '../text';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -20,7 +20,7 @@ export default async function ProfileIcon({ userId, firstName, lastName }: Props
     return (
         <Popover>
             <PopoverTrigger asChild>
-                <Avatar className={cn("ring-1 ring-primary", user?.imageUrl === fallbackUserImageUrl ? "p-2" : "")}>
+                <Avatar className={cn("ring-1 ring-primary size-9", user?.imageUrl === fallbackUserImageUrl ? "p-2" : "")}>
                     <AvatarImage
                         src={user?.imageUrl ?? fallbackUserImageUrl}
                         alt={`${firstName} ${lastName}`}

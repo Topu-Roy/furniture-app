@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import AddButton from "./addButton";
-import { Link } from 'next-view-transitions'
+import Link from "next/link";
 import { GripHorizontal } from "lucide-react";
 
 type Props = {

@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 import MobileMenu from "./mobileMenu";
 import CartIcon from "./cartIcon";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { Search } from "lucide-react";
+// import { Search } from "lucide-react";
 import ProfileIcon from "./profileIcon";
 import { getUserDetailsByAuthId } from "@/actions/userAction";
 
@@ -20,19 +20,26 @@ export default async function NavBar() {
   return (
     <header className="fixed top-0 z-50 flex h-[5.5rem] w-[100vw] items-center justify-center bg-white px-2 shadow-sm">
       <div className="mx-auto flex w-[98vw] max-w-[85rem] flex-row justify-between">
-        <div className="relative flex items-center justify-between gap-2">
-          <MobileMenu />
 
-          <Link href="/">
-            <Image
-              src="/logo-text.png"
-              height={100}
-              width={146}
-              alt="furnit"
-              className="h-[30px] w-auto"
-            />
-          </Link>
-        </div>
+        <Link href="/" className="lg:hidden">
+          <Image
+            src="/logo-icon.png"
+            height={150}
+            width={150}
+            alt="furnit"
+            className="h-[45px] w-auto"
+          />
+        </Link>
+
+        <Link href="/" className="hidden lg:flex justify-center items-center">
+          <Image
+            src="/logo-text.png"
+            height={150}
+            width={150}
+            alt="furnit"
+            className="h-[30px] w-auto"
+          />
+        </Link>
 
         <div className="hidden items-center justify-center gap-4 font-semibold md:flex">
           <Link href="/">
@@ -62,37 +69,39 @@ export default async function NavBar() {
           ) : null}
         </div>
 
-        <div className="flex w-auto flex-row items-center justify-between gap-3">
-          <Button variant={"ghost"} className="p-1">
+        <div className="flex items-center justify-between gap-3">
+          {/* <Button variant={"ghost"} className="p-1">
             <Search />
-          </Button>
+          </Button> */}
 
-          <CartIcon userInfo={userInfo} />
+          {!user ? (
+            <div className="flex items-center justify-center gap-3">
+              <Link
+                href={"/api/auth/login?post_login_redirect_url=/authcallback"}
+              >
+                <Button variant={"ghost"}>Sign In</Button>
+              </Link>
+              <Link
+                href={
+                  "/api/auth/register?post_login_redirect_url=/authcallback"
+                }
+              >
+                <Button>Register</Button>
+              </Link>
+            </div>
+          ) : (
+            <>
+              <CartIcon userInfo={userInfo} />
 
-          <div>
-            {!user ? (
-              <div className="flex items-center justify-center gap-2">
-                <Link
-                  href={"/api/auth/login?post_login_redirect_url=/authcallback"}
-                >
-                  <Button variant={"ghost"}>Sign In</Button>
-                </Link>
-                <Link
-                  href={
-                    "/api/auth/register?post_login_redirect_url=/authcallback"
-                  }
-                >
-                  <Button>Register</Button>
-                </Link>
-              </div>
-            ) : (
               <ProfileIcon
                 firstName={user?.given_name ?? ""}
                 lastName={user?.family_name ?? ""}
                 userId={user.id}
               />
-            )}
-          </div>
+            </>
+          )}
+
+          <MobileMenu />
         </div>
       </div>
     </header>

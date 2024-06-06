@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Link } from 'next-view-transitions'
+import Link from "next/link";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";

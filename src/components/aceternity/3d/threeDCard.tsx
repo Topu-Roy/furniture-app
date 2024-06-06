@@ -5,7 +5,7 @@ import {
   CardBody,
   CardContainer,
 } from "@/components/aceternity/3d-card";
-import { Link } from 'next-view-transitions';
+import Link from "next/link";
 
 type Props = {
   heading: string;

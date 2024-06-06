@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'next-view-transitions'
+import Link from "next/link";
 import Product from "@/app/_components/product/productCard";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/app/_components/heading";

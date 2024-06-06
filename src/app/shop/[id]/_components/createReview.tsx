@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Text } from "@/app/_components/text";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
-import { Link } from 'next-view-transitions';
+import Link from "next/link";
 import Rating from "./rating";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { createRevive } from "@/actions/reviewAction";

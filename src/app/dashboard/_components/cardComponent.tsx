@@ -1,7 +1,7 @@
 import { Text } from "@/app/_components/text"
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
-import { Link } from 'next-view-transitions';
+import Link from "next/link";
 
 type CardComponentPropsType = {
     count: number,
