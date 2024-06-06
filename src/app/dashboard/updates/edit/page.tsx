@@ -111,11 +111,11 @@ export default function EditPage() {
     )
 
     return (
-        <div className="w-full max-w-7xl mx-auto">
+        <div className="w-[100dvw] lg:w-[80dvw] px-2 max-w-7xl mx-auto">
             <Form {...form}>
                 <Card className='py-8 divide-y space-y-4'>
                     <Text muted size='max' className='text-center'>Edit product details</Text>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 mx-auto space-y-6 pt-4">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="w-full lg:w-[65%] px-5 lg:px-0 mx-auto space-y-6 pt-4">
                         <FormField
                             control={form.control}
                             name="productTitle"
@@ -186,7 +186,7 @@ export default function EditPage() {
                                 </FormItem>
                             )}
                         />
-                        <div className="flex justify-between items-center">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 lg:grid-cols-3 items-center">
                             <FormField
                                 control={form.control}
                                 name="color"
@@ -195,7 +195,7 @@ export default function EditPage() {
                                         <FormLabel><span className="text-rose-500">*</span>Color</FormLabel>
                                         <FormControl>
                                             <Select {...field} onValueChange={field.onChange} defaultValue={product?.color}>
-                                                <SelectTrigger className="w-[180px]">
+                                                <SelectTrigger className="w-full">
                                                     <SelectValue placeholder="Select a color" />
                                                 </SelectTrigger>
                                                 <SelectContent>
@@ -220,7 +220,7 @@ export default function EditPage() {
                                         <FormLabel><span className="text-rose-500">*</span>Category</FormLabel>
                                         <FormControl>
                                             <Select {...field} onValueChange={field.onChange} defaultValue={product?.category}>
-                                                <SelectTrigger className="w-[180px]">
+                                                <SelectTrigger className="w-full">
                                                     <SelectValue placeholder="Select a category" />
                                                 </SelectTrigger>
                                                 <SelectContent>
@@ -245,7 +245,7 @@ export default function EditPage() {
                                         <FormLabel><span className="text-rose-500">*</span>Status</FormLabel>
                                         <FormControl>
                                             <Select {...field} onValueChange={field.onChange} defaultValue={product?.status ? product?.status : undefined}>
-                                                <SelectTrigger className="w-[180px]">
+                                                <SelectTrigger className="w-full">
                                                     <SelectValue placeholder="Select a status" />
                                                 </SelectTrigger>
                                                 <SelectContent>
@@ -270,7 +270,7 @@ export default function EditPage() {
                                         <FormLabel><span className="text-rose-500">*</span>Tag</FormLabel>
                                         <FormControl>
                                             <Select {...field} onValueChange={field.onChange} defaultValue={product?.tag}>
-                                                <SelectTrigger className="w-[180px]">
+                                                <SelectTrigger className="w-full">
                                                     <SelectValue placeholder="Select a tag" />
                                                 </SelectTrigger>
                                                 <SelectContent>
