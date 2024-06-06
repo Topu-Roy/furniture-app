@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils';
 import { useToast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
-import { useCartStore } from '@/zustand/cart/cartStore';
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 import { addToCart } from '@/actions/cartAction';
 
@@ -24,9 +23,6 @@ export default function AddToCartButtonForRelated(props: Props) {
     const { toast } = useToast();
 
     const router = useRouter();
-
-    const products_store = useCartStore((store) => store.products);
-    const setProducts_store = useCartStore((store) => store.setProducts);
 
     async function handleAddToCart() {
         if (!user) {
@@ -66,14 +62,6 @@ export default function AddToCartButtonForRelated(props: Props) {
         }
 
         if (response.action === "updated") {
-            setProducts_store(
-                products_store.map((product) =>
-                    product.id === productId
-                        ? { ...product, ...response.product }
-                        : product,
-                ),
-            );
-
             toast({
                 title: "Updated cart",
                 description: "Product updated successfully",
@@ -81,9 +69,6 @@ export default function AddToCartButtonForRelated(props: Props) {
         }
 
         if (response.action === "created") {
-            if (response.product) {
-                setProducts_store([...products_store, response.product]);
-            }
             toast({
                 title: "Added to cart",
                 description: "Product successfully added to cart",

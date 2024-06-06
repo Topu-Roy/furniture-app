@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
-import { useCartStore } from "@/zustand/cart/cartStore";
 import { Link } from 'next-view-transitions';
 import { useRouter } from "next/navigation";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
@@ -23,9 +22,6 @@ export default function ProductAddToCart(props: Props) {
 
   const user = getUser();
   const router = useRouter();
-
-  const products_store = useCartStore((store) => store.products);
-  const setProducts_store = useCartStore((store) => store.setProducts);
 
   async function handleAddToCart() {
     if (!user) {
@@ -61,14 +57,6 @@ export default function ProductAddToCart(props: Props) {
     }
 
     if (response.action === "updated") {
-      setProducts_store(
-        products_store.map((product) =>
-          product.id === productId
-            ? { ...product, ...response.product }
-            : product,
-        ),
-      );
-
       toast({
         title: "Updated cart",
         description: "Product updated successfully",
@@ -76,9 +64,6 @@ export default function ProductAddToCart(props: Props) {
     }
 
     if (response.action === "created") {
-      if (response.product) {
-        setProducts_store([...products_store, response.product]);
-      }
       toast({
         title: "Added to cart",
         description: "Product successfully added to cart",
