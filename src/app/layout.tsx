@@ -1,12 +1,12 @@
 import "@/styles/globals.css";
 
-import { ViewTransitions } from 'next-view-transitions'
-
 import NavBar from "./_components/NavBar";
 import Footer from "./_components/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import { inter } from "@/styles/font";
 
+import { ViewTransitions } from 'next-view-transitions'
+import NextTopLoader from 'nextjs-toploader';
 
 export const metadata = {
   title: "Furnit",
@@ -22,6 +22,10 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en" className={`${inter.className}`}>
         <body>
+          <NextTopLoader
+            color="#c28529"
+            showSpinner={false}
+          />
           <NavBar />
           {children}
           <Toaster />
