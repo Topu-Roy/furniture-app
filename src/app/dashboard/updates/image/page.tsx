@@ -29,7 +29,6 @@ import {
 } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
-import { BASE_URL } from "@/lib/utils";
 import {
     Select,
     SelectContent,
@@ -271,7 +270,7 @@ export default function ImageUpdater() {
                             <Button
                                 onClick={() =>
                                     router.push(
-                                        `${BASE_URL}/dashboard/updates/image/upload?id=${product.id}&title=${product.productTitle.replace(" ", "%")}`,
+                                        `/dashboard/updates/image/upload?id=${product.id}&title=${product.productTitle.replace(" ", "%")}`,
                                     )
                                 }
                                 className="h-12 w-full flex-1 hover:bg-primary hover:text-white"
