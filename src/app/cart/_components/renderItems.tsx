@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Link } from "next-view-transitions";
 import Image from "next/image";
 import {
   type Category,
@@ -20,6 +19,7 @@ import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
 import HeaderActions from "./headerActions";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type Product = {
   id: string;

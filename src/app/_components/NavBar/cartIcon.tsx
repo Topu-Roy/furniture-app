@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Link } from "next-view-transitions";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ShoppingCart } from "lucide-react";
 import { getCartItemsCount } from "@/actions/cartAction";
 import { type Role } from "@prisma/client";
+import Link from "next/link";
 
 type Props = {
   userInfo: {
