@@ -9,6 +9,7 @@ import { updateImageUrl } from '@/actions/productAction'
 import { Cloud, File, Loader2 } from 'lucide-react'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
+import { Text } from '@/app/_components/text'
 
 export default function UpdateImage() {
     const [uploadProgress, setUploadProgress] = useState(0);
@@ -46,6 +47,7 @@ export default function UpdateImage() {
 
     return (
         <div className='mt-[4rem] py-20 max-w-7xl mx-auto'>
+            <Text muted size='max' className='text-center pb-8'>Upload an Image</Text>
             <Dropzone
                 multiple={false}
                 onDrop={async (acceptedFiles) => {
