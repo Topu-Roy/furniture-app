@@ -97,7 +97,7 @@ export default function FooterLinks() {
               </Link>
             </div>
           </div>
-          <div className="flex w-full items-center justify-center gap-4 lg:justify-start">
+          <div className="flex w-full items-center justify-center gap-4 md:pb-4 lg:justify-start">
             {socialLinks.map((item) => (
               <Link
                 key={item.name}
@@ -112,7 +112,7 @@ export default function FooterLinks() {
 
         <div className="mx-auto h-px w-[90%] bg-white/10 md:hidden" />
 
-        <div className="flex flex-1 flex-row px-4 pt-8">
+        <div className="flex flex-1 flex-row px-4 py-8">
           {footerData.map((item) => (
             <div key={item.headline} className="flex-1 text-center">
               <Text size="xl" className={cn("pb-4 text-white/70")}>
