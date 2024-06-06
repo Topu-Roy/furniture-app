@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation';
 import { type Product } from '@prisma/client';
 import { getPaginatedProducts_withoutDescription, getTotalProductCount_withoutDescription } from '@/actions/productAction';
@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { DataTable } from './data-table';
 import { columns } from './columns';
 
-export default function WithoutDescriptionTable() {
+function WithoutDescriptionTableComponent() {
     const [products, setProducts] = useState<Product[]>([])
     const [totalProducts, setTotalProducts] = useState<number>(0)
     const searchParams = useSearchParams();
@@ -66,5 +66,13 @@ export default function WithoutDescriptionTable() {
         <main className='w-full mx-auto'>
             <DataTable columns={columns} data={products} PaginationButtons={PaginationButtons} />
         </main>
+    )
+}
+
+export default function WithoutDescriptionTable() {
+    return (
+        <Suspense fallback={<div>Loading</div>}>
+            <WithoutDescriptionTableComponent />
+        </Suspense>
     )
 }
