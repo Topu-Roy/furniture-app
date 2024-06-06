@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn, scrollToTop } from "@/lib/utils";
 import HeadingAndReset from "./headingAndReset";
@@ -12,7 +12,7 @@ type ProductTagsType = {
   quantity: number;
 };
 
-export default function ProductTag({ products }: { products: Product[] }) {
+function ProductTagComponent({ products }: { products: Product[] }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -34,11 +34,11 @@ export default function ProductTag({ products }: { products: Product[] }) {
   useEffect(() => {
     const tag: Tag | "All" =
       selectedTagParam === "Minimalistic" ||
-      selectedTagParam === "Modern" ||
-      selectedTagParam === "Stylish" ||
-      selectedTagParam === "Elegant" ||
-      selectedTagParam === "Ambient" ||
-      selectedTagParam === "Luxurious"
+        selectedTagParam === "Modern" ||
+        selectedTagParam === "Stylish" ||
+        selectedTagParam === "Elegant" ||
+        selectedTagParam === "Ambient" ||
+        selectedTagParam === "Luxurious"
         ? (selectedTagParam as Tag)
         : "All";
 
@@ -122,4 +122,12 @@ export default function ProductTag({ products }: { products: Product[] }) {
       </div>
     </div>
   );
+}
+
+export default function ProductTag({ products }: { products: Product[] }) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProductTagComponent products={products} />;
+    </Suspense>
+  )
 }

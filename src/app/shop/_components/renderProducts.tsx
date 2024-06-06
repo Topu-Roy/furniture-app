@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { scrollToTop } from "@/lib/utils";
 import Product from "@/app/_components/product/productCard";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ type Props = {
   setSheetOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function RenderProducts(props: Props) {
+export function RenderProductsComponent(props: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedColor = searchParams.get("color") ?? "All";
@@ -162,4 +162,13 @@ export default function RenderProducts(props: Props) {
       </div>
     </div>
   );
+}
+
+
+export default function RenderProducts(props: Props) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RenderProductsComponent products={props.products} setSheetOpen={props.setSheetOpen} />
+    </Suspense>
+  )
 }

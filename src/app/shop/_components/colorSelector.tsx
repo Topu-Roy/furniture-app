@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { cn, scrollToTop } from "@/lib/utils";
 import HeadingAndReset from "./headingAndReset";
 import { type Product, type Color } from "@prisma/client";
@@ -11,7 +11,7 @@ type ColorNQuantity = {
   quantity: number;
 };
 
-export default function ColorSelector({ products }: { products: Product[] }) {
+function ColorSelectorComponent({ products }: { products: Product[] }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -33,10 +33,10 @@ export default function ColorSelector({ products }: { products: Product[] }) {
   useEffect(() => {
     const color: Color | "All" =
       selectedColorParam === "Black" ||
-      selectedColorParam === "White" ||
-      selectedColorParam === "Red" ||
-      selectedColorParam === "Brown" ||
-      selectedColorParam === "Green"
+        selectedColorParam === "White" ||
+        selectedColorParam === "Red" ||
+        selectedColorParam === "Brown" ||
+        selectedColorParam === "Green"
         ? (selectedColorParam as Color)
         : "All";
 
@@ -120,5 +120,13 @@ export default function ColorSelector({ products }: { products: Product[] }) {
         <div className="bg-green-500/80"></div>
       </div>
     </div>
+  );
+}
+
+export default function ColorSelector({ products }: { products: Product[] }) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ColorSelectorComponent products={products} />
+    </Suspense>
   );
 }

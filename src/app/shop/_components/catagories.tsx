@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { cn, scrollToTop } from "@/lib/utils";
 import HeadingAndReset from "./headingAndReset";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,7 @@ type ProductCatagoriesType = {
   quantity: number;
 }[];
 
-export default function Catagories({ products }: { products: Product[] }) {
+function CatagoriesComponent({ products }: { products: Product[] }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -26,15 +26,15 @@ export default function Catagories({ products }: { products: Product[] }) {
   useEffect(() => {
     const category: Category | "All" =
       selectedCategoryParam === "Chair" ||
-      selectedCategoryParam === "Table" ||
-      selectedCategoryParam === "Lamp" ||
-      selectedCategoryParam === "Drawer" ||
-      selectedCategoryParam === "Bed" ||
-      selectedCategoryParam === "Bookshelf" ||
-      selectedCategoryParam === "Sofa"
+        selectedCategoryParam === "Table" ||
+        selectedCategoryParam === "Lamp" ||
+        selectedCategoryParam === "Drawer" ||
+        selectedCategoryParam === "Bed" ||
+        selectedCategoryParam === "Bookshelf" ||
+        selectedCategoryParam === "Sofa"
         ? (selectedCategoryParam as Category)
         : "All";
-        
+
     setSelectedCategory(category);
   }, [selectedCategoryParam]);
 
@@ -140,4 +140,12 @@ export default function Catagories({ products }: { products: Product[] }) {
       </div>
     </div>
   );
+}
+
+export default function Catagories({ products }: { products: Product[] }) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CatagoriesComponent products={products} />
+    </Suspense>
+  )
 }
