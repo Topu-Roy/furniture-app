@@ -22,7 +22,7 @@ export default async function Customers() {
     const data = await getData()
 
     return (
-        <div className="container mx-auto py-10">
+        <div className="max-w-7xl w-[100dvw] lg:w-[80dvw] px-2 overflow-y-scroll mx-auto">
             <DataTable columns={columns} data={data} />
         </div>
     )
