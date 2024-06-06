@@ -178,14 +178,14 @@ export default function ImageUpdater() {
 
     return (
         <>
-            <div className="flex items-center justify-between px-4">
-                <Card className="p-3">Total: {productWithInvalidImage.length}</Card>
-                <div className="flex items-center justify-between gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center px-4">
+                <Card className="px-3 py-2 md:w-[50%]">Total: {productWithInvalidImage.length}</Card>
+                <div className="grid grid-cols-2 items-center gap-4">
                     <Select
                         onValueChange={(e: Category | "All") => setSelectedCategory(e)}
                         value={selectedCategory}
                     >
-                        <SelectTrigger className="w-36">
+                        <SelectTrigger className="w-full">
                             <SelectValue placeholder="Category" />
                         </SelectTrigger>
                         <SelectContent>
@@ -201,7 +201,7 @@ export default function ImageUpdater() {
                         onValueChange={(e: SortingMethodType) => setSort(e)}
                         value={sort}
                     >
-                        <SelectTrigger className="w-36">
+                        <SelectTrigger className="w-full">
                             <SelectValue placeholder="Sort" />
                         </SelectTrigger>
                         <SelectContent>
@@ -214,7 +214,7 @@ export default function ImageUpdater() {
                     </Select>
                 </div>
             </div>
-            <div className="grid grid-cols-3 gap-3 p-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-4">
                 {productWithInvalidImageSorted.map((product) => (
                     <Card
                         key={product.id}
@@ -235,7 +235,7 @@ export default function ImageUpdater() {
                                 <Text size="s">{product.color}</Text>
                             </div>
                         </div>
-                        <div className="flex items-center justify-between gap-2 pt-4">
+                        <div className="grid grid-cols-2 items-center gap-2 pt-4">
                             <Dialog>
                                 <DialogTrigger asChild>
                                     <Button
@@ -245,7 +245,7 @@ export default function ImageUpdater() {
                                         Delete Product
                                     </Button>
                                 </DialogTrigger>
-                                <DialogContent>
+                                <DialogContent className="max-w-md w-[80%] rounded-md">
                                     <DialogHeader>
                                         <DialogTitle>Are you absolutely sure?</DialogTitle>
                                         <DialogDescription>
