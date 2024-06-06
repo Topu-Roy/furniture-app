@@ -125,8 +125,8 @@ export default function Dashboard() {
     }, [products, isLoading])
 
     return (
-        <main className='w-full px-4 space-y-4'>
-            <div className='flex justify-between items-center gap-4'>
+        <main className='w-[100dvw] lg:w-[80dvw] xl:max-w-6xl mx-auto px-4 overflow-y-scroll space-y-4'>
+            <div className='grid grid-cols-2 lg:grid-cols-3 items-center gap-4'>
                 <CardComponent
                     link='/dashboard/products'
                     title='Total products'
@@ -149,12 +149,12 @@ export default function Dashboard() {
 
             <section>
                 <Heading className='py-6'>Category</Heading>
-                <div className="grid grid-cols-5 gap-3 place-content-center">
+                <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3 place-content-center">
                     {
                         cards.map((card, index) => (
                             <div key={`${index}-${card.image}`} className="flex justify-center items-center hover:scale-105 transition-all ease-in-out">
                                 <Link href={'/dashboard/products'}>
-                                    <Card className='p-0 relative overflow-hidden w-[250px]'>
+                                    <Card className='p-0 relative overflow-hidden w-46 md:w-[14.5rem] lg:w-64'>
                                         <Image
                                             src={card.image}
                                             alt={card.title}
