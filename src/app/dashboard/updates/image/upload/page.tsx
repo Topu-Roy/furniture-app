@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { useUploadThing } from "@/lib/uploadthing";
 import Dropzone from "react-dropzone";
@@ -11,14 +11,17 @@ import { BASE_URL, cn } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Text } from "@/app/_components/text";
 
-export default function UpdateImage() {
+function UpdateImageComponent() {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [updatingURL, setUpdatingURL] = useState(false);
+
     const { isUploading, startUpload } = useUploadThing("imageUploader");
+
     const { toast } = useToast();
     const router = useRouter();
     const searchParams = useSearchParams();
     const id = searchParams.get("id");
+
     const productTitle = searchParams.get("title");
 
     const startFakedUploadProgress = () => {
@@ -132,7 +135,7 @@ export default function UpdateImage() {
         <main className="max-w-4xl mx-auto pt-20">
             <div className='divide-y-2'>
                 <Text size='lg' className='text-center font-semibold pb-4'>Upload a new image</Text>
-                <Text className='text-center font-medium pt-4'>{productTitle}</Text>
+                <Text className='text-center font-medium pt-4'>{productTitle?.replace("-", " ")}</Text>
             </div>
             <Dropzone
                 multiple={false}
@@ -212,4 +215,12 @@ export default function UpdateImage() {
             </Dropzone>
         </main>
     );
+}
+
+export default function UpdateImage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <UpdateImageComponent />
+        </Suspense>
+    )
 }
