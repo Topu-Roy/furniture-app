@@ -63,7 +63,7 @@ export default function ProductDashboard() {
     }, [currentPage, perPage])
 
     return (
-        <main className='max-w-7xl mx-auto'>
+        <main className='max-w-7xl w-[100dvw] lg:w-[80dvw] px-2 overflow-y-scroll mx-auto'>
             <DataTable columns={columns} data={products} PaginationButtons={PaginationButtons} />
         </main>
     )
