@@ -5,7 +5,7 @@ import CompactIconsRating from "./compactIconsRating";
 import { Heading } from "@/app/_components/heading";
 import { Text } from "@/app/_components/text";
 import Link from "next/link";
-import Rating from "@/app/shop/[id]/_components/rating";
+import Rating from "@/app/products/_components/rating";
 
 export default function Hero() {
   return (

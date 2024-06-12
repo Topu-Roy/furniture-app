@@ -31,7 +31,7 @@ export default function Product({ product, className }: Props) {
     >
       <div className="flex w-full flex-col items-center justify-start">
         <div className="relative w-full overflow-hidden">
-          <Link href={`/shop/${product.id}`}>
+          <Link href={`/products/${product.id}`}>
             <div className="z-10 aspect-square overflow-hidden rounded-md">
               {/* //TODO: Fix default image url */}
               <Image
