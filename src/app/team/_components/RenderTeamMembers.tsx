@@ -1,7 +1,5 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { Text } from "../../_components/text";
 import {
   Tooltip,
@@ -10,6 +8,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Facebook, Github, MessageCircle } from "lucide-react";
+import Link from "next/link";
 
 type TeamMember = {
   id: number;
@@ -23,7 +22,6 @@ type props = {
 };
 
 export default function RenderTeamMembers(props: props) {
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
 
   const socialIcons = [
     {
@@ -40,13 +38,9 @@ export default function RenderTeamMembers(props: props) {
     },
   ];
 
-  useEffect(() => {
-    setTeamMembers(props.teamMembers);
-  }, [props.teamMembers]);
-
   return (
     <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-2 py-6 md:grid-cols-3 md:px-3 md:py-8 lg:py-14 xl:py-16 2xl:px-0">
-      {teamMembers.map((member) => (
+      {props.teamMembers.map((member) => (
         <div
           key={`${member.id}-team-member`}
           className="w-full space-y-4 rounded-xl border p-4 shadow"
@@ -70,9 +64,9 @@ export default function RenderTeamMembers(props: props) {
                   >
                     <Tooltip>
                       <TooltipTrigger>
-                        <Button className="flex items-center justify-center rounded-full bg-black p-2 text-white transition-all duration-300 hover:scale-105">
+                        <Link href={"#"} className="flex items-center justify-center rounded-full bg-black p-2 text-white transition-all duration-300 hover:scale-105">
                           {icon.icon}
-                        </Button>
+                        </Link>
                       </TooltipTrigger>
                       <TooltipContent>
                         <p>{icon.name}</p>
