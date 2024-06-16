@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import { type BlogType } from "../blogPostArray";
 import { Button } from "@/components/ui/button";

@@ -19,7 +19,7 @@ export type BlogType = {
 
 export const blogPosts: BlogType[] = [
   {
-    author: { name: "Emily Johnson", imageURL: "/blog/authors/Emily Johnson.jpg" },
+    author: { name: "Emily Johnson", imageURL: "https://utfs.io/f/b6457cad-40c1-45cc-a3bc-b9e90b4bb4e2-dk7oh7.jpg" },
     id: 1,
     postDate: "2024-03-19",
     headline: "The Importance of Choosing the Right Furniture for Your Home",
@@ -57,7 +57,7 @@ export const blogPosts: BlogType[] = [
     cover: "/blog/cover/Choosing the Right Furniture for Your Home.png",
   },
   {
-    author: { name: "Michael Smith", imageURL: "/blog/authors/Michael Smith.jpg" },
+    author: { name: "Michael Smith", imageURL: "https://utfs.io/f/5a6969e5-98cf-4ebc-9aae-8894a85b109b-ugzdsa.jpg" },
     id: 2,
     postDate: "2023-02-15",
     headline: "Trends in Modern Furniture Design",
@@ -99,7 +99,7 @@ export const blogPosts: BlogType[] = [
     cover: "/blog/cover/Trends in Modern Furniture Design.png",
   },
   {
-    author: { name: "Sophia Lee", imageURL: "/blog/authors/Sophia Lee.jpg" },
+    author: { name: "Sophia Lee", imageURL: "https://utfs.io/f/68ec4714-6bce-4157-8321-e77e777fb3b9-akmgk8.jpg" },
     id: 3,
     postDate: "2023-06-18",
     headline: "Tips for Decorating Small Spaces",
@@ -141,7 +141,7 @@ export const blogPosts: BlogType[] = [
     cover: "/blog/cover/Tips for Decorating Small Spaces.png",
   },
   {
-    author: { name: "David Miller", imageURL: "/blog/authors/David Miller.jpg" },
+    author: { name: "David Miller", imageURL: "https://utfs.io/f/67a01c4f-2c27-457d-9993-9b9d80d03ebf-sc3u17.jpg" },
     id: 4,
     postDate: "2023-07-26",
     headline: "How to Care for Your Furniture and Make It Last",
@@ -183,7 +183,7 @@ export const blogPosts: BlogType[] = [
     cover: "/blog/cover/Care for Your Furniture and Make It Last.jpg",
   },
   {
-    author: { name: "Jessica Brown", imageURL: "/blog/authors/Jessica Brown.jpg" },
+    author: { name: "Jessica Brown", imageURL: "https://utfs.io/f/3e5b0a2a-1ac9-4210-9e35-a98e91968b79-9ue99a.jpg" },
     id: 5,
     postDate: "2023-04-26",
     headline: "Creating a Cozy and Inviting Living Room",
@@ -225,7 +225,7 @@ export const blogPosts: BlogType[] = [
     cover: "/blog/cover/Creating a Cozy and Inviting Living Room.jpg",
   },
   {
-    author: { name: "Emily Smith", imageURL: "/blog/authors/Emily Smith.jpg" },
+    author: { name: "Emily Smith", imageURL: "https://utfs.io/f/744c8609-027e-4d4e-9714-1d7b251a4c78-15noz5.jpg" },
     id: 6,
     postDate: "2023-08-21",
     headline: "Elevate Your Home with Timeless Furniture Pieces",
@@ -263,7 +263,7 @@ export const blogPosts: BlogType[] = [
     cover: "/blog/cover/Elevate Your Home with Timeless.jpg",
   },
   {
-    author: { name: "Michael Johnson", imageURL: "/blog/authors/Michael Johnson.jpg" },
+    author: { name: "Michael Johnson", imageURL: "https://utfs.io/f/8aa64072-503c-4976-bd8a-680464dad878-ti7v5a.jpg" },
     id: 7,
     postDate: "2024-03-18",
     headline: "Discovering Vintage Charm: Decorating Your Home with Antiques",
@@ -302,7 +302,7 @@ export const blogPosts: BlogType[] = [
   },
   {
     id: 8,
-    author: { name: "Sophia Lee", imageURL: "/blog/authors/Sophia Lee.jpg" },
+    author: { name: "Sophia Lee", imageURL: "https://utfs.io/f/68ec4714-6bce-4157-8321-e77e777fb3b9-akmgk8.jpg" },
     headline: "Maximizing Space in a Small Apartment",
     article: {
       intro:
@@ -339,7 +339,7 @@ export const blogPosts: BlogType[] = [
     postDate: "2024-01-05",
   },
   {
-    author: { name: "Sophia Martinez", imageURL: "/blog/authors/Sophia Martinez.jpg" },
+    author: { name: "Sophia Martinez", imageURL: "https://utfs.io/f/f7f5640d-03dc-4246-8285-df7f67763e96-fit0t8.jpg" },
     id: 9,
     postDate: "2024-03-15",
     headline: "DIY Home Decor Projects: Adding Personal Touches to Your Space",
@@ -381,7 +381,7 @@ export const blogPosts: BlogType[] = [
     cover: "/blog/cover/DIY Home Decor Projects Adding Personal Touches.jpg",
   },
   {
-    author: { name: "Emma Wilson", imageURL: "/blog/authors/Emma Wilson.jpg" },
+    author: { name: "Emma Wilson", imageURL: "https://utfs.io/f/e8d83362-2f4d-4a66-8643-4cf0f8a1dbb4-anpb8k.jpg" },
     id: 10,
     postDate: "2024-03-10",
     headline: "The Psychology of Color: Enhancing Your Home with Color Theory",
@@ -447,7 +447,7 @@ export const blogPosts: BlogType[] = [
     cover: "/blog/cover/The Psychology of Color.png",
   },
   {
-    author: { name: "Olivia Green", imageURL: "/blog/authors/Olivia Green.jpg" },
+    author: { name: "Olivia Green", imageURL: "https://utfs.io/f/06bde7ea-9b33-4489-abbd-1317ea2d1f60-ry0pq3.jpg" },
     id: 11,
     postDate: "2024-03-08",
     headline: "Sustainable Furniture: Eco-Friendly Choices for a Greener Home",
@@ -514,7 +514,7 @@ export const blogPosts: BlogType[] = [
   },
   {
     id: 12,
-    author: { name: "Jessica Hernandez", imageURL: "/blog/authors/Jessica Hernandez.jpg" },
+    author: { name: "Jessica Hernandez", imageURL: "https://utfs.io/f/714e0725-07a0-49fd-9d5d-42f343c6ee1a-7rv7kx.jpg" },
     headline: "Incorporating Feng Shui Principles into Your Home Design",
     article: {
       intro:
