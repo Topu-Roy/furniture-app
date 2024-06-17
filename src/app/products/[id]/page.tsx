@@ -113,12 +113,8 @@ export default async function ProductDetails({
                                 {product.status ? <Chip text={product.status} /> : null}
                                 {product.tag ? <Chip text={product.tag} /> : null}
                             </div>
-                            {/* //TODO: Add Product description */}
                             <p className="mb-6 text-gray-500 dark:text-gray-400">
-                                Studio quality three mic array for crystal clear calls and voice
-                                recordings. Six-speaker sound system for a remarkably robust and
-                                high-quality audio experience. Up to 256GB of ultrafast SSD
-                                storage.
+                                {product.description}
                             </p>
                         </div>
                     </div>
