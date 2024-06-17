@@ -1,30 +1,40 @@
-# Create T3 App
+# 🪄 Furnit: The Magical World of Furniture Awaits! 🪄
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+## ⚡ Version: 1.1.0 ⚡
 
-## What's next? How do I make an app with this?
+Welcome to the enchanting realm of Furnit, where furniture comes to life! This captivating Next.js application, powered by Prisma and a plethora of cutting-edge libraries, promises to elevate your interior design experience to new heights. Prepare to be spellbound!
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## 🌟 Key Features
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- **Server-Side Rendering (SSR)** - Furnit harnesses the power of Next.js to deliver lightning-fast initial page loads and improved SEO.
+- **Static Site Generation (SSG)** - Leverage the performance benefits of pre-rendering for enhanced user experiences.
+- **Server Actions** - Seamlessly perform server-side operations without page refreshes, ensuring a smooth and responsive flow.
+- **Cart and Checkout** - Immerse yourself in a delightful shopping experience with a feature-rich cart and streamlined checkout process.
+- **State Management with searchParams** - Effortlessly manage application state using the power of Next.js searchParams.
+- **Mobile Optimized** - Furnit is meticulously crafted to provide a captivating experience on both desktop and mobile devices.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## 📦 Dependencies
 
-## Learn More
+- `kinde-auth` - Secure authentication with Kinde
+- `env-nextjs` - Environment variable management for Next.js
+- `tanstack react-table` - Powerful and lightweight table component
+- `vercel analytics` - Insightful analytics for your Next.js app
+- `lucide-react` - Beautifully crafted icons for your app
+- `nextjs-toploader` - Enticing top loader for Next.js apps
+- `react-dropzone` - Intuitive drag-and-drop file uploads
+- `react-fast-marquee` - Mesmerizing marquee components
+- `react-hook-form` - Effortless form management with React Hook Form
+- `tailwindcss-animate` - Captivating animations for Tailwind CSS
+- `uploadthing` - Secure and scalable file uploads
+- `zod` - TypeScript-first schema validation
+- `zustand` - Delightful state management for React
+- `eslint` - Linting tool for JavaScript and TypeScript
+- `prettier` - Opinionated code formatter
+- `prettier-plugin-tailwindcss` - Tailwind CSS plugin for Prettier
+- `prisma` - Next-generation ORM for Node.js and TypeScript
+- `tailwindcss` - Utility-first CSS framework
+- `typescript` - TypeScript language for application-scale JavaScript
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## 🧚‍♀️ Let the Magic Begin! 🧚‍♀️
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
-# prisma-nextjs
+Embark on an enchanting journey with Furnit, where every piece of furniture comes alive with the power of cutting-edge technologies. Immerse yourself in a captivating world of interior design, where imagination knows no bounds. Get ready to experience the magic of server-rendered pages, static site generation, server actions, a delightful cart and checkout experience, and state management with searchParams – all optimized for both desktop and mobile screens. The future of furniture awaits!
