@@ -70,8 +70,8 @@ export default function OurBenefits() {
             <Image
               height={1000}
               width={1000}
-              src="/images/img_rectangle_16.png"
-              alt="image_one"
+              src="https://utfs.io/f/25264bfc-4191-4585-b2df-767ec828e15a-ezfor3.png"
+              alt="Furnit"
               className="hidden w-full scale-110 object-cover lg:block"
             />
           </div>

@@ -4,18 +4,18 @@ import React from "react";
 
 export default function CompactIconsRating() {
   const userIconsForRating = [
-    "img_unsplash_wnolnjo7ts8.png",
-    "img_unsplash_rtvgs4vgkgm.png",
-    "img_unsplash_d1upkifd04a.png",
-    "img_unsplash_plsf6obtgms.png",
+    "https://utfs.io/f/0c129076-43e0-423e-baf9-ce397a5767a2-hdmc02.png",
+    "https://utfs.io/f/6cd5bf41-ad22-4f28-8606-b70e16cc4d99-jecvhl.png",
+    "https://utfs.io/f/23a291ca-7804-40db-a6ca-712bb577479b-2fz9m2.png",
+    "https://utfs.io/f/9e5cda45-71fc-449a-a470-36e881410943-8al9rk.png",
   ];
 
   return (
     <div className="flex w-full flex-row justify-center">
-      {userIconsForRating.map((icon) => (
+      {userIconsForRating.map((image, index) => (
         <Image
-          key={`${icon}-icon`}
-          src={`/images/${icon}`}
+          key={`${image}-${index}`}
+          src={image}
           alt=""
           className="h-[50px] w-[50px] rounded-[50%]"
           height={50}

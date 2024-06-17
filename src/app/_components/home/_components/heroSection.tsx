@@ -41,15 +41,15 @@ export default function HeroSection() {
             <Image
               height={1000}
               width={1000}
-              src="/hero/Lamp - Black - Vintage Desk Lamp (1).jpg"
-              alt=""
+              src="https://utfs.io/f/7a85000c-e46d-4681-bfe3-9eb80b521812-9mkf9m.jpg"
+              alt="Furnit - Topu Roy"
               className="absolute left-0 top-0 w-[60%] rounded-lg object-cover"
             />
             <Image
               height={1000}
               width={1000}
-              src="/hero/Bed - Brown - Four Poster Canopy Bed (2).jpg"
-              alt=""
+              src="https://utfs.io/f/83301904-c745-4423-9435-2da0eb8bdaba-nhduvf.jpg"
+              alt="Furnit - Topu Roy"
               className="absolute bottom-0 right-0 w-[60%] rounded-lg object-cover shadow-2xl"
             />
           </div>

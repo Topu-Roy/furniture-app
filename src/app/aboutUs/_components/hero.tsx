@@ -50,7 +50,7 @@ export default function Hero() {
           </div>
           <div className="md:flex flex-1 items-center justify-end hidden">
             <Image
-              src={"/products/Lamp - Black - Vintage Desk Lamp (1).jpg"}
+              src={"https://utfs.io/f/fdd5b437-8fc0-4e9f-a79b-37032958f196-meirr.jpg"}
               alt="Topu Roy"
               width={1050}
               height={1400}

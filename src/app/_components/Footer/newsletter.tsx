@@ -33,7 +33,7 @@ export default function Newsletter() {
         <Image
           height={1000}
           width={1000}
-          src="/images/img_pexels_photo_by.png"
+          src="https://utfs.io/f/43ac1f63-0880-44d5-abc1-e96513231f43-hndm3m.png"
           alt="furnit footer - topu roy"
           className="object-cover"
         />

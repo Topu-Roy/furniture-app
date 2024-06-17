@@ -8,10 +8,10 @@ export default function ReadBlogSection() {
   const blogsMobile = blogPosts.slice(0, 2);
   const blogsTablet = blogPosts.slice(0, 4);
   const blogsDesktop = blogPosts.slice(0, 6);
-  const blogsWideScreen = blogPosts.slice(0, 8);
+  const blogsWideScreen = blogPosts.slice(0, 9);
 
   return (
-    <section className="bg-white py-10 ">
+    <section className="bg-white py-10 pt-20">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <div className="flex w-full flex-col items-center justify-start gap-4 pb-4">
           <Heading className="text-center !font-semibold tracking-[-0.50px]">
@@ -23,33 +23,37 @@ export default function ReadBlogSection() {
           </Text>
         </div>
 
-        <div className="mx-auto flex w-full flex-wrap items-center justify-center gap-4 sm:hidden">
+        {/* //* Mobile */}
+        <div className="mx-auto w-full max-w-md grid-cols-1 gap-4 grid sm:hidden">
           {blogsMobile.map((item) => (
-            <div className="mx-auto w-[95%]" key={`${item.id}-blog`}>
+            <div key={`${item.id}-blog`}>
               <Blog blog={item} />
             </div>
           ))}
         </div>
 
-        <div className="mx-auto hidden w-full flex-wrap items-center justify-center gap-4 sm:flex lg:hidden ">
+        {/* //* Tablet */}
+        <div className="mx-auto hidden w-full grid-cols-2 gap-4 sm:grid lg:hidden ">
           {blogsTablet.map((item) => (
-            <div className="w-[47%]" key={`${item.id}-blog`}>
+            <div key={`${item.id}-blog`}>
               <Blog blog={item} />
             </div>
           ))}
         </div>
 
-        <div className="mx-auto hidden w-full flex-wrap items-center justify-center gap-4 lg:flex xl:hidden ">
+        {/* //* Laptop */}
+        <div className="mx-auto hidden w-full grid-cols-3 gap-4 lg:grid xl:hidden ">
           {blogsDesktop.map((item) => (
-            <div className="w-[30%]" key={`${item.id}-blog`}>
+            <div key={`${item.id}-blog`}>
               <Blog blog={item} />
             </div>
           ))}
         </div>
 
-        <div className="mx-auto hidden w-full flex-wrap items-center justify-center gap-4 xl:flex ">
+        {/* //* Desktop */}
+        <div className="mx-auto hidden w-full grid-cols-3 gap-4 xl:grid">
           {blogsWideScreen.map((item) => (
-            <div className="flex-1" key={`${item.id}-blog`}>
+            <div key={`${item.id}-blog`}>
               <Blog blog={item} />
             </div>
           ))}

@@ -41,28 +41,28 @@ export default function NewArrivals({ products }: Props) {
             >
               <Button variant={"ghost"}>View All</Button>
             </Link>
-            <div className="flex w-full flex-row flex-wrap justify-center gap-4 md:hidden">
+            <div className="mx-auto grid w-full max-w-md grid-cols-1 gap-4 px-4 sm:max-w-[85%] sm:grid-cols-2 md:hidden">
               {filteredProducts.mobile.map((item) => (
-                <div className="w-[95%] sm:w-[43%]" key={item.id}>
+                <div key={item.id}>
                   <Product product={item} />
                 </div>
               ))}
             </div>
-            <div className="hidden w-full flex-row flex-wrap justify-center gap-4 md:flex lg:hidden">
+            <div className="mx-auto hidden w-full max-w-4xl grid-cols-2 gap-4 px-4 md:grid lg:hidden">
               {filteredProducts.tablet.map((item) => (
-                <div className="w-[40%]" key={item.id}>
+                <div key={item.id}>
                   <Product product={item} />
                 </div>
               ))}
             </div>
-            <div className="hidden w-full flex-row flex-wrap justify-center gap-4 lg:flex xl:hidden">
+            <div className="hidden px-4 max-w-6xl mx-auto w-full grid-cols-3 gap-4 lg:grid xl:hidden">
               {filteredProducts.desktop.map((item) => (
-                <div className="w-[31%] xl:w-[18rem]" key={item.id}>
+                <div key={item.id}>
                   <Product product={item} />
                 </div>
               ))}
             </div>
-            <div className="hidden w-full flex-row flex-wrap justify-center gap-4 xl:flex">
+            <div className="hidden px-4 max-w-7xl mx-auto w-full grid-cols-4 gap-4 xl:grid">
               {filteredProducts.widescreen.map((item) => (
                 <div className="w-[18rem]" key={item.id}>
                   <Product product={item} />

@@ -3,7 +3,7 @@ export const teamMembers = [
         id: 1,
         role: "Project Manager",
         name: "Emily Johnson",
-        imageUrl: "https://utfs.io/f/30cf2375-7889-4b90-baee-99e0921af032-dk7oh7.jpg"
+        imageUrl: "https://utfs.io/f/8b4d75b6-2728-44de-82fd-dd3b3528b22c-lzrm5s.jpg"
     },
     {
         id: 2,
