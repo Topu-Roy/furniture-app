@@ -1,8 +1,8 @@
-![Furnit](./public/logo-text.png)
+[![Furnit](./public/logo-text.png)](https://furnit-snowy.vercel.app)
 
 # 🪄 Furnit: The Magical World of Furniture Awaits! 🪄
 
-## ⚡ Version: 1.1.0 ⚡[![Live](./public/logo-icon.png)](https://furnit-snowy.vercel.app)
+## ⚡ Version: 1.1.0 ⚡
 
 Welcome to the enchanting realm of Furnit, where furniture comes to life! This captivating [Next.js](https://nextjs.org/) application, powered by Prisma and a plethora of cutting-edge libraries, promises to elevate your interior design experience to new heights. Prepare to be spellbound!
 
