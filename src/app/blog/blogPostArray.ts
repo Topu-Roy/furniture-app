@@ -547,7 +547,7 @@ export const blogPosts: BlogType[] = [
       ],
     },
     cover: "https://utfs.io/f/6c33d637-516b-46ee-9abf-0834313c490e-wywcf1.png",
-    thumbnail: "https://utfs.io/f/d195bec5-66c2-4944-ba4b-01f79043fb11-wywcf1.png",
+    thumbnail: "https://utfs.io/f/91d17c26-a895-4323-b2f8-f8524cf40fd4-wywcf1.png",
     postDate: "2024-03-08",
   },
 ];

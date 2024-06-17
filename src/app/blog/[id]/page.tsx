@@ -19,16 +19,17 @@ export default function BlogDetails({ params }: { params: { id: string } }) {
     );
   }
 
+
   return (
-    <div className="w-full bg-gray-200">
-      <div className="prose mx-auto mt-[4rem] max-w-7xl px-4 py-2 sm:py-3 md:py-4 xl:px-6">
+    <div className="mt-[4rem] bg-gray-200 pt-8 md:pt-10 lg:pt-14">
+      <div className="prose mx-auto max-w-7xl px-4 py-2 sm:py-3 md:py-4 xl:px-6">
         <Heading className="my-4 pt-2 text-center sm:mt-8 sm:text-left md:hidden">
           {blog.headline}
         </Heading>
 
         <div className="flex w-full items-center justify-center overflow-hidden rounded-lg lg:h-[30rem]">
           <Image
-            className="my-0 w-full py-0"
+            className="my-0 w-full py-0 shadow"
             width={1800}
             height={900}
             src={blog.cover}
