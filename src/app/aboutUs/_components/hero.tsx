@@ -19,7 +19,7 @@ export default function Hero() {
               </Heading>
               <Text muted className="pb-4">
                 We believe your home reflects your story.
-                We curate a collection of quality furniture that's both beautiful and functional,
+                We curate a collection of quality furniture that&apos;s both beautiful and functional,
                 helping you create spaces you love. Explore our selection and find pieces that inspire you!
               </Text>
               <Link href={"/shop"}>
