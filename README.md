@@ -1,6 +1,6 @@
-# 🪄 Furnit: The Magical World of Furniture Awaits! 🪄
-
 ![Furnit](./public/logo-text.png)
+
+# 🪄 Furnit: The Magical World of Furniture Awaits! 🪄
 
 ## ⚡ Version: 1.1.0 ⚡
 
