@@ -4,6 +4,7 @@ import NavBar from "./_components/NavBar";
 import Footer from "./_components/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import { inter } from "@/styles/font";
+import { Analytics } from '@vercel/analytics/react';
 
 import NextTopLoader from 'nextjs-toploader';
 
@@ -28,6 +29,7 @@ export default function RootLayout({
         {children}
         <Toaster />
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
