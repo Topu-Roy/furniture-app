@@ -1,5 +1,7 @@
 # 🪄 Furnit: The Magical World of Furniture Awaits! 🪄
 
+![Furnit](./public/logo-text.png)
+
 ## ⚡ Version: 1.1.0 ⚡
 
 Welcome to the enchanting realm of Furnit, where furniture comes to life! This captivating Next.js application, powered by Prisma and a plethora of cutting-edge libraries, promises to elevate your interior design experience to new heights. Prepare to be spellbound!
