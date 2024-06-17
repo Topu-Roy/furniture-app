@@ -18,7 +18,7 @@ export default async function NavBar() {
   });
 
   return (
-    <header className="fixed top-0 z-50 flex h-[5.5rem] w-[100vw] items-center justify-center bg-white px-2 shadow-sm">
+    <header className="fixed top-0 z-50 flex h-[5.5rem] w-[100vw] items-center justify-center bg-white px-2 shadow-md shadow-black/5">
       <div className="mx-auto flex w-[98vw] max-w-[85rem] flex-row justify-between">
 
         <Link href="/" className="lg:hidden">
