@@ -17,12 +17,10 @@ export default function Hero() {
               <Heading>
                 Provide the best quality ingredients for home products
               </Heading>
-              {/* //TODO: Get Real copy text*/}
               <Text muted className="pb-4">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit dictumst
-                posuere, lectus dis vehicula augue elementum quam risus.
-                Placerat dictum lobortis lacinia volutpat morbi cum justo
-                commodo est aliquam, facilisi consequat ligula vivamus faucibus
+                We believe your home reflects your story.
+                We curate a collection of quality furniture that's both beautiful and functional,
+                helping you create spaces you love. Explore our selection and find pieces that inspire you!
               </Text>
               <Link href={"/shop"}>
                 <Button

@@ -1,9 +1,8 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 import AddToCartButtonForRelated from './addToCartButtonForRelated'
 import { Button } from '@/components/ui/button'
-
 
 type ProductProps = {
     productTitle: string,
@@ -14,7 +13,7 @@ type ProductProps = {
     userId: string | null,
 }
 
-export default function Product({ price, productTitle, productImage, productId, userId }: ProductProps) {
+export default function Product({ price, productTitle, productImage, productId, userId, description }: ProductProps) {
     return (
         <div className="space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
             <Link href={`/products/${productId}`} className="overflow-hidden rounded">
@@ -27,9 +26,10 @@ export default function Product({ price, productTitle, productImage, productId, 
                 />
             </Link>
             <div>
-                <Link href={`/shop/${productId}`} className="text-lg line-clamp-1 font-semibold leading-tight text-gray-900 hover:underline dark:text-white">{productTitle}</Link>
-                {/* //*TODO: add description */}
-                <p className="mt-2 text-base line-clamp-2 font-normal text-gray-500 dark:text-gray-400">This generation has some improvements, including a longer continuous battery life.</p>
+                <Link href={`/products/${productId}`} className="text-lg line-clamp-1 font-semibold leading-tight text-gray-900 hover:underline dark:text-white">{productTitle}</Link>
+                <p className="mt-2 text-base line-clamp-2 font-normal text-gray-500 dark:text-gray-400">
+                    {description}
+                </p>
             </div>
             <div>
                 <p className="text-lg font-bold text-gray-900 dark:text-white">
@@ -37,7 +37,7 @@ export default function Product({ price, productTitle, productImage, productId, 
                 </p>
             </div>
             <div className="mt-6 flex items-center justify-between gap-2.5">
-                <Link href={`/shop/${productId}`}>
+                <Link href={`/products/${productId}`}>
                     <Button variant={'outline'} className="flex flex-1 items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium  text-black">
                         <svg className="-ms-2 me-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="#000000" version="1.1" id="Ebene_1" width="800px" height="800px" viewBox="0 0 64 64" enable-background="new 0 0 64 64">
                             <g>

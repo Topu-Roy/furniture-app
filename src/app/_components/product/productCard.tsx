@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -10,6 +11,7 @@ import AddButton from "./addButton";
 import ButtonWithIcon from "./buttonWithIcon";
 import { Text } from "../text";
 import { type Product } from "@prisma/client";
+import { defaultProductImageUrl } from "@/lib/defaults";
 
 const DynamicMobilePopover = dynamic(() => import("./mobilePopover"), {
   ssr: false,
@@ -33,11 +35,10 @@ export default function Product({ product, className }: Props) {
         <div className="relative w-full overflow-hidden">
           <Link href={`/products/${product.id}`}>
             <div className="z-10 aspect-square overflow-hidden rounded-md">
-              {/* //TODO: Fix default image url */}
               <Image
                 height={1024}
                 width={1024}
-                src={product.image ?? "/images/defaultNoData.png"}
+                src={product.image ?? defaultProductImageUrl}
                 alt={product.productTitle}
                 className="aspect-square h-full w-full justify-center transition-all duration-500 ease-in-out group-hover:scale-105"
               />
