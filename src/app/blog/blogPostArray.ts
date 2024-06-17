@@ -19,7 +19,7 @@ export type BlogType = {
 
 export const blogPosts: BlogType[] = [
   {
-    author: { name: "Emily Johnson", imageURL: "https://utfs.io/f/b6457cad-40c1-45cc-a3bc-b9e90b4bb4e2-dk7oh7.jpg" },
+    author: { name: "Emily Johnson", imageURL: "https://utfs.io/f/8b4d75b6-2728-44de-82fd-dd3b3528b22c-lzrm5s.jpg" },
     id: 1,
     postDate: "2024-03-19",
     headline: "The Importance of Choosing the Right Furniture for Your Home",
@@ -514,7 +514,7 @@ export const blogPosts: BlogType[] = [
   },
   {
     id: 12,
-    author: { name: "Jessica Hernandez", imageURL: "https://utfs.io/f/714e0725-07a0-49fd-9d5d-42f343c6ee1a-7rv7kx.jpg" },
+    author: { name: "Jessica Hernandez", imageURL: "https://utfs.io/f/832b106a-6fc6-40e8-8d1a-b6b06512984e-jejbnf.jpg" },
     headline: "Incorporating Feng Shui Principles into Your Home Design",
     article: {
       intro:

@@ -13,7 +13,7 @@ export default function SecondCTA() {
         <div className="m-auto flex w-full flex-col justify-between p-4 md:flex-row">
           <div className="mx-auto flex h-full w-[70%] flex-col items-center justify-start md:my-auto md:w-[40%]">
             <Image
-              src="https://utfs.io/f/cbff3a91-11ff-495b-b34b-5efe706efb0a-3ifscb.png"
+              src="https://utfs.io/f/2b75b1e6-9d9e-4161-9a6a-894e1413b904-w5bnwa.png"
               height={1380}
               width={1230}
               alt="white sofa"

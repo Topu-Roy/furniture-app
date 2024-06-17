@@ -113,7 +113,7 @@ export default async function ProductDetails({
                                 {product.status ? <Chip text={product.status} /> : null}
                                 {product.tag ? <Chip text={product.tag} /> : null}
                             </div>
-                            <p className="mb-6 text-gray-500 dark:text-gray-400">
+                            <p className="my-6 text-gray-500 dark:text-gray-400">
                                 {product.description}
                             </p>
                         </div>

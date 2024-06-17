@@ -43,7 +43,7 @@ export const testimonialsArray: TestimonialsArrayType[] = [
         name: "Jessica Hernandez",
     },
     {
-        imageURL: "https://utfs.io/f/ef41a0bd-5981-4598-93ec-258e7a278377-nxe1qo.jpg",
+        imageURL: "https://utfs.io/f/832b106a-6fc6-40e8-8d1a-b6b06512984e-jejbnf.jpg",
         headline: "Perfect for small spaces",
         text: "As someone living in a small apartment, I was worried about finding furniture that would fit. This app has a great selection of space-saving furniture options.  Highly recommend!",
         location: "Miami, FL",

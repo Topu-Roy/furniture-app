@@ -21,7 +21,7 @@ export const teamMembers = [
         id: 4,
         role: "Backend Developer",
         name: "David Miller",
-        imageUrl: "https://utfs.io/f/41b8138c-a7e1-4440-ae72-076fb0bba91c-sc3u17.jpg"
+        imageUrl: "https://utfs.io/f/a0e45596-e90a-49d8-8aeb-69ce049c0b4a-j7jf5h.jpg"
     },
     {
         id: 5,
